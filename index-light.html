@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="light">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
@@ -13,7 +13,7 @@
 <meta property="og:image:type" content="image/jpeg"/>
 <meta property="og:image:width" content="630"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:url" content="https://indeokyeo-wq.github.io/portfolio/"/>
+<meta property="og:url" content="https://indeokyeo-wq.github.io/portfolio/index-light.html"/>
 <meta property="og:site_name" content="여인덕 포트폴리오"/>
 
 <!-- Twitter Card -->
@@ -678,12 +678,11 @@ function toggleTheme(){
   updateScreeningLinks(isLight);
 }
 (function(){
-  const isLight=localStorage.getItem('theme')==='light';
-  if(isLight){
-    document.documentElement.classList.add('light');
-    document.getElementById('theme-icon').textContent='🌙';
-    document.getElementById('theme-label').textContent='다크 모드';
-  }
+  const saved=localStorage.getItem('theme');
+  const isLight=saved?saved==='light':true;
+  if(!isLight)document.documentElement.classList.remove('light');
+  document.getElementById('theme-icon').textContent=isLight?'🌙':'☀️';
+  document.getElementById('theme-label').textContent=isLight?'다크 모드':'라이트 모드';
   updateScreeningLinks(isLight);
 })();
 </script>
