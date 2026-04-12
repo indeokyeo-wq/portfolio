@@ -1,614 +1,494 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>여인덕 포트폴리오 | 사업 전문가</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>여인덕 | AI-First 사업 전문가</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0b0b14;--bg2:#12121f;--bg3:#1a1a2e;
+  --gold:#f0c040;--text:#e0e0f0;--muted:#7777aa;
+  --border:#252540;--blue:#6c8fff;--green:#4caf82;
+}
+body{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
 
-    body {
-      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-      background: #0f0f1a;
-      color: #e8e8f0;
-      line-height: 1.7;
-    }
+/* ── HERO ── */
+#hero{
+  background:linear-gradient(160deg,#0b0b14 0%,#0e0e20 60%,#13132b 100%);
+  border-bottom:1px solid var(--border);
+  padding:72px 0 60px;
+}
+.hero-inner{display:grid;grid-template-columns:160px 1fr;gap:48px;align-items:center;}
+.photo-col{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.hero-photo{width:140px;height:140px;border-radius:50%;border:3px solid var(--gold);object-fit:cover;object-position:center top;}
+.name-tag{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;}
+.info-col h1{font-size:40px;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.05;margin-bottom:6px;}
+.info-col .eng{font-size:13px;color:var(--muted);margin-bottom:20px;letter-spacing:.04em;}
+.big-claim{
+  font-size:17px;font-weight:700;color:var(--gold);
+  background:rgba(240,192,64,.06);
+  border:1px solid rgba(240,192,64,.2);
+  border-radius:10px;padding:14px 20px;
+  margin-bottom:22px;line-height:1.5;
+}
+.big-claim span{color:#fff;}
+.contacts{display:flex;flex-wrap:wrap;gap:14px;}
+.contacts a,.contacts span{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:5px;text-decoration:none;}
+.contacts .dot{color:var(--gold);}
 
-    /* ── 공통 ── */
-    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-    .gold { color: #f0c040; }
-    .section { padding: 64px 0; }
-    .section-title {
-      font-size: 22px;
-      font-weight: 700;
-      color: #f0c040;
-      border-left: 4px solid #f0c040;
-      padding-left: 14px;
-      margin-bottom: 32px;
-      letter-spacing: 0.04em;
-    }
-    .card {
-      background: #1a1a2e;
-      border: 1px solid #2a2a40;
-      border-radius: 12px;
-      padding: 28px;
-    }
+/* ── IMPACT METRICS ── */
+#impact{background:var(--bg3);border-bottom:1px solid var(--border);padding:0;}
+.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);}
+.metric{
+  padding:28px 20px;border-right:1px solid var(--border);text-align:center;
+  position:relative;
+}
+.metric:last-child{border-right:none;}
+.metric .before{font-size:12px;color:var(--muted);text-decoration:line-through;margin-bottom:2px;}
+.metric .val{font-size:32px;font-weight:900;color:var(--gold);line-height:1;}
+.metric .unit{font-size:13px;color:#9999bb;margin-top:6px;}
+.metric .arrow{color:var(--green);font-size:12px;margin-top:2px;font-weight:700;}
 
-    /* ── HERO ── */
-    #hero {
-      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 60%, #12122a 100%);
-      padding: 80px 0 60px;
-      border-bottom: 1px solid #2a2a40;
-    }
-    .hero-inner {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-    }
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid #f0c040;
-      background: #2a2a40;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-      color: #f0c040;
-      overflow: hidden;
-    }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-text h1 {
-      font-size: 42px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-    }
-    .hero-text .subtitle {
-      font-size: 16px;
-      color: #f0c040;
-      margin-top: 6px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
-    .hero-text .contacts {
-      display: flex;
-      gap: 24px;
-      margin-top: 18px;
-      font-size: 14px;
-      color: #aaaacc;
-      flex-wrap: wrap;
-    }
-    .hero-text .contacts span { display: flex; align-items: center; gap: 6px; }
-    .hero-text .contacts .icon { color: #f0c040; }
+/* ── AI CORE ── */
+#aicore{
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+  padding:64px 0;border-bottom:1px solid var(--border);
+}
+.aicore-label{font-size:11px;letter-spacing:.14em;color:var(--blue);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
+.aicore-title{font-size:28px;font-weight:800;color:#fff;margin-bottom:6px;}
+.aicore-sub{font-size:14px;color:var(--muted);margin-bottom:40px;}
+.pipeline-box{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:16px;padding:32px 28px;margin-bottom:28px;
+}
+.pipe-flow{display:flex;align-items:center;gap:0;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;}
+.pipe-node{
+  background:var(--bg);border:1px solid rgba(240,192,64,.3);
+  border-radius:10px;padding:12px 16px;text-align:center;
+  flex-shrink:0;min-width:110px;
+}
+.pipe-node .pn-icon{font-size:20px;margin-bottom:4px;}
+.pipe-node .pn-label{font-size:11px;color:var(--gold);font-weight:700;}
+.pipe-node .pn-tool{font-size:10px;color:var(--muted);margin-top:2px;}
+.pipe-arrow{color:var(--gold);font-size:20px;padding:0 6px;flex-shrink:0;}
+.tool-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.tool-tag{
+  background:rgba(108,143,255,.1);border:1px solid rgba(108,143,255,.3);
+  border-radius:6px;padding:5px 12px;font-size:12px;color:var(--blue);font-weight:600;
+}
 
-    /* ── INTRO ── */
-    #intro .intro-box {
-      background: #1a1a2e;
-      border: 1px solid #f0c04040;
-      border-radius: 12px;
-      padding: 28px 32px;
-    }
-    #intro .intro-box .highlight {
-      font-size: 18px;
-      font-weight: 700;
-      color: #f0c040;
-      margin-bottom: 12px;
-    }
-    #intro .intro-box p { color: #c8c8e0; font-size: 15px; }
+/* ── DUAL SKILLS ── */
+#skills{background:var(--bg2);padding:64px 0;border-bottom:1px solid var(--border);}
+.skills-label{font-size:11px;letter-spacing:.14em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
+.skills-title{font-size:28px;font-weight:800;color:#fff;margin-bottom:32px;}
+.skills-two{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.skill-track{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:28px 24px;}
+.track-head{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.track-icon{font-size:22px;}
+.track-head h3{font-size:16px;font-weight:800;color:#fff;}
+.track-head .track-badge{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:700;margin-left:4px;}
+.badge-biz{background:rgba(240,192,64,.15);color:var(--gold);border:1px solid rgba(240,192,64,.3);}
+.badge-ai{background:rgba(108,143,255,.15);color:var(--blue);border:1px solid rgba(108,143,255,.3);}
+.skill-item{margin-bottom:14px;}
+.skill-item:last-child{margin-bottom:0;}
+.skill-name{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;}
+.skill-bar-wrap{height:4px;background:var(--border);border-radius:2px;margin-bottom:4px;}
+.skill-bar{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));}
+.skill-bar.blue{background:linear-gradient(90deg,var(--blue),#8fb3ff);}
+.skill-desc{font-size:11.5px;color:var(--muted);line-height:1.5;}
 
-    /* ── KEY EXPERIENCE ── */
-    #key .key-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .key-card {
-      background: #1a1a2e;
-      border: 1px solid #2a2a40;
-      border-radius: 12px;
-      padding: 28px 24px;
-    }
-    .key-num {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 2px solid #f0c040;
-      color: #f0c040;
-      font-weight: 800;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-    .key-card h3 { font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 10px; line-height: 1.4; }
-    .key-card p { font-size: 13px; color: #9999bb; line-height: 1.7; }
+/* ── TRACK RECORD ── */
+#track{background:var(--bg);padding:64px 0;border-bottom:1px solid var(--border);}
+.tr-label{font-size:11px;letter-spacing:.14em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
+.tr-title{font-size:28px;font-weight:800;color:#fff;margin-bottom:32px;}
+.tr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.tr-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:26px;}
+.tr-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--gold);background:rgba(240,192,64,.1);border-radius:4px;padding:2px 8px;margin-bottom:10px;}
+.tr-card h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:14px;}
+.tr-result{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(76,175,130,.08);border-left:3px solid var(--green);
+  padding:8px 12px;border-radius:0 8px 8px 0;
+  font-size:13px;font-weight:700;color:var(--green);
+  margin-bottom:14px;
+}
+.tr-rows{}
+.tr-row{font-size:13px;color:#b0b0cc;margin-bottom:7px;display:flex;gap:6px;}
+.tr-row .lbl{color:var(--gold);font-weight:700;flex-shrink:0;}
 
-    /* ── CAREER + INFO (2컬럼) ── */
-    #career-info .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-    .career-list { list-style: none; }
-    .career-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 0;
-      border-bottom: 1px solid #2a2a40;
-      font-size: 14px;
-      color: #c8c8e0;
-    }
-    .career-list li:last-child { border-bottom: none; }
-    .career-list .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #f0c040;
-      margin-top: 6px;
-      flex-shrink: 0;
-    }
-    .career-list .company { font-weight: 600; color: #ffffff; }
-    .career-list .period { color: #7777aa; font-size: 12px; margin-top: 2px; }
+/* ── CAREER ── */
+#career{background:var(--bg2);padding:64px 0;border-bottom:1px solid var(--border);}
+.career-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+.c-label{font-size:11px;letter-spacing:.14em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
+.c-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:24px;}
+.tl{position:relative;padding-left:16px;}
+.tl::before{content:"";position:absolute;left:4px;top:4px;bottom:4px;width:2px;background:var(--border);}
+.tl-item{position:relative;padding:0 0 22px 18px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-dot{position:absolute;left:-12px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid var(--bg2);}
+.tl-co{font-size:13.5px;font-weight:700;color:#fff;}
+.tl-period{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.profile-list{list-style:none;}
+.profile-list li{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);font-size:13.5px;color:#b0b0cc;}
+.profile-list li:last-child{border-bottom:none;}
+.p-ic{color:var(--gold);flex-shrink:0;}
+.profile-list strong{color:#fff;}
 
-    .info-list { list-style: none; }
-    .info-list li {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid #2a2a40;
-      font-size: 14px;
-      color: #c8c8e0;
-    }
-    .info-list li:last-child { border-bottom: none; }
-    .info-list .icon { color: #f0c040; font-size: 16px; width: 20px; text-align: center; }
-    .info-list strong { color: #ffffff; }
+/* ── AI PLAN ── */
+#aiplan{background:var(--bg);padding:64px 0;}
+.ap-label{font-size:11px;letter-spacing:.14em;color:var(--blue);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
+.ap-title{font-size:28px;font-weight:800;color:#fff;margin-bottom:6px;}
+.ap-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.ap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.ap-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:26px;position:relative;overflow:hidden;}
+.ap-card::before{content:attr(data-step);position:absolute;top:16px;right:18px;font-size:48px;font-weight:900;color:rgba(108,143,255,.06);line-height:1;}
+.ap-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.ap-icon{font-size:20px;}
+.ap-head h3{font-size:14.5px;font-weight:700;color:#fff;}
+.ap-goal{font-size:13px;color:var(--blue);font-weight:600;margin-bottom:10px;}
+.ap-ul{list-style:none;margin-bottom:12px;}
+.ap-ul li{font-size:12px;color:var(--muted);padding:3px 0 3px 12px;position:relative;}
+.ap-ul li::before{content:"·";position:absolute;left:0;color:var(--gold);font-weight:700;}
+.ap-out{font-size:12px;color:var(--green);border-top:1px solid var(--border);padding-top:10px;}
+.ap-out strong{margin-right:4px;}
 
-    /* ── SKILLS ── */
-    #skills .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-    .skill-card {
-      background: #1a1a2e;
-      border: 1px solid #2a2a40;
-      border-radius: 12px;
-      padding: 20px 22px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-    .skill-icon {
-      font-size: 28px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .skill-card h4 {
-      font-size: 14px;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 6px;
-    }
-    .skill-card h4 .badge {
-      font-size: 11px;
-      background: #f0c04020;
-      color: #f0c040;
-      border: 1px solid #f0c04060;
-      border-radius: 4px;
-      padding: 1px 6px;
-      margin-left: 6px;
-      font-weight: 500;
-    }
-    .skill-card p { font-size: 12px; color: #8888aa; line-height: 1.6; }
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:36px 24px;text-align:center;font-size:13px;color:var(--muted);}
+footer a{color:var(--gold);text-decoration:none;}
 
-    /* ── ACHIEVEMENTS ── */
-    #achievements .ach-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-    .ach-card {
-      background: #1a1a2e;
-      border: 1px solid #2a2a40;
-      border-radius: 12px;
-      padding: 24px;
-    }
-    .ach-card h3 { font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 16px; }
-    .ach-row { margin-bottom: 10px; font-size: 13px; }
-    .ach-row .label { color: #f0c040; font-weight: 600; margin-right: 6px; }
-    .ach-row .text { color: #b8b8d0; }
-
-    /* ── AI PLAN ── */
-    #aiplan { background: #12122a; border-top: 1px solid #2a2a40; border-bottom: 1px solid #2a2a40; }
-    #aiplan .plan-intro {
-      background: #1a1a2e;
-      border: 1px solid #f0c04040;
-      border-radius: 12px;
-      padding: 20px 28px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 600;
-      color: #f0c040;
-      margin-bottom: 32px;
-    }
-    #aiplan .plan-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-    .plan-card {
-      background: #1a1a2e;
-      border: 1px solid #2a2a40;
-      border-radius: 12px;
-      padding: 24px;
-    }
-    .plan-card .step-head {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .plan-card .step-icon { font-size: 22px; }
-    .plan-card h3 { font-size: 15px; font-weight: 700; color: #ffffff; }
-    .plan-card .purpose { font-size: 13px; color: #c8c8e0; margin-bottom: 12px; }
-    .plan-card .purpose strong { color: #f0c040; }
-    .plan-card ul { list-style: none; padding: 0; margin-bottom: 12px; }
-    .plan-card ul li {
-      font-size: 12px;
-      color: #8888aa;
-      padding: 3px 0;
-      padding-left: 14px;
-      position: relative;
-    }
-    .plan-card ul li::before { content: '•'; position: absolute; left: 0; color: #f0c040; }
-    .plan-card .output {
-      font-size: 12px;
-      color: #f0c040;
-      border-top: 1px solid #2a2a40;
-      padding-top: 10px;
-      margin-top: 10px;
-    }
-    .plan-card .output strong { margin-right: 4px; }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 40px 24px;
-      color: #444466;
-      font-size: 13px;
-      border-top: 1px solid #2a2a40;
-    }
-    footer a { color: #f0c040; text-decoration: none; }
-
-    /* ── 반응형 ── */
-    @media (max-width: 680px) {
-      .hero-inner { flex-direction: column; text-align: center; }
-      .hero-text .contacts { justify-content: center; }
-      #key .key-grid { grid-template-columns: 1fr; }
-      #career-info .two-col { grid-template-columns: 1fr; }
-      #skills .skills-grid { grid-template-columns: 1fr; }
-      #achievements .ach-grid { grid-template-columns: 1fr; }
-      #aiplan .plan-grid { grid-template-columns: 1fr; }
-      .hero-text h1 { font-size: 30px; }
-    }
-  </style>
+@media(max-width:720px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;}
+  .photo-col{align-items:center;}
+  .contacts{justify-content:center;}
+  .metrics-row{grid-template-columns:repeat(2,1fr);}
+  .pipe-flow{flex-wrap:wrap;justify-content:center;}
+  .skills-two,.tr-grid,.career-grid,.ap-grid{grid-template-columns:1fr;}
+  .info-col h1{font-size:30px;}
+}
+</style>
 </head>
 <body>
 
 <!-- ── HERO ── -->
 <section id="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <div class="avatar">👤</div>
-      <div class="hero-text">
-        <h1>여인덕</h1>
-        <div class="subtitle">데이터 분석부터 AI 자동화, 사업기획까지 직접 실행하는 사업 전문가</div>
-        <div class="contacts">
-          <span><span class="icon">✉</span> reddington414@naver.com</span>
-          <span><span class="icon">📞</span> 010-2560-4207</span>
-          <span><span class="icon">🎓</span> 경희대학교 호텔경영학과</span>
-        </div>
+<div class="wrap">
+<div class="hero-inner">
+  <div class="photo-col">
+    <img class="hero-photo" src="data:image/jpeg;base64,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" alt="여인덕"/>
+    <div class="name-tag">Yeo Indeok</div>
+  </div>
+  <div class="info-col">
+    <h1>여인덕</h1>
+    <div class="eng">Business Strategist · AI Automation Architect</div>
+    <div class="big-claim">
+      <span>8년의 게임 사업 경험 × AI 자동화 구축 능력</span><br>
+      사업을 "기획"하는 사람이 아니라, AI로 직접 <span>"만들고 실행"</span>하는 전문가입니다.
+    </div>
+    <div class="contacts">
+      <span><span class="dot">✉</span> reddington414@naver.com</span>
+      <span><span class="dot">📞</span> 010-2560-4207</span>
+      <span><span class="dot">🎓</span> 경희대 호텔경영</span>
+      <span><span class="dot">📅</span> 1992.04.14</span>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- ── IMPACT METRICS ── -->
+<section id="impact">
+<div class="wrap">
+<div class="metrics-row">
+  <div class="metric">
+    <div class="before">3시간</div>
+    <div class="val">10<span style="font-size:18px">분</span></div>
+    <div class="unit">AI 자동화로 단축한 반복 업무</div>
+    <div class="arrow">▼ 97% 감소</div>
+  </div>
+  <div class="metric">
+    <div style="height:20px"></div>
+    <div class="val">8<span style="font-size:18px">년+</span></div>
+    <div class="unit">게임 사업 전 영역 직접 경험</div>
+    <div class="arrow" style="color:var(--gold)">사업 AtoZ</div>
+  </div>
+  <div class="metric">
+    <div style="height:20px"></div>
+    <div class="val">7<span style="font-size:18px">개</span></div>
+    <div class="unit">글로벌 서비스 권역 운영</div>
+    <div class="arrow" style="color:var(--blue)">NCW·NCT·NCJ 외</div>
+  </div>
+  <div class="metric">
+    <div style="height:20px"></div>
+    <div class="val">10<span style="font-size:18px">년</span></div>
+    <div class="unit">B&amp;S 장수 IP 라이브 유지 기여</div>
+    <div class="arrow" style="color:var(--green)">IP 파워 현재도 유지</div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- ── AI CORE ── -->
+<section id="aicore">
+<div class="wrap">
+  <div class="aicore-label">What I Actually Build</div>
+  <div class="aicore-title">AI로 사업 파이프라인을 직접 설계합니다</div>
+  <div class="aicore-sub">전략 수립부터 데이터 수집·분석·의사결정·실행까지 — 1인 오케스트레이션 체계</div>
+  <div class="pipeline-box">
+    <div class="pipe-flow">
+      <div class="pipe-node">
+        <div class="pn-icon">🔍</div>
+        <div class="pn-label">데이터 수집</div>
+        <div class="pn-tool">Playwright · API</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node">
+        <div class="pn-icon">🧠</div>
+        <div class="pn-label">AI 분석</div>
+        <div class="pn-tool">Claude · Vision</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node">
+        <div class="pn-icon">📊</div>
+        <div class="pn-label">인사이트 도출</div>
+        <div class="pn-tool">자동 리포트</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node">
+        <div class="pn-icon">⚡</div>
+        <div class="pn-label">의사결정·실행</div>
+        <div class="pn-tool">대시보드</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node">
+        <div class="pn-icon">📣</div>
+        <div class="pn-label">알림·공유</div>
+        <div class="pn-tool">Slack · Web</div>
       </div>
     </div>
   </div>
+  <div class="tool-tags">
+    <span class="tool-tag">Claude Code</span>
+    <span class="tool-tag">Multi-Agent</span>
+    <span class="tool-tag">MCP 연동</span>
+    <span class="tool-tag">Python</span>
+    <span class="tool-tag">Cursor</span>
+    <span class="tool-tag">Codex AI</span>
+    <span class="tool-tag">Slack API</span>
+    <span class="tool-tag">Google Play API</span>
+    <span class="tool-tag">MMP (Adjust/AppsFlyer)</span>
+    <span class="tool-tag">Admin Dashboard</span>
+  </div>
+</div>
 </section>
 
-<!-- ── 자기소개 ── -->
-<section id="intro" class="section">
-  <div class="container">
-    <div class="section-title">자기소개</div>
-    <div class="intro-box card">
-      <div class="highlight">약 8년간 쌓은 사업 역량을 AI 기반으로, 글로벌 모바일 게임 사업에서 성과를 창출하겠습니다.</div>
-      <p>6년간 NC에서 비즈니스 모델 수립부터 사업계획까지 게임 사업의 AtoZ를 경험하며 사업 역량을 쌓았고,
-      현재는 AI 자동화를 구축하며 데이터 분석부터 의사결정까지 AI 기반으로 사업기획 업무를 하며 성과를 창출하고 있습니다.</p>
+<!-- ── DUAL SKILLS ── -->
+<section id="skills">
+<div class="wrap">
+  <div class="skills-label">Skill Tracks</div>
+  <div class="skills-title">Business × AI — 두 가지 트랙의 전문성</div>
+  <div class="skills-two">
+    <div class="skill-track">
+      <div class="track-head">
+        <span class="track-icon">💼</span>
+        <h3>비즈니스 트랙</h3>
+        <span class="track-badge badge-biz">8년 실전</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">사업 전략 및 사업계획 수립</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:100%"></div></div>
+        <div class="skill-desc">데이터 분석 기반 KPI 설정 · 라이브 서비스 방향성 제시</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">마케팅 전략 / 플랜 수립</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div>
+        <div class="skill-desc">타깃 분석 · MMP 채널별 ROAS 최적화</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">BM / 수익 모델 기획 및 설계</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div>
+        <div class="skill-desc">인앱 결제·광고 수익 모델 LTV 극대화 구조 설계</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">글로벌 론칭 현지화 운영</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div>
+        <div class="skill-desc">NCW·NCT·NCJ 퍼블리셔 협업 · FQA · 라이브 체계</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">데이터 추출 및 분석 / 시각화</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div>
+        <div class="skill-desc">코호트 분석 · ROAS 추적 · 인사이트 → 의사결정</div>
+      </div>
+    </div>
+    <div class="skill-track">
+      <div class="track-head">
+        <span class="track-icon">🤖</span>
+        <h3>AI / Tech 트랙</h3>
+        <span class="track-badge badge-ai">직접 구축</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">AI 자동화 파이프라인 설계</div>
+        <div class="skill-bar-wrap"><div class="skill-bar blue" style="width:100%"></div></div>
+        <div class="skill-desc">Claude Code 멀티 에이전트 · MCP 연동 1인 파이프라인 구축</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Admin 대시보드 직접 개발</div>
+        <div class="skill-bar-wrap"><div class="skill-bar blue" style="width:88%"></div></div>
+        <div class="skill-desc">Claude · Cursor · Codex AI로 내부 툴 직접 개발 · 반복 업무 자동화</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">AI 기반 시장 분석 시스템</div>
+        <div class="skill-bar-wrap"><div class="skill-bar blue" style="width:90%"></div></div>
+        <div class="skill-desc">Google Play API · Claude Vision → 100점 스코어링 자동화</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Slack Webhook 자동 알림</div>
+        <div class="skill-bar-wrap"><div class="skill-bar blue" style="width:85%"></div></div>
+        <div class="skill-desc">MMP 지표 임계점 도달 시 자동 감지 → 팀 알림</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">팀 공용 AI SaaS 구축</div>
+        <div class="skill-bar-wrap"><div class="skill-bar blue" style="width:82%"></div></div>
+        <div class="skill-desc">GitHub 버전 관리 · Web 대시보드 · 히스토리 자산화</div>
+      </div>
     </div>
   </div>
+</div>
 </section>
 
-<!-- ── 핵심 성과 ── -->
-<section id="key" class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="section-title">KEY EXPERIENCE 핵심 성과</div>
-    <div class="key-grid">
-
-      <div class="key-card">
-        <div class="key-num">①</div>
-        <h3>게임 비즈니스 전 영역을 직접 경험</h3>
-        <p>기획부터 마케팅, 라이브 운영, 데이터 분석, 성과 관리까지 게임 사업의 A to Z를 NC에서 직접 실행하며 성과를 만들어냈습니다.</p>
+<!-- ── TRACK RECORD ── -->
+<section id="track">
+<div class="wrap">
+  <div class="tr-label">Proven Results</div>
+  <div class="tr-title">검증된 성과 4가지</div>
+  <div class="tr-grid">
+    <div class="tr-card">
+      <span class="tr-tag">AI AUTOMATION</span>
+      <h3>1인 10역 — AI 자동화로 업무 범위 확장</h3>
+      <div class="tr-result">⚡ 3시간 소요 작업 → 10분으로 단축 (97% 감소)</div>
+      <div class="tr-rows">
+        <div class="tr-row"><span class="lbl">배경</span>데이터 추출·분석·사업 기획 등 반복 업무에 리소스 과다 소모</div>
+        <div class="tr-row"><span class="lbl">실행</span>Claude Code 멀티 Agent + MCP 연동 오케스트레이션 체계 직접 설계</div>
+        <div class="tr-row"><span class="lbl">결과</span>확보된 시간으로 고부가가치 전략 기획 집중, 1인 파이프라인 자산화</div>
       </div>
-
-      <div class="key-card">
-        <div class="key-num">②</div>
-        <h3>글로벌 퍼블리싱 운영하며 현지화 수립</h3>
-        <p>NCW, NCT, NCJ 해외 주요 퍼블리셔 협업 프로젝트 진행하며 담당 IP 현지화 전략을 수립하고 라이브 서비스를 운영했습니다.</p>
+    </div>
+    <div class="tr-card">
+      <span class="tr-tag">BUSINESS STRATEGY</span>
+      <h3>B&amp;S 사업 전략 수립 — 10년+ 장수 IP 유지</h3>
+      <div class="tr-result">📊 주요 지표 반등 · 태동·10주년 업데이트 견인</div>
+      <div class="tr-rows">
+        <div class="tr-row"><span class="lbl">배경</span>장기 서비스 B&amp;S의 모멘텀 하락, 재도약 전략 필요</div>
+        <div class="tr-row"><span class="lbl">실행</span>유저 데이터 분석 → 핵심 타깃 재설정 → 대규모 업데이트 기획 총괄</div>
+        <div class="tr-row"><span class="lbl">결과</span>신규 USP 확보, 10년 이상 서비스되는 장수 IP 입지 강화</div>
       </div>
-
-      <div class="key-card">
-        <div class="key-num">③</div>
-        <h3>AI 시스템 구축으로 사업 전략 수립 및 추진</h3>
-        <p>데이터 분석 및 사업 전략을 AI 자동화로 파이프라인 구축하고, 오케스트레이션 체계로 agent 운영하고 있습니다.</p>
+    </div>
+    <div class="tr-card">
+      <span class="tr-tag">GLOBAL MONETIZATION</span>
+      <h3>NCW 현지화 BM 재구성 — 북미/유럽 매출 증대</h3>
+      <div class="tr-result">💵 글로벌 유저 결제 전환율 개선 · 유의미한 매출 증대</div>
+      <div class="tr-rows">
+        <div class="tr-row"><span class="lbl">배경</span>북미·유럽 유저 PU 전환율 한계, 국내 BM 직수입 부적합</div>
+        <div class="tr-row"><span class="lbl">실행</span>핵심 BM(보물창고·소울패스·랜덤박스) NCW 소비 패턴 맞춤 재설계</div>
+        <div class="tr-row"><span class="lbl">결과</span>상품·가격·보상 밸런스 현지화로 거부감 최소화, 매출 증대 달성</div>
       </div>
-
+    </div>
+    <div class="tr-card">
+      <span class="tr-tag">RETENTION DESIGN</span>
+      <h3>소울리그 리텐션 설계 — DAU 상승 및 이탈 방어</h3>
+      <div class="tr-result">📈 DAU 상승 · 이탈 방어 · 복귀 유저 증가</div>
+      <div class="tr-rows">
+        <div class="tr-row"><span class="lbl">배경</span>장기 서비스 게임 이탈률 증가, 소수만 참여하는 랭킹 구조</div>
+        <div class="tr-row"><span class="lbl">실행</span>기존 랭킹 이벤트 → 다수 참여 가능한 소울리그 구조로 개편</div>
+        <div class="tr-row"><span class="lbl">결과</span>이벤트 기간 DAU 상승, 핵심 리텐션 지표 전반 개선</div>
+      </div>
     </div>
   </div>
+</div>
 </section>
 
-<!-- ── 경력 + 인적사항 ── -->
-<section id="career-info" class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="two-col">
-
-      <div>
-        <div class="section-title">주요 경력 상세</div>
-        <div class="card">
-          <ul class="career-list">
-            <li>
-              <span class="dot"></span>
-              <div>
-                <div class="company">KT 밀리의서재 사업기획팀</div>
-                <div class="period">25.09 ~ 재직 중</div>
-              </div>
-            </li>
-            <li>
-              <span class="dot"></span>
-              <div>
-                <div class="company">오가닉 비즈니스 콘텐츠사업팀</div>
-                <div class="period">24.08 ~ 25.08 (약 1년)</div>
-              </div>
-            </li>
-            <li>
-              <span class="dot"></span>
-              <div>
-                <div class="company">B&S 사업실 마케팅사업팀 (팀장)</div>
-                <div class="period">22.04 ~ 24.07 (약 2년 3개월)</div>
-              </div>
-            </li>
-            <li>
-              <span class="dot"></span>
-              <div>
-                <div class="company">B&S 사업실 마케팅사업팀</div>
-                <div class="period">21.03 ~ 22.03 (약 1년 1개월)</div>
-              </div>
-            </li>
-            <li>
-              <span class="dot"></span>
-              <div>
-                <div class="company">B&S 사업실 콘텐츠사업팀</div>
-                <div class="period">19.01 ~ 21.02 (약 2년 2개월)</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div>
-        <div class="section-title">인적 및 학력사항</div>
-        <div class="card">
-          <ul class="info-list">
-            <li><span class="icon">👤</span> <div><strong>여인덕 (Yeo Indeok)</strong><br><span style="color:#7777aa;font-size:13px;">1992.04.14</span></div></li>
-            <li><span class="icon">✉</span> reddington414@naver.com</li>
-            <li><span class="icon">📞</span> 010-2560-4207</li>
-            <li><span class="icon">🎓</span> <div><strong>경희대학교 호텔경영학과</strong><br><span style="color:#7777aa;font-size:13px;">2012.03 ~ 2019.02 / 졸업</span></div></li>
-            <li><span class="icon">🏫</span> <div><strong>여의도 고등학교</strong><br><span style="color:#7777aa;font-size:13px;">2008.03 ~ 2011.02 / 졸업</span></div></li>
-          </ul>
-        </div>
-      </div>
-
+<!-- ── CAREER ── -->
+<section id="career">
+<div class="wrap">
+<div class="career-grid">
+  <div>
+    <div class="c-label">Career</div>
+    <div class="c-title">주요 경력</div>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-co">KT 밀리의서재 · 사업기획팀</div><div class="tl-period">2025.09 ~ 재직 중</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-co">오가닉 비즈니스 · 콘텐츠사업팀</div><div class="tl-period">2024.08 ~ 2025.08 (약 1년)</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-co">B&amp;S 사업실 마케팅사업팀 <span style="color:var(--gold);font-size:12px">(팀장)</span></div><div class="tl-period">2022.04 ~ 2024.07 (약 2년 3개월)</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-co">B&amp;S 사업실 마케팅사업팀</div><div class="tl-period">2021.03 ~ 2022.03 (약 1년 1개월)</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-co">B&amp;S 사업실 콘텐츠사업팀</div><div class="tl-period">2019.01 ~ 2021.02 (약 2년 2개월)</div></div>
     </div>
   </div>
+  <div>
+    <div class="c-label">Profile</div>
+    <div class="c-title">인적 · 학력</div>
+    <ul class="profile-list">
+      <li><span class="p-ic">👤</span><div><strong>여인덕 (Yeo Indeok)</strong><br><span style="font-size:12px;color:var(--muted)">1992.04.14</span></div></li>
+      <li><span class="p-ic">✉</span> reddington414@naver.com</li>
+      <li><span class="p-ic">📞</span> 010-2560-4207</li>
+      <li><span class="p-ic">🎓</span><div><strong>경희대학교 호텔경영학과</strong><br><span style="font-size:12px;color:var(--muted)">2012.03 ~ 2019.02 · 졸업</span></div></li>
+      <li><span class="p-ic">🏫</span><div><strong>여의도 고등학교</strong><br><span style="font-size:12px;color:var(--muted)">2008.03 ~ 2011.02 · 졸업</span></div></li>
+    </ul>
+  </div>
+</div>
+</div>
 </section>
 
-<!-- ── 보유 스킬 ── -->
-<section id="skills" class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="section-title">보유 스킬 및 역량</div>
-    <div class="skills-grid">
-
-      <div class="skill-card">
-        <div class="skill-icon">🤖</div>
-        <div>
-          <h4>AI 자동화 프로그램 구축 <span class="badge">고급</span></h4>
-          <p>Claude Code 멀티 에이전트 및 MCP 연동을 통한 수집→분석→실행 1인 파이프라인 설계</p>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-icon">📊</div>
-        <div>
-          <h4>AI 활용 어드민 구축 및 리소스 효율화 <span class="badge">고급</span></h4>
-          <p>AI 도구(Claude, Cursor, Codex AI)를 활용한 내부 대시보드 직접 개발 및 반복 업무 리소스 획기적 단축</p>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-icon">💡</div>
-        <div>
-          <h4>사업 전략 및 사업계획 수립 <span class="badge">고급</span></h4>
-          <p>국내 및 NCW/NCT 라이브 서비스 진행 기반, 데이터 분석을 통한 핵심 KPI 설정 및 방향성 제시</p>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-icon">📣</div>
-        <div>
-          <h4>마케팅 전략 / 플랜 수립 <span class="badge">고급</span></h4>
-          <p>타깃 분석에 맞춘 마케팅 기획 및 MMP 데이터 기반 채널별 ROAS 분석을 통한 마케팅 성과 최적화</p>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-icon">🌐</div>
-        <div>
-          <h4>국내/해외 프로덕트 론칭 및 라이브 <span class="badge">고급</span></h4>
-          <p>글로벌 주요 권역 퍼블리셔와의 긴밀한 현지화 협업 및 시장 특성에 맞춘 라이브 서비스 체계 수립·운영</p>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-icon">✅</div>
-        <div>
-          <h4>글로벌 론칭 준비 및 FQA <span class="badge">고급</span></h4>
-          <p>사업-개발-마케팅 글로벌 팀 간 커뮤니케이션 리딩, 프로덕트 시장성 분석을 통한 성공적 론칭 준비</p>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-icon">💰</div>
-        <div>
-          <h4>BM / 수익 모델 기획 및 설계 <span class="badge">고급</span></h4>
-          <p>모바일 게임 인앱 결제, 광고 수익 모델 등 LTV 극대화를 위한 수익 구조 설계 및 성과 검증</p>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-icon">📈</div>
-        <div>
-          <h4>데이터 추출 및 분석 / 시각화 <span class="badge">고급</span></h4>
-          <p>MMP, 코호트 분석, ROAS 추적 등 복잡한 데이터 지표 심층 분석을 통한 인사이트 도출 및 의사결정</p>
-        </div>
-      </div>
-
+<!-- ── AI PLAN ── -->
+<section id="aiplan">
+<div class="wrap">
+  <div class="ap-label">Next Actions</div>
+  <div class="ap-title">입사 후 AI 활용 계획</div>
+  <div class="ap-sub">영업이익 증대 방향으로 AI를 활용, 글로벌 모바일 게임 사업에서 측정 가능한 성과를 창출합니다</div>
+  <div class="ap-grid">
+    <div class="ap-card" data-step="01">
+      <div class="ap-head"><span class="ap-icon">🎮</span><h3>STEP 1. 광고 배치 시점 발굴</h3></div>
+      <div class="ap-goal">AI가 직접 게임을 플레이하며 광고 배치 최적 시점 발굴</div>
+      <ul class="ap-ul">
+        <li>ADB + Python 에뮬레이터 자동 플레이 · 스크린샷 캡처</li>
+        <li>Claude Vision API로 광고 노출/실패/보상 화면 인식</li>
+        <li>JSON 로그 누적 → 분석 리포트 자동 생성</li>
+      </ul>
+      <div class="ap-out"><strong>산출물:</strong> 게임별 광고 배치 시점 데이터 / 리워드 최적 유도 지점</div>
+    </div>
+    <div class="ap-card" data-step="02">
+      <div class="ap-head"><span class="ap-icon">⏱</span><h3>STEP 2. 광고 피로도 자동 감지</h3></div>
+      <div class="ap-goal">AI가 피로도 축적 패턴 감지 → 교체 시점 자동 알림</div>
+      <ul class="ap-ul">
+        <li>MMP API(Adjust/AppsFlyer) 연동 데이터 자동 수집</li>
+        <li>채널별 CTR/ROAS/CPC 추이 Python 자동 분석</li>
+        <li>임계점 도달 시 Slack Webhook 자동 알림</li>
+      </ul>
+      <div class="ap-out"><strong>산출물:</strong> 소재 상태 대시보드 (정상/주의/교체) / 최적 교체 주기</div>
+    </div>
+    <div class="ap-card" data-step="03">
+      <div class="ap-head"><span class="ap-icon">🔍</span><h3>STEP 3. 인수 후보 게임 스크리닝</h3></div>
+      <div class="ap-goal">수동 시장 조사 → 30분 AI 자동 분석으로 대체</div>
+      <ul class="ap-ul">
+        <li>Google Play / App Store 공개 지표 자동 수집</li>
+        <li>Claude API 다차원 평가 (DAU · 광고잠재력 · 리뷰 감성)</li>
+        <li>자체 알고리즘 100점 자동 스코어링</li>
+      </ul>
+      <div class="ap-out"><strong>산출물:</strong> 후보 게임 순위 리포트 / 100점 만점 요약</div>
+    </div>
+    <div class="ap-card" data-step="04">
+      <div class="ap-head"><span class="ap-icon">👥</span><h3>STEP 4. 팀 공용 AI SaaS 구축</h3></div>
+      <div class="ap-goal">개인 AI가 아닌, 팀 전체가 버튼 하나로 일하는 환경</div>
+      <ul class="ap-ul">
+        <li>GitHub 프롬프트 · 스크립트 팀 공유/버전 관리</li>
+        <li>Web 대시보드로 팀원 누구나 분석 실행</li>
+        <li>결과 자동 저장 · 히스토리 스택 → 조직 자산화</li>
+      </ul>
+      <div class="ap-out"><strong>산출물:</strong> 조직 전체 AI 자동화 파이프라인 자산화</div>
     </div>
   </div>
+</div>
 </section>
 
-<!-- ── 주요 경험 및 성과 ── -->
-<section id="achievements" class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="section-title">주요 경험 및 성과 소개</div>
-    <div class="ach-grid">
-
-      <div class="ach-card">
-        <h3>① 1인 10역 — AI 활용으로 업무 범위 확장</h3>
-        <div class="ach-row"><span class="label">상황</span><span class="text">데이터 추출/분석, 사업 기획 등 반복 업무에 리소스 소모</span></div>
-        <div class="ach-row"><span class="label">전략</span><span class="text">Claude Code 멀티 Agent 및 MCP 연동으로 1인 10역 자동화 오케스트레이션 체계 직접 설계</span></div>
-        <div class="ach-row"><span class="label">성과</span><span class="text">3시간 소요 작업을 10분으로 단축. 확보된 리소스로 전략적 기획 및 더 많은 고부가가치 업무 수행 역량 증폭</span></div>
-      </div>
-
-      <div class="ach-card">
-        <h3>② B&S 사업 전략 수립 및 실행</h3>
-        <div class="ach-row"><span class="label">상황</span><span class="text">장기 서비스 중인 B&S의 서비스 모멘텀 창출 필요</span></div>
-        <div class="ach-row"><span class="label">전략</span><span class="text">B&S 정체성 재확립. 유저 데이터 분석을 통해 핵심 타깃 재설정 및 대규모 업데이트 기획</span></div>
-        <div class="ach-row"><span class="label">성과</span><span class="text">신규 USP 확보로 긍정적 기대감 조성. 주요 지표 반등 및 10년 이상 서비스되는 장수 IP로서의 입지 강화 (태동 업데이트, 10주년 업데이트)</span></div>
-      </div>
-
-      <div class="ach-card">
-        <h3>③ NCW 현지화 BM 재구성으로 매출 증대</h3>
-        <div class="ach-row"><span class="label">상황</span><span class="text">북미/유럽 유저들의 결제 전환율(PU) 증대 한계 직면</span></div>
-        <div class="ach-row"><span class="label">전략</span><span class="text">국내 핵심 BM(보물창고, 소울패스, 랜덤박스)을 NCW 권역 유저 취향과 소비 패턴에 맞춰 철저히 분석 후 재설계</span></div>
-        <div class="ach-row"><span class="label">성과</span><span class="text">상품 구성, 가격, 보상 밸런스의 정교한 현지화로 글로벌 유저의 거부감 최소화 및 유의미한 매출 증대 달성</span></div>
-      </div>
-
-      <div class="ach-card">
-        <h3>④ 유저 리텐션 방어 / 설계</h3>
-        <div class="ach-row"><span class="label">상황</span><span class="text">장기 서비스 게임의 이탈률 증가 및 참여도 하락</span></div>
-        <div class="ach-row"><span class="label">전략</span><span class="text">'소울리그' 리텐션 설계 관점으로 접근하여 기존 랭킹 이벤트를 다수가 참여할 수 있는 형태로 개편</span></div>
-        <div class="ach-row"><span class="label">성과</span><span class="text">이벤트 기간 동안 DAU 상승, 기존 유저 이탈 방어 및 복귀 유저 증가 등 핵심 리텐션 지표 개선</span></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── 입사 후 AI 활용 계획 ── -->
-<section id="aiplan" class="section">
-  <div class="container">
-    <div class="section-title">입사 후 AI 활용 계획</div>
-    <div class="plan-intro">
-      영업이익 증대 방향으로 AI를 활용하여, 글로벌 모바일 게임 사업에서 사업적 성과 창출
-    </div>
-    <div class="plan-grid">
-
-      <div class="plan-card">
-        <div class="step-head">
-          <span class="step-icon">🎮</span>
-          <h3>STEP 1. 광고 배치 시점 발굴</h3>
-        </div>
-        <div class="purpose"><strong>목적:</strong> AI가 직접 게임을 플레이하며 광고 배치 최적 시점 발굴</div>
-        <ul>
-          <li>ADB + Python으로 에뮬레이터 자동 플레이 및 스크린샷 캡처</li>
-          <li>Claude Vision API로 화면 인식 (광고 노출/실패/보상 화면)</li>
-          <li>JSON 로그 누적 및 분석 리포트 자동 생성 파이프라인</li>
-        </ul>
-        <div class="output"><strong>산출물:</strong> 게임별 광고 배치 시점 데이터 / 리워드 최적 유도 지점</div>
-      </div>
-
-      <div class="plan-card">
-        <div class="step-head">
-          <span class="step-icon">⏱</span>
-          <h3>STEP 2. 광고 피로도 감지</h3>
-        </div>
-        <div class="purpose"><strong>목적:</strong> AI가 광고 피로도 축적 패턴을 감지하여 교체 시점 알림</div>
-        <ul>
-          <li>MMP API(Adjust/AppsFlyer) 연동하여 데이터 자동 수집</li>
-          <li>Python으로 채널별 CTR/ROAS/CPC 추이 자동 분석</li>
-          <li>피로도 임계점 도달 시 Slack Webhook 자동 알림 발송</li>
-        </ul>
-        <div class="output"><strong>산출물:</strong> 소재별 상태 대시보드 (정상/주의/교체) / 최적 교체 주기</div>
-      </div>
-
-      <div class="plan-card">
-        <div class="step-head">
-          <span class="step-icon">🔍</span>
-          <h3>STEP 3. 인수 후보 게임 스크리닝</h3>
-        </div>
-        <div class="purpose"><strong>목적:</strong> 수동 시장 조사를 30분 AI 자동 분석으로 대체</div>
-        <ul>
-          <li>Google Play / App Store 공개 지표 API 자동 수집</li>
-          <li>Claude API가 다차원 평가 (DAU/광고잠재력/리뷰 감성) 수행</li>
-          <li>자체 알고리즘 기반 인수 적합도 점수 자동 스코어링</li>
-        </ul>
-        <div class="output"><strong>산출물:</strong> 후보 게임 순위 리포트 / 100점 만점 요약 리포트</div>
-      </div>
-
-      <div class="plan-card">
-        <div class="step-head">
-          <span class="step-icon">👥</span>
-          <h3>STEP 4. 팀 공용 AI SaaS 구축</h3>
-        </div>
-        <div class="purpose"><strong>목적:</strong> 개인의 AI 모델이 아닌, 팀 전체가 버튼 하나로 일하는 환경 구축</div>
-        <ul>
-          <li>Git(GitHub)으로 분석 프롬프트 및 스크립트 팀 공유/버전 관리</li>
-          <li>Web 대시보드 구축으로 팀원 누구나 손쉽게 분석 실행</li>
-          <li>분석 결과 자동 저장 및 히스토리 스택되어 모델 학습</li>
-        </ul>
-        <div class="output"><strong>산출물:</strong> 조직 전체의 AI 자동화 파이프라인 자산화</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── FOOTER ── -->
 <footer>
-  <p>여인덕 포트폴리오 · <a href="mailto:reddington414@naver.com">reddington414@naver.com</a> · 010-2560-4207</p>
+  여인덕 포트폴리오 · <a href="mailto:reddington414@naver.com">reddington414@naver.com</a> · 010-2560-4207
 </footer>
-
 </body>
 </html>
