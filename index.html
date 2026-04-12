@@ -10,23 +10,30 @@
   --bg:#0b0b14;--bg2:#12121f;--bg3:#1a1a2e;
   --gold:#f0c040;--text:#e0e0f0;--muted:#7777aa;
   --border:#252540;--blue:#6c8fff;--green:#4caf82;
+  --text-bright:#ffffff;--text-body:#c0c0d8;--text-sec:#b0b0cc;
 }
 html.light{
-  --bg:#f4f4f8;--bg2:#ffffff;--bg3:#eaeaf2;
-  --gold:#9a6f00;--text:#1a1a2e;--muted:#5555778;
-  --border:#d0d0e0;--blue:#3355cc;--green:#256f4a;
+  --bg:#f5f5f9;--bg2:#ffffff;--bg3:#ebebf3;
+  --gold:#8a6000;--text:#1a1a2e;--muted:#6666888;
+  --border:#d5d5e5;--blue:#3355cc;--green:#1d6940;
+  --text-bright:#1a1a2e;--text-body:#2e2e50;--text-sec:#444466;
 }
 html.light body{background:var(--bg);color:var(--text);}
-html.light #hero{background:linear-gradient(160deg,#eaeaf5 0%,#f0f0fa 60%,#e8e8f5 100%);}
-html.light .pipeline-box{background:#fff;}
-html.light .pipe-node{background:#f0f0f8;}
-html.light .skill-track{background:#fff;}
-html.light .tr-card{background:#fff;}
-html.light .ap-card{background:#fff;}
-html.light #collab{background:#eaeaf2;}
-html.light footer{background:#fff;}
-html.light .tl::before{background:#d0d0e0;}
-html.light .tl-dot{border-color:#f4f4f8;}
+html.light #hero{background:linear-gradient(160deg,#eceef8 0%,#f2f4fc 60%,#e8ecf8 100%);}
+html.light #impact{background:var(--bg3);}
+html.light #aicore{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);}
+html.light #skills{background:var(--bg2);}
+html.light #track{background:var(--bg);}
+html.light #aiplan{background:var(--bg);}
+html.light .pipeline-box{background:var(--bg2);}
+html.light .pipe-node{background:var(--bg3);}
+html.light .skill-track{background:var(--bg2);}
+html.light .tr-card{background:var(--bg2);}
+html.light .ap-card{background:var(--bg2);}
+html.light #collab{background:var(--bg3)!important;}
+html.light footer{background:var(--bg2);}
+html.light .tl::before{background:var(--border);}
+html.light .tl-dot{border-color:var(--bg2);}
 
 /* theme toggle button */
 #theme-btn{
@@ -52,16 +59,27 @@ body{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(
 .photo-col{display:flex;flex-direction:column;align-items:center;gap:12px;}
 .hero-photo{width:140px;height:140px;border-radius:50%;border:3px solid var(--gold);object-fit:cover;object-position:center top;}
 .name-tag{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;}
-.info-col h1{font-size:40px;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.05;margin-bottom:6px;}
+.info-col h1{font-size:40px;font-weight:900;color:var(--text-bright);letter-spacing:-.02em;line-height:1.05;margin-bottom:6px;}
 .info-col .eng{font-size:13px;color:var(--muted);margin-bottom:20px;letter-spacing:.04em;}
 .big-claim{
   font-size:17px;font-weight:700;color:var(--gold);
   background:rgba(240,192,64,.06);
   border:1px solid rgba(240,192,64,.2);
   border-radius:10px;padding:14px 20px;
-  margin-bottom:22px;line-height:1.5;
+  margin-bottom:16px;line-height:1.6;
 }
-.big-claim span{color:#fff;}
+.big-claim span{color:var(--text-bright);}
+/* role tags */
+.role-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
+.role-tag{font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;border:1px solid var(--border);color:var(--muted);}
+.role-tag.active{background:rgba(108,143,255,.12);border-color:rgba(108,143,255,.4);color:var(--blue);}
+/* CTA buttons */
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.cta-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;border:none;transition:all .2s;}
+.cta-primary{background:var(--gold);color:#0b0b14;}
+.cta-primary:hover{opacity:.85;}
+.cta-secondary{background:transparent;border:1px solid var(--border);color:var(--text);}
+.cta-secondary:hover{border-color:var(--gold);color:var(--gold);}
 .contacts{display:flex;flex-wrap:wrap;gap:14px;}
 .contacts a,.contacts span{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:5px;text-decoration:none;}
 .contacts .dot{color:var(--gold);}
@@ -76,7 +94,7 @@ body{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(
 .metric:last-child{border-right:none;}
 .metric .before{font-size:12px;color:var(--muted);text-decoration:line-through;margin-bottom:2px;}
 .metric .val{font-size:32px;font-weight:900;color:var(--gold);line-height:1;}
-.metric .unit{font-size:13px;color:#9999bb;margin-top:6px;}
+.metric .unit{font-size:13px;color:var(--muted);margin-top:6px;}
 .metric .arrow{color:var(--green);font-size:12px;margin-top:2px;font-weight:700;}
 
 /* ── AI CORE ── */
@@ -85,7 +103,7 @@ body{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(
   padding:64px 0;border-bottom:1px solid var(--border);
 }
 .aicore-label{font-size:11px;letter-spacing:.14em;color:var(--blue);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
-.aicore-title{font-size:28px;font-weight:800;color:#fff;margin-bottom:6px;}
+.aicore-title{font-size:28px;font-weight:800;color:var(--text-bright);margin-bottom:6px;}
 .aicore-sub{font-size:14px;color:var(--muted);margin-bottom:40px;}
 .pipeline-box{
   background:var(--bg3);border:1px solid var(--border);
@@ -110,18 +128,18 @@ body{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(
 /* ── DUAL SKILLS ── */
 #skills{background:var(--bg2);padding:64px 0;border-bottom:1px solid var(--border);}
 .skills-label{font-size:11px;letter-spacing:.14em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
-.skills-title{font-size:28px;font-weight:800;color:#fff;margin-bottom:32px;}
+.skills-title{font-size:28px;font-weight:800;color:var(--text-bright);margin-bottom:32px;}
 .skills-two{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
 .skill-track{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:28px 24px;}
 .track-head{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
 .track-icon{font-size:22px;}
-.track-head h3{font-size:16px;font-weight:800;color:#fff;}
+.track-head h3{font-size:16px;font-weight:800;color:var(--text-bright);}
 .track-head .track-badge{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:700;margin-left:4px;}
 .badge-biz{background:rgba(240,192,64,.15);color:var(--gold);border:1px solid rgba(240,192,64,.3);}
 .badge-ai{background:rgba(108,143,255,.15);color:var(--blue);border:1px solid rgba(108,143,255,.3);}
 .skill-item{margin-bottom:14px;}
 .skill-item:last-child{margin-bottom:0;}
-.skill-name{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;}
+.skill-name{font-size:13px;font-weight:700;color:var(--text-bright);margin-bottom:4px;}
 .skill-bar-wrap{height:4px;background:var(--border);border-radius:2px;margin-bottom:4px;}
 .skill-bar{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));}
 .skill-bar.blue{background:linear-gradient(90deg,var(--blue),#8fb3ff);}
@@ -130,11 +148,11 @@ body{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(
 /* ── TRACK RECORD ── */
 #track{background:var(--bg);padding:64px 0;border-bottom:1px solid var(--border);}
 .tr-label{font-size:11px;letter-spacing:.14em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
-.tr-title{font-size:28px;font-weight:800;color:#fff;margin-bottom:32px;}
+.tr-title{font-size:28px;font-weight:800;color:var(--text-bright);margin-bottom:32px;}
 .tr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
 .tr-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:26px;}
 .tr-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--gold);background:rgba(240,192,64,.1);border-radius:4px;padding:2px 8px;margin-bottom:10px;}
-.tr-card h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:14px;}
+.tr-card h3{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:14px;}
 .tr-result{
   display:flex;align-items:center;gap:10px;
   background:rgba(76,175,130,.08);border-left:3px solid var(--green);
@@ -143,38 +161,38 @@ body{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(
   margin-bottom:14px;
 }
 .tr-rows{}
-.tr-row{font-size:13px;color:#b0b0cc;margin-bottom:7px;display:flex;gap:6px;}
+.tr-row{font-size:13px;color:var(--text-sec);margin-bottom:7px;display:flex;gap:6px;}
 .tr-row .lbl{color:var(--gold);font-weight:700;flex-shrink:0;}
 
 /* ── CAREER ── */
 #career{background:var(--bg2);padding:64px 0;border-bottom:1px solid var(--border);}
 .career-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
 .c-label{font-size:11px;letter-spacing:.14em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
-.c-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:24px;}
+.c-title{font-size:22px;font-weight:800;color:var(--text-bright);margin-bottom:24px;}
 .tl{position:relative;padding-left:16px;}
 .tl::before{content:"";position:absolute;left:4px;top:4px;bottom:4px;width:2px;background:var(--border);}
 .tl-item{position:relative;padding:0 0 22px 18px;}
 .tl-item:last-child{padding-bottom:0;}
 .tl-dot{position:absolute;left:-12px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid var(--bg2);}
-.tl-co{font-size:13.5px;font-weight:700;color:#fff;}
+.tl-co{font-size:13.5px;font-weight:700;color:var(--text-bright);}
 .tl-period{font-size:11.5px;color:var(--muted);margin-top:2px;}
 .profile-list{list-style:none;}
-.profile-list li{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);font-size:13.5px;color:#b0b0cc;}
+.profile-list li{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);font-size:13.5px;color:var(--text-sec);}
 .profile-list li:last-child{border-bottom:none;}
 .p-ic{color:var(--gold);flex-shrink:0;}
-.profile-list strong{color:#fff;}
+.profile-list strong{color:var(--text-bright);}
 
 /* ── AI PLAN ── */
 #aiplan{background:var(--bg);padding:64px 0;}
 .ap-label{font-size:11px;letter-spacing:.14em;color:var(--blue);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
-.ap-title{font-size:28px;font-weight:800;color:#fff;margin-bottom:6px;}
+.ap-title{font-size:28px;font-weight:800;color:var(--text-bright);margin-bottom:6px;}
 .ap-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
 .ap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
 .ap-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:26px;position:relative;overflow:hidden;}
 .ap-card::before{content:attr(data-step);position:absolute;top:16px;right:18px;font-size:48px;font-weight:900;color:rgba(108,143,255,.06);line-height:1;}
 .ap-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
 .ap-icon{font-size:20px;}
-.ap-head h3{font-size:14.5px;font-weight:700;color:#fff;}
+.ap-head h3{font-size:14.5px;font-weight:700;color:var(--text-bright);}
 .ap-goal{font-size:13px;color:var(--blue);font-weight:600;margin-bottom:10px;}
 .ap-ul{list-style:none;margin-bottom:12px;}
 .ap-ul li{font-size:12px;color:var(--muted);padding:3px 0 3px 12px;position:relative;}
@@ -212,15 +230,25 @@ footer a{color:var(--gold);text-decoration:none;}
   </div>
   <div class="info-col">
     <h1>여인덕</h1>
-    <div class="eng">Business Strategist · AI Automation Architect</div>
+    <div class="eng">Business Strategist · AI Automation Builder</div>
+    <div class="role-tags">
+      <span class="role-tag active">Strategy / BizOps</span>
+      <span class="role-tag active">AI Automation</span>
+      <span class="role-tag active">Game Business / Growth</span>
+      <span class="role-tag">Monetization</span>
+    </div>
     <div class="big-claim">
-      <span>8년간 콘텐츠 사업 경험 × AI 자동화 구축 능력</span><br>
-      사업 기획과 실행을 기반으로, <span>AI를 활용해 성과를 극대화</span>할 수 있는 전문가입니다.
+      <span>콘텐츠 사업 성과를 만든 전략가이자,</span><br>
+      <span>그 전략을 자동화 도구로 직접 구현하는 빌더</span>
     </div>
     <div class="contacts">
       <span><span class="dot">✉</span> reddington414@naver.com</span>
       <span><span class="dot">📞</span> 010-2560-4207</span>
       <span><span class="dot">📅</span> 1992.04.14</span>
+    </div>
+    <div class="hero-ctas">
+      <button class="cta-btn cta-primary" onclick="copyEmail()">✉ 이메일 복사</button>
+      <a class="cta-btn cta-secondary" href="mailto:reddington414@naver.com?subject=포트폴리오 문의&body=안녕하세요, 여인덕님의 포트폴리오를 보고 연락드립니다.">☕ 커피챗 문의</a>
     </div>
   </div>
 </div>
@@ -407,18 +435,18 @@ footer a{color:var(--gold);text-decoration:none;}
   <div style="margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
     <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;">
       <div style="font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.1em;margin-bottom:8px;">LIVE PROJECT 01</div>
-      <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">이 포트폴리오 자체</div>
+      <div style="font-size:14px;font-weight:700;color:var(--text-bright);margin-bottom:6px;">이 포트폴리오 자체</div>
       <div style="font-size:12px;color:var(--muted);line-height:1.6;">HTML · CSS · Python · GitHub Pages로 직접 구축. 기획부터 배포까지 100% 직접 제작</div>
     </div>
     <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;">
       <div style="font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.1em;margin-bottom:8px;">LIVE PROJECT 02</div>
-      <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">모바일 게임 M&amp;A 스크리닝 대시보드</div>
+      <div style="font-size:14px;font-weight:700;color:var(--text-bright);margin-bottom:6px;">모바일 게임 M&amp;A 스크리닝 대시보드</div>
       <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:8px;">Google Play 크롤링 → Claude AI → 100점 스코어링 → 자동 배포. 현재 운영 중</div>
       <a href="https://indeokyeo-wq.github.io/game-screening/" target="_blank" style="font-size:11px;color:var(--blue);text-decoration:none;font-weight:600;">→ 라이브 보기</a>
     </div>
     <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;">
       <div style="font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.1em;margin-bottom:8px;">IN PROGRESS</div>
-      <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">현 직장 AI 스터디 운영</div>
+      <div style="font-size:14px;font-weight:700;color:var(--text-bright);margin-bottom:6px;">현 직장 AI 스터디 운영</div>
       <div style="font-size:12px;color:var(--muted);line-height:1.6;">팀 내 AI 활용 스터디 직접 기획·운영 중. 업무 효율화 및 더 많은 성과 창출을 위한 AI 도입 디벨럽 진행</div>
     </div>
   </div>
@@ -504,23 +532,23 @@ footer a{color:var(--gold);text-decoration:none;}
 <section id="collab" style="background:var(--bg3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 0;">
 <div class="wrap">
   <div style="font-size:11px;letter-spacing:.14em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:8px;">Long-term Partnership</div>
-  <div style="font-size:28px;font-weight:800;color:#fff;margin-bottom:8px;">6년간의 협업을 통해 빠른 성과 창출</div>
+  <div style="font-size:28px;font-weight:800;color:var(--text-bright);margin-bottom:8px;">6년간의 협업을 통해 빠른 성과 창출</div>
   <div style="font-size:14px;color:var(--muted);margin-bottom:36px;">시장을 보는 눈부터 실행 속도까지 — 6년간 같은 맥락으로 일해온 검증된 협업입니다</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
     <div style="background:var(--bg);border:1px solid rgba(240,192,64,.2);border-radius:14px;padding:28px;">
       <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:16px;">🤝 함께한 주요 업무</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <div style="font-size:13px;color:#c0c0d8;display:flex;gap:8px;"><span style="color:var(--gold);font-weight:700;flex-shrink:0;">·</span>B&amp;S 사업 전략 공동 수립 — 태동·10주년 업데이트 기획 및 실행</div>
-        <div style="font-size:13px;color:#c0c0d8;display:flex;gap:8px;"><span style="color:var(--gold);font-weight:700;flex-shrink:0;">·</span>NCW·NCT 해외 퍼블리셔 현지화 전략 협업</div>
-        <div style="font-size:13px;color:#c0c0d8;display:flex;gap:8px;"><span style="color:var(--gold);font-weight:700;flex-shrink:0;">·</span>마케팅 플랜·BM 설계·라이브 운영 전반 공동 진행</div>
-        <div style="font-size:13px;color:#c0c0d8;display:flex;gap:8px;"><span style="color:var(--gold);font-weight:700;flex-shrink:0;">·</span>데이터 분석 기반 KPI 설정 및 방향성 공동 제시</div>
+        <div style="font-size:13px;color:var(--text-body);display:flex;gap:8px;"><span style="color:var(--gold);font-weight:700;flex-shrink:0;">·</span>B&amp;S 사업 전략 공동 수립 — 태동·10주년 업데이트 기획 및 실행</div>
+        <div style="font-size:13px;color:var(--text-body);display:flex;gap:8px;"><span style="color:var(--gold);font-weight:700;flex-shrink:0;">·</span>NCW·NCT 해외 퍼블리셔 현지화 전략 협업</div>
+        <div style="font-size:13px;color:var(--text-body);display:flex;gap:8px;"><span style="color:var(--gold);font-weight:700;flex-shrink:0;">·</span>마케팅 플랜·BM 설계·라이브 운영 전반 공동 진행</div>
+        <div style="font-size:13px;color:var(--text-body);display:flex;gap:8px;"><span style="color:var(--gold);font-weight:700;flex-shrink:0;">·</span>데이터 분석 기반 KPI 설정 및 방향성 공동 제시</div>
       </div>
     </div>
     <div style="background:var(--bg);border:1px solid rgba(108,143,255,.2);border-radius:14px;padding:28px;">
       <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:16px;">💡 누구보다 빠른 협업이 가능한 이유</div>
-      <div style="font-size:14px;color:#c0c0d8;line-height:1.8;">
+      <div style="font-size:14px;color:var(--text-body);line-height:1.8;">
         6년간 같은 맥락으로 일해왔기에<br>
-        <strong style="color:#fff;">시장을 보는 눈, 의사결정 기준, 사업의 우선순위</strong>가 이미 정렬되어 있습니다.<br><br>
+        <strong style="color:var(--text-bright);">시장을 보는 눈, 의사결정 기준, 사업의 우선순위</strong>가 이미 정렬되어 있습니다.<br><br>
         처음부터 설명하지 않아도 되는 관계 — 그 덕분에 <strong style="color:var(--gold)">합을 맞추는 데 걸리는 시간 없이 바로 성과로 직결</strong>됩니다.
       </div>
     </div>
@@ -596,6 +624,13 @@ footer a{color:var(--gold);text-decoration:none;}
 </footer>
 
 <script>
+function copyEmail(){
+  navigator.clipboard.writeText('reddington414@naver.com').then(function(){
+    const btn=document.querySelector('.cta-primary');
+    btn.textContent='✓ 복사됐어요!';
+    setTimeout(()=>btn.innerHTML='✉ 이메일 복사',2000);
+  });
+}
 function toggleTheme(){
   const html=document.documentElement;
   const isLight=html.classList.toggle('light');
