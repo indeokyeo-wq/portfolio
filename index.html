@@ -11,6 +11,34 @@
   --gold:#f0c040;--text:#e0e0f0;--muted:#7777aa;
   --border:#252540;--blue:#6c8fff;--green:#4caf82;
 }
+html.light{
+  --bg:#f4f4f8;--bg2:#ffffff;--bg3:#eaeaf2;
+  --gold:#9a6f00;--text:#1a1a2e;--muted:#5555778;
+  --border:#d0d0e0;--blue:#3355cc;--green:#256f4a;
+}
+html.light body{background:var(--bg);color:var(--text);}
+html.light #hero{background:linear-gradient(160deg,#eaeaf5 0%,#f0f0fa 60%,#e8e8f5 100%);}
+html.light .pipeline-box{background:#fff;}
+html.light .pipe-node{background:#f0f0f8;}
+html.light .skill-track{background:#fff;}
+html.light .tr-card{background:#fff;}
+html.light .ap-card{background:#fff;}
+html.light #collab{background:#eaeaf2;}
+html.light footer{background:#fff;}
+html.light .tl::before{background:#d0d0e0;}
+html.light .tl-dot{border-color:#f4f4f8;}
+
+/* theme toggle button */
+#theme-btn{
+  position:fixed;top:16px;right:16px;z-index:999;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:99px;padding:7px 16px;
+  font-size:12px;font-weight:700;color:var(--text);
+  cursor:pointer;display:flex;align-items:center;gap:6px;
+  transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+#theme-btn:hover{background:var(--border);}
+
 body{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
 .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
 
@@ -169,6 +197,10 @@ footer a{color:var(--gold);text-decoration:none;}
 </style>
 </head>
 <body>
+
+<button id="theme-btn" onclick="toggleTheme()">
+  <span id="theme-icon">☀️</span><span id="theme-label">라이트 모드</span>
+</button>
 
 <!-- ── HERO ── -->
 <section id="hero">
@@ -562,5 +594,22 @@ footer a{color:var(--gold);text-decoration:none;}
 <footer>
   여인덕 포트폴리오 · <a href="mailto:reddington414@naver.com">reddington414@naver.com</a> · 010-2560-4207
 </footer>
+
+<script>
+function toggleTheme(){
+  const html=document.documentElement;
+  const isLight=html.classList.toggle('light');
+  document.getElementById('theme-icon').textContent=isLight?'🌙':'☀️';
+  document.getElementById('theme-label').textContent=isLight?'다크 모드':'라이트 모드';
+  localStorage.setItem('theme',isLight?'light':'dark');
+}
+(function(){
+  if(localStorage.getItem('theme')==='light'){
+    document.documentElement.classList.add('light');
+    document.getElementById('theme-icon').textContent='🌙';
+    document.getElementById('theme-label').textContent='다크 모드';
+  }
+})();
+</script>
 </body>
 </html>
