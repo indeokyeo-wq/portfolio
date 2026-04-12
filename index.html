@@ -167,7 +167,7 @@ body{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(
 .tr-label{font-size:11px;letter-spacing:.14em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
 .tr-title{font-size:28px;font-weight:800;color:var(--text-bright);margin-bottom:32px;}
 .tr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
-.tr-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:26px;}
+.tr-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:26px;overflow:hidden;}
 .tr-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--gold);background:rgba(240,192,64,.1);border-radius:4px;padding:2px 8px;margin-bottom:10px;}
 .tr-card h3{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:14px;}
 .tr-result{
@@ -175,10 +175,10 @@ body{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(
   background:rgba(76,175,130,.08);border-left:3px solid var(--green);
   padding:8px 12px;border-radius:0 8px 8px 0;
   font-size:13px;font-weight:700;color:var(--green);
-  margin-bottom:14px;
+  margin-bottom:14px;word-break:keep-all;
 }
 .tr-rows{}
-.tr-row{font-size:13px;color:var(--text-sec);margin-bottom:7px;display:flex;gap:6px;}
+.tr-row{font-size:13px;color:var(--text-sec);margin-bottom:7px;display:flex;gap:6px;word-break:keep-all;overflow-wrap:break-word;}
 .tr-row .lbl{color:var(--gold);font-weight:700;flex-shrink:0;}
 
 /* ── CAREER ── */
@@ -225,7 +225,9 @@ footer a{color:var(--gold);text-decoration:none;}
   .photo-col{align-items:center;}
   .contacts{justify-content:center;}
   .metrics-row{grid-template-columns:repeat(2,1fr);}
-  .pipe-flow{flex-wrap:wrap;justify-content:center;}
+  .pipe-flow{flex-direction:column;align-items:center;overflow-x:visible;}
+  .pipe-arrow{transform:rotate(90deg);padding:2px 0;}
+  .pipe-node{width:180px;}
   .skills-two,.tr-grid,.career-grid,.ap-grid{grid-template-columns:1fr;}
   .info-col h1{font-size:30px;}
   .aicore-mini-grid{grid-template-columns:1fr!important;}
@@ -377,7 +379,7 @@ footer a{color:var(--gold);text-decoration:none;}
       <div class="tr-result">📈 구매 풀 20% 확장 · 프로모션 월 매출 20억 KPI 달성</div>
       <div class="tr-rows">
         <div class="tr-row"><span class="lbl">배경</span>유저 감소·매출 하락세. 신규 유저 구매 전환 허들 높음</div>
-        <div class="tr-row" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><span class="lbl">실행</span>UI/UX·상품·판매 전략 전 과정 기획 → B&amp;S 만물상 신규 BM 라이브</div>
+        <div class="tr-row"><span class="lbl">실행</span>UI/UX·상품·판매 전략 전 과정 기획 → B&amp;S 만물상 신규 BM 라이브</div>
         <div class="tr-row"><span class="lbl">결과</span>구매 풀 20% 확장, 해당 프로모션 월 매출 20억 달성</div>
       </div>
     </div>
