@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>여인덕 포트폴리오 | 사업 전문가</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: #0f0f1a;
+      color: #e8e8f0;
+      line-height: 1.7;
+    }
+
+    /* ── 공통 ── */
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    .gold { color: #f0c040; }
+    .section { padding: 64px 0; }
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #f0c040;
+      border-left: 4px solid #f0c040;
+      padding-left: 14px;
+      margin-bottom: 32px;
+      letter-spacing: 0.04em;
+    }
+    .card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a40;
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 60%, #12122a 100%);
+      padding: 80px 0 60px;
+      border-bottom: 1px solid #2a2a40;
+    }
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #f0c040;
+      background: #2a2a40;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: #f0c040;
+      overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-text h1 {
+      font-size: 42px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+    .hero-text .subtitle {
+      font-size: 16px;
+      color: #f0c040;
+      margin-top: 6px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .hero-text .contacts {
+      display: flex;
+      gap: 24px;
+      margin-top: 18px;
+      font-size: 14px;
+      color: #aaaacc;
+      flex-wrap: wrap;
+    }
+    .hero-text .contacts span { display: flex; align-items: center; gap: 6px; }
+    .hero-text .contacts .icon { color: #f0c040; }
+
+    /* ── INTRO ── */
+    #intro .intro-box {
+      background: #1a1a2e;
+      border: 1px solid #f0c04040;
+      border-radius: 12px;
+      padding: 28px 32px;
+    }
+    #intro .intro-box .highlight {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f0c040;
+      margin-bottom: 12px;
+    }
+    #intro .intro-box p { color: #c8c8e0; font-size: 15px; }
+
+    /* ── KEY EXPERIENCE ── */
+    #key .key-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .key-card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a40;
+      border-radius: 12px;
+      padding: 28px 24px;
+    }
+    .key-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid #f0c040;
+      color: #f0c040;
+      font-weight: 800;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .key-card h3 { font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 10px; line-height: 1.4; }
+    .key-card p { font-size: 13px; color: #9999bb; line-height: 1.7; }
+
+    /* ── CAREER + INFO (2컬럼) ── */
+    #career-info .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .career-list { list-style: none; }
+    .career-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid #2a2a40;
+      font-size: 14px;
+      color: #c8c8e0;
+    }
+    .career-list li:last-child { border-bottom: none; }
+    .career-list .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #f0c040;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+    .career-list .company { font-weight: 600; color: #ffffff; }
+    .career-list .period { color: #7777aa; font-size: 12px; margin-top: 2px; }
+
+    .info-list { list-style: none; }
+    .info-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #2a2a40;
+      font-size: 14px;
+      color: #c8c8e0;
+    }
+    .info-list li:last-child { border-bottom: none; }
+    .info-list .icon { color: #f0c040; font-size: 16px; width: 20px; text-align: center; }
+    .info-list strong { color: #ffffff; }
+
+    /* ── SKILLS ── */
+    #skills .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .skill-card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a40;
+      border-radius: 12px;
+      padding: 20px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .skill-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .skill-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .skill-card h4 .badge {
+      font-size: 11px;
+      background: #f0c04020;
+      color: #f0c040;
+      border: 1px solid #f0c04060;
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-left: 6px;
+      font-weight: 500;
+    }
+    .skill-card p { font-size: 12px; color: #8888aa; line-height: 1.6; }
+
+    /* ── ACHIEVEMENTS ── */
+    #achievements .ach-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .ach-card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a40;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .ach-card h3 { font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 16px; }
+    .ach-row { margin-bottom: 10px; font-size: 13px; }
+    .ach-row .label { color: #f0c040; font-weight: 600; margin-right: 6px; }
+    .ach-row .text { color: #b8b8d0; }
+
+    /* ── AI PLAN ── */
+    #aiplan { background: #12122a; border-top: 1px solid #2a2a40; border-bottom: 1px solid #2a2a40; }
+    #aiplan .plan-intro {
+      background: #1a1a2e;
+      border: 1px solid #f0c04040;
+      border-radius: 12px;
+      padding: 20px 28px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      color: #f0c040;
+      margin-bottom: 32px;
+    }
+    #aiplan .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .plan-card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a40;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .plan-card .step-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .plan-card .step-icon { font-size: 22px; }
+    .plan-card h3 { font-size: 15px; font-weight: 700; color: #ffffff; }
+    .plan-card .purpose { font-size: 13px; color: #c8c8e0; margin-bottom: 12px; }
+    .plan-card .purpose strong { color: #f0c040; }
+    .plan-card ul { list-style: none; padding: 0; margin-bottom: 12px; }
+    .plan-card ul li {
+      font-size: 12px;
+      color: #8888aa;
+      padding: 3px 0;
+      padding-left: 14px;
+      position: relative;
+    }
+    .plan-card ul li::before { content: '•'; position: absolute; left: 0; color: #f0c040; }
+    .plan-card .output {
+      font-size: 12px;
+      color: #f0c040;
+      border-top: 1px solid #2a2a40;
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+    .plan-card .output strong { margin-right: 4px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: #444466;
+      font-size: 13px;
+      border-top: 1px solid #2a2a40;
+    }
+    footer a { color: #f0c040; text-decoration: none; }
+
+    /* ── 반응형 ── */
+    @media (max-width: 680px) {
+      .hero-inner { flex-direction: column; text-align: center; }
+      .hero-text .contacts { justify-content: center; }
+      #key .key-grid { grid-template-columns: 1fr; }
+      #career-info .two-col { grid-template-columns: 1fr; }
+      #skills .skills-grid { grid-template-columns: 1fr; }
+      #achievements .ach-grid { grid-template-columns: 1fr; }
+      #aiplan .plan-grid { grid-template-columns: 1fr; }
+      .hero-text h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="avatar">👤</div>
+      <div class="hero-text">
+        <h1>여인덕</h1>
+        <div class="subtitle">데이터 분석부터 AI 자동화, 사업기획까지 직접 실행하는 사업 전문가</div>
+        <div class="contacts">
+          <span><span class="icon">✉</span> reddington414@naver.com</span>
+          <span><span class="icon">📞</span> 010-2560-4207</span>
+          <span><span class="icon">🎓</span> 경희대학교 호텔경영학과</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 자기소개 ── -->
+<section id="intro" class="section">
+  <div class="container">
+    <div class="section-title">자기소개</div>
+    <div class="intro-box card">
+      <div class="highlight">약 8년간 쌓은 사업 역량을 AI 기반으로, 글로벌 모바일 게임 사업에서 성과를 창출하겠습니다.</div>
+      <p>6년간 NC에서 비즈니스 모델 수립부터 사업계획까지 게임 사업의 AtoZ를 경험하며 사업 역량을 쌓았고,
+      현재는 AI 자동화를 구축하며 데이터 분석부터 의사결정까지 AI 기반으로 사업기획 업무를 하며 성과를 창출하고 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 핵심 성과 ── -->
+<section id="key" class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-title">KEY EXPERIENCE 핵심 성과</div>
+    <div class="key-grid">
+
+      <div class="key-card">
+        <div class="key-num">①</div>
+        <h3>게임 비즈니스 전 영역을 직접 경험</h3>
+        <p>기획부터 마케팅, 라이브 운영, 데이터 분석, 성과 관리까지 게임 사업의 A to Z를 NC에서 직접 실행하며 성과를 만들어냈습니다.</p>
+      </div>
+
+      <div class="key-card">
+        <div class="key-num">②</div>
+        <h3>글로벌 퍼블리싱 운영하며 현지화 수립</h3>
+        <p>NCW, NCT, NCJ 해외 주요 퍼블리셔 협업 프로젝트 진행하며 담당 IP 현지화 전략을 수립하고 라이브 서비스를 운영했습니다.</p>
+      </div>
+
+      <div class="key-card">
+        <div class="key-num">③</div>
+        <h3>AI 시스템 구축으로 사업 전략 수립 및 추진</h3>
+        <p>데이터 분석 및 사업 전략을 AI 자동화로 파이프라인 구축하고, 오케스트레이션 체계로 agent 운영하고 있습니다.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 경력 + 인적사항 ── -->
+<section id="career-info" class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="two-col">
+
+      <div>
+        <div class="section-title">주요 경력 상세</div>
+        <div class="card">
+          <ul class="career-list">
+            <li>
+              <span class="dot"></span>
+              <div>
+                <div class="company">KT 밀리의서재 사업기획팀</div>
+                <div class="period">25.09 ~ 재직 중</div>
+              </div>
+            </li>
+            <li>
+              <span class="dot"></span>
+              <div>
+                <div class="company">오가닉 비즈니스 콘텐츠사업팀</div>
+                <div class="period">24.08 ~ 25.08 (약 1년)</div>
+              </div>
+            </li>
+            <li>
+              <span class="dot"></span>
+              <div>
+                <div class="company">B&S 사업실 마케팅사업팀 (팀장)</div>
+                <div class="period">22.04 ~ 24.07 (약 2년 3개월)</div>
+              </div>
+            </li>
+            <li>
+              <span class="dot"></span>
+              <div>
+                <div class="company">B&S 사업실 마케팅사업팀</div>
+                <div class="period">21.03 ~ 22.03 (약 1년 1개월)</div>
+              </div>
+            </li>
+            <li>
+              <span class="dot"></span>
+              <div>
+                <div class="company">B&S 사업실 콘텐츠사업팀</div>
+                <div class="period">19.01 ~ 21.02 (약 2년 2개월)</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">인적 및 학력사항</div>
+        <div class="card">
+          <ul class="info-list">
+            <li><span class="icon">👤</span> <div><strong>여인덕 (Yeo Indeok)</strong><br><span style="color:#7777aa;font-size:13px;">1992.04.14</span></div></li>
+            <li><span class="icon">✉</span> reddington414@naver.com</li>
+            <li><span class="icon">📞</span> 010-2560-4207</li>
+            <li><span class="icon">🎓</span> <div><strong>경희대학교 호텔경영학과</strong><br><span style="color:#7777aa;font-size:13px;">2012.03 ~ 2019.02 / 졸업</span></div></li>
+            <li><span class="icon">🏫</span> <div><strong>여의도 고등학교</strong><br><span style="color:#7777aa;font-size:13px;">2008.03 ~ 2011.02 / 졸업</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 보유 스킬 ── -->
+<section id="skills" class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-title">보유 스킬 및 역량</div>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div>
+          <h4>AI 자동화 프로그램 구축 <span class="badge">고급</span></h4>
+          <p>Claude Code 멀티 에이전트 및 MCP 연동을 통한 수집→분석→실행 1인 파이프라인 설계</p>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <div>
+          <h4>AI 활용 어드민 구축 및 리소스 효율화 <span class="badge">고급</span></h4>
+          <p>AI 도구(Claude, Cursor, Codex AI)를 활용한 내부 대시보드 직접 개발 및 반복 업무 리소스 획기적 단축</p>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">💡</div>
+        <div>
+          <h4>사업 전략 및 사업계획 수립 <span class="badge">고급</span></h4>
+          <p>국내 및 NCW/NCT 라이브 서비스 진행 기반, 데이터 분석을 통한 핵심 KPI 설정 및 방향성 제시</p>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📣</div>
+        <div>
+          <h4>마케팅 전략 / 플랜 수립 <span class="badge">고급</span></h4>
+          <p>타깃 분석에 맞춘 마케팅 기획 및 MMP 데이터 기반 채널별 ROAS 분석을 통한 마케팅 성과 최적화</p>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <div>
+          <h4>국내/해외 프로덕트 론칭 및 라이브 <span class="badge">고급</span></h4>
+          <p>글로벌 주요 권역 퍼블리셔와의 긴밀한 현지화 협업 및 시장 특성에 맞춘 라이브 서비스 체계 수립·운영</p>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">✅</div>
+        <div>
+          <h4>글로벌 론칭 준비 및 FQA <span class="badge">고급</span></h4>
+          <p>사업-개발-마케팅 글로벌 팀 간 커뮤니케이션 리딩, 프로덕트 시장성 분석을 통한 성공적 론칭 준비</p>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">💰</div>
+        <div>
+          <h4>BM / 수익 모델 기획 및 설계 <span class="badge">고급</span></h4>
+          <p>모바일 게임 인앱 결제, 광고 수익 모델 등 LTV 극대화를 위한 수익 구조 설계 및 성과 검증</p>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📈</div>
+        <div>
+          <h4>데이터 추출 및 분석 / 시각화 <span class="badge">고급</span></h4>
+          <p>MMP, 코호트 분석, ROAS 추적 등 복잡한 데이터 지표 심층 분석을 통한 인사이트 도출 및 의사결정</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 주요 경험 및 성과 ── -->
+<section id="achievements" class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-title">주요 경험 및 성과 소개</div>
+    <div class="ach-grid">
+
+      <div class="ach-card">
+        <h3>① 1인 10역 — AI 활용으로 업무 범위 확장</h3>
+        <div class="ach-row"><span class="label">상황</span><span class="text">데이터 추출/분석, 사업 기획 등 반복 업무에 리소스 소모</span></div>
+        <div class="ach-row"><span class="label">전략</span><span class="text">Claude Code 멀티 Agent 및 MCP 연동으로 1인 10역 자동화 오케스트레이션 체계 직접 설계</span></div>
+        <div class="ach-row"><span class="label">성과</span><span class="text">3시간 소요 작업을 10분으로 단축. 확보된 리소스로 전략적 기획 및 더 많은 고부가가치 업무 수행 역량 증폭</span></div>
+      </div>
+
+      <div class="ach-card">
+        <h3>② B&S 사업 전략 수립 및 실행</h3>
+        <div class="ach-row"><span class="label">상황</span><span class="text">장기 서비스 중인 B&S의 서비스 모멘텀 창출 필요</span></div>
+        <div class="ach-row"><span class="label">전략</span><span class="text">B&S 정체성 재확립. 유저 데이터 분석을 통해 핵심 타깃 재설정 및 대규모 업데이트 기획</span></div>
+        <div class="ach-row"><span class="label">성과</span><span class="text">신규 USP 확보로 긍정적 기대감 조성. 주요 지표 반등 및 10년 이상 서비스되는 장수 IP로서의 입지 강화 (태동 업데이트, 10주년 업데이트)</span></div>
+      </div>
+
+      <div class="ach-card">
+        <h3>③ NCW 현지화 BM 재구성으로 매출 증대</h3>
+        <div class="ach-row"><span class="label">상황</span><span class="text">북미/유럽 유저들의 결제 전환율(PU) 증대 한계 직면</span></div>
+        <div class="ach-row"><span class="label">전략</span><span class="text">국내 핵심 BM(보물창고, 소울패스, 랜덤박스)을 NCW 권역 유저 취향과 소비 패턴에 맞춰 철저히 분석 후 재설계</span></div>
+        <div class="ach-row"><span class="label">성과</span><span class="text">상품 구성, 가격, 보상 밸런스의 정교한 현지화로 글로벌 유저의 거부감 최소화 및 유의미한 매출 증대 달성</span></div>
+      </div>
+
+      <div class="ach-card">
+        <h3>④ 유저 리텐션 방어 / 설계</h3>
+        <div class="ach-row"><span class="label">상황</span><span class="text">장기 서비스 게임의 이탈률 증가 및 참여도 하락</span></div>
+        <div class="ach-row"><span class="label">전략</span><span class="text">'소울리그' 리텐션 설계 관점으로 접근하여 기존 랭킹 이벤트를 다수가 참여할 수 있는 형태로 개편</span></div>
+        <div class="ach-row"><span class="label">성과</span><span class="text">이벤트 기간 동안 DAU 상승, 기존 유저 이탈 방어 및 복귀 유저 증가 등 핵심 리텐션 지표 개선</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 입사 후 AI 활용 계획 ── -->
+<section id="aiplan" class="section">
+  <div class="container">
+    <div class="section-title">입사 후 AI 활용 계획</div>
+    <div class="plan-intro">
+      영업이익 증대 방향으로 AI를 활용하여, 글로벌 모바일 게임 사업에서 사업적 성과 창출
+    </div>
+    <div class="plan-grid">
+
+      <div class="plan-card">
+        <div class="step-head">
+          <span class="step-icon">🎮</span>
+          <h3>STEP 1. 광고 배치 시점 발굴</h3>
+        </div>
+        <div class="purpose"><strong>목적:</strong> AI가 직접 게임을 플레이하며 광고 배치 최적 시점 발굴</div>
+        <ul>
+          <li>ADB + Python으로 에뮬레이터 자동 플레이 및 스크린샷 캡처</li>
+          <li>Claude Vision API로 화면 인식 (광고 노출/실패/보상 화면)</li>
+          <li>JSON 로그 누적 및 분석 리포트 자동 생성 파이프라인</li>
+        </ul>
+        <div class="output"><strong>산출물:</strong> 게임별 광고 배치 시점 데이터 / 리워드 최적 유도 지점</div>
+      </div>
+
+      <div class="plan-card">
+        <div class="step-head">
+          <span class="step-icon">⏱</span>
+          <h3>STEP 2. 광고 피로도 감지</h3>
+        </div>
+        <div class="purpose"><strong>목적:</strong> AI가 광고 피로도 축적 패턴을 감지하여 교체 시점 알림</div>
+        <ul>
+          <li>MMP API(Adjust/AppsFlyer) 연동하여 데이터 자동 수집</li>
+          <li>Python으로 채널별 CTR/ROAS/CPC 추이 자동 분석</li>
+          <li>피로도 임계점 도달 시 Slack Webhook 자동 알림 발송</li>
+        </ul>
+        <div class="output"><strong>산출물:</strong> 소재별 상태 대시보드 (정상/주의/교체) / 최적 교체 주기</div>
+      </div>
+
+      <div class="plan-card">
+        <div class="step-head">
+          <span class="step-icon">🔍</span>
+          <h3>STEP 3. 인수 후보 게임 스크리닝</h3>
+        </div>
+        <div class="purpose"><strong>목적:</strong> 수동 시장 조사를 30분 AI 자동 분석으로 대체</div>
+        <ul>
+          <li>Google Play / App Store 공개 지표 API 자동 수집</li>
+          <li>Claude API가 다차원 평가 (DAU/광고잠재력/리뷰 감성) 수행</li>
+          <li>자체 알고리즘 기반 인수 적합도 점수 자동 스코어링</li>
+        </ul>
+        <div class="output"><strong>산출물:</strong> 후보 게임 순위 리포트 / 100점 만점 요약 리포트</div>
+      </div>
+
+      <div class="plan-card">
+        <div class="step-head">
+          <span class="step-icon">👥</span>
+          <h3>STEP 4. 팀 공용 AI SaaS 구축</h3>
+        </div>
+        <div class="purpose"><strong>목적:</strong> 개인의 AI 모델이 아닌, 팀 전체가 버튼 하나로 일하는 환경 구축</div>
+        <ul>
+          <li>Git(GitHub)으로 분석 프롬프트 및 스크립트 팀 공유/버전 관리</li>
+          <li>Web 대시보드 구축으로 팀원 누구나 손쉽게 분석 실행</li>
+          <li>분석 결과 자동 저장 및 히스토리 스택되어 모델 학습</li>
+        </ul>
+        <div class="output"><strong>산출물:</strong> 조직 전체의 AI 자동화 파이프라인 자산화</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>여인덕 포트폴리오 · <a href="mailto:reddington414@naver.com">reddington414@naver.com</a> · 010-2560-4207</p>
+</footer>
+
+</body>
+</html>
