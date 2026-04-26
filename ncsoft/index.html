@@ -1,0 +1,2451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>여인덕 — 사업전략·데이터 분석 담당자 포트폴리오</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f8fafc;
+    --bg-soft-2: #f1f5f9;
+    --ink: #0f172a;
+    --ink-2: #334155;
+    --ink-3: #64748b;
+    --line: #e2e8f0;
+    --line-2: #cbd5e1;
+
+    --p1: #1e3a8a;
+    --p1-soft: #eff6ff;
+    --p1-tint: #dbeafe;
+    --p2: #0e7490;
+    --p2-soft: #ecfeff;
+    --p2-tint: #cffafe;
+    --p3: #b45309;
+    --p3-soft: #fffbeb;
+    --p3-tint: #fef3c7;
+    --p4: #7c3aed;
+    --p4-soft: #f5f3ff;
+    --p4-tint: #ddd6fe;
+
+    --accent: #1e3a8a;
+    --accent-2: #2563eb;
+    --good: #15803d;
+    --highlight: #fef3c7;
+    --orange: #ea580c;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #d6dee8;
+    color: var(--ink);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-feature-settings: 'tnum';
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 32px 16px 64px;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background: var(--bg);
+    box-shadow: 0 12px 36px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.04);
+    padding: 60px 72px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2px;
+  }
+
+  /* === NC Logo === */
+  .nc-logo {
+    height: 36px;
+    width: auto;
+    display: block;
+  }
+  .nc-logo-large { height: 52px; }
+  .nc-logo-small { height: 18px; }
+
+  /* === Slide chrome === */
+  .slide-no {
+    position: absolute;
+    bottom: 26px;
+    right: 72px;
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
+  }
+  .slide-foot {
+    position: absolute;
+    bottom: 22px;
+    left: 72px;
+    font-size: 11px;
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .slide-foot strong { color: var(--ink-2); font-weight: 700; }
+
+  .s-eyebrow {
+    font-size: 11px;
+    color: var(--accent-2);
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .s-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    background: var(--accent-2);
+  }
+  .s-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px;
+  }
+  .s-subtitle {
+    font-size: 14.5px;
+    color: var(--ink-3);
+    margin: 0 0 24px;
+    line-height: 1.65;
+    max-width: 980px;
+  }
+
+  /* ============================================== */
+  /* SLIDE 1: COVER                                 */
+  /* ============================================== */
+  .slide.cover {
+    background:
+      radial-gradient(ellipse 700px 500px at 100% 0%, rgba(0, 73, 144, 0.04), transparent 60%),
+      radial-gradient(ellipse 600px 500px at 0% 100%, rgba(30, 58, 138, 0.05), transparent 60%),
+      linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    padding: 72px 80px;
+    justify-content: space-between;
+  }
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cover-date {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-3);
+    letter-spacing: 0.12em;
+  }
+
+  .cover-center { margin: auto 0; }
+  .cover-eyebrow {
+    font-size: 13px;
+    color: var(--accent-2);
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .cover-eyebrow::before {
+    content: '';
+    width: 36px;
+    height: 2px;
+    background: var(--accent-2);
+  }
+  .cover-position-tag {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink-3);
+    margin: 0 0 16px;
+  }
+  .cover-title-main {
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 0 0 36px;
+  }
+  .cover-title-main em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .cover-name-block {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .cover-name {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .cover-name-eng {
+    font-size: 14px;
+    color: var(--ink-3);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* ============================================== */
+  /* SLIDE 2: ABOUT                                 */
+  /* ============================================== */
+  .about-lead {
+    font-size: 23px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.55;
+    letter-spacing: -0.014em;
+    margin: 0 0 24px;
+    padding: 20px 24px;
+    background: var(--bg-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+  }
+  .about-lead em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 800;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 48px;
+    flex: 1;
+    align-items: flex-start;
+  }
+  .about-keys-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 0 0 14px;
+    letter-spacing: -0.012em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .about-keys-title::before {
+    content: '';
+    width: 22px;
+    height: 2px;
+    background: var(--accent-2);
+  }
+  .about-photo-wrap { position: relative; }
+  .about-photo {
+    width: 280px;
+    height: 340px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 12px;
+    box-shadow: 0 24px 64px rgba(15, 23, 42, 0.15), 0 4px 12px rgba(15, 23, 42, 0.06);
+  }
+  .about-photo-tag {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: white;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    padding: 7px 16px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .about-headline {
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.4;
+    letter-spacing: -0.018em;
+    margin: 0 0 28px;
+  }
+  .about-headline em {
+    font-style: normal;
+    color: var(--accent);
+    background: linear-gradient(180deg, transparent 70%, rgba(37, 99, 235, 0.15) 70%);
+    padding: 0 4px;
+  }
+  .about-keys {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .about-key {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 18px;
+    padding: 13px 18px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    align-items: center;
+  }
+  .about-key.k1 { border-left-color: var(--p1); }
+  .about-key.k2 { border-left-color: var(--p2); }
+  .about-key.k3 { border-left-color: var(--p3); }
+  .about-key.k4 { border-left-color: var(--p4); }
+  .ak-num {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .about-key.k1 .ak-num { color: var(--p1); }
+  .about-key.k2 .ak-num { color: var(--p2); }
+  .about-key.k3 .ak-num { color: var(--p3); }
+  .about-key.k4 .ak-num { color: var(--p4); }
+  .ak-body { display: flex; flex-direction: column; gap: 3px; }
+  .ak-title {
+    font-size: 14.5px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .ak-desc {
+    font-size: 11.5px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+
+  /* ============================================== */
+  /* SLIDE 3: SKILLS (4 카테고리, 4-column)            */
+  /* ============================================== */
+  .skill-groups {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    flex: 1;
+  }
+  .skill-group {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .skill-group.cat1 { border-top: 4px solid var(--p1); }
+  .skill-group.cat2 { border-top: 4px solid var(--p2); }
+  .skill-group.cat3 { border-top: 4px solid var(--p3); }
+  .skill-group.cat4 { border-top: 4px solid var(--p4); }
+
+  .sg-head {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sg-head-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sg-icon { font-size: 18px; }
+  .sg-name {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .sg-count {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+
+  .skill-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .skill-box {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 10px 12px;
+  }
+  .sb-name {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 3px;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sb-name .sb-ic { font-size: 13px; }
+  .sb-desc {
+    font-size: 10.5px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .skill-group.cat1 .skill-box { border-left: 2px solid var(--p1-tint); }
+  .skill-group.cat2 .skill-box { border-left: 2px solid var(--p2-tint); }
+  .skill-group.cat3 .skill-box { border-left: 2px solid var(--p3-tint); }
+  .skill-group.cat4 .skill-box { border-left: 2px solid var(--p4-tint); }
+
+  /* ============================================== */
+  /* SLIDE 4: CAREER                                */
+  /* ============================================== */
+  .career-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 56px;
+    flex: 1;
+  }
+  .career-left, .career-right { display: flex; flex-direction: column; }
+  .career-section-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .career-section-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 0 0 22px;
+    letter-spacing: -0.015em;
+  }
+  .career-tl {
+    position: relative;
+    padding-left: 18px;
+  }
+  .career-tl::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--line);
+  }
+  .ct-item {
+    position: relative;
+    padding: 0 0 11px 18px;
+  }
+  .ct-item:last-child { padding-bottom: 0; }
+  .ct-dot {
+    position: absolute;
+    left: -14px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-2);
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--ink-3);
+  }
+  .ct-item.current .ct-dot {
+    background: var(--accent-2);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
+  }
+  .ct-co {
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .ct-co .role-leader {
+    font-size: 10px;
+    color: white;
+    background: var(--accent);
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    letter-spacing: 0.04em;
+  }
+  .ct-co .role-member {
+    font-size: 10px;
+    color: var(--ink-3);
+    background: var(--bg-soft-2);
+    border: 1px solid var(--line);
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    letter-spacing: 0.04em;
+  }
+  .ct-period {
+    font-size: 10.5px;
+    color: var(--ink-3);
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .ct-desc {
+    font-size: 11px;
+    color: var(--ink-2);
+    margin-top: 3px;
+    line-height: 1.55;
+  }
+
+  .profile-list { list-style: none; padding: 0; margin: 0; }
+  .profile-list li {
+    display: flex;
+    gap: 14px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-2);
+    align-items: flex-start;
+  }
+  .profile-list li:last-child { border-bottom: none; }
+  .pl-ic { color: var(--accent-2); font-weight: 800; flex-shrink: 0; width: 18px; }
+  .profile-list strong { color: var(--ink); font-weight: 700; }
+  .pl-sub { display: block; font-size: 11px; color: var(--ink-3); margin-top: 2px; }
+
+  /* ============================================== */
+  /* PILLAR PAGES                                   */
+  /* ============================================== */
+  .pillar-head-bar {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 16px;
+  }
+  .phb-num {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    flex-shrink: 0;
+  }
+  .slide.pillar-1 .phb-num { color: var(--p1); }
+  .slide.pillar-2 .phb-num { color: var(--p2); }
+  .slide.pillar-3 .phb-num { color: var(--p3); }
+  .slide.pillar-4 .phb-num { color: var(--orange); }
+  .slide.pillar-5 .phb-num { color: var(--p4); }
+  .phb-text { flex: 1; padding-top: 0; }
+  .phb-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  .slide.pillar-1 .phb-tag { background: var(--p1-soft); color: var(--p1); }
+  .slide.pillar-2 .phb-tag { background: var(--p2-soft); color: var(--p2); }
+  .slide.pillar-3 .phb-tag { background: var(--p3-soft); color: var(--p3); }
+  .slide.pillar-4 .phb-tag { background: #fff7ed; color: var(--orange); }
+  .slide.pillar-5 .phb-tag { background: var(--p4-soft); color: var(--p4); }
+  .phb-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.2;
+    letter-spacing: -0.022em;
+    margin: 0 0 4px;
+    white-space: nowrap;
+  }
+  .phb-sub {
+    font-size: 12.5px;
+    color: var(--ink-3);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .case-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    flex: 1;
+  }
+  .case-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .case-card.hero {
+    border: 2px solid var(--p2);
+    background: linear-gradient(135deg, white, var(--p2-soft) 200%);
+    box-shadow: 0 12px 36px rgba(14, 116, 144, 0.08);
+  }
+  .cc-tag-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .cc-tag {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .cc-tag.t1 { background: var(--p1-soft); color: var(--p1); }
+  .cc-tag.t2 { background: var(--p2-soft); color: var(--p2); }
+  .cc-tag.t3 { background: var(--p3-soft); color: var(--p3); }
+  .cc-tag.t4 { background: #fff7ed; color: var(--orange); }
+  .cc-period {
+    font-size: 10.5px;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .cc-title {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 0 0 3px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+  .cc-role {
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .cc-result {
+    background: var(--good);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 12px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .cc-result.alt { background: var(--accent); }
+  .cc-result.alt2 { background: var(--p2); }
+  .cc-result.alt3 { background: var(--p3); }
+  .cc-result.alt4 { background: var(--orange); }
+  .cc-result.qual {
+    background: white;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ink-3);
+  }
+  .cc-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .cc-bullets li {
+    font-size: 11.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    padding-left: 11px;
+    margin-bottom: 5px;
+    position: relative;
+  }
+  .cc-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .pillar-1 .cc-bullets li::before { background: var(--p1); }
+  .pillar-2 .cc-bullets li::before { background: var(--p2); }
+  .pillar-3 .cc-bullets li::before { background: var(--p3); }
+  .pillar-4 .cc-bullets li::before { background: var(--orange); }
+  .pillar-5 .cc-bullets li::before { background: var(--p4); }
+  .cc-bullets li b { color: var(--ink); font-weight: 700; }
+
+  .hero-stat-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 6px 0 10px;
+  }
+  .hsb-item {
+    background: white;
+    border: 1px solid var(--p2-tint);
+    border-radius: 6px;
+    padding: 9px 12px;
+  }
+  .hsb-key {
+    font-size: 9px;
+    color: var(--p2);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+  }
+  .hsb-val {
+    font-size: 11.5px;
+    color: var(--ink);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  /* ============================================== */
+  /* AI CORE                                        */
+  /* ============================================== */
+  .ai-pipeline {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+  .ai-pipe-label {
+    font-size: 10.5px;
+    color: var(--ink-3);
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    margin-bottom: 12px;
+  }
+  .pipe-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 4px;
+  }
+  .pipe-node {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .pipe-node.accent {
+    background: linear-gradient(135deg, var(--p4-soft), white);
+    border-color: var(--p4-tint);
+  }
+  .pn-icon { font-size: 26px; margin-bottom: 4px; }
+  .pn-label { font-size: 14px; font-weight: 800; color: var(--ink); margin-bottom: 2px; line-height: 1.3; }
+  .pn-tool { font-size: 12px; color: var(--ink-3); line-height: 1.3; }
+  .pipe-arrow { color: var(--p4); font-size: 24px; font-weight: 800; }
+
+  .ai-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    flex: 1;
+  }
+  .ai-mini {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--p4);
+    border-radius: 8px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 0;
+  }
+  .am-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--p4);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 70px;
+  }
+  .am-num small { font-size: 14px; font-weight: 700; color: var(--ink-2); margin-left: 2px; }
+  .am-body { flex: 1; min-width: 0; }
+  .am-title { font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 3px; }
+  .am-desc { font-size: 13.5px; color: var(--ink-3); line-height: 1.5; }
+  .am-link { font-size: 12px; color: var(--p4); font-weight: 700; margin-top: 3px; letter-spacing: 0.04em; }
+
+  /* ============================================== */
+  /* 사업전략 요약 (NEW)                              */
+  /* ============================================== */
+  .biz-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .biz-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+  .biz-card.bc1 { border-top: 3px solid var(--p1); }
+  .biz-card.bc2 { border-top: 3px solid var(--p2); }
+  .biz-card.bc3 { border-top: 3px solid var(--p3); }
+  .bc-tag {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+  }
+  .biz-card.bc1 .bc-tag { color: var(--p1); }
+  .biz-card.bc2 .bc-tag { color: var(--p2); }
+  .biz-card.bc3 .bc-tag { color: var(--p3); }
+  .bc-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  .bc-stats {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .bc-stat .v {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .bc-stat .v small { font-size: 11px; font-weight: 700; color: var(--ink-2); }
+  .bc-stat .k {
+    font-size: 9.5px;
+    color: var(--ink-3);
+    margin-top: 3px;
+    letter-spacing: 0.04em;
+  }
+  .bc-bullet {
+    font-size: 11.5px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .bc-bullet b { color: var(--ink); font-weight: 700; }
+
+  .biz-insight {
+    background: linear-gradient(135deg, #fef3c7, white 60%);
+    border: 1px solid #fde68a;
+    border-left: 4px solid var(--orange);
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin-bottom: 14px;
+  }
+  .bi-tag {
+    font-size: 10.5px;
+    color: var(--orange);
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    margin-bottom: 4px;
+  }
+  .bi-text {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 500;
+  }
+  .bi-text b { font-weight: 800; }
+
+  .biz-actions {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+  }
+  .ba-cell {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 11px;
+    text-align: center;
+  }
+  .ba-key {
+    font-size: 10px;
+    color: var(--accent-2);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    margin-bottom: 3px;
+  }
+  .ba-name {
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 3px;
+    letter-spacing: -0.005em;
+  }
+  .ba-desc {
+    font-size: 10px;
+    color: var(--ink-3);
+    line-height: 1.4;
+  }
+
+  /* ============================================== */
+  /* 30/60/90 Plan                                  */
+  /* ============================================== */
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    flex: 1;
+  }
+  .plan-col {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 22px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    min-height: 0;
+  }
+  .plan-col::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .plan-col.early::before { background: var(--p1); }
+  .plan-col.mid::before { background: var(--accent-2); }
+  .plan-col.late::before { background: var(--good); }
+  .plan-day {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+  .plan-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .plan-col.early .plan-label { color: var(--p1); }
+  .plan-col.mid .plan-label { color: var(--accent-2); }
+  .plan-col.late .plan-label { color: var(--good); }
+  .plan-h {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    line-height: 1.4;
+  }
+  .plan-col ul { list-style: none; padding: 0; margin: 0; }
+  .plan-col li {
+    font-size: 12.5px;
+    color: var(--ink-2);
+    line-height: 1.65;
+    padding-left: 14px;
+    margin-bottom: 9px;
+    position: relative;
+  }
+  .plan-col li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+  .plan-col.early li::before { background: var(--p1); }
+  .plan-col.mid li::before { background: var(--accent-2); }
+  .plan-col.late li::before { background: var(--good); }
+
+  /* ============================================== */
+  /* ENDING                                         */
+  /* ============================================== */
+  .slide.ending {
+    background:
+      radial-gradient(ellipse 700px 500px at 0% 100%, rgba(0, 73, 144, 0.04), transparent 60%),
+      radial-gradient(ellipse 600px 500px at 100% 0%, rgba(30, 58, 138, 0.06), transparent 60%),
+      linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    padding: 72px 80px;
+    justify-content: space-between;
+  }
+  .ending-center { margin: auto 0; }
+  .ending-thank {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent-2);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .ending-thank::before {
+    content: '';
+    width: 36px;
+    height: 2px;
+    background: var(--accent-2);
+  }
+  .ending-line {
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    margin: 0 0 28px;
+  }
+  .ending-line em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .ending-sub {
+    font-size: 17px;
+    color: var(--ink-2);
+    line-height: 1.7;
+    max-width: 880px;
+    margin: 0 0 40px;
+  }
+  .ending-meta {
+    display: flex;
+    gap: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+  .ending-meta span { display: flex; align-items: center; gap: 8px; }
+  .ending-meta strong { color: var(--ink); font-weight: 700; }
+
+  /* ============================================== */
+  /* PILLAR ROWS (slides 5~8 — 가로행 컨설팅 톤)       */
+  /* ============================================== */
+  .case-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+  }
+  .case-row {
+    display: grid;
+    grid-template-columns: 70px 1fr 320px 152px;
+    gap: 0;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--ink-3);
+    border-radius: 8px;
+    padding: 12px 14px 12px 18px;
+    align-items: stretch;
+    flex: 1;
+    min-height: 0;
+    overflow: visible;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+  .pillar-1 .case-row { border-left-color: var(--p1); }
+  .pillar-2 .case-row { border-left-color: var(--p2); }
+  .pillar-3 .case-row { border-left-color: var(--p3); }
+  .pillar-4 .case-row { border-left-color: var(--orange); }
+  .case-row.hero {
+    border-left-width: 5px;
+    background: linear-gradient(90deg, var(--p2-soft) 0%, white 30%);
+  }
+
+  .cr-left {
+    display: flex;
+    flex-direction: column;
+    padding-right: 18px;
+    border-right: 1px solid var(--line);
+    align-self: stretch;
+    justify-content: center;
+  }
+  .cr-num {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-3);
+  }
+  .pillar-1 .cr-num { color: var(--p1); }
+  .pillar-2 .cr-num { color: var(--p2); }
+  .pillar-3 .cr-num { color: var(--p3); }
+  .pillar-4 .cr-num { color: var(--orange); }
+  .cr-tag {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .cr-period {
+    font-size: 10.5px;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+
+  .cr-mid {
+    padding: 0 18px;
+    align-self: center;
+  }
+  .cr-img-wrap {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px 0 14px;
+    margin-left: 6px;
+  }
+  .cr-thumb {
+    width: 130px;
+    height: 90px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    box-shadow: 0 2px 6px rgba(15,23,42,0.10);
+    background: white;
+  }
+  .cr-thumb.contain { object-fit: contain; padding: 8px; background: var(--bg-soft); }
+  .cr-title {
+    font-size: 20.5px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 5px;
+    letter-spacing: -0.012em;
+    line-height: 1.3;
+  }
+  .cr-role {
+    font-size: 14.5px;
+    color: var(--ink-3);
+    margin-bottom: 9px;
+    line-height: 1.45;
+  }
+  .cr-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .cr-bullets li {
+    font-size: 15px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    padding-left: 13px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .cr-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--ink-3);
+  }
+  .pillar-1 .cr-bullets li::before { background: var(--p1); }
+  .pillar-2 .cr-bullets li::before { background: var(--p2); }
+  .pillar-3 .cr-bullets li::before { background: var(--p3); }
+  .pillar-4 .cr-bullets li::before { background: var(--orange); }
+  .cr-bullets li b { color: var(--ink); font-weight: 700; }
+
+  .cr-right {
+    background: var(--bg-soft);
+    border-left: 1px solid var(--line);
+    padding: 10px 14px 10px 16px;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    margin-left: 12px;
+    overflow: visible;
+  }
+  .pillar-1 .cr-right { background: linear-gradient(90deg, var(--p1-soft), var(--bg-soft)); }
+  .pillar-2 .cr-right { background: linear-gradient(90deg, var(--p2-soft), var(--bg-soft)); }
+  .pillar-3 .cr-right { background: linear-gradient(90deg, var(--p3-soft), var(--bg-soft)); }
+  .pillar-4 .cr-right { background: linear-gradient(90deg, #fff7ed, var(--bg-soft)); }
+
+  .cr-metric-label {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .cr-metric {
+    font-size: 18.5px;
+    font-weight: 800;
+    letter-spacing: -0.012em;
+    line-height: 1.35;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .pillar-1 .cr-metric { color: var(--p1); }
+  .pillar-2 .cr-metric { color: var(--p2); }
+  .pillar-3 .cr-metric { color: var(--p3); }
+  .pillar-4 .cr-metric { color: var(--orange); }
+  .cr-metric small { font-size: 11px; font-weight: 700; }
+
+  .cr-evidence {
+    font-size: 13px;
+    color: var(--ink-2);
+    margin-top: 8px;
+    padding-top: 7px;
+    border-top: 1px dashed rgba(148, 163, 184, 0.5);
+    line-height: 1.5;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .cr-evidence::before {
+    content: '↳ ';
+    color: var(--ink-3);
+    font-weight: 700;
+  }
+  .cr-evidence b { color: var(--ink); font-weight: 800; }
+
+  /* ============================================== */
+  /* PILLAR REFINED (이전 — 미사용)                    */
+  /* ============================================== */
+  .pillar-pipe {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 22px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+  .pillar-pipe-label {
+    font-size: 10px;
+    color: var(--ink-3);
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .pp-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .pp-node {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .pillar-1 .pp-node.accent { background: linear-gradient(135deg, var(--p1-soft), white); border-color: var(--p1-tint); }
+  .pillar-2 .pp-node.accent { background: linear-gradient(135deg, var(--p2-soft), white); border-color: var(--p2-tint); }
+  .pillar-3 .pp-node.accent { background: linear-gradient(135deg, var(--p3-soft), white); border-color: var(--p3-tint); }
+  .pillar-4 .pp-node.accent { background: linear-gradient(135deg, #fff7ed, white); border-color: #fed7aa; }
+  .pp-step {
+    font-size: 9px;
+    color: var(--ink-3);
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    margin-bottom: 4px;
+  }
+  .pillar-1 .pp-node.accent .pp-step { color: var(--p1); }
+  .pillar-2 .pp-node.accent .pp-step { color: var(--p2); }
+  .pillar-3 .pp-node.accent .pp-step { color: var(--p3); }
+  .pillar-4 .pp-node.accent .pp-step { color: var(--orange); }
+  .pp-name {
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    line-height: 1.3;
+  }
+  .pp-arrow {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--ink-3);
+    align-self: center;
+  }
+  .pillar-1 .pp-arrow { color: var(--p1); }
+  .pillar-2 .pp-arrow { color: var(--p2); }
+  .pillar-3 .pp-arrow { color: var(--p3); }
+  .pillar-4 .pp-arrow { color: var(--orange); }
+
+  .pillar-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    flex: 1;
+    min-height: 0;
+  }
+  .pillar-mini {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ink-3);
+    border-radius: 8px;
+    padding: 16px 18px 14px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+  }
+  .pillar-1 .pillar-mini { border-left-color: var(--p1); }
+  .pillar-2 .pillar-mini { border-left-color: var(--p2); }
+  .pillar-3 .pillar-mini { border-left-color: var(--p3); }
+  .pillar-4 .pillar-mini { border-left-color: var(--orange); }
+  .pillar-mini.hero {
+    box-shadow: 0 8px 24px rgba(14, 116, 144, 0.10);
+    border-left-width: 4px;
+  }
+
+  .pm-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .pm-tag {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .pillar-1 .pm-tag { color: var(--p1); }
+  .pillar-2 .pm-tag { color: var(--p2); }
+  .pillar-3 .pm-tag { color: var(--p3); }
+  .pillar-4 .pm-tag { color: var(--orange); }
+  .pm-period {
+    font-size: 10px;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+
+  .pm-metric {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .pillar-1 .pm-metric { color: var(--p1); }
+  .pillar-2 .pm-metric { color: var(--p2); }
+  .pillar-3 .pm-metric { color: var(--p3); }
+  .pillar-4 .pm-metric { color: var(--orange); }
+  .pm-metric small { font-size: 13px; font-weight: 700; }
+
+  .pm-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 6px;
+    letter-spacing: -0.008em;
+    line-height: 1.35;
+  }
+  .pm-desc {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .pm-desc b { color: var(--ink); font-weight: 700; }
+
+  /* ============================================== */
+  /* 90-Day VIZ (slide 10 redesign)                 */
+  /* ============================================== */
+  .plan-rail {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding: 0 6px;
+  }
+  .plan-pill {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 12px 18px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.06);
+  }
+  .plan-pill.early { border-color: var(--p1); background: var(--p1-soft); }
+  .plan-pill.mid { border-color: var(--accent-2); background: #eff6ff; }
+  .plan-pill.late { border-color: var(--good); background: #ecfdf5; }
+  .plan-pill .pp-day {
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .plan-pill .pp-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    margin-left: 8px;
+  }
+  .plan-pill.early .pp-label { color: var(--p1); }
+  .plan-pill.mid .pp-label { color: var(--accent-2); }
+  .plan-pill.late .pp-label { color: var(--good); }
+  .plan-rail-arrow {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--ink-3);
+  }
+
+  .plan-grid-v2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    flex: 1;
+    min-height: 0;
+  }
+  .plan-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(15,23,42,0.05);
+    min-height: 0;
+  }
+  .plan-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+  }
+  .plan-card.early::before { background: var(--p1); }
+  .plan-card.mid::before { background: var(--accent-2); }
+  .plan-card.late::before { background: var(--good); }
+  .pc-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .pc-icon {
+    font-size: 34px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .pc-h {
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    flex: 1;
+    min-width: 0;
+  }
+  .pc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .pc-list li {
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    padding-left: 24px;
+    margin-bottom: 11px;
+    position: relative;
+  }
+  .pc-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 800;
+    font-size: 13px;
+  }
+  .plan-card.early .pc-list li::before { color: var(--p1); }
+  .plan-card.mid .pc-list li::before { color: var(--accent-2); }
+  .plan-card.late .pc-list li::before { color: var(--good); }
+
+  .pc-gate {
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+    background: var(--bg-soft);
+    border: 1px dashed var(--line-2);
+    color: var(--ink-2);
+  }
+  .plan-card.early .pc-gate { background: var(--p1-soft); border-color: var(--p1-tint); color: var(--p1); }
+  .plan-card.mid .pc-gate { background: #eff6ff; border-color: #bfdbfe; color: var(--accent-2); }
+  .plan-card.late .pc-gate { background: #ecfdf5; border-color: #a7f3d0; color: var(--good); }
+
+  /* slide 11 — report preview */
+  .s11-body {
+    display: grid;
+    grid-template-columns: 480px 1fr;
+    gap: 26px;
+    flex: 1;
+    min-height: 0;
+    margin-bottom: 14px;
+  }
+  .s11-preview {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(15,23,42,0.10);
+    background: white;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 0;
+  }
+  .s11-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    object-position: top;
+  }
+  .s11-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    min-height: 0;
+  }
+  .s11-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--ink-3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.04);
+  }
+  .s11-card.c1 { border-left-color: var(--p1); }
+  .s11-card.c2 { border-left-color: var(--p2); }
+  .s11-card.c3 { border-left-color: var(--p3); }
+  .s11-card-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .s11-card-num {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .s11-card.c1 .s11-card-num { color: var(--p1); }
+  .s11-card.c2 .s11-card-num { color: var(--p2); }
+  .s11-card.c3 .s11-card-num { color: var(--p3); }
+  .s11-card-tag {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .s11-card-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .s11-card-desc {
+    font-size: 11.5px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .s11-card-desc b { color: var(--ink); font-weight: 700; }
+
+  .s11-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+  }
+  .s11-report-btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: white;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(30,58,138,0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .s11-report-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(30,58,138,0.35);
+  }
+  .s11-rb-label {
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    font-weight: 800;
+    opacity: 0.85;
+    margin-bottom: 3px;
+  }
+  .s11-rb-title {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: -0.005em;
+  }
+
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    html, body { background: white; }
+    .deck { padding: 0; gap: 0; }
+    .slide {
+      box-shadow: none;
+      page-break-after: always;
+      break-after: page;
+      width: 1280px;
+      height: 720px;
+      border-radius: 0;
+    }
+    .slide:last-child { page-break-after: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- ========== SLIDE 1: COVER ========== -->
+<section class="slide cover">
+  <div class="cover-top">
+    <img class="nc-logo nc-logo-large" src="NCSOFT CI-Blue.png" alt="NCSOFT" />
+    <div class="cover-date">2026 · 04</div>
+  </div>
+
+  <div class="cover-center">
+    <div class="cover-eyebrow">PORTFOLIO</div>
+    <p class="cover-position-tag">신규사업본부 · 모바일 캐주얼 / 퍼블리싱</p>
+    <h1 class="cover-title-main">
+      사업전략 · 데이터 분석 담당자<br/>
+      <em>포트폴리오</em>
+    </h1>
+    <div class="cover-name-block">
+      <span class="cover-name">여인덕</span>
+      <span class="cover-name-eng">YEO INDEOK</span>
+    </div>
+  </div>
+
+  <div></div>
+  <div class="slide-no">01 / 12</div>
+</section>
+
+<!-- ========== SLIDE 2: ABOUT ========== -->
+<section class="slide">
+  <div class="s-eyebrow">About</div>
+  <p class="about-lead">
+    게임사업의 전 사이클을 경험했고, 데이터 분석과 해석을 토대로 사업 지표를 관리하며<br/>
+    사업 전략을 수립해본 <em>사업전략 / 데이터 분석 담당자</em>입니다.
+  </p>
+
+  <div class="about-grid">
+    <div class="about-photo-wrap">
+      <img class="about-photo" src="profile.jpg" alt="여인덕" />
+      <div class="about-photo-tag">YEO INDEOK</div>
+    </div>
+
+    <div class="about-text">
+      <h3 class="about-keys-title">강점 4가지</h3>
+
+      <div class="about-keys">
+        <div class="about-key k1">
+          <div class="ak-num">01</div>
+          <div class="ak-body">
+            <div class="ak-title">게임 사업 한 사이클 직접 경험</div>
+            <div class="ak-desc">B&S 6년 — 신규 BM · 라이브 진단 · 신작 런칭까지 IP 전 구간 운영</div>
+          </div>
+        </div>
+        <div class="about-key k2">
+          <div class="ak-num">02</div>
+          <div class="ak-body">
+            <div class="ak-title">데이터 분석 기반 사업지표 관리</div>
+            <div class="ak-desc">매출·DAU·리텐션·LTV·CAC 등 핵심 지표를 매주·매월 의사결정에 연결</div>
+          </div>
+        </div>
+        <div class="about-key k3">
+          <div class="ak-num">03</div>
+          <div class="ak-body">
+            <div class="ak-title">글로벌 시장 사업 경험</div>
+            <div class="ak-desc">NCW 퍼블리싱 의사결정 직접 조율, 지역별 BM 현지화 → 북미·유럽 매출 증대</div>
+          </div>
+        </div>
+        <div class="about-key k4">
+          <div class="ak-num">04</div>
+          <div class="ak-body">
+            <div class="ak-title">AI 자동화 활용 능력</div>
+            <div class="ak-desc">매출/지표 대시보드 제작 + 사업리뷰 자동화 파이프라인</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-foot"><img class="nc-logo nc-logo-small" src="NCSOFT CI-Blue.png" alt="" /> <strong>여인덕</strong> · About</div>
+  <div class="slide-no">02 / 12</div>
+</section>
+
+<!-- ========== SLIDE 3: SKILLS (4 카테고리) ========== -->
+<section class="slide">
+  <div class="s-eyebrow">Skills</div>
+  <h2 class="s-title">보유 스킬</h2>
+  <p class="s-subtitle">사업 전략·기획 + 데이터 분석/사업지표 관리 + 글로벌 사업 운영 + AI 활용 능력</p>
+
+  <div class="skill-groups">
+    <div class="skill-group cat1">
+      <div class="sg-head">
+        <div class="sg-head-row"><span class="sg-icon">📋</span><span class="sg-name">사업 전략 · 기획</span></div>
+        <div class="sg-count">5 SKILLS</div>
+      </div>
+      <div class="skill-boxes">
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">🧭</span>사업계획 수립 / 방향성 제시</div>
+          <div class="sb-desc">밀리 26년 사업계획 단독 수립 + B&S 태동 — 라이브 게임 체질 전반 재정렬</div>
+        </div>
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">💰</span>신규 BM 설계</div>
+          <div class="sb-desc">보물찾기·만물상·소울패스 — 정규 매출원 안착</div>
+        </div>
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">🔄</span>리텐션 방어 설계</div>
+          <div class="sb-desc">소울리그 — 데이터 기반 이벤트 기획, DAU 약 100% 증가</div>
+        </div>
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">🚀</span>신작 IP 사업 진입</div>
+          <div class="sb-desc">B&S Neo — 테스트 데이터 → 라이브 사업계획 결정</div>
+        </div>
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">📑</span>MS Office 활용</div>
+          <div class="sb-desc">PPT·Excel·Word — 사업계획·리포트·대표 보고 자료 직접 작성</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-group cat2">
+      <div class="sg-head">
+        <div class="sg-head-row"><span class="sg-icon">📈</span><span class="sg-name">데이터 분석 · 사업지표</span></div>
+        <div class="sg-count">3 SKILLS</div>
+      </div>
+      <div class="skill-boxes">
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">📉</span>데이터 분석 · 쿼리 추출</div>
+          <div class="sb-desc">BigQuery·SQL 직접 작성, 핸드 로그 분석으로 사업 인사이트 도출</div>
+        </div>
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">📊</span>사업지표 위클리 운영</div>
+          <div class="sb-desc">매출·DAU·리텐션·CAC·ROAS 통합 모니터링·해석</div>
+        </div>
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">🎯</span>UA 의사결정 · MMP 운영</div>
+          <div class="sb-desc">Airbridge 트래킹 + 장르별 LTV 역산 CAC 임계선으로 채널·소재·예산 재배분</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-group cat3">
+      <div class="sg-head">
+        <div class="sg-head-row"><span class="sg-icon">🌐</span><span class="sg-name">글로벌 사업 운영</span></div>
+        <div class="sg-count">3 SKILLS</div>
+      </div>
+      <div class="skill-boxes">
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">💵</span>글로벌 BM 현지화</div>
+          <div class="sb-desc">NCW 지역별 데이터 진단 → 핵심 BM 재설계, 북미·유럽 매출 증대</div>
+        </div>
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">🎉</span>글로벌 이벤트 · 프로모션</div>
+          <div class="sb-desc">지역별 시즌·라이프사이클 맞춤 이벤트 기획·운영</div>
+        </div>
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">🤝</span>본사-퍼블리셔 협업</div>
+          <div class="sb-desc">의사결정 구조 직접 조율, 크로스보더 라이브 운영</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-group cat4">
+      <div class="sg-head">
+        <div class="sg-head-row"><span class="sg-icon">🤖</span><span class="sg-name">AI 활용</span></div>
+        <div class="sg-count">3 SKILLS</div>
+      </div>
+      <div class="skill-boxes">
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">⚙️</span>Claude Code · MCP 자동화</div>
+          <div class="sb-desc">11개 자체 스킬 라이브러리, BigQuery·Notion·Atlassian MCP 연동</div>
+        </div>
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">🔧</span>사업 파이프라인 자동화</div>
+          <div class="sb-desc">사업리뷰·시장 발굴·리포트 자동화 파이프라인 운영</div>
+        </div>
+        <div class="skill-box">
+          <div class="sb-name"><span class="sb-ic">📊</span>매출/지표 대시보드 제작</div>
+          <div class="sb-desc">사업리뷰용 매출·LTV·CAC·ROAS 대시보드 직접 제작·운영</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-foot"><img class="nc-logo nc-logo-small" src="NCSOFT CI-Blue.png" alt="" /> <strong>여인덕</strong> · Skills</div>
+  <div class="slide-no">03 / 12</div>
+</section>
+
+<!-- ========== SLIDE 4: CAREER ========== -->
+<section class="slide">
+  <div class="s-eyebrow">Career & Profile</div>
+  <h2 class="s-title">경력 · 학력 · 인적</h2>
+
+  <div class="career-grid">
+    <div class="career-left">
+      <div class="career-section-label">CAREER</div>
+      <h3 class="career-section-title">주요 경력</h3>
+      <div class="career-tl">
+        <div class="ct-item current">
+          <div class="ct-dot"></div>
+          <div class="ct-co">KT밀리의서재 사업기획팀<span class="role-member">매니저</span></div>
+          <div class="ct-period">2025.09 ~ 재직중</div>
+          <div class="ct-desc">26년 B2C 사업계획 단독 수립 · 매월 대표 직보고 사업리뷰 · LTV/CAC UA 의사결정 · AI 자동화 파이프라인</div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-dot"></div>
+          <div class="ct-co">오가닉비즈니스 마케팅사업팀<span class="role-member">팀원</span></div>
+          <div class="ct-period">2024.08 ~ 2025.08 (약 1년)</div>
+          <div class="ct-desc">신규 비즈니스 모델 설계 / 마케팅 전략 수립</div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-dot"></div>
+          <div class="ct-co">엔씨소프트 B&S 사업실 마케팅사업팀<span class="role-leader">팀장</span></div>
+          <div class="ct-period">2022.04 ~ 2024.07 (약 2년 3개월)</div>
+          <div class="ct-desc">B&S Neo 신작 런칭 준비 · NCW 글로벌 BM 현지화 · 위클리 사업리뷰 운영</div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-dot"></div>
+          <div class="ct-co">엔씨소프트 B&S 사업실 마케팅사업팀<span class="role-member">팀원</span></div>
+          <div class="ct-period">2021.03 ~ 2022.03 (약 1년 1개월)</div>
+          <div class="ct-desc">마케팅·인프라·매출 등 사업지표 통합 운영 · 소울리그 등 리텐션 방어 설계</div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-dot"></div>
+          <div class="ct-co">엔씨소프트 B&S 사업실 콘텐츠사업팀<span class="role-member">팀원</span></div>
+          <div class="ct-period">2019.01 ~ 2021.02 (약 2년 2개월)</div>
+          <div class="ct-desc">B&S 태동 업데이트 · 만물상 · 보물찾기 — 신규 BM 발굴 + 라이브 사업 방향성 제시</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="career-right">
+      <div class="career-section-label">PROFILE</div>
+      <h3 class="career-section-title">인적사항</h3>
+      <ul class="profile-list">
+        <li>
+          <span class="pl-ic">👤</span>
+          <div>
+            <strong>여인덕 (Yeo Indeok)</strong>
+            <span class="pl-sub">1992.04.14</span>
+          </div>
+        </li>
+        <li>
+          <span class="pl-ic">✉</span>
+          <div>indeokyeo@naver.com</div>
+        </li>
+        <li>
+          <span class="pl-ic">📞</span>
+          <div>010-2560-4207</div>
+        </li>
+        <li>
+          <span class="pl-ic">🎓</span>
+          <div>
+            <strong>경희대학교 호텔경영학과</strong>
+            <span class="pl-sub">2012.03 ~ 2019.02 · 졸업</span>
+          </div>
+        </li>
+        <li>
+          <span class="pl-ic">🏫</span>
+          <div>
+            <strong>여의도 고등학교</strong>
+            <span class="pl-sub">2008.03 ~ 2011.02 · 졸업</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-foot"><img class="nc-logo nc-logo-small" src="NCSOFT CI-Blue.png" alt="" /> <strong>여인덕</strong> · Career & Profile</div>
+  <div class="slide-no">04 / 12</div>
+</section>
+
+<!-- ========== SLIDE 5: 강점1 — 한 사이클 (3카드, NCW 빠짐) ========== -->
+<section class="slide pillar-1">
+  <div class="pillar-head-bar">
+    <div class="phb-num">01</div>
+    <div class="phb-text">
+      <span class="phb-tag">강점 01 · 사이클</span>
+      <h2 class="phb-title">게임 사업 한 사이클을 직접 운영해봤습니다</h2>
+      <p class="phb-sub">라이브 진단 → 신규 BM 설계 → 핵심 지표 운영 — 한 IP에서 사업의 핵심 사이클을 직접 돌렸습니다.</p>
+    </div>
+  </div>
+
+  <div class="case-rows">
+    <div class="case-row">
+      <div class="cr-left">
+        <div class="cr-num">01</div>
+      </div>
+      <div class="cr-mid">
+        <div class="cr-title">B&S 태동 — 콘텐츠 동선 수립 + 아이템 체질 개편</div>
+        <div class="cr-role">엔드게임 파밍 노후화 진단 → 게임 체질 전반 재설계</div>
+        <ul class="cr-bullets">
+          <li>콘텐츠 소비 동선 재수립 + <b>게임 체질 전반 개편안</b> 설계</li>
+          <li>유관부서 통합 협업 리드 → 런칭까지 <b>End-to-End 주도</b></li>
+        </ul>
+      </div>
+      <div class="cr-right">
+        <div class="cr-metric-label">RESULT</div>
+        <div class="cr-metric">라이브 게임 체질 전면 재정렬</div>
+        <div class="cr-evidence"><b>WAU +30%</b> · 업데이트 이전 대비</div>
+      </div>
+      <div class="cr-img-wrap"><img class="cr-thumb" src="assets/img_taedong.jpg" alt="태동" /></div>
+    </div>
+
+    <div class="case-row">
+      <div class="cr-left">
+        <div class="cr-num">02</div>
+      </div>
+      <div class="cr-mid">
+        <div class="cr-title">B&S 소울패스</div>
+        <div class="cr-role">패스형 신규 BM 도입 → BM 체질 개편</div>
+        <ul class="cr-bullets">
+          <li>라오킹·Fortnite 배틀패스 분석 → <b>패스형 BM 도입</b></li>
+          <li>일회성 프로모션 의존 BM을 <b>구독형 매출 흐름</b>으로 전환</li>
+        </ul>
+      </div>
+      <div class="cr-right">
+        <div class="cr-metric-label">REVENUE</div>
+        <div class="cr-metric">구독형 매출 흐름 안착</div>
+        <div class="cr-evidence"><b>월 3억+</b> · 3만원 이하 구독 BM</div>
+      </div>
+      <div class="cr-img-wrap"><img class="cr-thumb" src="assets/img_soulpass.jpg" alt="소울패스" /></div>
+    </div>
+
+    <div class="case-row">
+      <div class="cr-left">
+        <div class="cr-num">03</div>
+      </div>
+      <div class="cr-mid">
+        <div class="cr-title">B&S 소울리그 — 리텐션 방어 전략 설계/운영</div>
+        <div class="cr-role">던전 소비 가속 → 반복 소비 구조 설계</div>
+        <ul class="cr-bullets">
+          <li>순환 보상 + 주간 미션 + <b>시즌형 랭킹 PvP</b> 설계</li>
+          <li>주간 지표 해석 → <b>보상·난이도 튜닝</b> + 인사이트 도출</li>
+        </ul>
+      </div>
+      <div class="cr-right">
+        <div class="cr-metric-label">RETENTION</div>
+        <div class="cr-metric">리텐션 방어 · 정규 콘텐츠 확장</div>
+        <div class="cr-evidence"><b>DAU +100%</b> · 체류·재방문 동반 개선</div>
+      </div>
+      <div class="cr-img-wrap"><img class="cr-thumb" src="assets/img_soulleague.jpg" alt="소울리그" /></div>
+    </div>
+  </div>
+  <div class="slide-foot"><img class="nc-logo nc-logo-small" src="NCSOFT CI-Blue.png" alt="" /> <strong>여인덕</strong> · 강점 01</div>
+  <div class="slide-no">05 / 12</div>
+</section>
+
+<!-- ========== SLIDE 6: 강점2 — 사업지표 관리 ========== -->
+<section class="slide pillar-2">
+  <div class="pillar-head-bar">
+    <div class="phb-num">02</div>
+    <div class="phb-text">
+      <span class="phb-tag">강점 02 · 데이터 사업지표</span>
+      <h2 class="phb-title">데이터 분석 기반으로 사업지표를 관리했습니다</h2>
+      <p class="phb-sub">매출·DAU·리텐션·LTV·CAC·마케팅 효율 등 핵심 지표를 매주·매월 해석해 의사결정에 연결. 엔씨에서도 밀리에서도. UA는 그중 한 축.</p>
+    </div>
+  </div>
+
+  <div class="case-rows">
+    <div class="case-row">
+      <div class="cr-left">
+        <div class="cr-num">01</div>
+      </div>
+      <div class="cr-mid">
+        <div class="cr-title">밀리 26년 B2C 사업계획 + 사업리뷰 (AI 자동화)</div>
+        <div class="cr-role">콘텐츠-지표 정합성 단독 수립 / 매월 대표 직보고 / AI 파이프라인 운영</div>
+        <ul class="cr-bullets">
+          <li><b>Airbridge 신규 유입 트래킹</b> → 채널별 성과 분석 자동화</li>
+          <li><b>Python·Claude Code·MCP</b> 자동 업로드 파이프라인 구축</li>
+        </ul>
+      </div>
+      <div class="cr-right">
+        <div class="cr-metric-label">CADENCE</div>
+        <div class="cr-metric">B2C 사업 의사결정 기여</div>
+        <div class="cr-evidence"><b>대표 보고</b> + 유관부서 워닝 시그널 제공</div>
+      </div>
+      <div class="cr-img-wrap"><img class="cr-thumb contain" src="assets/img_mmp_stack.png" alt="MMP Stack" /></div>
+    </div>
+
+    <div class="case-row">
+      <div class="cr-left">
+        <div class="cr-num">02</div>
+      </div>
+      <div class="cr-mid">
+        <div class="cr-title">B&S 10주년 마케팅 플랜 수립·운영 / UA 지표 분석</div>
+        <div class="cr-role">10주년 캠페인 직접 운영 (대행사 협업) → 신규 소재 제작·테스트</div>
+        <ul class="cr-bullets">
+          <li><b>CTR 모니터링 → 저성과 소재 즉시 교체</b> 사이클로 대행사 작업 지시</li>
+          <li><b>CPI/CTR/ROAS 기반 채널·소재 재배분</b> = UA 실전 경험</li>
+        </ul>
+      </div>
+      <div class="cr-right">
+        <div class="cr-metric-label">PERFORMANCE</div>
+        <div class="cr-metric">CTR 1% → 3% · 예산 효율 우위</div>
+        <div class="cr-evidence">태동 6억 vs <b>10주년 2억</b> 효율 우위</div>
+      </div>
+      <div class="cr-img-wrap"><img class="cr-thumb" src="assets/img_bs10th.jpg" alt="B&S 10주년" /></div>
+    </div>
+
+    <div class="case-row">
+      <div class="cr-left">
+        <div class="cr-num">03</div>
+      </div>
+      <div class="cr-mid">
+        <div class="cr-title">데이터 기반 리텐션 방어 / BM 설계</div>
+        <div class="cr-role">매출·체류·구매 패턴 분석 → 리텐션·BM 의사결정</div>
+        <ul class="cr-bullets">
+          <li>구매·체류·반복 소비 데이터로 <b>리텐션 진단·방어 설계</b></li>
+          <li>BM 효율 검증 → <b>다음 BM·이벤트 보상·구조 의사결정</b></li>
+        </ul>
+      </div>
+      <div class="cr-right">
+        <div class="cr-metric-label">LOOP</div>
+        <div class="cr-metric">데이터 기반 BM·이벤트 강화</div>
+        <div class="cr-evidence"><b>이벤트/BM 사후 분석</b> · 유관부서 공유</div>
+      </div>
+      <div class="cr-img-wrap"><img class="cr-thumb" src="assets/img_chart.jpg" alt="데이터 분석" /></div>
+    </div>
+  </div>
+  <div class="slide-foot"><img class="nc-logo nc-logo-small" src="NCSOFT CI-Blue.png" alt="" /> <strong>여인덕</strong> · 강점 02</div>
+  <div class="slide-no">06 / 12</div>
+</section>
+
+<!-- ========== SLIDE 7: 강점3 — 신규 사업 영역 발굴 ========== -->
+<section class="slide pillar-3">
+  <div class="pillar-head-bar">
+    <div class="phb-num">03</div>
+    <div class="phb-text">
+      <span class="phb-tag">강점 03 · 신규 발굴</span>
+      <h2 class="phb-title">신규 사업 영역을 발굴해 정규 매출원으로 안착</h2>
+      <p class="phb-sub">신작 IP 사업 진입 + 신규 BM 발굴. 데이터로 사전 검증하고, 처음부터 매출 구조를 설계해 라이브에 안착시킨 사례.</p>
+    </div>
+  </div>
+
+  <div class="case-rows">
+    <div class="case-row">
+      <div class="cr-left">
+        <div class="cr-num">01</div>
+      </div>
+      <div class="cr-mid">
+        <div class="cr-title">B&S Neo — 사업계획 / 런칭 준비</div>
+        <div class="cr-role">테스트 피드백 사업 관점 재해석 → 라이브 적용 방향 결정</div>
+        <ul class="cr-bullets">
+          <li>테스트 데이터를 <b>구매·체류·반복 소비</b>로 재해석</li>
+          <li>Neo 타깃 맞춤 상품·프로모션 재설계 → <b>반기 사업계획 반영</b></li>
+        </ul>
+      </div>
+      <div class="cr-right">
+        <div class="cr-metric-label">OUTCOME</div>
+        <div class="cr-metric">신작 사업방향 · 라이브 적용 결정</div>
+        <div class="cr-evidence"><b>반기 사업계획</b> 반영 · 라이브·신작 병행</div>
+      </div>
+      <div class="cr-img-wrap"><img class="cr-thumb" src="assets/img_neo.jpg" alt="B&S Neo" /></div>
+    </div>
+
+    <div class="case-row">
+      <div class="cr-left">
+        <div class="cr-num">02</div>
+      </div>
+      <div class="cr-mid">
+        <div class="cr-title">B&S 만물상 — 신규 BM 기획·설계</div>
+        <div class="cr-role">직관적 UI/UX + 확정 보상으로 구매 허들 ↓</div>
+        <ul class="cr-bullets">
+          <li>유저 <b>4 세그먼트</b> 분류 + 6종 상품 라인업 구성</li>
+          <li>시나리오 모델링으로 구매 진입율 <b>사전 예측·검토</b></li>
+        </ul>
+      </div>
+      <div class="cr-right">
+        <div class="cr-metric-label">REVENUE</div>
+        <div class="cr-metric">매출·구매풀 동시 확장</div>
+        <div class="cr-evidence"><b>월 20억 · 구매풀 +20%</b> 달성</div>
+      </div>
+      <div class="cr-img-wrap"><img class="cr-thumb" src="assets/img_manmul.jpg" alt="만물상" /></div>
+    </div>
+
+    <div class="case-row">
+      <div class="cr-left">
+        <div class="cr-num">03</div>
+      </div>
+      <div class="cr-mid">
+        <div class="cr-title">B&S 보물찾기 — 신규 BM 기획·설계</div>
+        <div class="cr-role">유저 참여형 신사업 모델 + 전략 퍼널 구조화</div>
+        <ul class="cr-bullets">
+          <li><b>90명+ 동시 참여</b> 위해 보상-참여율 반복 실험</li>
+          <li>참여 → 리뷰 → 구매 <b>전략 퍼널 구조화</b> · End-to-End 주도</li>
+        </ul>
+      </div>
+      <div class="cr-right">
+        <div class="cr-metric-label">REVENUE</div>
+        <div class="cr-metric">신규 BM → 정규 수익모델 안착</div>
+        <div class="cr-evidence"><b>첫 달 10억 · 3년 정규 BM</b> 운영</div>
+      </div>
+      <div class="cr-img-wrap"><img class="cr-thumb" src="assets/img_treasure.jpg" alt="보물찾기" /></div>
+    </div>
+  </div>
+  <div class="slide-foot"><img class="nc-logo nc-logo-small" src="NCSOFT CI-Blue.png" alt="" /> <strong>여인덕</strong> · 강점 03</div>
+  <div class="slide-no">07 / 12</div>
+</section>
+
+<!-- ========== SLIDE 8: 강점4 — 글로벌 경험 (HSF 차용) ========== -->
+<section class="slide pillar-4">
+  <div class="pillar-head-bar">
+    <div class="phb-num">04</div>
+    <div class="phb-text">
+      <span class="phb-tag">강점 04 · 글로벌</span>
+      <h2 class="phb-title">글로벌 경험 — 해외에서도 기여할 수 있습니다</h2>
+      <p class="phb-sub">국내 BM을 해외에 그대로 이식하지 않고, 현지 유저 관점에서 다시 설계한 실전 경험을 쌓았습니다.</p>
+    </div>
+  </div>
+
+  <div class="case-rows">
+    <div class="case-row">
+      <div class="cr-left">
+        <div class="cr-num">01</div>
+      </div>
+      <div class="cr-mid">
+        <div class="cr-title">NCA/NCW 글로벌 BM 현지화</div>
+        <div class="cr-role">NCW 유저 소비 패턴 분석 → 3대 핵심 BM 현지화</div>
+        <ul class="cr-bullets">
+          <li>국내 BM과의 <b>괴리 지점 정량 파악</b> · 지역별 거부감 진단</li>
+          <li><b>보물창고·소울패스·랜덤박스</b> 상품·가격·보상 현지화</li>
+        </ul>
+      </div>
+      <div class="cr-right">
+        <div class="cr-metric-label">REVENUE</div>
+        <div class="cr-metric">북미·유럽 매출 증대 (현지화)</div>
+        <div class="cr-evidence">보물창고·소울패스·랜덤박스 <b>현지화</b></div>
+      </div>
+      <div class="cr-img-wrap"><img class="cr-thumb" src="assets/img_ncw.jpg" alt="NCW 글로벌" /></div>
+    </div>
+
+    <div class="case-row">
+      <div class="cr-left">
+        <div class="cr-num">02</div>
+      </div>
+      <div class="cr-mid">
+        <div class="cr-title">지역별 이벤트·시즌 캘린더 + 본사-퍼블리셔 협업</div>
+        <div class="cr-role">지역별 이벤트 설계 · 시즌 캘린더 운영 · 크로스보더 의사결정 조율</div>
+        <ul class="cr-bullets">
+          <li>해외 라이프사이클 갭 진단 → <b>지역별 시즌 캘린더 설계</b></li>
+          <li>본사-퍼블리셔 <b>우선순위 조율</b> + 크로스보더 라이브 안정화</li>
+        </ul>
+      </div>
+      <div class="cr-right">
+        <div class="cr-metric-label">RESULT</div>
+        <div class="cr-metric">지역별 참여·매출 동반 상승</div>
+        <div class="cr-evidence">본사·퍼블리셔 <b>공동 실행</b> 사이클</div>
+      </div>
+      <div class="cr-img-wrap"><img class="cr-thumb contain" src="assets/img_global_event.jpg" alt="글로벌 이벤트" /></div>
+    </div>
+  </div>
+  <div class="slide-foot"><img class="nc-logo nc-logo-small" src="NCSOFT CI-Blue.png" alt="" /> <strong>여인덕</strong> · 강점 04</div>
+  <div class="slide-no">08 / 12</div>
+</section>
+
+<!-- ========== SLIDE 9: 강점5 — AI 레버리지 ========== -->
+<section class="slide pillar-5">
+  <div class="pillar-head-bar">
+    <div class="phb-num">05</div>
+    <div class="phb-text">
+      <span class="phb-tag">강점 05 · AI 활용</span>
+      <h2 class="phb-title">AI 자동화로 분석의 신뢰성·범위를 확장합니다</h2>
+      <p class="phb-sub">사업 문제 발견 → 도구 직접 설계 → AI 자동화 → 실사용·검증 → 조직 자산화. 한 명이 본부 단위 작업을 수행합니다.</p>
+    </div>
+  </div>
+
+  <div class="ai-pipeline">
+    <div class="ai-pipe-label">BUSINESS NEED → BUILD → DEPLOY</div>
+    <div class="pipe-flow">
+      <div class="pipe-node">
+        <div class="pn-icon">💡</div>
+        <div class="pn-label">사업 문제 발견</div>
+        <div class="pn-tool">현장 경험 기반</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node">
+        <div class="pn-icon">🛠</div>
+        <div class="pn-label">도구 직접 설계</div>
+        <div class="pn-tool">Claude Code · MCP</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node accent">
+        <div class="pn-icon">🤖</div>
+        <div class="pn-label">AI 자동화 구축</div>
+        <div class="pn-tool">Multi-Agent · API</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node">
+        <div class="pn-icon">📊</div>
+        <div class="pn-label">실사용·검증</div>
+        <div class="pn-tool">대시보드 · 사업리뷰</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node">
+        <div class="pn-icon">🏢</div>
+        <div class="pn-label">조직 자산화</div>
+        <div class="pn-tool">팀 공유·확장</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-mini-grid">
+    <div class="ai-mini">
+      <div class="am-num" style="font-size:32px;">📊</div>
+      <div class="am-body">
+        <div class="am-title">매출/지표 대시보드 제작</div>
+        <div class="am-desc">사업리뷰용 매출·LTV·CAC·ROAS 대시보드 직접 제작 — BigQuery → 시각화 → 의사결정 루프</div>
+        <div class="am-link">Python · BigQuery · Confluence 통합</div>
+      </div>
+    </div>
+    <div class="ai-mini">
+      <div class="am-num">매일</div>
+      <div class="am-body">
+        <div class="am-title">밀리 사업리뷰 자동화 파이프라인</div>
+        <div class="am-desc">BigQuery → QA → 인사이트 → Confluence 자동 업로드 파이프라인</div>
+        <div class="am-link">Python · Claude Code · MCP 연동</div>
+      </div>
+    </div>
+    <div class="ai-mini">
+      <div class="am-num">11<small>개</small></div>
+      <div class="am-body">
+        <div class="am-title">Claude Code 자체 스킬 라이브러리</div>
+        <div class="am-desc">5에이전트 파이프라인 + 사업분석·리포팅 등 도메인 스킬 직접 제작</div>
+        <div class="am-link">Notion·Atlassian·BigQuery MCP 통합</div>
+      </div>
+    </div>
+    <div class="ai-mini">
+      <div class="am-num">1<small style="color:var(--p4);">→</small>10<small>+</small></div>
+      <div class="am-body">
+        <div class="am-title">1인이 본부 단위 작업 수행</div>
+        <div class="am-desc">사업분석·시장발굴·리포트 자동화로 의사결정 속도 증폭</div>
+        <div class="am-link">정성 분석 수준의 신뢰성 확보</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-foot"><img class="nc-logo nc-logo-small" src="NCSOFT CI-Blue.png" alt="" /> <strong>여인덕</strong> · 강점 05</div>
+  <div class="slide-no">09 / 12</div>
+</section>
+
+<!-- ========== SLIDE 10: 90일 계획 ========== -->
+<section class="slide">
+  <div class="s-eyebrow">90-Day Plan</div>
+  <h2 class="s-title">합류 후 90일 계획</h2>
+  <p class="s-subtitle">사업 사이클 경험 + 사업지표 관리 + 글로벌 + AI 자동화 — 다섯 강점을 본부 업무에 단계적으로 정착시킵니다.</p>
+
+  <div class="plan-rail">
+    <div class="plan-pill early">
+      <span class="pp-day">Day 1—30</span><span class="pp-label">진단</span>
+    </div>
+    <div class="plan-rail-arrow">→</div>
+    <div class="plan-pill mid">
+      <span class="pp-day">Day 31—60</span><span class="pp-label">제안</span>
+    </div>
+    <div class="plan-rail-arrow">→</div>
+    <div class="plan-pill late">
+      <span class="pp-day">Day 61—90</span><span class="pp-label">실행</span>
+    </div>
+  </div>
+
+  <div class="plan-grid-v2">
+    <div class="plan-card early">
+      <div class="pc-head"><div class="pc-icon">🔍</div><p class="pc-h">본부 게임·데이터 구조 파악</p></div>
+      <ul class="pc-list">
+        <li>3사(JustPlay·Springcomes·Lihuhu) <b>KPI 통합 보드</b> 구축</li>
+        <li>게임별 <b>LTV·CAC 실측</b> + 채널·오퍼링 현황 파악</li>
+        <li><b>MMP·BigQuery 데이터 구조</b> 파악</li>
+        <li>게임별 강점·리스크 1차 정리</li>
+      </ul>
+    </div>
+    <div class="plan-card mid">
+      <div class="pc-head"><div class="pc-icon">💡</div><p class="pc-h">사업 진단 → 우선순위 제안</p></div>
+      <ul class="pc-list">
+        <li>게임별 <b>매출·리텐션·UA 효율 진단 리포트</b> 작성</li>
+        <li><b>비효율·기회 영역 도출</b> (광고 BM·지역 단가 갭)</li>
+        <li>채널별 <b>LTV·CAC 매트릭스 리포트</b> 안착</li>
+        <li>본부 <b>우선 공략 게임·시장 후보군</b> 제안</li>
+      </ul>
+    </div>
+    <div class="plan-card late">
+      <div class="pc-head"><div class="pc-icon">🚀</div><p class="pc-h">소규모 실행 → 검증 → 확장</p></div>
+      <ul class="pc-list">
+        <li>제안 액션 중 <b>1건 소규모 직접 실행</b> (광고 최적화 파일럿)</li>
+        <li>실행 결과 데이터로 <b>가설 검증</b></li>
+        <li>검증된 안 → <b>분기 액션·KPI</b>로 확장 합의</li>
+        <li>AI 자동화 본부 이식 + <b>1년 로드맵 초안</b></li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-foot"><img class="nc-logo nc-logo-small" src="NCSOFT CI-Blue.png" alt="" /> <strong>여인덕</strong> · 90-Day Plan</div>
+  <div class="slide-no">10 / 12</div>
+</section>
+
+<!-- ========== SLIDE 11: 사업전략 요약 (NEW) ========== -->
+<section class="slide">
+  <div class="s-eyebrow">Business Strategy · Pre-Work</div>
+  <h2 class="s-title" style="margin-bottom:4px;">이력서 작성하며 현황 파악 위해, 신규사업본부 캐주얼 3사 사업 리포트를 정리해봤습니다</h2>
+  <p class="s-subtitle" style="margin-bottom:14px;">공개 데이터 기준으로 4사 인수 후 사업 현황·향후 운영 방향성·사업 전략을 정리한 자체 분석 리포트입니다.</p>
+
+  <div class="s11-body">
+    <div class="s11-preview">
+      <img src="assets/img_report_top.png" alt="사업전략 리포트 — 현황·인수 타임라인" />
+    </div>
+
+    <div class="s11-summary">
+      <div class="s11-card c1">
+        <div class="s11-card-head">
+          <span class="s11-card-num">01</span>
+          <span class="s11-card-tag">현황</span>
+        </div>
+        <div class="s11-card-title">5개월 4사 인수 4,550억 → 2030 1.5조 회수 (3.3배)</div>
+        <div class="s11-card-desc">
+          Moving Eye·Lihuhu·Springcomes·JustPlay <b>인수 타임라인</b>과 4사 누적 투자·연매출·필요 추가 매출(+1.1조/년)을 KPI 카드로 정리.
+        </div>
+      </div>
+
+      <div class="s11-card c2">
+        <div class="s11-card-head">
+          <span class="s11-card-num">02</span>
+          <span class="s11-card-tag">방향성 · 로드맵</span>
+        </div>
+        <div class="s11-card-title">2025 → 2030 매출 도달 경로 + 동력 분해</div>
+        <div class="s11-card-desc">
+          베이스라인 4천억 → 1.5조까지 <b>단계별 매출 경로</b>·성장 동력 분해, 장르/지역 벤치마크 기반 도달 가능성 검증.
+        </div>
+      </div>
+
+      <div class="s11-card c3">
+        <div class="s11-card-head">
+          <span class="s11-card-num">03</span>
+          <span class="s11-card-tag">솔루션</span>
+        </div>
+        <div class="s11-card-title">3사 비대칭 해소 — 6대 액션</div>
+        <div class="s11-card-desc">
+          공급(양산 라인 이식)·유통(인벤토리 통합)·UA·글로벌·LiveOps·AdTech <b>6대 매출 성장 액션</b>으로 +1.1조/년 도달 안 도출.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s11-bottom">
+    <a class="s11-report-btn" href="report.html" target="_blank" rel="noopener">
+      <span class="s11-rb-label">FULL REPORT</span>
+      <span class="s11-rb-title">사업전략 분석 리포트 전체 보기 →</span>
+    </a>
+  </div>
+
+  <div class="slide-foot"><img class="nc-logo nc-logo-small" src="NCSOFT CI-Blue.png" alt="" /> <strong>여인덕</strong> · Pre-Work</div>
+  <div class="slide-no">11 / 12</div>
+</section>
+
+<!-- ========== SLIDE 12: ENDING ========== -->
+<section class="slide ending">
+  <div class="cover-top">
+    <img class="nc-logo nc-logo-large" src="NCSOFT CI-Blue.png" alt="NCSOFT" />
+    <div class="cover-date">2026 · 04</div>
+  </div>
+
+  <div class="ending-center">
+    <div class="ending-thank">THANK YOU</div>
+    <p class="ending-line">
+      NC에서 보낸 6년으로,<br/>
+      빠르게 <em>본부 성과 달성</em>에 기여하겠습니다.
+    </p>
+    <p class="ending-sub">
+      2019년 NC 공채로 입사해 8년 커리어 중 6년을 엔씨소프트에서 보냈습니다.<br/>
+      앞서 쌓은 경험을 바탕으로 본부 업무와 조직에 빠르게 적응하고,<br/>
+      <strong>그동안 쌓아온 사업 역량을 사업전략 / 데이터 분석 담당자로서 본부 성과로 이어가겠습니다.</strong><br/>
+      감사합니다.
+    </p>
+  </div>
+
+  <div class="ending-meta">
+    <span><strong>여인덕 · YEO INDEOK</strong></span>
+    <span>✉ indeokyeo@naver.com</span>
+    <span>📞 010-2560-4207</span>
+  </div>
+  <div class="slide-no">12 / 12</div>
+</section>
+
+</div>
+</body>
+</html>

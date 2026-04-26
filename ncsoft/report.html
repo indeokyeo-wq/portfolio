@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>엔씨소프트 모바일 캐주얼 인수 진단 — 4,550억 베팅, 시너지는 만들어진다</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+:root {
+  --bg: #f8fafc; --surface: #ffffff; --bg-soft: #f1f5f9;
+  --border: #e2e8f0; --border-strong: #cbd5e1;
+  --text: #0f172a; --text-2: #334155; --text-3: #64748b; --text-4: #94a3b8;
+  --accent: #1e3a8a; --accent-2: #2563eb; --accent-soft: #eff6ff; --accent-tint: #dbeafe;
+  --warn: #b45309; --warn-soft: #fffbeb; --warn-tint: #fef3c7;
+  --good: #15803d; --good-soft: #f0fdf4; --good-tint: #dcfce7;
+  --info: #0e7490; --info-soft: #ecfeff; --info-tint: #cffafe;
+  --highlight: #fef3c7;
+  --c-just: #ea580c;
+  --c-spring: #15803d;
+  --c-lihuhu: #7c3aed;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg); color: var(--text);
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, "Noto Sans KR", sans-serif;
+  font-size: 14px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: -0.005em;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 40px 80px; background: var(--surface); box-shadow: 0 0 60px rgba(15,23,42,0.06); }
+header.report-head { padding: 56px 0 28px; margin-bottom: 0; border-bottom: 1px solid var(--border); position: relative; }
+header.report-head::before {
+  content: ''; position: absolute; left: 0; top: 56px; width: 36px; height: 3px; background: var(--accent-2);
+}
+.eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-2); font-weight: 800; margin: 16px 0 14px; }
+h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.025em; margin: 0 0 16px; line-height: 1.3; color: var(--text); }
+.subhead { font-size: 14.5px; color: var(--text-2); margin: 0 0 22px; max-width: 980px; line-height: 1.75; }
+.subhead strong { color: var(--accent); font-weight: 700; }
+.meta-row { display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: var(--text-3); padding-top: 16px; border-top: 1px solid var(--border); }
+.meta-row span strong { color: var(--text-2); font-weight: 700; letter-spacing: 0.02em; }
+
+section { margin-bottom: 64px; }
+h2 { font-size: 22px; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.02em; display: flex; align-items: baseline; gap: 14px; color: var(--text); }
+h2 .num { font-size: 11px; color: var(--accent-2); font-weight: 800; letter-spacing: 0.18em; padding: 4px 10px; background: var(--accent-soft); border-radius: 3px; }
+.h2-sub { font-size: 13.5px; color: var(--text-3); margin: 0 0 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); line-height: 1.7; }
+h3 { font-size: 16px; font-weight: 700; margin: 28px 0 12px; color: var(--text); letter-spacing: -0.015em; }
+p, li { color: var(--text-2); }
+
+.gl { border-bottom: 1px dotted var(--accent-2); cursor: help; color: var(--accent-2); font-weight: 500; position: relative; }
+.gl::after {
+  content: attr(data-tip);
+  position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%);
+  background: #1f2937; color: #fff; padding: 8px 12px; border-radius: 6px;
+  font-size: 12px; line-height: 1.5; white-space: normal; width: 280px;
+  opacity: 0; pointer-events: none; transition: opacity 0.15s; z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-weight: 400;
+}
+.gl:hover::after { opacity: 1; }
+
+.thesis { background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); color: #fff; padding: 28px 32px; margin: 28px 0; border-radius: 4px; box-shadow: 0 8px 24px rgba(30,58,138,0.15); position: relative; overflow: hidden; }
+.thesis::before { content: ''; position: absolute; right: -40px; top: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(251,191,36,0.15), transparent 70%); }
+.thesis .label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #fbbf24; font-weight: 800; margin-bottom: 12px; position: relative; }
+.thesis p { font-size: 15px; color: #fff; margin: 0; line-height: 1.85; position: relative; }
+.thesis p strong { color: #fbbf24; font-weight: 700; }
+
+/* Flow nav (현황→방향성→솔루션) */
+.flow-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 0 0 32px; border: 1px solid var(--border); background: var(--surface); }
+.flow-step { padding: 18px 22px; border-right: 1px solid var(--border); position: relative; }
+.flow-step:last-child { border-right: none; }
+.flow-step .fn { font-size: 10.5px; letter-spacing: 0.18em; color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+.flow-step .ft { font-size: 16px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
+.flow-step .fd { font-size: 12px; color: var(--text-3); line-height: 1.55; }
+.flow-step.active { background: var(--accent-soft); border-top: 3px solid var(--accent); padding-top: 15px; }
+
+/* Focus area card (구 problem) */
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+.problem { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--accent-2); padding: 20px 22px; border-radius: 4px; transition: transform 0.15s, box-shadow 0.15s; }
+.problem:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,23,42,0.06); }
+.problem .pn { font-size: 11px; letter-spacing: 0.18em; color: var(--accent-2); font-weight: 800; margin-bottom: 10px; text-transform: uppercase; }
+.problem .ph { font-size: 14.5px; font-weight: 700; margin: 0 0 10px; line-height: 1.5; color: var(--text); letter-spacing: -0.015em; }
+.problem .pd { font-size: 12.5px; color: var(--text-2); line-height: 1.75; margin: 0; }
+.problem .pd strong { color: var(--accent); }
+
+/* Gap gauge */
+.gap-gauge { background: var(--surface); border: 1px solid var(--border); padding: 22px 26px; margin: 18px 0; }
+.gap-gauge h4 { font-size: 13px; margin: 0 0 16px; font-weight: 700; }
+.gap-row { display: grid; grid-template-columns: 140px 1fr 110px; gap: 14px; align-items: center; margin-bottom: 10px; font-size: 12px; }
+.gap-row .gl-name { color: var(--text-2); font-weight: 600; }
+.gap-row .gl-bar { background: #f1f5f9; height: 22px; border-radius: 3px; overflow: hidden; position: relative; }
+.gap-row .gl-fill { height: 100%; display: flex; align-items: center; padding: 0 10px; color: #fff; font-size: 11.5px; font-weight: 700; }
+.gap-row .gl-val { text-align: right; font-weight: 700; color: var(--text); font-size: 12.5px; }
+
+/* M&A timeline */
+/* ===== M&A Timeline (시각화) ===== */
+.ma-timeline-vis { position: relative; margin: 28px 0 24px; padding: 0 4px; }
+.ma-timeline-vis .nodes {
+  position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.ma-timeline-vis .nodes::before {
+  content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 8px;
+  height: 3px; background: linear-gradient(to right, var(--accent), var(--accent-2));
+  border-radius: 2px; z-index: 1;
+}
+.ma-node { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; }
+.ma-node .dot {
+  width: 18px; height: 18px; border-radius: 50%; background: #fff;
+  border: 4px solid var(--accent); box-shadow: 0 0 0 4px rgba(30,58,138,0.08), 0 2px 6px rgba(30,58,138,0.25);
+  margin-bottom: 12px;
+}
+.ma-node.large .dot { width: 22px; height: 22px; border-color: var(--good); border-width: 5px; box-shadow: 0 0 0 5px rgba(34,197,94,0.12), 0 2px 8px rgba(34,197,94,0.3); }
+.ma-node .when { font-size: 10.5px; color: var(--accent); font-weight: 700; letter-spacing: 0.04em; }
+.ma-node .who { font-size: 14px; font-weight: 700; color: var(--text); margin: 2px 0; }
+.ma-node .country { font-size: 10.5px; color: var(--text-3); margin-bottom: 10px; }
+.ma-node .card {
+  background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--accent);
+  border-radius: 4px; padding: 12px 14px; width: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.ma-node.large .card { border-top-color: var(--good); }
+.ma-node .deal { font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.4; }
+.ma-node .deal small { font-weight: 500; color: var(--text-3); }
+.ma-node .role { font-size: 11px; color: var(--text-3); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border); line-height: 1.5; }
+.ma-node .ma-spec { width: 100%; border-collapse: collapse; font-size: 10.5px; table-layout: fixed; }
+.ma-node .ma-spec th { text-align: left; color: var(--text-3); font-weight: 600; padding: 6px 4px 6px 0; width: 42%; vertical-align: top; line-height: 1.4; }
+.ma-node .ma-spec td { color: var(--text); padding: 6px 0; line-height: 1.45; vertical-align: top; word-break: keep-all; overflow-wrap: break-word; height: 32px; }
+.ma-node .ma-spec tr + tr th, .ma-node .ma-spec tr + tr td { border-top: 1px dashed var(--border); }
+.ma-node .card { display: flex; flex-direction: column; }
+.ma-timeline-vis .nodes { align-items: stretch; }
+.ma-node { height: 100%; }
+.ma-timeline-vis .axis-labels {
+  display: flex; justify-content: space-between; font-size: 10.5px; color: var(--text-3);
+  letter-spacing: 0.06em; margin-top: 14px; font-weight: 600; padding: 0 6%;
+}
+@media (max-width: 860px) {
+  .ma-timeline-vis .nodes { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ma-timeline-vis .nodes::before { display: none; }
+  .ma-timeline-vis .axis-labels { display: none; }
+}
+
+/* ===== Company row (3 collapsibles in one row) ===== */
+.company-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 18px 0 24px;
+  align-items: start;
+}
+.company-row > details[open] { grid-column: 1 / -1; }
+@media (max-width: 860px) { .company-row { grid-template-columns: 1fr; } }
+
+/* ===== Collapsible company details ===== */
+details.company-details {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+  overflow: hidden; transition: box-shadow 0.2s;
+}
+details.company-details:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+details.company-details > summary {
+  list-style: none; cursor: pointer; padding: 18px 18px;
+  display: flex; flex-direction: column; align-items: stretch; gap: 12px;
+  transition: background 0.15s; min-height: 200px;
+}
+details.company-details[open] > summary {
+  flex-direction: row; align-items: center; gap: 16px; min-height: 0;
+  padding: 16px 22px; background: var(--accent-soft); border-bottom: 1px solid var(--border);
+}
+details.company-details > summary::-webkit-details-marker { display: none; }
+details.company-details > summary:hover { background: var(--accent-soft); }
+details.company-details .brand-icon {
+  width: 56px; height: 56px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.04em;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); flex-shrink: 0;
+}
+details.company-details .brand-info { flex: 1; min-width: 0; }
+details.company-details .brand-info .name { font-size: 16px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+details.company-details .brand-info .tagline { font-size: 11.5px; color: var(--text-3); line-height: 1.6; }
+details.company-details .toggle-hint {
+  font-size: 10.5px; color: var(--accent); font-weight: 700; padding: 6px 12px;
+  border: 1px solid var(--accent); border-radius: 999px; background: #fff;
+  align-self: flex-start; white-space: nowrap;
+}
+details.company-details[open] .toggle-hint { align-self: center; }
+details.company-details[open] .toggle-hint::before { content: "닫기 ▲"; }
+details.company-details:not([open]) .toggle-hint::before { content: "상세 보기 ▼"; }
+details.company-details > .company-body { padding: 16px 22px 24px; }
+
+/* Direction principle cards */
+.dir-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+.dir-card { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 18px 20px; }
+.dir-card .dn { font-size: 24px; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+.dir-card .dh { font-size: 14px; font-weight: 700; margin: 0 0 8px; line-height: 1.45; }
+.dir-card .dd { font-size: 12px; color: var(--text-2); line-height: 1.65; margin: 0; }
+.dir-card .dd strong { color: var(--accent); }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 18px 0; }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--accent); padding: 18px 20px; border-radius: 4px; transition: transform 0.15s, box-shadow 0.15s; }
+.kpi:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,23,42,0.06); }
+.kpi .label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; font-weight: 700; }
+.kpi .value { font-size: 26px; font-weight: 800; color: var(--text); letter-spacing: -0.025em; line-height: 1.15; }
+.kpi .value small { font-size: 13px; font-weight: 600; color: var(--text-3); margin-left: 2px; }
+.kpi .sub { font-size: 11.5px; color: var(--text-3); margin-top: 8px; line-height: 1.55; padding-top: 10px; border-top: 1px dashed var(--border); }
+
+.chart-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 20px 0; }
+.chart-card { background: var(--surface); border: 1px solid var(--border); padding: 22px 24px; border-radius: 4px; }
+.chart-card h4 { font-size: 13.5px; font-weight: 700; margin: 0 0 4px; color: var(--text); }
+.chart-card .desc { font-size: 11.5px; color: var(--text-3); margin: 0 0 16px; line-height: 1.55; }
+.chart-wrap { position: relative; height: 260px; }
+.chart-wrap.tall { height: 340px; }
+
+table.compare {
+  width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+}
+table.compare th, table.compare td {
+  text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); vertical-align: top;
+}
+table.compare th:last-child, table.compare td:last-child { border-right: none; }
+table.compare thead th { background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.02em; }
+table.compare tbody tr:last-child td { border-bottom: none; }
+table.compare tbody tr:nth-child(even) { background: var(--bg-soft); }
+table.compare tbody td:first-child { background: var(--accent-soft); font-weight: 700; color: var(--accent); width: 24%; font-size: 12px; }
+
+.company-panel { background: var(--surface); border: 1px solid var(--border); margin-bottom: 24px; }
+.company-head { padding: 18px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 14px; }
+.company-head .badge { width: 8px; height: 36px; border-radius: 2px; }
+.company-head .name { font-size: 19px; font-weight: 700; margin: 0 0 2px; }
+.company-head .tagline { font-size: 12.5px; color: var(--text-3); margin: 0; }
+.company-body { padding: 6px 22px 20px; }
+.section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 22px 0 10px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+
+.mini-kpi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 8px 0 12px; }
+.mini-kpi .b { background: #f7f8fa; border-left: 2px solid var(--accent); padding: 8px 12px; }
+.mini-kpi .b .l { font-size: 10.5px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+.mini-kpi .b .v { font-size: 15px; font-weight: 700; color: var(--text); margin-top: 2px; line-height: 1.2; }
+
+.games-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.gcard { display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center; padding: 10px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; }
+.gcard .icon { width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, #cbd5e1, #94a3b8); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 22px; font-weight: 700; overflow: hidden; }
+.gcard .icon img { width: 100%; height: 100%; object-fit: cover; }
+.gcard .info { min-width: 0; }
+.gcard .gname { font-size: 13px; font-weight: 700; margin: 0 0 2px; line-height: 1.25; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gcard .gmeta { font-size: 11px; color: var(--text-3); }
+.gcard .gmeta span + span::before { content: " · "; color: var(--text-4); }
+.gcard .links { display: flex; flex-direction: column; gap: 4px; }
+.gcard .links a { font-size: 10.5px; padding: 3px 8px; border-radius: 4px; text-decoration: none; font-weight: 600; }
+.gcard .links a.ios { background: #111827; color: #fff; }
+.gcard .links a.gp { background: #16a34a; color: #fff; }
+
+.tip { background: var(--info-soft); border-left: 3px solid var(--info); padding: 12px 16px; margin: 12px 0; font-size: 12.5px; color: var(--text-2); border-radius: 4px; line-height: 1.7; }
+.tip strong { color: var(--info); }
+.tip .tlabel { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--info); margin-right: 8px; padding: 2px 8px; background: #fff; border: 1px solid var(--info); border-radius: 3px; }
+
+.callout { background: var(--warn-soft); border-left: 4px solid var(--warn); padding: 16px 22px; margin: 16px 0; font-size: 13px; border-radius: 4px; line-height: 1.75; }
+.callout strong { color: var(--warn); }
+.callout-good { background: var(--good-soft); border-left-color: var(--good); }
+.callout-good strong { color: var(--good); }
+
+/* Strategy category blocks */
+.strat-cat { background: var(--surface); border: 1px solid var(--border); margin-bottom: 18px; border-radius: 4px; overflow: hidden; }
+.strat-cat-head { padding: 16px 22px; background: linear-gradient(to right, var(--accent), var(--accent-2)); color: #fff; display: flex; align-items: baseline; gap: 14px; }
+.strat-cat-head .num { font-size: 28px; font-weight: 700; line-height: 1; letter-spacing: -0.04em; color: #fbbf24; }
+.strat-cat-head .ttl { font-size: 18px; font-weight: 700; margin: 0; }
+.strat-cat-head .sub { font-size: 12px; color: rgba(255,255,255,0.85); margin: 0; flex-grow: 1; }
+.strat-cat-head .impact { font-size: 11px; padding: 4px 10px; background: rgba(251,191,36,0.2); color: #fbbf24; border-radius: 3px; font-weight: 700; letter-spacing: 0.04em; }
+.strat-cat-body { padding: 18px 22px; }
+.strat-action { padding: 12px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 22px 1fr; gap: 12px; }
+.strat-action:last-child { border-bottom: none; }
+.strat-action .bullet { font-size: 14px; font-weight: 700; color: var(--accent); }
+.strat-action h5 { font-size: 13.5px; font-weight: 700; margin: 0 0 4px; }
+.strat-action .now { font-size: 12px; color: var(--text-3); margin: 0 0 4px; }
+.strat-action .now strong { color: var(--text-2); }
+.strat-action .do { font-size: 12.5px; color: var(--text); margin: 4px 0; }
+.strat-action .do strong { color: var(--accent); }
+.strat-action .ev { font-size: 11.5px; color: var(--good); margin: 4px 0; font-weight: 600; }
+.strat-action .ref { font-size: 11px; color: var(--text-3); font-style: italic; margin-top: 4px; }
+
+/* Tab Navigation */
+.tab-nav {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--surface); border-bottom: 2px solid var(--accent);
+  display: flex; gap: 0; margin: 0 -40px 32px; padding: 0 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.tab-btn {
+  padding: 14px 22px; font-size: 13px; font-weight: 600; cursor: pointer;
+  background: transparent; border: none; border-bottom: 3px solid transparent;
+  color: var(--text-3); margin-bottom: -2px; transition: all 0.15s;
+  display: flex; align-items: center; gap: 8px; font-family: inherit;
+  letter-spacing: -0.01em;
+}
+.tab-btn:hover { color: var(--text); background: var(--accent-soft); }
+.tab-btn.active {
+  color: var(--accent); border-bottom-color: var(--accent);
+  background: var(--accent-soft); font-weight: 700;
+}
+.tab-btn .tab-num {
+  font-size: 10px; letter-spacing: 0.1em; color: var(--text-4);
+  font-weight: 700; text-transform: uppercase;
+}
+.tab-btn.active .tab-num { color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.2s; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 860px) {
+  .tab-nav { margin: 0 -18px 24px; padding: 0 18px; overflow-x: auto; }
+  .tab-btn { padding: 10px 14px; font-size: 12px; white-space: nowrap; }
+}
+
+/* Phase grid */
+.phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.phase { background: var(--surface); border: 1px solid var(--border); padding: 18px 20px; border-top: 3px solid var(--accent); }
+.phase .when { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+.phase h4 { font-size: 14px; font-weight: 700; margin: 0 0 10px; }
+.phase ul { margin: 0; padding-left: 16px; }
+.phase li { font-size: 12.5px; margin-bottom: 4px; }
+
+.glossary { background: var(--surface); border: 1px solid var(--border); padding: 18px 22px; }
+.glossary h3 { margin-top: 0; }
+.glossary dl { margin: 0; display: grid; grid-template-columns: 200px 1fr; gap: 8px 18px; font-size: 13px; }
+.glossary dt { font-weight: 700; color: var(--accent); }
+.glossary dd { margin: 0; color: var(--text-2); }
+
+.sources { background: var(--surface); border: 1px solid var(--border); padding: 22px 24px; font-size: 12.5px; }
+.sources ul { margin: 6px 0 0; padding-left: 18px; }
+.sources li { margin-bottom: 4px; color: var(--text-3); }
+.sources li a { color: var(--accent-2); text-decoration: none; }
+.sources li a:hover { text-decoration: underline; }
+.sources h3 { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); margin-top: 16px; }
+.sources h3:first-child { margin-top: 0; }
+
+footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-4); text-align: center; letter-spacing: 0.04em; }
+
+@media (max-width: 860px) {
+  .container { padding: 32px 18px; }
+  .kpi-grid, .chart-grid-2, .games-grid, .phase-grid, .mini-kpi { grid-template-columns: 1fr; }
+  .mini-kpi { grid-template-columns: 1fr 1fr; }
+  .glossary dl { grid-template-columns: 1fr; }
+  h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="report-head">
+  <div class="eyebrow">NC 신규사업본부 · 모바일/캐주얼 게임 사업전략 리포트</div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:280px;">
+      <h1 style="margin-bottom:6px;">NC 신규사업본부 모바일/캐주얼 게임 사업전략 리포트</h1>
+      <p class="subhead" style="margin-top:8px;">
+        현재 파악할 수 있는 외부 데이터를 기준으로 4사 인수 후 사업 <strong>현황</strong>을 정리하고, 향후 <strong>운영 방향성과 사업 전략</strong>을 함께 정리한 자료입니다.
+      </p>
+    </div>
+    <div style="font-size:12px;color:var(--text-2);line-height:1.9;text-align:right;border-left:3px solid var(--accent);padding-left:14px;min-width:200px;">
+      <div><strong>작성자</strong> 여인덕</div>
+      <div><strong>직무</strong> 사업 전략 / 데이터 분석 담당자</div>
+    </div>
+  </div>
+</header>
+
+<!-- Tab Navigation (sticky) -->
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="summary">
+    <span><span class="tab-num">00</span><br>📋 Summary</span>
+  </button>
+  <button class="tab-btn" data-tab="status">
+    <span><span class="tab-num">01</span><br>📊 현황</span>
+  </button>
+  <button class="tab-btn" data-tab="direction">
+    <span><span class="tab-num">02</span><br>🎯 방향성·로드맵</span>
+  </button>
+  <button class="tab-btn" data-tab="solution">
+    <span><span class="tab-num">03</span><br>💡 솔루션</span>
+  </button>
+  <button class="tab-btn" data-tab="plan">
+    <span><span class="tab-num">04</span><br>🤖 실무 계획</span>
+  </button>
+  <button class="tab-btn" data-tab="appendix">
+    <span><span class="tab-num">05</span><br>📖 Appendix</span>
+  </button>
+</nav>
+
+<!-- ============ 00 Summary ============ -->
+<section data-tab-content="summary">
+  <h2><span class="num">00</span> Summary — 본 보고서 한눈에 보기</h2>
+  <p class="h2-sub" style="font-style:italic;">아래 5개 피처의 핵심 결론을 개조식으로 정리. 각 카드 우측 하단의 "자세히 보기" 클릭 시 해당 탭으로 이동합니다.</p>
+
+  <div class="dir-grid" style="grid-template-columns: 1fr; gap: 14px; margin-top:18px;">
+
+    <!-- 01. 현황 -->
+    <div class="dir-card" style="border-left:none;border-top:4px solid var(--accent);background:linear-gradient(180deg,#eff6ff 0%,#fff 50%);padding:22px 26px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
+          <div class="dn" style="color:var(--accent);font-size:13px;letter-spacing:0.08em;">01 · 현황</div>
+          <div class="dh" style="font-size:17px;margin:6px 0 12px;">📊 NC 모바일 캐주얼 진출 현황</div>
+        </div>
+        <button onclick="showTab('status');window.scrollTo({top:0,behavior:'smooth'});" style="background:var(--accent);color:#fff;border:none;padding:8px 16px;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;font-family:inherit;white-space:nowrap;">자세히 보기 →</button>
+      </div>
+      <ul style="margin:0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+        <li>5개월 내 4사 인수 — <strong>누적 투자액 4,550억원 이상</strong> (Moving Eye · Lihuhu · Springcomes · JustPlay)</li>
+        <li>2030년 모바일 캐주얼 매출 <strong style="color:var(--good);">1.5조원 — 인수 투자액 대비 3.3배 회수 KPI</strong></li>
+        <li>3사 합산 매출 ~3,846억 / DAU 360만 / 운영 게임 170+ — <strong>글로벌 캐주얼 시장 TOP 30~40권 규모</strong></li>
+      </ul>
+    </div>
+
+    <!-- 02. 방향성·로드맵 -->
+    <div class="dir-card" style="border-left:none;border-top:4px solid var(--accent-2);background:linear-gradient(180deg,#dbeafe 0%,#fff 50%);padding:22px 26px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
+          <div class="dn" style="color:var(--accent-2);font-size:13px;letter-spacing:0.08em;">02 · 방향성·로드맵</div>
+          <div class="dh" style="font-size:17px;margin:6px 0 12px;">🎯 단계별 묶음 로드맵 — 자금 회전식 진입</div>
+        </div>
+        <button onclick="showTab('direction');window.scrollTo({top:0,behavior:'smooth'});" style="background:var(--accent-2);color:#fff;border:none;padding:8px 16px;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;font-family:inherit;white-space:nowrap;">자세히 보기 →</button>
+      </div>
+      <ul style="margin:0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+        <li>인수의 구조적 가치: <strong>단일 IP·MMORPG 의존도 헤지 + 차세대 매출축 정착</strong></li>
+        <li>1차 wedge: <strong style="color:var(--good);">광고 leak 회수 + Springcomes 트래픽 단가 정상화 (Phase 1 Quick Win)</strong></li>
+        <li>4단계 묶음 (Quick Win → 검증 자산 확장 → 선택 확장 → 풀가동) + <strong>검증 게이트로 sunk cost 사전 차단</strong></li>
+      </ul>
+    </div>
+
+    <!-- 03. 솔루션 -->
+    <div class="dir-card" style="border-left:none;border-top:4px solid #f59e0b;background:linear-gradient(180deg,#fef3c7 0%,#fff 50%);padding:22px 26px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
+          <div class="dn" style="color:#b45309;font-size:13px;letter-spacing:0.08em;">03 · 솔루션</div>
+          <div class="dh" style="font-size:17px;margin:6px 0 12px;">💡 매출 성장 6대 실행 카테고리</div>
+        </div>
+        <button onclick="showTab('solution');window.scrollTo({top:0,behavior:'smooth'});" style="background:#f59e0b;color:#fff;border:none;padding:8px 16px;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;font-family:inherit;white-space:nowrap;">자세히 보기 →</button>
+      </div>
+      <ul style="margin:0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+        <li>6대 카테고리: <strong>공급 / 유통 / UA / 글로벌 / IAP 투트랙 / 광고 최적화</strong></li>
+        <li><strong style="color:var(--good);">B(유통 다각화) + F(광고 최적화) = Phase 1 Quick Win 우선 진입 카드</strong> — SDK leak 30~40% 내재화로 즉시 PnL 개선</li>
+        <li>나머지 카테고리는 Quick Win 성과로 확보된 자본·조직 신뢰 기반으로 <strong>단계별 순차 진입</strong></li>
+      </ul>
+    </div>
+
+    <!-- 04. 실무 계획 -->
+    <div class="dir-card" style="border-left:none;border-top:4px solid var(--good);background:linear-gradient(180deg,#dcfce7 0%,#fff 50%);padding:22px 26px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
+          <div class="dn" style="color:var(--good);font-size:13px;letter-spacing:0.08em;">04 · 실무 계획</div>
+          <div class="dh" style="font-size:17px;margin:6px 0 12px;">🤖 AI 운영체계 + 첫 90일 액션 플랜</div>
+        </div>
+        <button onclick="showTab('plan');window.scrollTo({top:0,behavior:'smooth'});" style="background:var(--good);color:#fff;border:none;padding:8px 16px;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;font-family:inherit;white-space:nowrap;">자세히 보기 →</button>
+      </div>
+      <ul style="margin:0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+        <li><strong>AI 운영체계 8개 액션</strong> (즉시 4 + 3~6개월 4) — UA·LiveOps·Genre Lab 전 영역 매출 +15~30% 가속 인프라</li>
+        <li>본인 보유 자산 (Game Screening 100개 · Claude Code 11스킬 · 5에이전트 파이프라인) — <strong>입사 30일 내 PoC 즉시 착수 가능</strong></li>
+        <li>첫 90일: <strong>진단 (Day 1~30) → KPI 보드 통합 (~60) → Quick Win 파일럿 + 임원 보고 (~90)</strong></li>
+      </ul>
+    </div>
+
+    <!-- 05. Appendix -->
+    <div class="dir-card" style="border-left:none;border-top:4px solid var(--text-3);background:linear-gradient(180deg,#f1f5f9 0%,#fff 50%);padding:22px 26px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
+          <div class="dn" style="color:var(--text-3);font-size:13px;letter-spacing:0.08em;">05 · Appendix</div>
+          <div class="dh" style="font-size:17px;margin:6px 0 12px;">📖 산업 비교 / 산정 기준 / 출처</div>
+        </div>
+        <button onclick="showTab('appendix');window.scrollTo({top:0,behavior:'smooth'});" style="background:var(--text-3);color:#fff;border:none;padding:8px 16px;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;font-family:inherit;white-space:nowrap;">자세히 보기 →</button>
+      </div>
+      <ul style="margin:0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+        <li><strong>산업 best-in-class 대비 3사 위치</strong> — ARPDAU·잔존율·장르별 ARPU 정량 비교</li>
+        <li><strong>산정·추정 기준</strong> — 환율·매출·DAU·시장 규모·국가별 비중·장르 분포 산출 근거 정리</li>
+        <li><strong>출처</strong> — 3사 데이터 / 광고 BM 산업 벤치마크 / 회사 인수·사업 전략 외부 자료 링크</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 현황 탭 통합 요약 (현황 + 게임 3사 + 시장 분석) ============ -->
+<section data-tab-content="status">
+  <div class="callout" style="background:linear-gradient(135deg,#fef3c7,#fff);border-left-color:#f59e0b;padding:22px 28px;margin-bottom:24px;">
+    <strong style="color:#b45309;font-size:16px;">📌 요약</strong>
+    <ul style="margin:14px 0 0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+      <li><strong style="color:#b45309;">현황</strong> — 4,550억원 투자 완료 / 2030년까지 <strong>1.5조 매출(인수액 대비 3.3배 회수) 도달 필요</strong></li>
+      <li><strong style="color:#b45309;">게임 3사</strong> — 3사 모두 카테고리 내 입지 확보 / 리워드·머지·하이퍼캐주얼 <strong>장르 비중복 분산 → 포트폴리오 구성의 전략적 합리성 확보</strong></li>
+      <li><strong style="color:#b45309;">시장 분석</strong> — 글로벌 캐주얼 62조 대비 점유율 0.6% / <strong>가져갈 시장 파이 충분히 크고 진입 여지 큼</strong></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 01 현황 ============ -->
+<section data-tab-content="status">
+  <h2><span class="num">01</span> 현황</h2>
+  <p class="h2-sub" style="font-style:italic;">공시: 2030년 모바일 캐주얼 게임 1.5조 매출 달성. 4사 인수 4,550억 → 회수 목표 3.3배.</p>
+
+  <!-- 현황 요약 -->
+  <div class="callout" style="background:linear-gradient(135deg,#eff6ff,#fff);border-left-color:var(--accent);margin:14px 0;padding:20px 26px;">
+    <strong style="color:var(--accent);font-size:16px;">📌 요약</strong>
+    <ul style="margin:14px 0 0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+      <li><strong>5개월 내 4사 인수 완료 — 누적 투자액 4,550억원 이상</strong> (Moving Eye · Lihuhu · Springcomes · JustPlay)</li>
+      <li>2030년 모바일 캐주얼 매출 <strong style="color:var(--good);">1.5조원 달성 — 인수 투자액 대비 3.3배 회수가 공식 KPI</strong></li>
+      <li>본 보고서는 회수 KPI 도달을 위한 <strong>정량 측정 보드와 단계별 실행 로드맵</strong>을 제시</li>
+    </ul>
+  </div>
+
+  <!-- Core KPI -->
+  <div class="kpi-grid">
+    <div class="kpi" style="border-left-color:var(--warn);">
+      <div class="label">4사 누적 투자액 (확인분)</div>
+      <div class="value">4,550 <small>억원+</small></div>
+      <div class="sub">JustPlay 2,989억 + Lihuhu 1,534억<br>Springcomes·Moving Eye 미공개</div>
+    </div>
+    <div class="kpi" style="border-left-color:var(--text-3);">
+      <div class="label">2025 4사 합산 매출</div>
+      <div class="value">~3,846 <small>억원/년</small></div>
+      <div class="sub">JustPlay 2,366 + Lihuhu 1,200 + Spring 280<br><strong style="color:var(--good);">2026 forecast: JustPlay만 4,460억 (+88%)</strong></div>
+    </div>
+    <div class="kpi" style="border-left-color:var(--good);">
+      <div class="label">2030 캐주얼 매출 공식 목표</div>
+      <div class="value">1.5 <small>조원</small></div>
+      <div class="sub">전체 5조 매출 목표의 30% (NC 공시)<br>= 인수액 대비 <strong>3.3배 회수</strong></div>
+    </div>
+    <div class="kpi" style="border-left-color:var(--accent);">
+      <div class="label">필요 추가 매출 (목표-현재)</div>
+      <div class="value">+1.1 <small>조원/년</small></div>
+      <div class="sub">현재 4,000억 → 목표 1.5조<br>= 4년간 <strong>3.75배 성장 필요</strong></div>
+    </div>
+  </div>
+
+  <!-- M&A 타임라인 (시각화) -->
+  <h3 style="margin-top:32px;">5개월 안에 4건 — 인수 타임라인</h3>
+  <div class="ma-timeline-vis">
+    <div class="nodes">
+      <div class="ma-node">
+        <div class="dot"></div>
+        <div class="when">2025년 말</div>
+        <div class="who">Moving Eye</div>
+        <div class="country">🇸🇮 슬로베니아</div>
+        <div class="card">
+          <table class="ma-spec"><tbody>
+            <tr><th>인수액</th><td>금액 미공개</td></tr>
+            <tr><th>지분</th><td>미공개</td></tr>
+            <tr><th>2025 매출</th><td>비공개 · 소규모</td></tr>
+            <tr><th>DAU</th><td>비공개</td></tr>
+            <tr><th>영업이익률</th><td>비공개</td></tr>
+            <tr><th>핵심 자산</th><td>라이브 노하우 PoC</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <div class="ma-node">
+        <div class="dot"></div>
+        <div class="when">2025-12-19</div>
+        <div class="who">Lihuhu</div>
+        <div class="country">🇻🇳 베트남</div>
+        <div class="card">
+          <table class="ma-spec"><tbody>
+            <tr><th>인수액</th><td><strong>1,534억원</strong></td></tr>
+            <tr><th>지분</th><td>67%</td></tr>
+            <tr><th>2025 매출</th><td>1,200억원</td></tr>
+            <tr><th>DAU</th><td>~60만 (추정)</td></tr>
+            <tr><th>영업이익률</th><td><strong>25%</strong></td></tr>
+            <tr><th>핵심 자산</th><td>하이퍼캐주얼 양산 라인</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <div class="ma-node">
+        <div class="dot"></div>
+        <div class="when">2025년 말</div>
+        <div class="who">Springcomes</div>
+        <div class="country">🇰🇷 한국</div>
+        <div class="card">
+          <table class="ma-spec"><tbody>
+            <tr><th>인수액</th><td>금액 미공개</td></tr>
+            <tr><th>지분</th><td>미공개</td></tr>
+            <tr><th>2025 매출</th><td>280억원</td></tr>
+            <tr><th>DAU</th><td><strong>250만</strong></td></tr>
+            <tr><th>영업이익률</th><td>~5~10% (추정)</td></tr>
+            <tr><th>핵심 자산</th><td>머지 IP 4종 보유</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <div class="ma-node large">
+        <div class="dot"></div>
+        <div class="when">2026-03-11</div>
+        <div class="who">JustPlay</div>
+        <div class="country">🇩🇪 독일</div>
+        <div class="card">
+          <table class="ma-spec"><tbody>
+            <tr><th>인수액</th><td><strong>2,989억원</strong></td></tr>
+            <tr><th>지분</th><td>70%</td></tr>
+            <tr><th>2025 매출</th><td><strong>2,366억원</strong></td></tr>
+            <tr><th>DAU</th><td>50만</td></tr>
+            <tr><th>영업이익률</th><td>11%</td></tr>
+            <tr><th>핵심 자산</th><td>리워드 광고 플랫폼</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 방향성 ============ -->
+<section data-tab-content="direction">
+  <h2><span class="num">01</span> 방향성 — 공식 통합 전략 위에 측정·실행 KPI를 얹습니다</h2>
+  <p class="h2-sub">"통합"은 회사 공식 발표 전략. 본 보고서의 기여 영역은 "어떻게 측정·실행할 것인가"의 정량 KPI 보드 설계입니다.</p>
+
+  <!-- 방향성·로드맵 요약 -->
+  <div class="callout" style="background:linear-gradient(135deg,#eff6ff,#fff);border-left-color:var(--accent);margin:14px 0;padding:20px 26px;">
+    <strong style="color:var(--accent);font-size:16px;">📌 요약</strong>
+    <ul style="margin:14px 0 0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+      <li><strong style="color:var(--accent);">방향성</strong> — 통합 방향은 NC 공식 전략으로 확정 / 다음 단계는 <strong>매주 정량 판정 가능한 KPI 4축 보드 구축</strong></li>
+      <li><strong style="color:var(--accent);">1차 wedge</strong> — <strong>광고 leak 회수 + Springcomes 트래픽 단가 정상화</strong>가 Phase 1 Quick Win 구간</li>
+      <li><strong style="color:var(--accent);">로드맵</strong> — 4단계 묶음 (Quick Win → 검증 자산 확장 → 선택 확장 → 풀가동) + <strong>검증 게이트로 sunk cost 사전 차단</strong></li>
+    </ul>
+  </div>
+
+  <h3 style="margin-top:28px;">정량 측정 KPI 4축</h3>
+  <p style="font-size:12.5px;color:var(--text-2);margin:8px 0 14px;">3사 통합 운영의 성공·실패를 매주 정량으로 판정 가능한 의사결정 기준선입니다.</p>
+  <div class="dir-grid" style="grid-template-columns: repeat(4, 1fr); gap: 10px;">
+    <div class="dir-card">
+      <div class="dn">KPI ①</div>
+      <div class="dh">국가별 LTV/CAC 임계선</div>
+      <p class="dd"><strong>측정</strong>: 게임 × 국가별 유저 1명 평생 매출(LTV) ÷ 광고 획득비(CAC). <strong>임계선</strong>: LTV/CAC ≥ 3.0 = 광고 확장 / 1.5~3.0 = 유지·최적화 / &lt;1.5 = 채널 차단. <strong>현 상태</strong>: 미공개·미측정 추정.</p>
+    </div>
+    <div class="dir-card">
+      <div class="dn">KPI ②</div>
+      <div class="dh">게임별 ARPDAU 추이</div>
+      <p class="dd"><strong>측정</strong>: 매일 게임 켜는 유저 1명당 매출(광고+IAP). <strong>벤치마크</strong>: 매치-3 $0.10~0.15 / 머지 $0.08~0.12 / 하이퍼캐주얼 $0.03~0.05. <strong>액션 트리거</strong>: ARPDAU가 벤치마크의 70% 이하 = 즉시 진단 대상.</p>
+    </div>
+    <div class="dir-card">
+      <div class="dn">KPI ③</div>
+      <div class="dh">인벤토리 Cross-promo 비율</div>
+      <p class="dd"><strong>측정</strong>: 4사 게임 광고 슬롯 중 다른 자회사 게임으로 전환된 유저 비율. <strong>목표</strong>: 첫해 10% → 2년차 25% → 3년차 40%. <strong>가치</strong>: 외부 UA 비용 0원으로 신규 인스톨 확보.</p>
+    </div>
+    <div class="dir-card">
+      <div class="dn">KPI ④</div>
+      <div class="dh">신작 D7 ROAS</div>
+      <p class="dd"><strong>측정</strong>: 신작 출시 7일 안에 광고비 회수율. <strong>임계선</strong>: D7 ROAS ≥ 25% = 글로벌 확장 / 15~25% = 한정 시장 / &lt;15% = 조기 종료. <strong>벤치마크</strong>: Springcomes Hello Town D7 50% (산업 평균 이상).</p>
+    </div>
+  </div>
+
+  <!-- 비대칭 가치 박스 -->
+  <div class="callout callout-good">
+    <strong>통합 시너지의 정량 메커니즘 — JustPlay 2,366억(gross) vs Springcomes 280억(net) 매출 비대칭 해석</strong>
+    <p style="margin:10px 0 0;font-size:12.5px;line-height:1.75;">
+      <strong>두 회사 매출의 회계 기준이 다릅니다.</strong>
+    </p>
+    <ul style="margin:8px 0 0;padding-left:20px;font-size:12.5px;line-height:1.85;">
+      <li><strong>JustPlay 2,366억</strong> = 광고주가 직접 지급한 <strong>거래 총액(gross)</strong> 기준. 유저 보상이 약 50% 차감되어 영업이익률 11% 형성.</li>
+      <li><strong>Springcomes 280억</strong> = 외부 SDK 수수료 차감 후 받는 <strong>분배금(net)</strong> 기준. 광고주 실제 지출액은 약 2~3배 규모로 추정.</li>
+      <li><strong>핵심 메커니즘</strong>: Springcomes DAU 250만은 JustPlay(50만)의 5배. <strong>Springcomes 인벤토리를 JustPlay 채널로 라우팅 시 외부 수수료 절감 + gross 기준 매출 비선형 증가</strong>가 가능합니다. 엔씨가 발표한 통합 시너지의 정량 메커니즘입니다.</li>
+    </ul>
+  </div>
+
+  <!-- Springcomes 자산 재평가 (핵심 결론) -->
+  <div class="callout" style="background:var(--good-tint);border-left-color:var(--good);margin-top:20px;">
+    <strong style="color:var(--good);">🎯 핵심 결론 — Springcomes 중심 자산 재평가</strong>
+    <p style="margin:10px 0 0;font-size:12.5px;line-height:1.8;">
+      4사 중 <strong>매출 280억의 Springcomes가 회수 ROI 관점의 핵심 자산</strong>으로 판단됩니다. 근거 5가지:
+    </p>
+    <table class="compare" style="margin:10px 0 0;font-size:11.5px;"><thead><tr><th>근거</th><th>Springcomes</th><th>다른 회사</th></tr></thead><tbody>
+      <tr><td>D365 LTV (장르 평균)</td><td><strong>머지 $10~20 / 매치 $15~25</strong></td><td>Lihuhu 하이퍼캐주얼 $1~3 / JustPlay 광고 BM 한정</td></tr>
+      <tr><td>D7 ROAS 검증</td><td><strong>Hello Town D7 50% / D30 66%</strong></td><td>Lihuhu 미공개 / JustPlay 광고 BM 다른 측정</td></tr>
+      <tr><td>자체 IP 보유</td><td>머지 페코·헬로 타운·머지 스위츠·Kingdom Wars 등 <strong>IP 4종+</strong></td><td>Lihuhu 양산형 무IP / JustPlay 플랫폼</td></tr>
+      <tr><td>운영 검증 기간</td><td><strong>Kingdom Wars 9년·Jewels Temple 9년</strong> = 에버그린</td><td>다른 회사들 단기</td></tr>
+      <tr><td>DAU/매출 비대칭</td><td><strong>DAU 250만 vs 매출 280억 = 단가 정상화 시 5~10배 성장 여지</strong></td><td>JustPlay·Lihuhu는 이미 정상 단가</td></tr>
+    </tbody></table>
+    <p style="margin:10px 0 0;font-size:12.5px;line-height:1.7;">
+      <strong>3개 레버 결합 시 Springcomes 매출 시나리오</strong>: ① <strong>Lihuhu 양산 + Springcomes IP</strong> (신작 3배) ② <strong>JustPlay 채널 cross-promo</strong> (CAC -50~80%) ③ <strong>검증 Top 5에 IAP 도입</strong> (ARPPU 2~3배). 3년 안에 <strong>매출 280억 → 2,500억 (9배)</strong>. 이게 본 보고서의 가장 강한 정량 인사이트.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 03 로드맵 ============ -->
+<section data-tab-content="direction">
+  <h2><span class="num">02</span> 로드맵 — 4,550억 → 1.5조 도달 4단계 묶음 전략</h2>
+  <p class="h2-sub">단계별 자금 회전 · 검증 게이트로 사전 차단 · 앞 단계 성과로 다음 단계 자원·신뢰 확보. 동시 가동 리스크를 제거한 단계 진입 설계입니다.</p>
+
+
+  <!-- Phase 카드 4개 -->
+  <h3 style="margin-top:24px;">단계별 묶음 로드맵</h3>
+  <div class="dir-grid" style="grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top:8px;">
+    <div class="dir-card" style="border-left-color:#f59e0b;">
+      <div class="dn" style="color:#f59e0b;">Phase 1</div>
+      <div class="dh">Quick Win (2026)</div>
+      <p class="dd">
+        <strong>4,000억 → 5,200억</strong><br>
+        <strong>묶음</strong>: B(유통 다각화) + F(광고 최적화)<br>
+        <strong>핵심</strong>: JustPlay 광고 인벤토리 3사 통합 허브 → SDK 수수료 30~40% 내재화 / Header Bidding + Mediation 통합 / KPI 4축 보드<br>
+        <strong>검증 게이트</strong>: +1,200억 입증 (leak 회수 +600 + 광고 최적화 +600), ARPDAU 벤치마크 70% 회복<br>
+        <strong>의미</strong>: 자본·조직 신뢰 확보 → Phase 2 자원 투입의 명분
+      </p>
+    </div>
+    <div class="dir-card" style="border-left-color:var(--accent-2);">
+      <div class="dn" style="color:var(--accent-2);">Phase 2</div>
+      <div class="dh">검증 자산 확장 (2027)</div>
+      <p class="dd">
+        <strong>5,200억 → 7,500억</strong><br>
+        <strong>묶음</strong>: C(Cross-promo) + E 일부(Springcomes IAP 즉시)<br>
+        <strong>핵심</strong>: JustPlay → 3사 Cross-promo 10→25% / <strong>Springcomes Top 2(헬로타운·머지스위츠) 시즌패스 즉시 도입</strong> (이미 IAP 경험 보유) / Genre Lab 신작 12~15종/년<br>
+        <strong>검증 게이트</strong>: Cross-promo CAC -50%, ARPPU +30%<br>
+        <strong>의미</strong>: 미달 시 → Phase 3 글로벌 확장 보류
+      </p>
+    </div>
+    <div class="dir-card" style="border-left-color:var(--accent);">
+      <div class="dn" style="color:var(--accent);">Phase 3</div>
+      <div class="dh">선택 확장 (2028)</div>
+      <p class="dd">
+        <strong>7,500억 → 10,500억</strong><br>
+        <strong>묶음</strong>: D 축소(일본 집중) + E 확대(Top 5 IAP)<br>
+        <strong>핵심</strong>: <strong>머지 페코 일본 집중</strong> 진출 (현지 퍼블리셔) / 검증 완료 Top 5 시즌패스 확대 / 인도·라틴은 조건부 옵션 보류<br>
+        <strong>검증 게이트</strong>: 일본 매출 +1,500억, IAP 비중 20% 도달<br>
+        <strong>의미</strong>: 인도·라틴 동시 진출(v10) → 일본 집중 후 조건부 (실패 비용 ↓)
+      </p>
+    </div>
+    <div class="dir-card" style="border-left-color:var(--good);">
+      <div class="dn" style="color:var(--good);">Phase 4</div>
+      <div class="dh">1.5조 도달 (2029~30)</div>
+      <p class="dd">
+        <strong>10,500억 → 15,000억</strong><br>
+        <strong>묶음</strong>: A(공급가속) + D 확장(인도·라틴) + AI 운영 풀가동<br>
+        <strong>핵심</strong>: Lihuhu 양산 라인을 Springcomes에 이식 (단, <strong>조직 컬처 충돌 관리 — 별도 스튜디오 분리 운영 권장</strong>) / 인도·라틴 진출 (Phase 2~3 데이터 검증 시) / AI 8개 액션 풀가동<br>
+        <strong>목표</strong>: 1.5조 / 인수액 3.3배 회수<br>
+        <strong>의미</strong>: 검증된 운영 인프라 위에서만 가속
+      </p>
+    </div>
+  </div>
+
+  <div class="tip" style="margin-top:14px;">
+    <span class="tlabel">v10 대비 핵심 차별점</span>
+    ① <strong>자금 회전식 단계 진입</strong> (앞 성과로 다음 자원 확보) ② <strong>검증 게이트로 sunk cost 방지</strong> ③ <strong>Springcomes IAP 1년 앞당김</strong> (이미 경험 보유) ④ <strong>글로벌 확장 축소·집중</strong> (인도·라틴 동시 → 일본 집중)
+  </div>
+
+  <h3 style="margin-top:32px;">참고 — 4단 마일스톤 매출 시뮬레이션</h3>
+
+  <!-- 매출 곡선 라인 차트 -->
+  <div class="chart-card" style="margin:18px 0;">
+    <h4>매출 도달 경로 — 2025 → 2030 (단위: 억원)</h4>
+    <p class="desc">자연 성장 시나리오(점선) vs 본 보고서 권장 시나리오(실선) 비교. 권장 시나리오 적용 시 2030년 1.5조 도달 가능합니다.</p>
+    <div class="chart-wrap tall"><canvas id="chartRoadmap"></canvas></div>
+  </div>
+
+  <!-- 4단 마일스톤 매출 비교 막대 -->
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <h4>4단 마일스톤별 매출 목표</h4>
+      <p class="desc">2025 베이스라인 → 2030 1.5조 도달까지 단계별 매출</p>
+      <div class="chart-wrap"><canvas id="chartMilestones"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h4>매출 성장 동력 분해 (2025 → 2030)</h4>
+      <p class="desc">+1.16조 추가 매출의 세부 기여 영역 (추정)</p>
+      <div class="chart-wrap"><canvas id="chartGrowthDrivers"></canvas></div>
+    </div>
+  </div>
+  <div class="tip">
+    <span class="tlabel">매출 추정 근거</span>
+    2026~27 통합 시너지 +30% 가속 / 2027~28 IAP 도입으로 ARPPU 2~3배 / 2028~30 신규 시장(인도·라틴) 진출 + 신작 페이스 3배. 각 단계 누적 CAGR 약 30%로 산출했습니다.
+  </div>
+
+  <!-- 4단 마일스톤 카드 -->
+  <div class="dir-grid" style="grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top:18px;">
+    <div class="dir-card" style="border-left-color:var(--warn);">
+      <div class="dn" style="color:var(--warn);">2026</div>
+      <div class="dh">통합 인프라 — 측정·표준화</div>
+      <p class="dd"><strong>핵심</strong>: 4사 매출 4,000 → 5,200억<br><strong>액션</strong>:<br>• KPI 4축 보드 구축 (LTV/CAC·ARPDAU·Cross-promo·D7 ROAS)<br>• AppLovin MAX 단일 mediation 표준화<br>• Cross-promo 비율 10% 도달<br><strong>리스크</strong>: 통합 지연 시 외부 SDK 수수료 leak 지속</p>
+    </div>
+    <div class="dir-card" style="border-left-color:#f59e0b;">
+      <div class="dn" style="color:#f59e0b;">2027</div>
+      <div class="dh">신작 가속 — 매출 1/3 도달</div>
+      <p class="dd"><strong>핵심</strong>: 5,200 → 7,500억 (전사 매출의 1/3)<br><strong>액션</strong>:<br>• Springcomes 신작 페이스 5종 → 12~15종<br>• Genre Lab 운영 (6~10주 prototype 사이클)<br>• 일본·인도 진출 시작 (머지 페코 IP)<br><strong>리스크</strong>: 양산 효율 vs 품질 trade-off</p>
+    </div>
+    <div class="dir-card" style="border-left-color:var(--accent-2);">
+      <div class="dn" style="color:var(--accent-2);">2028</div>
+      <div class="dh">IAP 투트랙 — 검증 게임만</div>
+      <p class="dd"><strong>핵심</strong>: 7,500 → 10,500억 (광고+IAP 하이브리드)<br><strong>액션</strong>:<br>• 1년 운영 검증된 Top 5 게임에 IAP 도입<br>• Hello Town·머지 스위츠·Match Triple 3D 시즌패스<br>• 광고 BM cyclical 하락 보전 장치 가동<br><strong>리스크</strong>: IAP 도입 시 잔존율 일시 하락</p>
+    </div>
+    <div class="dir-card" style="border-left-color:var(--good);">
+      <div class="dn" style="color:var(--good);">2030</div>
+      <div class="dh">공식 목표 — 1.5조 도달</div>
+      <p class="dd"><strong>핵심</strong>: 10,500 → 15,000억 (인수액 3.3배 회수)<br><strong>액션</strong>:<br>• AI 운영체계 8개 액션 풀가동<br>• 인도·라틴 시장 점유율 5%<br>• Cross-promo 비율 40% 도달<br><strong>리스크</strong>: 광고 단가 cyclical 침체 → IAP가 받쳐야 함</p>
+    </div>
+  </div>
+
+  <div class="tip" style="margin-top:14px;">
+    <span class="tlabel">로드맵 핵심 메시지</span>
+    1.5조 도달은 <strong>4단계 의사결정의 누적 결과</strong>입니다. 각 단계마다 KPI·액션·리스크가 정의될 때 다음 단계로 진입 가능합니다. <strong>본 포지션의 역할은 매주 측정·매월 점검·매분기 의사결정 보드 운영입니다.</strong>
+  </div>
+</section>
+
+<!-- 02 게임 3사 상세 -->
+<section data-tab-content="status">
+  <h2><span class="num">02</span> 게임 3사 상세</h2>
+  <p class="h2-sub" style="font-style:italic;">※ 본 페이지의 수치는 외부 공개 데이터 기반 추정치로, 실제 데이터와 다를 수 있는 점 참고 부탁드립니다.</p>
+
+  <!-- 헤드 메시지 -->
+  <div class="callout" style="background:linear-gradient(135deg,#eff6ff,#fff);border-left-color:var(--accent);margin-top:14px;padding:20px 26px;">
+    <strong style="color:var(--accent);font-size:16px;">📌 요약</strong>
+    <ul style="margin:14px 0 0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+      <li><strong style="color:var(--c-just);">JustPlay</strong>: 리워드 광고 BM 카테고리 글로벌 TOP3 — <strong>광고 인벤토리 통합 허브 자산</strong></li>
+      <li><strong style="color:var(--c-lihuhu);">Lihuhu</strong>: 영업이익률 25% (Voodoo·Homa 동급 최상위) — <strong>하이퍼캐주얼 양산 효율 자산</strong></li>
+      <li><strong style="color:var(--c-spring);">Springcomes</strong>: DAU 250만 + 머지 IP 4종 — <strong>트래픽 자산 + 검증된 IP 풀</strong></li>
+    </ul>
+    <p style="margin:14px 0 0;font-size:14px;color:var(--text-2);line-height:1.7;">→ 리워드 + 머지 + 하이퍼캐주얼로 <strong>장르 비중복 분산이 확보된 포트폴리오 구성</strong>으로, 인수의 전략적 합리성이 검증되는 구조입니다.</p>
+  </div>
+
+  <!-- KPI 카드 (매출 순: JustPlay > Lihuhu > Springcomes > 합산) -->
+  <div class="kpi-grid" style="margin-top:18px;">
+    <div class="kpi" style="border-left:none;border-top:4px solid var(--c-just);background:linear-gradient(180deg,#fff7ed 0%,#fff 60%);box-shadow:0 4px 14px rgba(217,119,6,0.1);">
+      <div class="label" style="color:var(--c-just);">🇩🇪 JustPlay</div>
+      <div class="value" style="color:var(--c-just);">2,366 <small style="color:var(--text-3);">억/년</small></div>
+      <div class="sub">DAU 50만 · 운영 게임 35+ · 광고 BM 100%<br>영업이익 <strong>263억/년</strong> · 마진 11%<br><strong style="color:var(--good);">2026 forecast: 4,460억 (+88%)</strong></div>
+    </div>
+    <div class="kpi" style="border-left:none;border-top:4px solid var(--c-lihuhu);background:linear-gradient(180deg,#f5f3ff 0%,#fff 60%);box-shadow:0 4px 14px rgba(124,58,237,0.1);">
+      <div class="label" style="color:var(--c-lihuhu);">🇻🇳 Lihuhu</div>
+      <div class="value" style="color:var(--c-lihuhu);">1,200 <small style="color:var(--text-3);">억/년</small></div>
+      <div class="sub">DAU ~60만 · 운영 게임 <strong>100+</strong><br>영업이익 300억/년<br><strong style="color:var(--good);">마진 25% (3사 최고)</strong></div>
+    </div>
+    <div class="kpi" style="border-left:none;border-top:4px solid var(--c-spring);background:linear-gradient(180deg,#f0fdf4 0%,#fff 60%);box-shadow:0 4px 14px rgba(22,163,74,0.1);">
+      <div class="label" style="color:var(--c-spring);">🇰🇷 Springcomes</div>
+      <div class="value" style="color:var(--c-spring);">280 <small style="color:var(--text-3);">억/년</small></div>
+      <div class="sub">DAU <strong>250만 (3사 1위)</strong> · 운영 게임 30+<br>광고 메인 + IAP 일부<br>영업이익 추정 5~10%</div>
+    </div>
+    <div class="kpi" style="border-left:none;border-top:4px solid #fbbf24;background:linear-gradient(135deg,#1e3a8a 0%,#1e40af 100%);color:#fff;box-shadow:0 6px 20px rgba(30,58,138,0.3);">
+      <div class="label" style="color:rgba(255,255,255,0.9);letter-spacing:0.08em;">🎯 3사 합산</div>
+      <div class="value" style="color:#fff;">~3,846 <small style="color:rgba(255,255,255,0.7);">억/년</small></div>
+      <div class="sub" style="color:rgba(255,255,255,0.9);">DAU 합산 <strong style="color:#fbbf24;">~360만</strong> · 운영 게임 170+<br>영업이익 ~<strong style="color:#fbbf24;">590억/년</strong></div>
+    </div>
+  </div>
+
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <h4>3사 연간 매출 비교 (2025 기준)</h4>
+      <p class="desc">단위: 억원 · JustPlay은 gross, Springcomes·Lihuhu는 net 기준</p>
+      <div class="chart-wrap"><canvas id="chartRevenue"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h4>3사 일일 활성 사용자 (DAU)</h4>
+      <p class="desc">단위: 만명 · <strong>매출 순위와 정반대 구조</strong> — Springcomes가 트래픽 1위</p>
+      <div class="chart-wrap"><canvas id="chartDAU"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <h4>3사 영업이익 비교 (연간 / 단위: 억원)</h4>
+      <p class="desc">Lihuhu가 영업이익 절대값·이익률 모두 1위 (베트남 인건비 효율)</p>
+      <div class="chart-wrap"><canvas id="chartOpProfit"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h4>3사 영업이익률 비교 (%)</h4>
+      <p class="desc">Lihuhu 25% (3사 최고) · JustPlay 11% · Springcomes 추정 5~10%</p>
+      <div class="chart-wrap"><canvas id="chartOpMargin"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <h4>유저 1명 일일 매출 (ARPDAU)</h4>
+      <p class="desc">단위: 원 · JustPlay은 Springcomes의 약 45배 (BM 차이)</p>
+      <div class="chart-wrap"><canvas id="chartARPDAU"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h4>장르별 유저당 월 광고 매출 (산업 벤치마크)</h4>
+      <p class="desc">매치-3·머지 장르가 하이퍼캐주얼 대비 약 3.5배. 파티 장르가 최상단 (Sensor Tower 2024 기준)</p>
+      <div class="chart-wrap"><canvas id="chartGenreARPU"></canvas></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- 3사 상세 (3 collapsibles in one row) -->
+<section data-tab-content="status">
+  <h3 style="margin:24px 0 10px;font-size:14px;color:var(--text-3);letter-spacing:0.06em;text-transform:uppercase;">3사 상세 — 클릭해 펼쳐보기</h3>
+  <div class="company-row">
+  <details class="company-details">
+    <summary>
+      <div class="brand-icon" style="background:linear-gradient(135deg,#ea580c,#c2410c);">JP</div>
+      <div class="brand-info">
+        <div class="name">JustPlay <span style="font-size:12px;color:var(--text-3);font-weight:500;">· 독일 베를린 · 2020 설립</span></div>
+        <div class="tagline">2025 매출 <strong>2,366억</strong> → 2026 forecast <strong style="color:var(--good);">4,460억 (+88%)</strong> · 게임 35개 · DAU 50만 · 누적 인스톨 2,500만+</div>
+      </div>
+      <div class="toggle-hint"></div>
+    </summary>
+    <div class="company-body">
+
+      <div class="section-title">A. 트래픽 지표</div>
+      <div class="mini-kpi">
+        <div class="b"><div class="l">DAU</div><div class="v">50만+</div></div>
+        <div class="b"><div class="l">누적 다운로드</div><div class="v">2,500만+</div></div>
+        <div class="b"><div class="l">운영 게임 수</div><div class="v">35개+</div></div>
+        <div class="b"><div class="l">ARPDAU</div><div class="v">~1,360원</div></div>
+      </div>
+
+      <div class="section-title">B. 주력 게임 Top 10 (회사 자체 발표)</div>
+      <div class="games-grid">
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/GYvTs7y1JdQIRzC1kTAyvrxDaoj1ltqBJoqd3mDyyyJJ1Pgog2Mi5vfSlywDol9mHRQP-oBuJVBgEe8MrRa_dA=w128" alt="JustPlay Solitaire"></div><div class="info"><div class="gname">Solitaire Classic</div><div class="gmeta"><span>카드</span><span>에버그린</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.justplay.app" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/_lYcwhk15kEQDqliKxajVrdi9tsEDrS-ipQdIONx8wGW5OBbi0gReAukFre-7YQ5cfiD3WRi1c2P9SOe1HYcJ5g=w128" alt="Treasure Master"></div><div class="info"><div class="gname">Treasure Master</div><div class="gmeta"><span>퍼즐</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.gimica.treasuremaster" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/2OZ9hx-JjnC_QyK8bp0aOaMxXzsTzZLPvIWme0NaHwor2MIibxb0_mUQa9-grfBMTA=w128" alt="Bubble Chef"></div><div class="info"><div class="gname">Bubble Chef</div><div class="gmeta"><span>버블슈터</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.gimica.bubblepop" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/MjZeG5rB_JBJ4Ztai8-eR7EWR86dsOJMypCFurXQRjhT5Ov-75CBnkUDbUm52925z_o=w128" alt="Merge Blast"></div><div class="info"><div class="gname">Merge Blast</div><div class="gmeta"><span>머지</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.gimica.mergeblast" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/X-nt9ZCqvp8MqC10qfHCMCI1m6mHsmzaIs9WvKijhu7iLI7qKUjuBFnTNfOqy4D1Jzk=w128" alt="Zen Tiles"></div><div class="info"><div class="gname">Wooden Puzzle Bliss</div><div class="gmeta"><span>우드 퍼즐</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.gimica.zentiles" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1b/94/e2/1b94e265-46e4-7e24-f28e-9be35f022465/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Sugar Rush Adventure</div><div class="gmeta"><span>매치 퍼즐</span><span>JustPlay 메인앱 통합</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.justplay.app" target="_blank">JustPlay 메인앱</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/92/66/cc/9266cc9d-f076-c125-2c0d-f7f5370b2422/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Food Blast</div><div class="gmeta"><span>매치 퍼즐</span><span>JustPlay 메인앱 통합</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.justplay.app" target="_blank">JustPlay 메인앱</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d4/a6/77/d4a677f2-330c-71ac-319e-74381398a83c/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Match 3D</div><div class="gmeta"><span>매치 퍼즐 3D</span><span>JustPlay 메인앱 통합</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.justplay.app" target="_blank">JustPlay 메인앱</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/at5C9RVx1WjfKeVpcfBv-RsA5SZlRYNGIXiTTC3Bz_rhUwP0bTKCMvhS3gQuZGng_GV5WYfrcDhln2HVAxUWzw=w128" alt="Ball Bounce"></div><div class="info"><div class="gname">Ball Bounce</div><div class="gmeta"><span>아케이드</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.gimica.ballbounce" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/JMrae-figR-a6_BgLPABjRWYQCzRhaNj5A2Hm_F_3Oy8Txl0bg3ziPQyt7aAiK1q5Q=w128" alt="Mad Smash"></div><div class="info"><div class="gname">Mad Smash</div><div class="gmeta"><span>아케이드</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.gimica.madsmash" target="_blank">Google Play</a></div></div>
+      </div>
+      <div class="tip"><span class="tlabel">참고</span>JustPlay 게임은 자사 메인 앱 <strong>"JustPlay: Earn or Donate"</strong> (월 신규 다운로드 50만)을 허브로 함. 모든 보상이 메인 앱에서 통합 지급되는 구조.</div>
+
+      <div class="section-title">C. Top 10이 매출에서 차지하는 비중 (추정)</div>
+      <div class="chart-card"><p class="desc">35개 중 상위 10개가 매출 약 80% 견인 (모바일 게임 표준 분포)</p><div class="chart-wrap tall"><canvas id="chartParetoJust"></canvas></div></div>
+
+      <div class="section-title">D. 비즈니스 모델 (BM)</div>
+      <table class="compare"><tbody>
+        <tr><td>한 줄 요약</td><td>광고주 → JustPlay 광고비 지급 → JustPlay → 유저 현금/기프트카드 보상. <strong>유저가 보상 때문에 더 오래 머물고 광고를 더 많이 봄.</strong></td></tr>
+        <tr><td>주력 광고</td><td>리워드 비디오 광고 100% 의존</td></tr>
+        <tr><td>eCPM (광고 1,000번당 매출)</td><td>미국 iOS 약 26,000원 · 산업 표준 단가</td></tr>
+        <tr><td>영업이익률</td><td>11% — 매출의 약 50%가 유저 보상 비용으로 환원</td></tr>
+      </tbody></table>
+
+    </div>
+  </details>
+  <details class="company-details">
+    <summary>
+      <div class="brand-icon" style="background:linear-gradient(135deg,#15803d,#166534);">SC</div>
+      <div class="brand-info">
+        <div class="name">Springcomes <span style="font-size:12px;color:var(--text-3);font-weight:500;">· 한국 서울 · 2016 설립</span></div>
+        <div class="tagline">머지 게임 전문 · 매출 <strong>280억</strong> · DAU <strong>250만 (3사 1위)</strong> · 게임 30+ · 누적 인스톨 2~3억 · 머지 IP 4종+</div>
+      </div>
+      <div class="toggle-hint"></div>
+    </summary>
+    <div class="company-body">
+
+      <div class="section-title">A. 트래픽 지표</div>
+      <div class="mini-kpi">
+        <div class="b"><div class="l">DAU</div><div class="v">250만</div></div>
+        <div class="b"><div class="l">누적 다운로드</div><div class="v">2~3억</div></div>
+        <div class="b"><div class="l">운영 게임 수</div><div class="v">30개+</div></div>
+        <div class="b"><div class="l">ARPDAU</div><div class="v">~30원</div></div>
+      </div>
+
+      <div class="section-title">B. 주력 게임 Top 10</div>
+      <div class="games-grid">
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/Cdo9RXxx_GBI0FkTLGH2Q3cD1tEylHqlidnXor7afFxsgWJxfW-xcmb3bg6gRHlTaxKS=w128" alt="Kingdom Wars"></div><div class="info"><div class="gname">Kingdom Wars</div><div class="gmeta"><span>1,000만+ DL</span><span>2016~</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.stormdefense" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/uyxiB9CeaeLW4TesBI3w8hq3jHRIWB_bfpsbjSXOt7vyC7MdEkOq-zXIhSg2rXIVs8w=w128" alt="Jewels Temple"></div><div class="info"><div class="gname">Jewels Temple (Match-3)</div><div class="gmeta"><span>820만+ DL</span><span>2016</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.jquest" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/2j76oUIyaE6yJy0MuUeuh_aCzLpIjP3eLHTe6V3lXhMhN64mGWhgJOVV-bAcft4mcFLk=w128" alt="머지 스위츠"></div><div class="info"><div class="gname">머지 스위츠 (고양이 카페)</div><div class="gmeta"><span>470만 DL</span><span>2023-06</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.emerge" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/1HCjMO7fZ_tYi4vefT4N65n9yTmGNp-oURSFghjJ1GqmwVoEETdfjz56LiWsSHnl7A=w128" alt="헬로 타운"></div><div class="info"><div class="gname">헬로 타운 (신입사원 머지)</div><div class="gmeta"><span>440만 DL</span><span>2024-12</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/hello-town-merge-story/id6737850281" target="_blank">App Store</a><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.hellotown" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/CR7KxRX5VmWThfZ9-t5RRrQRivc1QMJvN-WJX_Cx8yE4sWiIb87uRkKbRsoTxvKBa-0N=w128" alt="머지 페코"></div><div class="info"><div class="gname">머지 페코</div><div class="gmeta"><span>머지</span><span>일본 친화 IP</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.mergepeko" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/7f/5b/967f5b4c-6a2d-a2e1-c840-3397da3ee35a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">벽돌깨기 스타</div><div class="gmeta"><span>아케이드</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/search?q=Springcomes+Brick+Breaker&c=apps" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1b/94/e2/1b94e265-46e4-7e24-f28e-9be35f022465/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">돌격 기사단 (방치형 RPG)</div><div class="gmeta"><span>방치형</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6477564391" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/92/66/cc/9266cc9d-f076-c125-2c0d-f7f5370b2422/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">타임 워: 오리진</div><div class="gmeta"><span>캐주얼</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6504663203" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d4/a6/77/d4a677f2-330c-71ac-319e-74381398a83c/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">부릉부릉 차빠져유</div><div class="gmeta"><span>보드</span><span>최근작</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6755670967" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/7f/5b/967f5b4c-6a2d-a2e1-c840-3397da3ee35a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">후르츠 이스케이프</div><div class="gmeta"><span>퍼즐</span><span>최근작</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6755807238" target="_blank">App Store</a></div></div>
+      </div>
+
+      <div class="section-title">C. Top 10 매출 견인 (추정)</div>
+      <div class="chart-card"><p class="desc">최신 hit 머지 2종(헬로 타운·머지 스위츠)이 견인</p><div class="chart-wrap tall"><canvas id="chartParetoSpring"></canvas></div></div>
+
+      <div class="section-title">D. 비즈니스 모델 (BM)</div>
+      <table class="compare"><tbody>
+        <tr><td>한 줄 요약</td><td>DAU 250만 유저가 게임하는 동안 광고 노출 → 광고비 수취. 머지 게임 일부 IAP도 있으나 비중 작음.</td></tr>
+        <tr><td>주력 광고 채널</td><td>Unity Offerwall · Adjoe Playtime · MyChips · Tapjoy · Gamelight 등 외부 SDK 분산</td></tr>
+        <tr><td>D7 ROAS · D30 ROAS</td><td>헬로 타운 D7 50% / D30 66% — 머지 장르 평균 이상</td></tr>
+        <tr><td>잔존율</td><td>머지 스위츠 D7 30% / D30 10% — 머지 장르 표준</td></tr>
+        <tr><td>영업이익률</td><td>미공개 (추정 5~10%)</td></tr>
+      </tbody></table>
+
+      <div class="tip"><span class="tlabel">매출 단가 비대칭 원인</span>DAU 250만 규모 대비 매출 280억은 외부 SDK 다중 분산 운영으로 인한 단가 미집중 + 한국 트래픽 비중에 따른 평균 eCPM 하향 효과로 해석됩니다. <strong>JustPlay 채널 통합 시 매출 비선형 증가가 정량 메커니즘으로 가능</strong>합니다.</div>
+
+    </div>
+  </details>
+  <details class="company-details">
+    <summary>
+      <div class="brand-icon" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);">LH</div>
+      <div class="brand-info">
+        <div class="name">Lihuhu <span style="font-size:12px;color:var(--text-3);font-weight:500;">· 베트남 · 2017 설립</span></div>
+        <div class="tagline">하이퍼캐주얼 양산 전문 · 매출 <strong>1,200억</strong> · 영업이익률 <strong style="color:var(--good);">25% (3사 최고)</strong> · 게임 100+ · 북미·유럽 매출 80%+</div>
+      </div>
+      <div class="toggle-hint"></div>
+    </summary>
+    <div class="company-body">
+
+      <div class="section-title">A. 트래픽 지표 (DAU는 추정)</div>
+      <div class="mini-kpi">
+        <div class="b"><div class="l">DAU (추정)</div><div class="v">~60만</div></div>
+        <div class="b"><div class="l">누적 다운로드 (대표작)</div><div class="v">1,000만+</div></div>
+        <div class="b"><div class="l">운영 게임 수</div><div class="v">100+</div></div>
+        <div class="b"><div class="l">ARPDAU (추정)</div><div class="v">~540원</div></div>
+      </div>
+
+      <div class="tip"><span class="tlabel">DAU 추정 방법</span>매출 1,200억(=$81M) ÷ 12개월 ÷ Match 장르 유저당 월 매출 $2.99 = MAU 약 226만 → DAU/MAU 비율 25~30% 적용 시 <strong>DAU 약 50~70만, 중간값 60만</strong>. Match Triple 3D 단일 누적 1,000만 DL · 월 매출 $130K(약 1.7억원)로 검증.</div>
+
+      <div class="section-title">B. 주력 게임 Top 10 (Apple App Store 기준)</div>
+      <div class="games-grid">
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/Fyj84R_cBe1AVt7Er17nVGyWe1z_S4xsTIQjNTHOV2lJV4YH8MD1ZIEBB-oeLhmDGg=w128" alt="Match Triple 3D"></div><div class="info"><div class="gname">Match Triple 3D: Matching Tile</div><div class="gmeta"><span>1,000만+ DL</span><span>월매출 1.7억</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=and.lihuhu.machingtriple" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d8/0d/de/d80dde82-a57e-a7dd-7786-8adc53a5c826/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Tiles In Hole: Black Hole</div><div class="gmeta"><span>Hole 시리즈</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/id6742146628" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a2/a6/92/a2a692eb-4a4c-c65b-8acd-699f44c6e72d/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Goods Hunt: Shopping Hole</div><div class="gmeta"><span>Hole 시리즈</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/id6749851029" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/86/0a/61/860a61eb-7667-6197-53e1-5ea3cfa50686/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Triple Car Jam 3D</div><div class="gmeta"><span>주차 + 매치</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/id6476186652" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bc/26/8d/bc268d54-0cae-809c-1e28-c38a7b648375/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Blossom Master: Tile Matching</div><div class="gmeta"><span>매치 퍼즐</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/id6448269576" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple123/v4/a1/a7/32/a1a7329b-f5a9-072e-65de-002ec9223ec5/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Number Link: 2248</div><div class="gmeta"><span>Number 시리즈</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/id6443498538" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/53/0e/89/530e8940-80ba-307f-a255-0a69bf8bf190/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Parking Master 3D</div><div class="gmeta"><span>주차</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/id6444550569" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/fa/75/96fa758e-3e7e-cfb4-8a3f-bf3bd0fa9fef/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Triple Find: Match Triple 3D</div><div class="gmeta"><span>오브젝트 + 매치</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/id6443690726" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1a/3d/f6/1a3df6df-9c52-1bf3-af09-d69382a8fa48/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Woodber: Number Game</div><div class="gmeta"><span>Number + Wood</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/id1635289326" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple122/v4/eb/d4/93/ebd4933b-e0b9-54ee-018c-5342b976ecd6/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">Sort Master: Water Puzzle</div><div class="gmeta"><span>정렬 퍼즐</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/id1600591542" target="_blank">App Store</a></div></div>
+      </div>
+
+      <div class="section-title">C. Top 10 매출 견인 (추정)</div>
+      <div class="chart-card"><p class="desc">100개 중 상위 10개가 매출 70~80% 견인 (양산형 회사 표준)</p><div class="chart-wrap tall"><canvas id="chartParetoLihuhu"></canvas></div></div>
+
+      <div class="section-title">D. 비즈니스 모델 (BM)</div>
+      <table class="compare"><tbody>
+        <tr><td>한 줄 요약</td><td>100개+ 양산 게임에 광고 SDK 일괄 부착. 평균 게임당 연 10.8억원. <strong>상위 10개가 매출 70~80% 견인</strong>.</td></tr>
+        <tr><td>주력 광고 채널</td><td>AppLovin / Unity Ads / IronSource / AdMob (하이퍼캐주얼 표준)</td></tr>
+        <tr><td>장르별 ARPU</td><td>하이퍼캐주얼 월 1,190원 (매치-3·머지 월 4,130원의 1/3)</td></tr>
+        <tr><td>영업이익률</td><td><strong>25% — 3사 최고</strong> (베트남 인건비 + 양산 효율 + 광고 BM)</td></tr>
+        <tr><td>강점·약점</td><td>강점: 양산 효율 / 약점: 게임 수명 짧음 → 신작 회전 의존</td></tr>
+      </tbody></table>
+
+    </div>
+  </details>
+  </div><!-- /.company-row -->
+</section>
+
+<!-- 03 시장 분석 -->
+<section data-tab-content="status">
+  <h2><span class="num">03</span> 시장 분석 — 모바일 캐주얼 시장 파이와 성장 가능성</h2>
+  <p class="h2-sub" style="font-style:italic;">글로벌 모바일 캐주얼 시장 규모 대비 3사가 차지하는 점유율 — 그리고 앞으로 가져갈 수 있는 성장 여지를 정량 분석합니다.</p>
+
+  <!-- 시장 분석 헤드 메시지 -->
+  <div class="callout" style="background:linear-gradient(135deg,#eff6ff,#fff);border-left-color:var(--accent);margin-top:14px;padding:20px 26px;">
+    <strong style="color:var(--accent);font-size:16px;">📌 요약</strong>
+    <ul style="margin:14px 0 0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+      <li>글로벌 모바일 캐주얼 시장 <strong>약 62조원 (2024) · CAGR 8~10% → 2030년 약 96조원</strong>으로 확장 전망</li>
+      <li>현 3사 점유율 <strong>0.6%</strong> — <strong style="color:var(--good);">상위권 진입 여지가 99%p 이상 잔존</strong>하는 저점유 단계</li>
+      <li>점유율 <strong>0.6% → 2.4% (1.8%p)</strong> 확장이 1.5조 회수의 정량 경로 / 일본·인도·라틴 등 <strong>미진입 시장이 추가 성장 옵션</strong>으로 작동</li>
+    </ul>
+  </div>
+
+  <!-- 글로벌 경쟁자 매출 비교 (포지션 확인) -->
+  <div class="chart-card" style="margin-top:18px;">
+    <h4>글로벌 경쟁자 매출 비교 — 3사의 시장 내 매출 포지션 (2024 기준, 단위: 억원)</h4>
+    <p class="desc">같은 모바일 캐주얼·리워드·하이퍼캐주얼 카테고리 글로벌 회사들 매출 비교. <strong>3사가 차지한 글로벌 시장 내 포지션</strong>을 시각화.</p>
+    <div class="chart-wrap tall"><canvas id="chartCompetitors"></canvas></div>
+  </div>
+
+  <!-- 3사 국가별 매출 비중 (요약) -->
+  <div class="chart-card" style="margin-top:14px;">
+    <h4>3사 국가별 매출 비중 (추정) — 글로벌 분산도 확인</h4>
+    <p class="desc">3사 모두 북미·유럽 비중이 높은 편. <strong>일본·동남아·인도·라틴 등 미진입 시장 = 점유율 추가 확보 여지</strong>입니다.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:12px;">
+      <div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--c-just);margin-bottom:6px;">🇩🇪 JustPlay</div>
+        <div class="chart-wrap" style="height:200px;"><canvas id="chartCountryJustTop"></canvas></div>
+      </div>
+      <div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--c-lihuhu);margin-bottom:6px;">🇻🇳 Lihuhu</div>
+        <div class="chart-wrap" style="height:200px;"><canvas id="chartCountryLihuhuTop"></canvas></div>
+      </div>
+      <div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--c-spring);margin-bottom:6px;">🇰🇷 Springcomes</div>
+        <div class="chart-wrap" style="height:200px;"><canvas id="chartCountrySpringTop"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시장 파이 KPI -->
+  <div class="kpi-grid" style="margin-top:18px;">
+    <div class="kpi" style="border-left:none;border-top:4px solid var(--accent);background:linear-gradient(180deg,#eff6ff 0%,#fff 60%);box-shadow:0 4px 14px rgba(30,58,138,0.08);">
+      <div class="label" style="color:var(--accent);">🌐 글로벌 모바일 게임 시장</div>
+      <div class="value" style="color:var(--accent);">~130 <small style="color:var(--text-3);">조원/년</small></div>
+      <div class="sub">2024 기준 ($92B · Newzoo Global Games Market Report)</div>
+    </div>
+    <div class="kpi" style="border-left:none;border-top:4px solid var(--accent-2);background:linear-gradient(180deg,#dbeafe 0%,#fff 60%);box-shadow:0 4px 14px rgba(37,99,235,0.08);">
+      <div class="label" style="color:var(--accent-2);">📱 모바일 캐주얼 세그먼트</div>
+      <div class="value" style="color:var(--accent-2);">~62 <small style="color:var(--text-3);">조원/년</small></div>
+      <div class="sub">매치-3·머지·하이퍼캐주얼·퍼즐·리워드 합산<br>(전체 모바일 게임의 약 49%)</div>
+    </div>
+    <div class="kpi" style="border-left:none;border-top:4px solid var(--good);background:linear-gradient(180deg,#dcfce7 0%,#fff 60%);box-shadow:0 4px 14px rgba(21,128,61,0.08);">
+      <div class="label" style="color:var(--good);">🎯 3사 합산 점유율</div>
+      <div class="value" style="color:var(--good);">~0.6 <small>%</small></div>
+      <div class="sub">현재 매출 ~3,846억 ÷ 캐주얼 62조<br><strong>= 시장의 1% 미만 (확장 여지 큼)</strong></div>
+    </div>
+    <div class="kpi" style="border-left:none;border-top:4px solid #fbbf24;background:linear-gradient(135deg,#1e3a8a,#1e40af);color:#fff;box-shadow:0 6px 20px rgba(30,58,138,0.3);">
+      <div class="label" style="color:rgba(255,255,255,0.9);letter-spacing:0.08em;">🚀 2030 목표 점유율</div>
+      <div class="value" style="color:#fff;">~2.4 <small style="color:rgba(255,255,255,0.7);">%</small></div>
+      <div class="sub" style="color:rgba(255,255,255,0.9);">목표 1.5조 ÷ 캐주얼 62조<br><strong style="color:#fbbf24;">= 4배 점유율 확장 목표</strong></div>
+    </div>
+  </div>
+
+  <!-- 시장 스케일 비교 (도넛 대신 가로 막대로 직관 비교) -->
+  <div class="chart-card" style="margin-top:18px;">
+    <h4>시장 스케일 비교 — 3사 합산 매출 vs 2030 목표 vs 글로벌 캐주얼 시장</h4>
+    <p class="desc">매출 규모를 동일 축에서 직접 비교. <strong>3사 합산 매출이 시장 전체 대비 차지하는 점유율 규모</strong>를 통해 향후 확장 여지를 가늠합니다.</p>
+    <div class="chart-wrap"><canvas id="chartMarketShare"></canvas></div>
+  </div>
+
+  <!-- 점유율 확장 시나리오 -->
+  <div class="chart-card" style="margin-top:14px;">
+    <h4>점유율 확장 시나리오 (2025 → 2030)</h4>
+    <p class="desc">현재 0.6% → 보수 1.1% (6,825억) → 공식 목표 2.4% (1.5조)</p>
+    <div class="chart-wrap"><canvas id="chartShareGrowth"></canvas></div>
+  </div>
+
+  <!-- 캐주얼 세그먼트 분포 -->
+  <div class="chart-card" style="margin-top:14px;">
+    <h4>모바일 캐주얼 세그먼트 분포 — 글로벌 매출 (조원/년)</h4>
+    <p class="desc">2024 기준 글로벌 매출 추정 (Sensor Tower 기반 · 환율 1,380원 적용). 3사가 진입할 수 있는 5개 장르 시장.</p>
+    <div class="chart-wrap tall"><canvas id="chartSegments"></canvas></div>
+  </div>
+
+  <!-- 3사 게임 포트폴리오 장르 분포 -->
+  <div class="chart-card" style="margin-top:14px;">
+    <h4>3사 게임 포트폴리오 장르 분포 (전체 게임 기준 · 추정 %)</h4>
+    <p class="desc">각 회사가 운영하는 전체 게임을 위 5개 장르 + 캐주얼/기타로 분류해 비중 산출. <strong>3사가 서로 다른 장르를 커버 → 포트폴리오 보완성 확인</strong>.</p>
+    <div class="chart-wrap tall"><canvas id="chart3coGenre"></canvas></div>
+  </div>
+
+</section>
+
+<!-- 다음 탭 이동 버튼 -->
+<section data-tab-content="status">
+  <div style="display:flex;justify-content:center;margin:36px 0 12px;">
+    <button onclick="showTab('direction');window.scrollTo({top:0,behavior:'smooth'});" style="
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#fff;border:none;padding:16px 32px;font-size:15px;font-weight:700;
+      border-radius:8px;cursor:pointer;box-shadow:0 6px 18px rgba(30,58,138,0.25);
+      letter-spacing:-0.01em;font-family:inherit;display:flex;align-items:center;gap:10px;
+      transition:transform 0.15s,box-shadow 0.15s;
+    " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(30,58,138,0.32)'"
+       onmouseout="this.style.transform='';this.style.boxShadow='0 6px 18px rgba(30,58,138,0.25)'">
+      🎯 방향성·로드맵 보기 <span style="font-size:18px;">→</span>
+    </button>
+  </div>
+</section>
+
+<!-- ============ 09 솔루션 ============ -->
+<div style="margin:42px 0 24px;padding:14px 20px;background:#fef3c7;border-left:4px solid #f59e0b;">
+  <div style="font-size:11px;letter-spacing:0.16em;color:#b45309;font-weight:700;margin-bottom:4px;">STEP 04 · 솔루션</div>
+  <div style="font-size:13px;color:var(--text-2);">로드맵 4단을 실행 단계로 떨어뜨린 6대 카테고리. 매출 4,000억 → 1.5조 도달 경로의 운영 액션.</div>
+</div>
+
+<!-- 09 솔루션 — 6대 카테고리 -->
+<section data-tab-content="solution">
+  <h2><span class="num">01</span> 솔루션 — 매출 성장을 위한 6대 실행 카테고리</h2>
+  <p class="h2-sub">공급 · 유통 · UA 마케팅 · 글로벌 · IAP 투트랙 · 광고 매출 최적화 — 각 카테고리에 3~5개 실행 액션</p>
+
+  <!-- 솔루션 요약 -->
+  <div class="callout" style="background:linear-gradient(135deg,#eff6ff,#fff);border-left-color:var(--accent);margin:14px 0;padding:20px 26px;">
+    <strong style="color:var(--accent);font-size:16px;">📌 요약</strong>
+    <ul style="margin:14px 0 0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+      <li><strong style="color:var(--accent);">6대 카테고리</strong> — 공급 / 유통 / UA / 글로벌 / IAP 투트랙 / 광고 최적화</li>
+      <li><strong style="color:var(--accent);">우선 진입</strong> — <strong style="color:var(--good);">B(유통 다각화) + F(광고 최적화) = Phase 1 Quick Win 카드</strong> (SDK leak 30~40% 내재화로 즉시 PnL 개선)</li>
+      <li><strong style="color:var(--accent);">단계 진입</strong> — 나머지 카테고리는 Quick Win 성과 기반 단계별 순차 진입 / 자원 분산 리스크 차단</li>
+    </ul>
+  </div>
+
+  <!-- 6대 솔루션 효과성 평가 -->
+  <h3 style="margin-top:24px;">6대 솔루션 효과성 평가 — 단계별 진입 우선순위</h3>
+  <p style="font-size:12.5px;color:var(--text-2);margin:8px 0 14px;">각 카테고리를 임팩트·실행 난이도·리스크 기준으로 평가하여 Phase 진입 순서를 도출합니다.</p>
+  <table class="compare" style="font-size:12.5px;">
+    <thead><tr><th>카테고리</th><th>매출 임팩트</th><th>판정</th><th>핵심 코멘트</th></tr></thead>
+    <tbody>
+      <tr><td>A. 공급가속</td><td>+50~100%</td><td>★★☆ 위험</td><td>양산 DNA(베트남) ≠ 에버그린 운영 DNA. <strong>조직 컬처 충돌 리스크</strong> → Phase 4로 후순위 진입</td></tr>
+      <tr><td><strong style="color:var(--good);">B. 유통 다각화</strong></td><td>+30~50%</td><td><strong style="color:var(--good);">★★★★★ 최우선</strong></td><td>SDK leak 30~40% 내재화로 <strong>즉시 PnL 개선</strong> — Phase 1 핵심 카드</td></tr>
+      <tr><td>C. UA Cross-promo</td><td>+20~40%</td><td>★★★★ 견고</td><td>표준 전략. 단 <strong>장르 적합도(Reward→Merge 전환률)</strong> 가설 검증 필요 — Phase 2 진입</td></tr>
+      <tr><td>D. 글로벌 확장</td><td>+30~80%</td><td>★★ 낙관적</td><td>인도 ARPU $0.3 수준으로 매출 기여 제한적. <strong>머지 페코 일본 집중</strong>이 현실적 — 축소 진입</td></tr>
+      <tr><td>E. IAP 투트랙</td><td>+30~50%</td><td>★★★★ 합리적</td><td>Springcomes IAP 경험 보유 → <strong>2027 미루지 않고 Phase 2 즉시 시작 가능</strong></td></tr>
+      <tr><td><strong style="color:var(--good);">F. 광고 최적화 6층</strong></td><td>+25~50%</td><td><strong style="color:var(--good);">★★★★★ 최우선</strong></td><td>기술 구현만으로 실행 가능 / <strong>재무 효율 즉시 가시화</strong> — Phase 1 핵심 카드</td></tr>
+    </tbody>
+  </table>
+  <div class="tip" style="margin-top:14px;">
+    <span class="tlabel">진입 순서</span>
+    <strong style="color:var(--good);">B + F = Phase 1 Quick Win</strong> → C · E = Phase 2 검증 자산 확장 → D = Phase 3 선택 확장 → A · D = Phase 4 풀가동.
+  </div>
+
+  <!-- A. 공급 -->
+  <div class="strat-cat">
+    <div class="strat-cat-head">
+      <div class="num">A</div>
+      <div style="flex-grow:1;">
+        <div class="ttl">공급 — 신작 출시 페이스 가속</div>
+        <div class="sub">현재 신작 출시 페이스: Springcomes App Store 출시 기준 연 4~5종 (2024~2025) / Lihuhu Play Store 등록 100+ 기반 양산</div>
+      </div>
+      <div class="impact">매출 임팩트<br>+50~100%</div>
+    </div>
+    <div class="strat-cat-body">
+      <div class="strat-action"><div class="bullet">A1</div><div>
+        <h5>Lihuhu 양산 라인을 Springcomes에 이식 (베트남↔한국)</h5>
+        <p class="now"><strong>근거 (App Store/Google Play 출시일 기준)</strong>: Springcomes 2024~2025 신작 — 헬로 타운(2024-12), 차빠져유(2025), 후르츠 이스케이프(2025), 돌격 기사단(2024), 타임 워(2024) = 연 4~5종. Lihuhu Match Triple 3D·Tiles In Hole·Goods Hunt 등 100+ 게임 Play Store 등록. 베트남 IT 인력 평균 연봉은 한국의 약 30~35% (VietnamWorks 2024 기준).</p>
+        <p class="do"><strong>해야 할 일</strong>: Springcomes 머지 IP·스토리 디자인은 한국에서, Lihuhu 양산 엔진·asset 라이브러리·광고 SDK 통합은 베트남에서. <strong>1게임 = 한국 기획 4주 + 베트남 양산 8주 = 3개월 사이클</strong>. Springcomes 신작 페이스 4~5종 → 12~15종.</p>
+        <p class="ev">예상: Springcomes 매출 +180~300% (3년)</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">A2</div><div>
+        <h5>Genre Lab 운영 — 6~10주 prototype 사이클 (Voodoo·Homa 산업 표준)</h5>
+        <p class="now"><strong>근거</strong>: Voodoo prototype 1~3주 + 테스트 10일 + polish 2~4주 = 총 6주. Homa Games는 5주 prototype 검증. 출처: PocketGamer "The Voodoo Approach" / Heavybit Podcast Homa Games. 산업 표준 사이클 적용 시 검증 안정성 확보 가능합니다.</p>
+        <p class="do"><strong>해야 할 일</strong>: AppMagic·Sensor Tower로 매주 신규 trending 장르 모니터링 → <strong>1~3주 prototype + 10일 CPI 사전 측정(JustPlay 광고) + 2~4주 polish = 총 6~10주 사이클</strong>. 베트남 양산 라인이 최적.</p>
+        <p class="ev">예상: 새 메가트렌드 진입 1번 = 매출 100~300억</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">A3</div><div>
+        <h5>추가 M&A — 유럽 mid-size 스튜디오 1~2곳</h5>
+        <p class="now"><strong>현재</strong>: NC 공시 기준 유럽 mid-large 캐주얼 스튜디오 협상 진행 중 (2026-03). 5조 매출 목표 달성 위해 추가 인수 필요한 상황.</p>
+        <p class="do"><strong>해야 할 일</strong>: 본인 game-screening 4항목 100점 평가 시스템(이미 100개 게임 분석 완료)을 그대로 적용 → 인수 후보 사전 스코어링. 베트남 양산 라인과 결합 가능한 IP/장르 우선.</p>
+        <p class="ev">예상: 1곳당 매출 +500~1,500억 (인수가 대비 2~3년 회수)</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">A4</div><div>
+        <h5>외부 인디 퍼블리싱 — JustPlay·Lihuhu 채널로 외부 게임 유통</h5>
+        <p class="now"><strong>현재</strong>: 자체 IP만 운영. 외부 인디 게임은 받지 않음.</p>
+        <p class="do"><strong>해야 할 일</strong>: Lihuhu의 양산 노하우 + JustPlay의 트래픽 채널을 인디에게 제공하고 매출 50:50 수익 배분. <strong>"광고 BM 인디 퍼블리셔"</strong> 포지션. Voodoo가 이걸로 수십 종 hit.</p>
+        <p class="ev">예상: 연 +10~20종 신작 추가 + 매출 +200~500억</p>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- B. 유통 -->
+  <div class="strat-cat">
+    <div class="strat-cat-head">
+      <div class="num">B</div>
+      <div style="flex-grow:1;">
+        <div class="ttl">더 많이 공급하기 — 유통 채널 다각화</div>
+        <div class="sub">현재 채널: 자체 App Store/Google Play만. JustPlay 인벤토리는 자기 게임에만 사용</div>
+      </div>
+      <div class="impact">매출 임팩트<br>+30~50%</div>
+    </div>
+    <div class="strat-cat-body">
+      <div class="strat-action"><div class="bullet">B1</div><div>
+        <h5>JustPlay 인벤토리를 3사 통합 광고/마케팅 허브로</h5>
+        <p class="now"><strong>현재</strong>: Lihuhu·Springcomes는 외부 광고회사(AppLovin·Unity·AdMob)에 의존. 광고비의 30~40%가 외부 수수료로 유출.</p>
+        <p class="do"><strong>해야 할 일</strong>: Lihuhu·Springcomes의 광고 노출을 <strong>JustPlay 자체 인벤토리에 우선 라우팅</strong>. 동시에 JustPlay 메인 앱에서 Lihuhu·Springcomes 게임을 추천(cross-promotion). 외부 광고 수수료 내재화 + 신규 인스톨 자체 채널 확보.</p>
+        <p class="ev">예상: 광고 마진 +20~30% (Lihuhu·Spring 합산 매출 1,480억의 20% = 약 300억 추가)</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">B2</div><div>
+        <h5>Apple Arcade · Netflix Games 등 구독 채널 진출</h5>
+        <p class="now"><strong>현재</strong>: 광고 BM만 운영. 광고 없는 채널 매출 0.</p>
+        <p class="do"><strong>해야 할 일</strong>: Springcomes의 머지 IP(헬로 타운·머지 스위츠) → <strong>Apple Arcade 광고 없는 버전 라이선스</strong>. Netflix Games·Google Play Pass도 동시 협상. 구독 수익 안정성 + 광고 미사용 유저 확보.</p>
+        <p class="ev">예상: 게임당 연 라이선스 5~20억원 · 5게임 진출 시 +50~100억</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">B3</div><div>
+        <h5>PC/Steam·Web 포팅</h5>
+        <p class="now"><strong>현재</strong>: 모바일 only. PC 게이머 트래픽 미진입.</p>
+        <p class="do"><strong>해야 할 일</strong>: Match Triple 3D, Hello Town 같은 단순 캐주얼은 <strong>Unity로 빌드만 PC 버전으로 추가 출시</strong>. Web 버전(Poki, CrazyGames 같은 무료 게임 포털)도 광고 BM으로 운영.</p>
+        <p class="ev">예상: 게임당 +20~30% 트래픽 (PC + Web)</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">B4</div><div>
+        <h5>WeChat·抖音 미니게임 진출 — 판호 이슈 우회 가능</h5>
+        <p class="now"><strong>현재</strong>: 중국 시장 진출 전무 (한국 게임 회사 표준 약점). 한한령 이후 한국 게임 판호(版号·중국 정식 게임 출시 허가) 발급은 비정기적.</p>
+        <p class="do"><strong>해야 할 일</strong>: 텐센트·바이트댄스 협력해 <strong>WeChat 미니게임 / 抖音(틱톡 중국) 미니프로그램</strong> 버전 출시. 미니게임은 <strong>스마트폰 네이티브 앱이 아니라 웹앱(미니프로그램) 형태</strong>라 판호 발급 대상 아님 — 한한령 우회 가능. 캐주얼 장르가 미니게임 친화적.</p>
+        <p class="ev">예상: 1~2년 후 매출 +200~500억 (성공 시)</p>
+        <p class="ref">※ 단 텐센트·바이트댄스가 게임 매출의 30~50% 수수료 떼므로 net 기준 매출 환산 필요. 정식 판호 발급 시 네이티브 앱 별도 출시 병행 검토.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- C. 마케팅 -->
+  <div class="strat-cat">
+    <div class="strat-cat-head">
+      <div class="num">C</div>
+      <div style="flex-grow:1;">
+        <div class="ttl">마케팅 (UA) — 더 효율적으로, 더 싸게</div>
+        <div class="sub">현재 UA 채널: Meta · Google · TikTok · 외부 SDK 분산. 자체 채널 활용 부족</div>
+      </div>
+      <div class="impact">매출 임팩트<br>+20~40%</div>
+    </div>
+    <div class="strat-cat-body">
+      <div class="strat-action"><div class="bullet">C1</div><div>
+        <h5>JustPlay 자체 채널로 신규 유저 확보 (CAC 절감) — 엔씨 공식 전략 정량화</h5>
+        <p class="now"><strong>현재 (추정)</strong>: Lihuhu·Springcomes는 신규 유저 1명당 외부 UA 비용 약 <strong>$2~3 (= 약 2,800~4,200원)</strong> 지출 추정. <span style="color:var(--text-3);">근거: 매치-3·머지 장르 글로벌 평균 CPI (Tenjin·AppsFlyer 2025 벤치마크). 3사 실제 데이터는 IR 비공개.</span></p>
+        <p class="do"><strong>해야 할 일</strong>: JustPlay 메인 앱(누적 2,500만+, 매월 신규 50만)에서 <strong>Lihuhu·Springcomes 게임 자동 추천</strong>. 자체 트래픽이라 외부 광고비 0원. <strong>NC 공시 통합 전략의 핵심 메커니즘</strong>이며, 본 보고서는 이를 정량 KPI(Cross-promo 비율 첫해 10% → 3년차 40%)로 환산.</p>
+        <p class="ev">예상: Lihuhu·Spring 평균 CAC 50~80% 절감 / 신규 인스톨 +30~50%</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">C2</div><div>
+        <h5>인플루언서·UGC 마케팅 — 비용은 추가, CAC는 절감</h5>
+        <p class="now"><strong>현재</strong>: 페이드 광고 위주. 유기적 입소문 마케팅 거의 없음. <strong>전제</strong>: 인플루언서·UGC도 비용 발생. 그러나 단가가 페이드 UA보다 낮음.</p>
+        <p class="do"><strong>해야 할 일</strong>: 머지 게임은 <strong>"진행 영상이 만족감 있는 콘텐츠"</strong>로 TikTok·Shorts에서 자생적 확산. 인플루언서 50명 시드 + UGC 캠페인. Royal Match가 이걸로 월 매출 수천억대 성장.</p>
+        <p class="ev">예상: <strong>인플루언서 평균 CPI ~$1.0~1.5 vs Meta 페이드 UA $2~3 → CAC 30~50% 절감</strong>. 단순히 비용 추가가 아니라 같은 효과를 더 싸게 얻는 채널 다변화 전략.</p>
+        <p class="ref">※ 산업 데이터: TikTok 인플루언서 마케팅 평균 CPI는 페이드 UA의 30~60% (HypeAuditor·Influencer Marketing Hub 2025).</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">C3</div><div>
+        <h5>자동 입찰 통합 — 가설 단계, 검증 필요</h5>
+        <p class="now"><strong>현재 (추정)</strong>: 3사가 각각 별도 UA 마케터·캠페인 운영 추정 (인수 직후 통합 전). <strong>※ 단 각 사 UA 인력 구조·데이터 통합 가능성은 입사 후 30일 내 확인 필요 사항.</strong></p>
+        <p class="do"><strong>해야 할 일 (가설)</strong>: 3사 UA 데이터를 단일 회수율 모델로 통합해 AppLovin AXON·Meta Advantage+·Google App Campaign 학습 데이터 풀링. <strong>전제</strong>: 통합이 무조건 효율 증가는 아님 — 각 사 UA 인력의 도메인 지식, 게임별 ROAS 분포 차이 고려 필요. 게임 단위 별도 운영이 효율적인 경우도 존재.</p>
+        <p class="ev">예상 (가설): 통합 적합 시 광고 효율 +10~20%. 단 검증 결과에 따라 게임/장르 단위 운영 유지가 더 나을 수 있음.</p>
+        <p class="ref">※ 본 액션은 입사 후 30일간 데이터 진단 후 의사결정. 가설 단계로 라벨링.</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">C4</div><div>
+        <h5>국가별·장르별 광고비 회수율 매트릭스</h5>
+        <p class="now"><strong>현재</strong>: "북미 70%" 같은 거시 지표만 공개. 국가 단위 의사결정 불가.</p>
+        <p class="do"><strong>해야 할 일</strong>: <strong>국가 × 장르 × 광고 채널 매트릭스</strong>로 매출 회수율 분해. 본인이 밀리에서 운영한 LTV 측정 체계(장르별 분리·CAC 임계선 규칙화) 응용. 신흥국·라틴은 단가 낮아도 ROI 높을 수 있음.</p>
+        <p class="ev">예상: 광고 효율 +10~20% · 신흥국 트래픽 풀 2배</p>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- D. 글로벌 -->
+  <div class="strat-cat">
+    <div class="strat-cat-head">
+      <div class="num">D</div>
+      <div style="flex-grow:1;">
+        <div class="ttl">글로벌 시장 확장</div>
+        <div class="sub">현재 매출 70~80%가 북미·유럽. 일본·중국·인도·라틴 미진입</div>
+      </div>
+      <div class="impact">매출 임팩트<br>+30~80%</div>
+    </div>
+    <div class="strat-cat-body">
+      <div class="strat-action"><div class="bullet">D1</div><div>
+        <h5>일본 — Springcomes 머지 페코 IP 일본 확장</h5>
+        <p class="now"><strong>현재</strong>: 일본 시장 매출 비중 작음. 머지 페코는 이미 일본 친화 캐릭터.</p>
+        <p class="do"><strong>해야 할 일</strong>: 일본 퍼블리셔(KLab·Cygames 등) 협업 또는 자체 일본 법인. <strong>Hello Kitty·산리오 IP 콜라보</strong>로 신작 (광고 + IAP 하이브리드). 일본 모바일 게임 매출 글로벌 2위 시장.</p>
+        <p class="ev">예상: 1년 후 매출 +100~300억</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">D2</div><div>
+        <h5>인도 — 1.4억 트래픽 풀 + 캐주얼 시장 $4.4B (글로벌 4위)</h5>
+        <p class="now"><strong>시장 규모 (Statista·Newzoo 2024)</strong>: 인도 모바일 게임 시장 약 <strong>$4.4B/년 (≈6.2조원)</strong>. 그중 캐주얼 비중 약 35% = <strong>$1.5B (≈2.1조)</strong>. 글로벌 캐주얼 시장 4위. 다운로드 수 기준은 <strong>세계 1위</strong>.</p>
+        <p class="now" style="margin-top:6px;"><strong>3사 현 진출 (추정)</strong>: Lihuhu 매출 80%가 북미·유럽 = 인도 매출 비중 미미. JustPlay은 리워드 BM 특성상 결제 인프라 약한 인도 시장 진출 부적합. <strong>3사 모두 인도 시장 본격 진출 안 한 상태로 추정.</strong> ※ 단 SensorTower·data.ai 유료 데이터 미접근 — 정확한 국가별 매출 분포는 입사 후 확인 필요.</p>
+        <p class="do"><strong>해야 할 일</strong>: <strong>저용량(50MB↓) Lite 버전</strong> 출시 (인도는 저사양 폰 비중 큼). 현지 결제 수단(UPI·Paytm) 통합. Hindi·Tamil 현지화. <strong>광고 단가 낮은 만큼 보상도 낮춰 마진 확보</strong>.</p>
+        <p class="ev">예상: 2년 후 트래픽 +100% · 매출 +50~150억 (장기)</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">D3</div><div>
+        <h5>라틴아메리카 — 브라질·멕시코 시장 $2.1B (글로벌 5위)</h5>
+        <p class="now"><strong>시장 규모 (Newzoo 2024)</strong>: 라틴아메리카 모바일 게임 시장 약 <strong>$2.1B/년 (≈3조원)</strong>. 브라질·멕시코·아르헨티나 3국 합계. <strong>모바일 게임 사용 시간 글로벌 상위 (1인당 일 4시간+, 동남아·중남미 평균 상회)</strong>.</p>
+        <p class="now" style="margin-top:6px;"><strong>3사 현 진출 (추정)</strong>: 3사 모두 포르투갈어·스페인어 현지화 게임 미공개. 라틴 매출 비중 미미 추정. ※ 정확한 매출 분포는 SensorTower 유료 데이터 필요.</p>
+        <p class="do"><strong>해야 할 일</strong>: 포르투갈어·스페인어 현지화 + 라틴 친화 캐릭터/소재 (베트남 양산 라인 활용). 현지 결제(PIX·OXXO) 통합.</p>
+        <p class="ev">예상: 1~2년 후 매출 +50~100억</p>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- E. IAP 투트랙 (재정의) -->
+  <div class="strat-cat">
+    <div class="strat-cat-head">
+      <div class="num">E</div>
+      <div style="flex-grow:1;">
+        <div class="ttl">IAP 투트랙 — 검증된 게임에만 인앱결제 강화 (2단계 순차)</div>
+        <div class="sub">1년 광고 BM으로 검증 → Top 5 게임에 IAP/시즌패스 도입 → 광고 단가 cyclical 하락 시 매출 보전 장치</div>
+      </div>
+      <div class="impact">매출 임팩트<br>+30~50%<br>(2027~)</div>
+    </div>
+    <div class="strat-cat-body">
+      <div class="callout" style="margin:0 0 14px;background:var(--accent-soft);border-left-color:var(--accent);">
+        <strong style="color:var(--accent);">투트랙 순차 전략 (1년 검증 후 진입)</strong>
+        <p style="margin:6px 0 0;font-size:12.5px;line-height:1.7;">
+          <strong>Year 1 (2026)</strong>: 4사 모든 게임 광고 BM으로만 검증 — D30·D90 잔존, ARPDAU, D7 ROAS 측정<br>
+          <strong>Year 2 (2027~)</strong>: 검증된 hit + LTV 긴 장르 Top 5 게임에만 시즌패스·IAP 도입<br>
+          <strong>Year 3+ (2028~)</strong>: 광고 단가 cyclical 하락 시 IAP 매출이 보전 장치로 작동 → 하이브리드 BM
+        </p>
+      </div>
+      <div class="strat-action"><div class="bullet">E1</div><div>
+        <h5>IAP 도입 1순위 후보 5개 게임 식별</h5>
+        <p class="now"><strong>선정 기준</strong>: ① D7/D30 ROAS 산업 평균 이상 ② 머지·매치-3 등 LTV 긴 장르 ③ 누적 다운로드 400만+ 또는 운영 5년+</p>
+        <p class="do"><strong>후보 (3사 자료 교차 검증)</strong>:</p>
+        <table class="compare" style="margin-top:6px;font-size:12px;"><thead><tr><th>게임</th><th>회사</th><th>장르 LTV</th><th>검증 근거</th></tr></thead><tbody>
+          <tr><td>Hello Town</td><td>Springcomes</td><td>머지 ($10~20)</td><td>D7 ROAS 50% / <strong>D30 66%</strong> · 440만 DL</td></tr>
+          <tr><td>머지 스위츠</td><td>Springcomes</td><td>머지 ($10~20)</td><td>470만 DL · D30 잔존 10% (장르 표준)</td></tr>
+          <tr><td>Kingdom Wars</td><td>Springcomes</td><td>전략·방어 ($8~15)</td><td><strong>2016 출시 9년 운영 = 에버그린 검증</strong> · 1,000만+ DL</td></tr>
+          <tr><td>Jewels Temple</td><td>Springcomes</td><td>매치-3 ($15~25)</td><td>2016 출시 9년 운영 · 820만 DL</td></tr>
+          <tr><td>Match Triple 3D</td><td>Lihuhu</td><td>매치 ($10~15)</td><td>1,000만+ DL · 월 매출 1.7억 정량 검증</td></tr>
+        </tbody></table>
+        <p class="ev" style="margin-top:6px;">발견: <strong>1순위 5개 중 4개가 Springcomes</strong> — 매출은 280억으로 작지만 IAP 강화 자산 가치는 가장 큼</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">E2</div><div>
+        <h5>시즌 패스 도입 — Royal Match 모델 이식</h5>
+        <p class="now"><strong>현재</strong>: 5개 후보 모두 시즌 패스 미운영 추정.</p>
+        <p class="do"><strong>해야 할 일</strong>: 30일 단위 보상 트랙 + 일일 미션 + 한정 스킨. <strong>무료 트랙 + 유료 패스($4.99) 2단</strong>. Royal Match·Candy Crush 검증 모델.</p>
+        <p class="ev">예상: 게임당 ARPPU +30~50% / D30 잔존 10% → 18~20%</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">E3</div><div>
+        <h5>유저 세그먼트별 맞춤 오퍼링 (Personalization)</h5>
+        <p class="now"><strong>현재</strong>: 동일 패키지를 모든 유저에게 노출 추정.</p>
+        <p class="do"><strong>해야 할 일</strong>: 결제 패턴별 세그먼트(Whale·Dolphin·Minnow·F2P) 분리 → 각 세그먼트에 최적 패키지·할인율·노출 빈도 차등 적용. AI 추천 엔진 활용.</p>
+        <p class="ev">예상: ARPPU +10~20% (Royal Match·Candy Crush 사례)</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">E4</div><div>
+        <h5>IP 콜라보 — 머지 페코 × 산리오 / Hello Kitty (Top 5에 한정)</h5>
+        <p class="now"><strong>현재</strong>: 외부 IP 콜라보 없음.</p>
+        <p class="do"><strong>해야 할 일</strong>: 검증된 Top 5 게임만 대상으로 한정 콜라보. 일본 시장 진출 D1과 결합. 신규 인스톨 일시 +200~500% 사례 다수.</p>
+        <p class="ev">예상: 콜라보 1건당 매출 +30~50억 (3개월)</p>
+      </div></div>
+      <div class="tip">
+        <span class="tlabel">왜 1년 검증인가</span>
+        IAP를 너무 일찍 도입하면 잔존율이 일시 하락(보통 -5~15%). <strong>광고 BM으로 잔존·ARPDAU·국가별 LTV가 안정화된 게임에만</strong> IAP를 얹어야 ARPPU 효과가 지속됨. 검증 안 된 양산 게임에 IAP 도입은 운영 인력만 낭비.
+      </div>
+    </div>
+  </div>
+
+  <!-- F. 광고 매출 최적화 (3 레이어 재구성) -->
+  <div class="strat-cat">
+    <div class="strat-cat-head">
+      <div class="num">F</div>
+      <div style="flex-grow:1;">
+        <div class="ttl">광고 매출 최적화 — 단가·노출·Mediation 3 레이어</div>
+        <div class="sub">같은 트래픽에서 매출 추출 효율 ↑ — 합산 임팩트 +25~50%</div>
+      </div>
+      <div class="impact">매출 임팩트<br>+25~50%</div>
+    </div>
+    <div class="strat-cat-body">
+
+      <!-- Layer A: 단가 -->
+      <div style="background:#eff6ff;padding:10px 14px;margin:8px 0 10px;border-left:3px solid var(--accent-2);">
+        <strong style="color:var(--accent);font-size:13px;">Layer A · 단가 (eCPM)</strong>
+        <span style="font-size:11.5px;color:var(--text-3);"> — 광고 1,000번당 받는 단가 자체를 올린다 (+15~25%)</span>
+      </div>
+      <div class="strat-action"><div class="bullet">F1</div><div>
+        <h5>Floor Price 최적화 — 게임·국가·시간대별 최저 단가 차등 설정</h5>
+        <p class="now"><strong>현재</strong>: 단일 Floor 또는 미운영 추정. 너무 높으면 fill rate 하락, 너무 낮으면 단가 leak.</p>
+        <p class="do"><strong>해야 할 일</strong>: 게임 × 국가 × 시간대 매트릭스로 Floor 분리. <strong>3~6개월 주기 A/B 재조정</strong>. 산업 표준 사례 그대로.</p>
+        <p class="ev">예상: 평균 eCPM +5~10%</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">F2</div><div>
+        <h5>Header Bidding (In-App Bidding) 도입 — Waterfall에서 동시 입찰로 전환</h5>
+        <p class="now"><strong>현재</strong>: Springcomes·Lihuhu는 Waterfall(순차 입찰) 운영 추정 (다수 SDK 분산 = Waterfall 특징).</p>
+        <p class="do"><strong>해야 할 일</strong>: <strong>모든 광고 네트워크가 동시 입찰</strong>하는 Bidding 구조로 전환. AppLovin MAX·Google AdMob·Meta Audience Network 3사 동시 호출.</p>
+        <p class="ev">예상: 평균 eCPM <strong>+10~25%</strong> (산업 검증 데이터)</p>
+      </div></div>
+
+      <!-- Layer B: 노출 -->
+      <div style="background:#eff6ff;padding:10px 14px;margin:14px 0 10px;border-left:3px solid var(--accent-2);">
+        <strong style="color:var(--accent);font-size:13px;">Layer B · 노출 (Frequency)</strong>
+        <span style="font-size:11.5px;color:var(--text-3);"> — 같은 단가에서 노출 횟수·배치 최적화 (+5~15%)</span>
+      </div>
+      <div class="strat-action"><div class="bullet">F3</div><div>
+        <h5>Rewarded Video 노출 빈도 — 세션당 2~3회 sweet spot</h5>
+        <p class="now"><strong>현재</strong>: 빈도 운영 수준 불명. 잔존율 vs 매출 trade-off 미측정 추정.</p>
+        <p class="do"><strong>해야 할 일</strong>: 매치-3 산업 표준 <strong>세션당 2~3회</strong> 적용. A/B로 게임별 sweet spot 미세조정.</p>
+        <p class="ev">예상: 매출 +3~7% (잔존율 영향 최소화)</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">F4</div><div>
+        <h5>Interstitial 배치 시점 최적화</h5>
+        <p class="now"><strong>현재</strong>: 메뉴 전환마다 vs 레벨 클리어 직후 — 배치 정책 불명.</p>
+        <p class="do"><strong>해야 할 일</strong>: <strong>레벨 클리어 직후 + 게임 종료 시점</strong>만 노출. 세션 중간 차단으로 잔존율 보호. 산업 best practice.</p>
+        <p class="ev">예상: 매출 +2~5% (잔존율 +1~2%p 동반)</p>
+      </div></div>
+      <div class="strat-action"><div class="bullet">F5</div><div>
+        <h5>Offerwall 표준 도입 — Springcomes 검증 사례 이식</h5>
+        <p class="now"><strong>근거</strong>: Springcomes Adjoe Playtime D30 ROAS <strong>+69.33%</strong> 검증 (Adjoe 공식 케이스 스터디). Lihuhu·JustPlay 미도입 추정.</p>
+        <p class="do"><strong>해야 할 일</strong>: Adjoe·Tapjoy·MyChips 등 Offerwall을 3사 표준으로 통합 도입.</p>
+        <p class="ev">예상: 매출 +10~15% (Springcomes 사례 기준)</p>
+      </div></div>
+
+      <!-- Layer C: Mediation -->
+      <div style="background:#eff6ff;padding:10px 14px;margin:14px 0 10px;border-left:3px solid var(--accent-2);">
+        <strong style="color:var(--accent);font-size:13px;">Layer C · Mediation (네트워크 통합)</strong>
+        <span style="font-size:11.5px;color:var(--text-3);"> — 운영 단순화 + 추가 단가 ↑ (+5~10%)</span>
+      </div>
+      <div class="strat-action"><div class="bullet">F6</div><div>
+        <h5>AppLovin MAX 단일 Mediation 표준화</h5>
+        <p class="now"><strong>현재</strong>: Springcomes 5~6개 SDK 분산 운영 (Unity Offerwall · Adjoe · Tapjoy · MyChips · Gamelight 다수). Lihuhu·JustPlay 단일화 여부 미확인.</p>
+        <p class="do"><strong>해야 할 일</strong>: <strong>AppLovin MAX 또는 LevelPlay 단일 mediation으로 통합</strong>. SDK 5~6개 → 1개. 운영 단순화 + 중복 비용 절감 + 입찰 데이터 통합 학습.</p>
+        <p class="ev">예상: 운영비 -30%, 평균 eCPM +5~10%</p>
+      </div></div>
+      <div class="tip">
+        <span class="tlabel">합산 임팩트 산출</span>
+        Layer A (+15~25%) × Layer B (+5~15%) × Layer C (+5~10%)는 단순 합산이 아니라 <strong>중첩 계산 시 약 +25~50%</strong>. 산업 best practice 적용 결과 (Tenjin·MAF 벤치마크 보고서 평균치).
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-good">
+    <strong>합산 임팩트 (6대 카테고리)</strong> — 6개 카테고리 동시 가동 시 3사 합산 매출 <strong>4,000억 → 1.5조 (4년 누적)</strong> 도달이 가능합니다.
+  </div>
+</section>
+
+<!-- 실무 계획 — 헤드 요약 + AI 솔루션 -->
+<section data-tab-content="plan">
+  <h2><span class="num">01</span> AI 매출 증대 솔루션 — 8개 액션</h2>
+  <p class="h2-sub">2030년 1.5조 도달을 가속하기 위한 AI 운영체계 인프라 8개 액션. 즉시 가능 4개 + 3~6개월 4개로 분리 제시합니다.</p>
+
+  <!-- 실무 계획 요약 -->
+  <div class="callout" style="background:linear-gradient(135deg,#eff6ff,#fff);border-left-color:var(--accent);margin:14px 0;padding:20px 26px;">
+    <strong style="color:var(--accent);font-size:16px;">📌 요약</strong>
+    <ul style="margin:14px 0 0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
+      <li><strong style="color:var(--accent);">AI 운영체계</strong> — 8개 액션 (즉시 4 + 3~6개월 4) / UA·LiveOps·Genre Lab 매출 <strong>+15~30% 가속 인프라</strong></li>
+      <li><strong style="color:var(--accent);">즉시 가능</strong> — 본인 보유 자산 (Game Screening 100개 · Claude Code 11스킬) 으로 <strong>입사 30일 내 PoC 착수</strong></li>
+      <li><strong style="color:var(--accent);">첫 90일 플랜</strong> — 진단 (~30) → KPI 보드 통합 (~60) → Quick Win 파일럿·임원 보고 (~90)</li>
+    </ul>
+  </div>
+
+  <!-- 즉시 가능 -->
+  <h3 style="margin-top:18px;color:var(--good);">즉시 가능 (입사 30~90일 PoC)</h3>
+  <p style="font-size:12.5px;color:var(--text-2);margin:6px 0 14px;">본인 보유 자산(Game Screening 100개 시스템·Claude Code 11스킬·5에이전트 파이프라인) 직접 활용 가능.</p>
+  <div class="dir-grid" style="grid-template-columns: repeat(2, 1fr); gap: 12px;">
+    <div class="dir-card" style="border-left-color:var(--good);">
+      <div class="dn" style="color:var(--good);">AI ①</div>
+      <div class="dh">광고 크리에이티브 자동 생성·테스트</div>
+      <p class="dd"><strong>방법</strong>: Midjourney·Runway·Sora로 1주에 100~500개 변형 자동 생성 → Meta·TikTok 자동 입찰 → 위닝 소재 발굴 속도 5~10배 ↑.<br><strong>본인 매칭</strong>: 5에이전트 파이프라인(youtube 분석→전략→스크립트) 구조 그대로 광고 소재 파이프라인으로 적용 가능.<br><strong>임팩트</strong>: <strong>CAC -20~30%</strong></p>
+    </div>
+    <div class="dir-card" style="border-left-color:var(--good);">
+      <div class="dn" style="color:var(--good);">AI ②</div>
+      <div class="dh">국가별 ROAS 자동 모니터링·알림 보드</div>
+      <p class="dd"><strong>방법</strong>: 매일 ROAS·CPI·잔존율 변동 감지 → 임계값 이탈 시 자동 알림 + 원인 분석 + 다음 액션 제안.<br><strong>본인 매칭</strong>: Claude Code SQL·BigQuery 분석 자동화 스킬.<br><strong>임팩트</strong>: <strong>의사결정 속도 ×3</strong></p>
+    </div>
+    <div class="dir-card" style="border-left-color:var(--good);">
+      <div class="dn" style="color:var(--good);">AI ③</div>
+      <div class="dh">Trending 장르 24h 모니터링</div>
+      <p class="dd"><strong>방법</strong>: App Store/Google Play 신규 차트 매일 스크래핑 → AI가 trending 장르·매출 추정·경쟁 강도 판정 → Genre Lab 인풋 자동화.<br><strong>본인 매칭</strong>: <strong>Game Screening 100개 시스템 그대로 확장</strong> (이미 만들어둔 자산 · 라이브 URL: indeokyeo-wq.github.io/game-screening).<br><strong>임팩트</strong>: <strong>신작 R&D 미스율 -50%</strong></p>
+    </div>
+    <div class="dir-card" style="border-left-color:var(--good);">
+      <div class="dn" style="color:var(--good);">AI ④</div>
+      <div class="dh">유저 리뷰·댓글 자동 분류·인사이트</div>
+      <p class="dd"><strong>방법</strong>: 3사 170+ 게임 App Store/Google Play 리뷰 매일 수집 → AI가 버그·UX 불만·LiveOps 요청 자동 분류 → LiveOps 백로그로 자동 변환.<br><strong>본인 매칭</strong>: 유튜브 댓글 분석 스킬 구조 재활용.<br><strong>임팩트</strong>: <strong>D7 잔존 +1~3%p</strong></p>
+    </div>
+  </div>
+
+  <!-- 3~6개월 -->
+  <h3 style="margin-top:24px;color:var(--accent);">3~6개월 내 가능 (입사 90일+)</h3>
+  <p style="font-size:12.5px;color:var(--text-2);margin:6px 0 14px;">엔지니어 협업 필요. 본인이 PM 역할로 사양 설계·검증.</p>
+  <div class="dir-grid" style="grid-template-columns: repeat(2, 1fr); gap: 12px;">
+    <div class="dir-card" style="border-left-color:var(--accent);">
+      <div class="dn" style="color:var(--accent);">AI ⑤</div>
+      <div class="dh">LTV 예측 모델 — D1 행동으로 D365 예측</div>
+      <p class="dd"><strong>방법</strong>: 신규 유저 첫 24시간 행동(세션·결제·광고 시청) 데이터로 D90/D365 LTV 예측 → CAC 상한 자동 산정 → UA 효율 +15~25%.<br><strong>임팩트</strong>: <strong>UA ROI +15~25%</strong></p>
+    </div>
+    <div class="dir-card" style="border-left-color:var(--accent);">
+      <div class="dn" style="color:var(--accent);">AI ⑥</div>
+      <div class="dh">유저 세그먼트별 맞춤 오퍼링 (Personalization)</div>
+      <p class="dd"><strong>방법</strong>: 같은 게임 안 결제 패턴별로 다른 패키지 제시. AI 추천 엔진. Royal Match·Candy Crush가 사용 중인 모델.<br><strong>임팩트</strong>: <strong>ARPPU +10~20%</strong></p>
+    </div>
+    <div class="dir-card" style="border-left-color:var(--accent);">
+      <div class="dn" style="color:var(--accent);">AI ⑦</div>
+      <div class="dh">LiveOps 이벤트 자동 기획</div>
+      <p class="dd"><strong>방법</strong>: 과거 이벤트 매출·잔존 데이터 학습 → 다음 시즌패스 보상 곡선·이벤트 테마·기간 자동 설계. AI가 초안 → PM이 검수.<br><strong>임팩트</strong>: <strong>LiveOps 매출 +20~30%</strong></p>
+    </div>
+    <div class="dir-card" style="border-left-color:var(--accent);">
+      <div class="dn" style="color:var(--accent);">AI ⑧</div>
+      <div class="dh">AI 게임 내 챗봇 CS (다국어)</div>
+      <p class="dd"><strong>방법</strong>: 한국·영어·일본·베트남·인도네시아 자동 응대. 응답속도 ×10. 운영비 -50%.<br><strong>임팩트</strong>: <strong>운영비 -50%</strong></p>
+    </div>
+  </div>
+
+  <div class="callout callout-good">
+    <strong>"AI Casual Operating System"</strong> — 8개 액션을 하나의 운영체계로 패키징한 구조입니다. <strong>2030년 1.5조 도달의 가속 인프라</strong>로, AI 운영체계가 시너지 효율을 극대화합니다. 본인은 Claude Code 11스킬·Game Screening 100개 배포 자산을 보유하고 있어 입사 첫날부터 PoC 가능합니다.
+  </div>
+</section>
+
+<!-- 90일 → 실무 계획 탭 -->
+<section data-tab-content="plan">
+  <h2><span class="num">02</span> 본 포지션 첫 90일 — 가장 빠른 액션부터</h2>
+  <p class="h2-sub">진단 → 설계 → 실행. 90일 안에 매출 +10~15% 정량 입증 가능한 액션 우선</p>
+
+  <div class="phase-grid">
+    <div class="phase">
+      <div class="when">Day 1~30 · 진단</div>
+      <h4>측정 KPI 보드 1순위 + 데이터 인벤토리</h4>
+      <ul>
+        <li><strong>KPI 4축 대시보드 v0 구축</strong>: LTV/CAC × 게임별 ARPDAU × Cross-promo 비율 × 신작 D7 ROAS</li>
+        <li>3사 170+ 게임 매출 분포 도출 (상위 10개가 정말 80%인지 검증)</li>
+        <li>Top 10 게임 × 유저당 매출 · 잔존율 · 광고 단가 매핑</li>
+        <li>JustPlay 광고 인벤토리 규모·단가·보상 비율 · Lihuhu·Springcomes의 외부 SDK 의존도 측정</li>
+        <li><strong>AI ②·③ PoC 시작</strong> — Game Screening 시스템 확장 + ROAS 자동 모니터링 보드</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">Day 31~60 · 설계</div>
+      <h4>3개 액션 동시 파일럿 설계</h4>
+      <ul>
+        <li><strong>F2</strong> Header Bidding 도입 plan (Springcomes 우선)</li>
+        <li><strong>F6</strong> AppLovin MAX 단일 mediation 도입 plan (3사 표준화)</li>
+        <li><strong>C1</strong> Match Triple 3D + JustPlay cross-promo 파일럿 (월 1.7억 → 2.5억 목표)</li>
+        <li><strong>C3</strong> 자동 입찰 통합 가설 검증 — 각 사 UA 인력 구조·데이터 진단</li>
+        <li>2027년 IAP 투트랙 도입 후보 5개 게임 사전 진단 (D30 잔존 베이스라인 측정)</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">Day 61~90 · 실행</div>
+      <h4>매출 +10~15% 정량 입증</h4>
+      <ul>
+        <li>파일럿 3개 결과 측정 → 시너지 1호 사례 정량화</li>
+        <li><strong>A2 Genre Lab</strong> 운영 시범 시작 (6~10주 사이클)</li>
+        <li><strong>D1 일본 시장</strong> 진출 협상 시작 (머지 페코 IP)</li>
+        <li>임원 보고 표준 대시보드 v1 (KPI 4축 + 매출 곡선 + 로드맵 마일스톤)</li>
+        <li><strong>AI ① 광고 크리에이티브 자동 생성</strong> PoC 결과 보고</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Appendix 01: 산업 best-in-class 대비 3사 위치 -->
+<section data-tab-content="appendix">
+  <h2><span class="num">01</span> 산업 best-in-class 대비 3사 위치</h2>
+  <p class="h2-sub" style="font-style:italic;">3사 핵심 지표 vs 산업 최고 수준 비교 — 성장 여지 정량화</p>
+  <table class="compare" style="margin-top:14px;">
+    <thead><tr><th>지표</th><th>JustPlay</th><th>Springcomes</th><th>Lihuhu</th><th>산업 best-in-class</th><th>성장 여지</th></tr></thead>
+    <tbody>
+      <tr><td>유저 1명 일매출 (ARPDAU)</td><td>~1,360원</td><td>~30원</td><td>~540원</td><td>리워드 leading</td><td>Springcomes 5~10배 / Lihuhu 2~3배</td></tr>
+      <tr><td>D30 잔존율</td><td>—</td><td>10% (머지 스위츠)</td><td>~5~8%</td><td>20%+ (Royal Match)</td><td>2~3배</td></tr>
+      <tr><td>장르별 월 ARPU</td><td>리워드 별도</td><td>매치-3 4,130원</td><td>하이퍼캐주얼 1,190원</td><td>파티 6,770원</td><td>Lihuhu 하이브리드 전환 시 3.5배</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Appendix 02: 산정·추정 기준 -->
+<section data-tab-content="appendix">
+  <h2><span class="num">02</span> 산정·추정 기준</h2>
+  <p class="h2-sub" style="font-style:italic;">본 보고서에 사용된 수치들의 산정·추정 근거 정리</p>
+
+  <div class="glossary" style="margin-top:14px;">
+    <h3 style="grid-column:1/-1;">기준 환율</h3>
+    <dl>
+      <dt>USD → 원</dt><dd>1 USD = 1,380원 (2026-04 기준 평균 환율 적용)</dd>
+    </dl>
+
+    <h3 style="grid-column:1/-1;margin-top:14px;">3사 매출 / DAU / 영업이익 산정</h3>
+    <dl>
+      <dt>JustPlay 매출 2,366억 (gross)</dt><dd>JustPlay GmbH 공시 자료 기준 2025 연 매출 ($171M × 1,380원). gross = 광고주 지급 총액 (유저 보상 50% 포함). 영업이익 263억 = 매출 11% (자체 발표).</dd>
+      <dt>JustPlay 2026 forecast 4,460억 (+88%)</dt><dd>NC IR 자료 "$325M ≈ 4,460억" 인용. 인수 발표 보도자료 근거.</dd>
+      <dt>Lihuhu 매출 1,200억 / 영업이익 300억</dt><dd>Lihuhu Pte Ltd 베트남 법인 공시 ($87M 매출 / 영업이익률 25% × 1,380원). DAU 60만은 추정값.</dd>
+      <dt>Lihuhu DAU 약 60만 (추정)</dt><dd>매출 1,200억 ($81M) ÷ 12개월 ÷ Match 장르 유저당 월 매출 $2.99 = MAU 약 226만 → DAU/MAU 비율 25~30% 적용 시 50~70만, 중간값 60만. Match Triple 3D 단일 누적 1,000만 DL · 월 매출 $130K로 검증 (Sensor Tower).</dd>
+      <dt>Springcomes 매출 280억 (net)</dt><dd>2024 감사보고서 미공개 (자산 120억 미만 비상장 법인은 외부감사 의무 없음). 280억은 외부 SDK 수수료 차감 후 분배금 net 기준. 실 광고주 지출액은 2~3배 추정. DAU 250만은 자사 발표.</dd>
+      <dt>Springcomes 영업이익률 5~10% (추정)</dt><dd>net 분배금 기준 + 한국 인건비 + 신작 R&D 비용 감안한 추정 범위.</dd>
+    </dl>
+
+    <h3 style="grid-column:1/-1;margin-top:14px;">시장 규모 산정</h3>
+    <dl>
+      <dt>글로벌 모바일 게임 시장 130조원</dt><dd>$92B × 1,380원 (Newzoo Global Games Market Report 2024).</dd>
+      <dt>모바일 캐주얼 세그먼트 62조원</dt><dd>$45B × 1,380원 (Sensor Tower Mobile Gaming Insights 2024). 매치-3 + 머지 + 하이퍼캐주얼 + 퍼즐 + 리워드·카드 합산. 전체 모바일 게임의 약 49% 비중.</dd>
+      <dt>장르별 시장 규모 (조원/년)</dt><dd>매치-3 16.6조 / 퍼즐 기타 13.8조 / 하이퍼캐주얼 12.4조 / 머지 11.0조 / 리워드·카드 8.3조 (Sensor Tower 2024 기반 추정).</dd>
+      <dt>3사 합산 점유율 0.6%</dt><dd>3,846억 ÷ 62조 = 0.62%.</dd>
+      <dt>2030 목표 점유율 2.4%</dt><dd>1.5조 ÷ 62조 = 2.42%. 시장 자체가 8~10% 성장하면 분모 확대.</dd>
+    </dl>
+
+    <h3 style="grid-column:1/-1;margin-top:14px;">국가별 매출 비중 추정</h3>
+    <dl>
+      <dt>JustPlay 북미 70 / 유럽 20 / 기타 10</dt><dd>JustPlay 자체 발표 "북미 매출 비중 약 70%" + 유럽 본사 소재지 + 영어권 매출 분포 일반화 추정.</dd>
+      <dt>Lihuhu 북미 60 / 유럽 20 / 동남아·한국 10 / 기타 10</dt><dd>Apple App Store US 차트 노출 빈도 + 베트남 본사 인근 + 하이퍼캐주얼 글로벌 표준 분포 기반 추정.</dd>
+      <dt>Springcomes 한국 50 / 일본 20 / 북미 20 / 기타 10</dt><dd>한국 본사 + 머지 페코 일본 친화 IP + 헬로 타운 글로벌 출시 후 북미 진출 + Google Play KR 차트 노출 빈도 기반 추정.</dd>
+    </dl>
+
+    <h3 style="grid-column:1/-1;margin-top:14px;">동급 카테고리 평균 매출·DAU (한눈에 비교 차트)</h3>
+    <dl>
+      <dt>JustPlay 동급 평균 매출 1,500억 / DAU 30만</dt><dd>리워드 광고 BM 플랫폼 카테고리 (Mistplay·App Flame·Tap Cash 등) 기준. JustPlay이 카테고리 TOP3 수준이라 평균보다 매출·DAU 모두 우위.</dd>
+      <dt>Lihuhu 동급 평균 매출 800억 / DAU 80만</dt><dd>하이퍼캐주얼 양산형 (게임 100+) 카테고리 평균. Voodoo·Homa·Lion Studios 등 비교군. Lihuhu는 매출 평균 이상, DAU는 평균 이하 (이익률로 보완).</dd>
+      <dt>Springcomes 동급 평균 매출 1,000억 / DAU 120만</dt><dd>머지·캐주얼 mid-size (Magic Tavern·Wooga 일부 게임 등) 카테고리 평균. Springcomes는 DAU 평균 2배지만 매출은 1/3 → 트래픽 활용 여지 큰 자산.</dd>
+    </dl>
+
+    <h3 style="grid-column:1/-1;margin-top:14px;">3사 게임 포트폴리오 장르 분포 (전체 게임 기준)</h3>
+    <dl>
+      <dt>JustPlay (35+ 게임)</dt><dd>리워드·카드 40% / 매치-3 25% / 퍼즐 기타 15% / 하이퍼캐주얼 10% / 머지 10%. App Store 분류 + 메인 앱 통합 게임 기준.</dd>
+      <dt>Lihuhu (100+ 게임)</dt><dd>하이퍼캐주얼 70% / 매치-3 20% / 머지 5% / 퍼즐 기타 5%. Google Play 등록 카테고리 + Sensor Tower 분류 기반.</dd>
+      <dt>Springcomes (30+ 게임)</dt><dd>머지 50% / 매치-3 20% / 캐주얼·기타 15% / 퍼즐 기타 10% / 하이퍼캐주얼 5%. 자체 발표 + App Store 카테고리 기반.</dd>
+    </dl>
+
+    <h3 style="grid-column:1/-1;margin-top:14px;">글로벌 경쟁자 매출 (2024 기준 / 단위: 억원)</h3>
+    <dl>
+      <dt>Playtika 35,000억</dt><dd>2024 연결 매출 $2.5B × 1,380원. NASDAQ 상장사 IR 자료.</dd>
+      <dt>Moon Active (Coin Master) 28,000억</dt><dd>2024 추정 $2B × 1,380원. Sensor Tower / The Information 추정치.</dd>
+      <dt>Scopely 28,000억</dt><dd>2024 매출 $2B × 1,380원. Savvy Games Group 산하.</dd>
+      <dt>Voodoo 4,200억</dt><dd>2024 매출 약 $300M × 1,380원. 자체 보도 + 업계 추정.</dd>
+      <dt>Homa Games 1,400억</dt><dd>2024 매출 약 $100M × 1,380원. Heavybit Podcast 인용.</dd>
+    </dl>
+
+    <h3 style="grid-column:1/-1;margin-top:14px;">eCPM·ARPDAU 산업 벤치마크</h3>
+    <dl>
+      <dt>미국 iOS 리워드 비디오 eCPM 26,000원</dt><dd>$19.63 × 1,380원 (Tenjin 모바일 광고 매출 벤치마크 2025).</dd>
+      <dt>장르별 유저당 월 광고 매출</dt><dd>하이퍼캐주얼 1,190원 ($0.86) / 매치-3·머지 4,130원 ($2.99) / 파티 6,770원 ($4.90). Sensor Tower 2024.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- 부록 02: 출처 -->
+<section data-tab-content="appendix">
+  <h2><span class="num">03</span> 출처</h2>
+  <div class="sources">
+    <h3>3사 게임 데이터</h3>
+    <ul>
+      <li><a href="https://www.justplayengine.com/" target="_blank">JustPlay 공식 사이트 (35+ 게임 · DAU 50만 · 누적 2,500만)</a></li>
+      <li><a href="https://www.justplayengine.com/ecosystem" target="_blank">JustPlay Top 10 자체 발표</a></li>
+      <li><a href="https://www.spcomes.com/" target="_blank">Springcomes 공식 (DAU 250만 · 누적 3억+)</a></li>
+      <li><a href="https://apps.apple.com/kr/developer/springcomes-co-ltd/id1151454258" target="_blank">Springcomes Apple App Store 개발자 페이지</a></li>
+      <li><a href="https://lihuhugames.com/" target="_blank">Lihuhu 공식 사이트</a></li>
+      <li><a href="https://apps.apple.com/us/developer/lihuhu-pte-ltd/id1259021611" target="_blank">Lihuhu Apple App Store 개발자 페이지</a></li>
+      <li><a href="https://app.sensortower.com/ios/us/lihuhu-pte-ltd/app/match-triple-3d-matching-tile/1530876832/" target="_blank">Match Triple 3D Sensor Tower (월 매출 $130K)</a></li>
+      <li><a href="https://unity.com/blog/breaking-down-match-triple-3d" target="_blank">Match Triple 3D 모네타이즈 분석 · Unity</a></li>
+      <li><a href="https://unity.com/resources/springcomes-offerwall" target="_blank">머지 스위츠 Unity Offerwall · D7 ROAS 50%+</a></li>
+      <li><a href="https://adjoe.io/success-stories/hello-town-adjoe-playtime/" target="_blank">헬로 타운 D30 ROAS +69.33% · Adjoe Playtime</a></li>
+    </ul>
+    <h3>광고 BM 산업 벤치마크</h3>
+    <ul>
+      <li><a href="https://tenjin.com/blog/ad-monetization-benchmark-report-2025-ecpm-ad-revenue/" target="_blank">Tenjin 모바일 광고 매출 벤치마크 2025 (eCPM · 장르별 ARPU)</a></li>
+      <li><a href="https://maf.ad/en/blog/rewarded-ads-stats/" target="_blank">MAF 리워드 광고 성과 분석</a></li>
+    </ul>
+    <h3>회사 인수·사업 전략</h3>
+    <ul>
+      <li><a href="https://www.smartbizn.com/news/articleView.html?idxno=138658" target="_blank">엔씨 저스트플레이 인수 · 2,060억 매출 기여</a></li>
+      <li><a href="https://www.getnews.co.kr/news/articleView.html?idxno=864182" target="_blank">엔씨 2030 매출 5조 목표 발표 · 게트뉴스</a></li>
+      <li><a href="https://thestackbytracy.substack.com/p/thuong-vu-cua-ncsoft-va-lihuhu" target="_blank">The $Stack · Lihuhu 하이브리드 캐주얼 야망</a></li>
+      <li><a href="https://indeokyeo-wq.github.io/game-screening/" target="_blank">본인 Game-Screening 4항목 100점 평가 시스템</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Prepared by 여인덕 · 모바일 캐주얼/퍼블리싱 사업 전략 및 데이터 분석 담당자 지원자료 · 2026-04-25 v9 · 게임 사업 전문가 관점
+</footer>
+
+</div>
+
+<script>
+Chart.defaults.font.family = '-apple-system, "Pretendard", "Segoe UI", "Noto Sans KR", sans-serif';
+Chart.defaults.font.size = 11.5;
+Chart.defaults.color = '#475569';
+Chart.register(ChartDataLabels);
+
+// === 통일 디자인 시스템 ===
+const C = {
+  just: '#ea580c',     // 주황 (JustPlay)
+  spring: '#15803d',   // 초록 (Springcomes)
+  lihuhu: '#7c3aed',   // 보라 (Lihuhu)
+  accent: '#1e3a8a',   // 네이비 (총합/시장)
+  accent2: '#2563eb',  // 블루
+  good: '#15803d',
+  amber: '#f59e0b',
+  rose: '#e11d48',
+  teal: '#0891b2',
+  slate: '#64748b',
+  slateLight: '#cbd5e1'
+};
+
+// 그라데이션 헬퍼 (세로/가로)
+function vGradient(ctx, color, opacity = 1) {
+  const {ctx: c, chartArea} = ctx.chart;
+  if (!chartArea) return color;
+  const g = c.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+  g.addColorStop(0, color + '80');
+  g.addColorStop(1, color);
+  return g;
+}
+function hGradient(ctx, color) {
+  const {ctx: c, chartArea} = ctx.chart;
+  if (!chartArea) return color;
+  const g = c.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
+  g.addColorStop(0, color + '80');
+  g.addColorStop(1, color);
+  return g;
+}
+
+// 공통 옵션
+const proGrid = { color: '#f1f5f9', lineWidth: 1, drawTicks: false };
+const proAxis = { font: { size: 11, weight: 600 }, color: '#475569' };
+const dlBarH = (fmt) => ({ anchor: 'end', align: 'end', color: '#0f172a', font: { size: 11.5, weight: 700 }, formatter: fmt, clip: false });
+const dlBarV = (fmt) => ({ anchor: 'end', align: 'top', color: '#0f172a', font: { size: 11.5, weight: 700 }, formatter: fmt, clip: false });
+
+// === 한눈에: 3사 매출 vs 동급 평균 (각 회사 + 동급 평균) ===
+new Chart(document.getElementById('chartRevenue'), {
+  type: 'bar',
+  data: {
+    labels: ['JustPlay', 'Lihuhu', 'Springcomes'],
+    datasets: [
+      {
+        label: '실적 매출',
+        data: [2366, 1200, 280],
+        backgroundColor: ctx => [hGradient(ctx, C.just), hGradient(ctx, C.lihuhu), hGradient(ctx, C.spring)][ctx.dataIndex],
+        borderRadius: 6, borderSkipped: false, barThickness: 24
+      },
+      {
+        label: '동급 카테고리 평균 매출',
+        data: [1500, 800, 1000],   // JustPlay 동급(리워드 BM): 평균 1500억 / Lihuhu 동급(하이퍼캐주얼 100+ 게임): 800억 / Springcomes 동급(머지 캐주얼 DAU 250만): 1000억
+        backgroundColor: '#cbd5e1',
+        borderRadius: 6, borderSkipped: false, barThickness: 24
+      }
+    ]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    layout: { padding: { right: 80, left: 4, top: 8, bottom: 4 } },
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, weight: 600 }, padding: 12, usePointStyle: true } },
+      datalabels: { anchor: 'end', align: 'end', color: '#0f172a', font: { size: 10.5, weight: 700 }, formatter: v => v.toLocaleString() + '억', clip: false }
+    },
+    scales: { x: { ticks: { ...proAxis, callback: v => v.toLocaleString() }, grid: proGrid, beginAtZero: true }, y: { grid: { display: false }, ticks: { ...proAxis, font: { size: 12, weight: 700 } } } }
+  }
+});
+
+// === 한눈에: DAU vs 동급 평균 ===
+new Chart(document.getElementById('chartDAU'), {
+  type: 'bar',
+  data: {
+    labels: ['Springcomes', 'Lihuhu', 'JustPlay'],
+    datasets: [
+      {
+        label: '실적 DAU',
+        data: [250, 60, 50],
+        backgroundColor: ctx => [hGradient(ctx, C.spring), hGradient(ctx, C.lihuhu), hGradient(ctx, C.just)][ctx.dataIndex],
+        borderRadius: 6, borderSkipped: false, barThickness: 24
+      },
+      {
+        label: '동급 카테고리 평균 DAU',
+        data: [120, 80, 30],  // 머지 매출 비슷 동급 DAU 120 / 하이퍼캐주얼 100+ 게임 동급 80 / 리워드 BM 동급 30
+        backgroundColor: '#cbd5e1',
+        borderRadius: 6, borderSkipped: false, barThickness: 24
+      }
+    ]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    layout: { padding: { right: 70, left: 4, top: 8, bottom: 4 } },
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, weight: 600 }, padding: 12, usePointStyle: true } },
+      datalabels: { anchor: 'end', align: 'end', color: '#0f172a', font: { size: 10.5, weight: 700 }, formatter: v => v + '만', clip: false }
+    },
+    scales: { x: { ticks: { ...proAxis, callback: v => v + '만' }, grid: proGrid, beginAtZero: true }, y: { grid: { display: false }, ticks: { ...proAxis, font: { size: 12, weight: 700 } } } }
+  }
+});
+
+// === 국가별 매출 비중 (3사 detail 패널) ===
+const countryOpts = (showLegend = true) => ({
+  responsive: true, maintainAspectRatio: false, cutout: '55%',
+  plugins: {
+    legend: { display: showLegend, position: 'bottom', labels: { font: { size: 10.5, weight: 600 }, padding: 10, usePointStyle: true, pointStyle: 'circle' } },
+    datalabels: { color: '#fff', font: { weight: 700, size: 11 }, formatter: v => v + '%' }
+  }
+});
+
+// === 한눈에 — 국가별 매출 비중 (요약 도넛 3개) ===
+new Chart(document.getElementById('chartCountryJustTop'), {
+  type: 'doughnut',
+  data: { labels: ['북미', '유럽', '기타'], datasets: [{ data: [70, 20, 10], backgroundColor: [C.accent, C.accent2, C.slateLight], borderColor: '#fff', borderWidth: 3 }] },
+  options: countryOpts()
+});
+new Chart(document.getElementById('chartCountryLihuhuTop'), {
+  type: 'doughnut',
+  data: { labels: ['북미', '유럽', '동남아·한국', '기타'], datasets: [{ data: [60, 20, 10, 10], backgroundColor: [C.accent, C.accent2, C.amber, C.slateLight], borderColor: '#fff', borderWidth: 3 }] },
+  options: countryOpts()
+});
+new Chart(document.getElementById('chartCountrySpringTop'), {
+  type: 'doughnut',
+  data: { labels: ['한국', '일본', '북미', '기타'], datasets: [{ data: [50, 20, 20, 10], backgroundColor: [C.accent, C.rose, C.accent2, C.slateLight], borderColor: '#fff', borderWidth: 3 }] },
+  options: countryOpts()
+});
+
+// === 한눈에: ARPDAU (세로 막대, 매출순, 하이퍼캐주얼 평균 제거) ===
+new Chart(document.getElementById('chartARPDAU'), {
+  type: 'bar',
+  data: {
+    labels: ['JustPlay', 'Lihuhu', 'Springcomes'],
+    datasets: [{
+      data: [1360, 540, 30],
+      backgroundColor: ctx => [vGradient(ctx, C.just), vGradient(ctx, C.lihuhu), vGradient(ctx, C.spring)][ctx.dataIndex],
+      borderRadius: 6, borderSkipped: false, maxBarThickness: 80
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30, left: 4, right: 4 } },
+    plugins: { legend: { display: false }, datalabels: dlBarV(v => v.toLocaleString() + '원') },
+    scales: { y: { ticks: { ...proAxis, callback: v => v.toLocaleString() + '원' }, grid: proGrid, beginAtZero: true }, x: { grid: { display: false }, ticks: { ...proAxis, font: { size: 12, weight: 700 } } } }
+  }
+});
+
+// === 한눈에: 장르별 ARPU (원으로 변경) ===
+new Chart(document.getElementById('chartGenreARPU'), {
+  type: 'bar',
+  data: {
+    labels: ['하이퍼캐주얼', '매치-3 / 머지', '파티 게임'],
+    datasets: [{
+      data: [1190, 4130, 6770],  // $0.86 → 1190원, $2.99 → 4130원, $4.90 → 6770원 (1380환율)
+      backgroundColor: ctx => [vGradient(ctx, C.slate), vGradient(ctx, C.teal), vGradient(ctx, C.accent2)][ctx.dataIndex],
+      borderRadius: 6, borderSkipped: false, maxBarThickness: 80
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30, left: 4, right: 4 } },
+    plugins: { legend: { display: false }, datalabels: dlBarV(v => v.toLocaleString() + '원') },
+    scales: { y: { ticks: { ...proAxis, callback: v => v.toLocaleString() }, grid: proGrid, beginAtZero: true }, x: { grid: { display: false }, ticks: { ...proAxis, font: { size: 12, weight: 700 } } } }
+  }
+});
+
+// === 한눈에 신규: 글로벌 경쟁자 매출 비교 ===
+new Chart(document.getElementById('chartCompetitors'), {
+  type: 'bar',
+  data: {
+    labels: ['Playtika', 'Moon Active (Coin Master)', 'Scopely', 'Voodoo', 'JustPlay ★', 'Lihuhu ★', 'Homa Games', 'Springcomes ★'],
+    datasets: [{
+      data: [35000, 28000, 28000, 4200, 2366, 1200, 1400, 280],
+      backgroundColor: ctx => {
+        const isNC = [4, 5, 7].includes(ctx.dataIndex);
+        return isNC ? hGradient(ctx, C.accent) : hGradient(ctx, C.slate);
+      },
+      borderRadius: 6, borderSkipped: false, barThickness: 22
+    }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    layout: { padding: { right: 90, left: 4, top: 8, bottom: 8 } },
+    plugins: {
+      legend: { display: false },
+      datalabels: { anchor: 'end', align: 'end', color: ctx => [4,5,7].includes(ctx.dataIndex) ? C.accent : '#475569', font: { size: 11, weight: 700 }, formatter: v => v.toLocaleString() + '억', clip: false },
+      tooltip: { callbacks: { label: ctx => ctx.parsed.x.toLocaleString() + '억원' } }
+    },
+    scales: {
+      x: { ticks: { ...proAxis, callback: v => (v >= 10000 ? (v/10000) + '조' : v.toLocaleString() + '억') }, grid: proGrid, type: 'logarithmic', min: 100 },
+      y: { grid: { display: false }, ticks: { ...proAxis, font: { size: 11.5, weight: 700 }, color: ctx => [4,5,7].includes(ctx.index) ? C.accent : '#475569' } }
+    }
+  }
+});
+
+// === 3사 영업이익 (가로 막대) ===
+new Chart(document.getElementById('chartOpProfit'), {
+  type: 'bar',
+  data: {
+    labels: ['Lihuhu', 'JustPlay', 'Springcomes (추정)'],
+    datasets: [{
+      data: [300, 263, 21],
+      backgroundColor: ctx => [hGradient(ctx, C.lihuhu), hGradient(ctx, C.just), hGradient(ctx, C.spring)][ctx.dataIndex],
+      borderRadius: 6, borderSkipped: false, barThickness: 32
+    }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    layout: { padding: { right: 70, left: 4, top: 8, bottom: 4 } },
+    plugins: { legend: { display: false }, datalabels: dlBarH(v => v.toLocaleString() + '억원') },
+    scales: { x: { ticks: { ...proAxis, callback: v => v + '억' }, grid: proGrid, beginAtZero: true }, y: { grid: { display: false }, ticks: { ...proAxis, font: { size: 12, weight: 700 } } } }
+  }
+});
+
+// === 3사 영업이익률 (세로 막대) ===
+new Chart(document.getElementById('chartOpMargin'), {
+  type: 'bar',
+  data: {
+    labels: ['Lihuhu', 'JustPlay', 'Springcomes (추정)'],
+    datasets: [{
+      data: [25, 11, 7.5],
+      backgroundColor: ctx => [vGradient(ctx, C.lihuhu), vGradient(ctx, C.just), vGradient(ctx, C.spring)][ctx.dataIndex],
+      borderRadius: 6, borderSkipped: false, maxBarThickness: 80
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30, left: 4, right: 4 } },
+    plugins: { legend: { display: false }, datalabels: dlBarV(v => v + '%') },
+    scales: { y: { ticks: { ...proAxis, callback: v => v + '%' }, grid: proGrid, max: 30, beginAtZero: true }, x: { grid: { display: false }, ticks: { ...proAxis, font: { size: 12, weight: 700 } } } }
+  }
+});
+
+// ==========================================
+// === 시장 분석 차트 (전부 원 단위로 통일) ===
+// ==========================================
+
+// 시장 스케일 비교 (가로 막대 — 같은 축에서 직접 비교)
+new Chart(document.getElementById('chartMarketShare'), {
+  type: 'bar',
+  data: {
+    labels: ['3사 합산 매출 (현재 0.6%)', '2030 공식 목표 (2.4%)', '보수 시나리오 1.5배 (1.1%)', '글로벌 캐주얼 시장 (100%)'],
+    datasets: [{
+      data: [3846, 15000, 6825, 620000],
+      backgroundColor: ctx => {
+        const colors = [C.just, C.good, C.accent2, C.slateLight];
+        return ctx.chart.ctx ? hGradient(ctx, colors[ctx.dataIndex]) : colors[ctx.dataIndex];
+      },
+      borderRadius: 6, borderSkipped: false, barThickness: 28
+    }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    layout: { padding: { right: 90, left: 4, top: 8, bottom: 4 } },
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        anchor: 'end', align: 'end', color: '#0f172a', font: { weight: 700, size: 11 },
+        formatter: v => v >= 10000 ? (v/10000).toFixed(1) + '조원' : v.toLocaleString() + '억원',
+        clip: false
+      },
+      tooltip: { callbacks: { label: ctx => ctx.parsed.x.toLocaleString() + '억원' } }
+    },
+    scales: {
+      x: { type: 'logarithmic', min: 1000, max: 1000000, ticks: { ...proAxis, callback: v => v >= 10000 ? (v/10000) + '조' : v.toLocaleString() + '억' }, grid: proGrid },
+      y: { grid: { display: false }, ticks: { ...proAxis, font: { size: 11.5, weight: 700 } } }
+    }
+  }
+});
+
+// 점유율 확장 시나리오
+new Chart(document.getElementById('chartShareGrowth'), {
+  type: 'bar',
+  data: {
+    labels: ['2025 현재', '보수 시나리오\n(1.5배)', '공식 목표 2030\n(3.3배)'],
+    datasets: [{
+      data: [0.6, 1.1, 2.4],
+      backgroundColor: ctx => [vGradient(ctx, C.slate), vGradient(ctx, C.accent2), vGradient(ctx, C.good)][ctx.dataIndex],
+      borderRadius: 6, borderSkipped: false, maxBarThickness: 80
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30 } },
+    plugins: {
+      legend: { display: false },
+      datalabels: { anchor: 'end', align: 'top', color: '#0f172a', font: { weight: 800, size: 13 }, formatter: v => v + '%', clip: false }
+    },
+    scales: { y: { ticks: { ...proAxis, callback: v => v + '%' }, grid: proGrid, max: 3, beginAtZero: true }, x: { grid: { display: false }, ticks: { ...proAxis, font: { size: 11, weight: 700 } } } }
+  }
+});
+
+// 캐주얼 세그먼트 분포 (원으로 변경)
+new Chart(document.getElementById('chartSegments'), {
+  type: 'bar',
+  data: {
+    labels: ['매치-3', '퍼즐 기타', '하이퍼캐주얼', '머지', '리워드·카드'],
+    datasets: [{
+      data: [16560, 13800, 12420, 11040, 8280],  // $B → 조원 (1380환율)
+      backgroundColor: ctx => [vGradient(ctx, C.teal), vGradient(ctx, C.amber), vGradient(ctx, C.lihuhu), vGradient(ctx, C.accent2), vGradient(ctx, C.just)][ctx.dataIndex],
+      borderRadius: 6, borderSkipped: false, maxBarThickness: 80
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30 } },
+    plugins: {
+      legend: { display: false },
+      datalabels: { anchor: 'end', align: 'top', color: '#0f172a', font: { weight: 800, size: 12 }, formatter: v => (v/10000).toFixed(1) + '조원', clip: false }
+    },
+    scales: { y: { ticks: { ...proAxis, callback: v => (v/10000).toFixed(0) + '조' }, grid: proGrid, beginAtZero: true }, x: { grid: { display: false }, ticks: { ...proAxis, font: { size: 11.5, weight: 700 } } } }
+  }
+});
+
+// 3사 게임 포트폴리오 장르 분포 (전체 게임 기준, stacked 가로 100%)
+new Chart(document.getElementById('chart3coGenre'), {
+  type: 'bar',
+  data: {
+    labels: ['JustPlay', 'Lihuhu', 'Springcomes'],
+    datasets: [
+      { label: '하이퍼캐주얼', data: [10, 70, 5],  backgroundColor: C.lihuhu, borderRadius: 0, stack: 'g' },
+      { label: '매치-3',       data: [25, 20, 20], backgroundColor: C.teal,   borderRadius: 0, stack: 'g' },
+      { label: '머지',         data: [10, 5, 50],  backgroundColor: C.accent2,borderRadius: 0, stack: 'g' },
+      { label: '퍼즐 기타',    data: [15, 5, 10],  backgroundColor: C.amber,  borderRadius: 0, stack: 'g' },
+      { label: '리워드·카드',  data: [40, 0, 0],   backgroundColor: C.just,   borderRadius: 0, stack: 'g' },
+      { label: '캐주얼·기타',  data: [0,  0, 15],  backgroundColor: C.slate,  borderRadius: 0, stack: 'g' },
+    ]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    layout: { padding: { left: 4, right: 8, top: 8, bottom: 4 } },
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, weight: 600 }, padding: 12, usePointStyle: true, pointStyle: 'rectRounded' } },
+      datalabels: {
+        color: '#fff', font: { weight: 700, size: 10.5 },
+        formatter: v => v >= 10 ? v + '%' : '',
+        display: ctx => ctx.dataset.data[ctx.dataIndex] >= 10
+      },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.x + '%' } }
+    },
+    scales: {
+      x: { stacked: true, max: 100, ticks: { ...proAxis, callback: v => v + '%' }, grid: proGrid },
+      y: { stacked: true, grid: { display: false }, ticks: { ...proAxis, font: { size: 12, weight: 700 } } }
+    }
+  }
+});
+
+// 매출 도달 경로 라인 차트 (2025 → 2030)
+new Chart(document.getElementById('chartRoadmap'), {
+  type: 'line',
+  data: {
+    labels: ['2025', '2026', '2027', '2028', '2029', '2030'],
+    datasets: [
+      {
+        label: '권장 시나리오 (1.5조 도달)',
+        data: [3846, 5200, 7500, 10500, 12700, 15000],
+        borderColor: C.accent, backgroundColor: 'rgba(30,58,138,0.08)',
+        borderWidth: 3, fill: true, tension: 0.3,
+        pointBackgroundColor: '#fff', pointBorderColor: C.accent, pointBorderWidth: 2.5, pointRadius: 5
+      },
+      {
+        label: '자연 성장 시나리오 (연 18%)',
+        data: [3846, 4538, 5355, 6319, 7456, 8798],
+        borderColor: '#94a3b8', backgroundColor: 'transparent',
+        borderWidth: 2, borderDash: [6, 4], fill: false, tension: 0.3,
+        pointBackgroundColor: '#fff', pointBorderColor: '#94a3b8', pointBorderWidth: 2, pointRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: true, position: 'bottom', labels: { padding: 16, font: { size: 12 }, usePointStyle: true } },
+      datalabels: {
+        align: 'top', anchor: 'end', color: ctx => ctx.datasetIndex === 0 ? C.accent : '#64748b',
+        font: { size: 10.5, weight: 700 },
+        formatter: v => v.toLocaleString(),
+        clip: false
+      }
+    },
+    layout: { padding: { top: 24 } },
+    scales: {
+      y: { ticks: { callback: v => (v/1000).toFixed(1) + '조' }, grid: { color: '#f1f5f9' }, beginAtZero: true, max: 17000 },
+      x: { grid: { display: false }, ticks: { font: { size: 12, weight: 600 } } }
+    }
+  }
+});
+
+// 4단 마일스톤 매출 막대
+new Chart(document.getElementById('chartMilestones'), {
+  type: 'bar',
+  data: {
+    labels: ['2025\n베이스', '2026\n통합', '2027\n신작가속', '2028\nIAP투트랙', '2030\n공식목표'],
+    datasets: [{
+      label: '매출 (억원)',
+      data: [3846, 5200, 7500, 10500, 15000],
+      backgroundColor: ['#94a3b8', '#fbbf24', '#fb923c', '#3b82f6', '#15803d'],
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, layout: { padding: { top: 28 } },
+    plugins: {
+      legend: { display: false },
+      datalabels: { anchor: 'end', align: 'top', color: '#0f172a', font: { size: 11, weight: 800 }, formatter: v => v.toLocaleString(), clip: false }
+    },
+    scales: {
+      y: { ticks: { callback: v => (v/1000).toFixed(1) + '조' }, grid: { color: '#f1f5f9' }, max: 17000 },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// 성장 동력 분해 도넛
+new Chart(document.getElementById('chartGrowthDrivers'), {
+  type: 'doughnut',
+  data: {
+    labels: ['JustPlay 88% 성장 (광고 BM 확장)', 'Springcomes IAP 투트랙', '신작 페이스 3배 (Lihuhu+Spring)', '신규 시장 (인도·라틴·일본)', '광고 최적화·AI 운영'],
+    datasets: [{
+      data: [3500, 2200, 2500, 1500, 1454],
+      backgroundColor: [C.just, C.spring, C.lihuhu, '#0e7490', '#fbbf24'],
+      borderColor: '#fff', borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: true, position: 'bottom', labels: { padding: 8, font: { size: 10.5 }, boxWidth: 10, usePointStyle: true } },
+      datalabels: {
+        color: '#fff', font: { size: 11, weight: 800 },
+        formatter: (v, ctx) => {
+          const total = ctx.dataset.data.reduce((a,b)=>a+b, 0);
+          return Math.round(v/total*100) + '%';
+        }
+      }
+    },
+    cutout: '55%'
+  }
+});
+
+function paretoChart(canvasId, color, gameLabels) {
+  const top10 = [22, 16, 12, 9, 7, 5, 4, 3, 2, 1.5];
+  const others = 100 - top10.reduce((a,b) => a+b, 0);
+  const data = [...top10, others];
+  const labels = [...gameLabels.slice(0, 10), '나머지 게임'];
+  return new Chart(document.getElementById(canvasId), {
+    type: 'bar',
+    data: { labels: labels, datasets: [{ label: '매출 비중 (%)', data: data, backgroundColor: data.map((v, i) => i < 10 ? color : '#cbd5e1'), borderRadius: 3 }] },
+    options: { responsive: true, maintainAspectRatio: false, layout: { padding: { top: 18 } }, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'top', color: '#111827', font: { size: 10.5, weight: 700 }, formatter: v => v.toFixed(1) + '%', clip: false } }, scales: { y: { ticks: { callback: v => v + '%' }, grid: { color: '#f3f4f6' }, max: 25 }, x: { grid: { display: false }, ticks: { autoSkip: false, maxRotation: 30, minRotation: 30, font: { size: 10 } } } } }
+  });
+}
+
+paretoChart('chartParetoJust', C.just, ['Solitaire Classic', 'Treasure Master', 'Bubble Chef', 'Merge Blast', 'Wooden Puzzle', 'Sugar Rush', 'Food Blast', 'Match 3D', 'Ball Bounce', 'Mad Smash']);
+paretoChart('chartParetoSpring', C.spring, ['헬로 타운', '머지 스위츠', 'Kingdom Wars', 'Jewels Temple', '머지 페코', '벽돌깨기 스타', '돌격 기사단', '타임 워', '차빠져유', '후르츠 이스케이프']);
+paretoChart('chartParetoLihuhu', C.lihuhu, ['Match Triple 3D', 'Tiles In Hole', 'Goods Hunt', 'Triple Car Jam', 'Blossom Master', 'Number Link', 'Parking Master', 'Triple Find', 'Woodber', 'Sort Master']);
+
+// ===== Tab Navigation =====
+// data-tab-content 직접 부여 방식으로 변경 (섹션 번호 per-tab 리셋)
+const tabMap = {};
+
+// 페이지 로드 시 각 section을 탭 카테고리로 분류
+function initTabs() {
+  const sections = document.querySelectorAll('section');
+  let prevTab = 'status';
+  sections.forEach(sec => {
+    const numEl = sec.querySelector('h2 .num');
+    if (numEl) {
+      const num = numEl.textContent.trim();
+      const tab = tabMap[num];
+      if (tab) {
+        sec.setAttribute('data-tab-content', tab);
+        prevTab = tab;
+      }
+    }
+  });
+
+  // Divider div들 (data 부록 안내·솔루션 안내)도 직후 section과 같은 탭으로 분류
+  const dividers = document.querySelectorAll('div[style*="margin:42px 0 24px"]');
+  dividers.forEach(div => {
+    let next = div.nextElementSibling;
+    while (next && next.tagName !== 'SECTION') next = next.nextElementSibling;
+    if (next) {
+      const tab = next.getAttribute('data-tab-content');
+      if (tab) div.setAttribute('data-tab-content', tab);
+    }
+  });
+
+  // 모든 [data-tab-content] 요소를 .tab-content 클래스로 wrapping
+  document.querySelectorAll('[data-tab-content]').forEach(el => {
+    el.classList.add('tab-content');
+  });
+
+  // 기본 활성 탭: status (URL ?tab= 으로 오버라이드 가능)
+  const params = new URLSearchParams(location.search);
+  const initial = params.get('tab') || 'summary';
+  showTab(initial);
+}
+
+function showTab(tabName) {
+  // 탭 버튼 active 토글
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-tab') === tabName);
+  });
+  // 탭 컨텐츠 토글
+  document.querySelectorAll('.tab-content').forEach(el => {
+    const matches = el.getAttribute('data-tab-content') === tabName;
+    el.classList.toggle('active', matches);
+    el.style.display = matches ? '' : 'none';
+  });
+  // Chart.js 차트 resize (display:none → block 전환 후)
+  setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => showTab(btn.getAttribute('data-tab')));
+});
+
+initTabs();
+
+// details (collapsible company panel) toggle 시 chart resize
+document.querySelectorAll('details.company-details').forEach(d => {
+  d.addEventListener('toggle', () => {
+    if (d.open) setTimeout(() => window.dispatchEvent(new Event('resize')), 60);
+  });
+});
+
+async function loadIcons() {
+  const cards = document.querySelectorAll('.gcard a.ios');
+  for (const link of cards) {
+    const m = link.href.match(/id(\d+)/);
+    if (!m) continue;
+    try {
+      const res = await fetch(`https://itunes.apple.com/lookup?id=${m[1]}`);
+      const data = await res.json();
+      if (data.results && data.results[0] && data.results[0].artworkUrl100) {
+        const card = link.closest('.gcard');
+        const icon = card.querySelector('.icon');
+        if (icon) icon.innerHTML = `<img src="${data.results[0].artworkUrl100}" alt="">`;
+      }
+    } catch (e) {}
+  }
+}
+loadIcons();
+</script>
+
+</body>
+</html>
