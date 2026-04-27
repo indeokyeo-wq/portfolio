@@ -1716,6 +1716,39 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
   <div style="padding:18px 22px;">
+      <!-- UA 효율화 흐름 도식 -->
+      <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;">UA 비용 구조 — 외부 의존 → 자체 채널 + 측정 자동화</div>
+        <div style="display:flex;align-items:stretch;gap:8px;">
+          <div style="flex:1;padding:12px 14px;background:#fef2f2;border-left:3px solid #dc2626;border-radius:4px;">
+            <div style="font-size:10.5px;color:#dc2626;font-weight:800;letter-spacing:0.06em;margin-bottom:6px;">현재. 외부 의존</div>
+            <div style="font-size:12px;color:var(--text-2);line-height:1.55;">Meta · Google · TikTok 페이드 위주. CPI $2~3</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--good);font-size:18px;font-weight:800;">→</div>
+          <div style="flex:1.3;padding:12px 14px;background:#f0fdf4;border-left:3px solid var(--good);border-radius:4px;">
+            <div style="font-size:10.5px;color:var(--good);font-weight:800;letter-spacing:0.06em;margin-bottom:6px;">대체. 자체 + UGC + 측정</div>
+            <div style="font-size:12px;color:var(--text-2);line-height:1.55;">메인 앱 cross-promo · 인플루언서 UGC · LTV 매트릭스</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;">
+          <div style="padding:10px;background:#fff;border:1px solid var(--border);border-radius:4px;text-align:center;">
+            <div style="font-size:10px;color:var(--text-3);font-weight:700;">2.1 Cross-promo</div>
+            <div style="font-size:13px;font-weight:800;color:var(--good);margin-top:4px;">CAC -15~30%</div>
+          </div>
+          <div style="padding:10px;background:#fff;border:1px solid var(--border);border-radius:4px;text-align:center;">
+            <div style="font-size:10px;color:var(--text-3);font-weight:700;">2.2 인플루언서</div>
+            <div style="font-size:13px;font-weight:800;color:var(--good);margin-top:4px;">CAC -30~50%</div>
+          </div>
+          <div style="padding:10px;background:#fff;border:1px solid var(--border);border-radius:4px;text-align:center;">
+            <div style="font-size:10px;color:var(--text-3);font-weight:700;">2.3 다채널</div>
+            <div style="font-size:13px;font-weight:800;color:var(--good);margin-top:4px;">효율 +10~20%</div>
+          </div>
+          <div style="padding:10px;background:#fff;border:1px solid var(--border);border-radius:4px;text-align:center;">
+            <div style="font-size:10px;color:var(--text-3);font-weight:700;">2.4 LTV·CAC</div>
+            <div style="font-size:13px;font-weight:800;color:var(--good);margin-top:4px;">자원 매트릭스</div>
+          </div>
+        </div>
+      </div>
       <div class="strat-action"><div class="bullet">2.1</div><div>
         <h5>JustPlay 메인 앱에서 게임 cross-promo</h5>
         <p class="now"><strong>현재</strong>: 3사 각자 외부 UA에 의존. 자체 트래픽(누적 2,500만+) 미활용.</p>
@@ -1762,6 +1795,33 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
   <div style="padding:18px 22px;">
+      <!-- 사이클 도식 -->
+      <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;">3개월 협업 사이클</div>
+        <div style="display:flex;align-items:stretch;gap:0;">
+          <div style="flex:1;background:#dbeafe;padding:14px 16px;border-radius:6px 0 0 6px;border-right:2px solid #fff;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span style="font-size:18px;">🇰🇷</span>
+              <strong style="font-size:13px;color:var(--accent-2);">한국 · Springcomes</strong>
+            </div>
+            <div style="font-size:11.5px;color:var(--text-2);line-height:1.55;">머지 IP·스토리 기획</div>
+            <div style="font-size:14px;font-weight:800;color:var(--accent-2);margin-top:8px;">4주</div>
+          </div>
+          <div style="display:flex;align-items:center;padding:0 6px;color:var(--text-3);font-size:18px;font-weight:800;">→</div>
+          <div style="flex:2;background:#eff6ff;padding:14px 16px;border-radius:0 6px 6px 0;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span style="font-size:18px;">🇻🇳</span>
+              <strong style="font-size:13px;color:var(--accent-2);">베트남 · Lihuhu</strong>
+            </div>
+            <div style="font-size:11.5px;color:var(--text-2);line-height:1.55;">양산 엔진 · asset 라이브러리 · 광고 SDK 통합</div>
+            <div style="font-size:14px;font-weight:800;color:var(--accent-2);margin-top:8px;">8주</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px dashed var(--border);font-size:12px;color:var(--text-2);">
+          <div>신작 페이스 <strong style="color:var(--text-3);">4~5종/년</strong> → <strong style="color:var(--accent-2);">8~12종/년</strong></div>
+          <div>인건비 효율 <strong style="color:var(--accent-2);">한국 대비 30~35%</strong></div>
+        </div>
+      </div>
       <div class="strat-action"><div class="bullet">1.1</div><div>
         <h5>Lihuhu 양산 라인을 Springcomes에 이식 (베트남↔한국)</h5>
         <p class="now"><strong>현재</strong>: Springcomes 신작 4~5종/년. Lihuhu 100+ 게임 양산 라인 가동. 베트남 인건비 한국의 30~35%.</p>
@@ -1779,6 +1839,39 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
   <div style="padding:18px 22px;">
+    <!-- AI 효율 비교 도식 -->
+    <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;">사람 → AI 자동화 임팩트</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+        <div style="padding:14px;background:#fff;border:1px solid var(--border);border-radius:6px;">
+          <div style="font-size:11px;color:var(--text-3);font-weight:700;letter-spacing:0.06em;margin-bottom:8px;">광고 크리에이티브</div>
+          <div style="display:flex;align-items:baseline;gap:8px;">
+            <div style="font-size:11px;color:var(--text-3);">사람 1~2주</div>
+            <span style="color:var(--accent-2);font-weight:800;">→</span>
+            <div style="font-size:13px;font-weight:800;color:var(--accent-2);">AI 주 100~500개</div>
+          </div>
+          <div style="margin-top:8px;font-size:18px;font-weight:800;color:var(--good);">CAC -20~30%</div>
+        </div>
+        <div style="padding:14px;background:#fff;border:1px solid var(--border);border-radius:6px;">
+          <div style="font-size:11px;color:var(--text-3);font-weight:700;letter-spacing:0.06em;margin-bottom:8px;">LTV 예측</div>
+          <div style="display:flex;align-items:baseline;gap:8px;">
+            <div style="font-size:11px;color:var(--text-3);">D90/D365 사후</div>
+            <span style="color:var(--accent-2);font-weight:800;">→</span>
+            <div style="font-size:13px;font-weight:800;color:var(--accent-2);">D1 → 자동 예측</div>
+          </div>
+          <div style="margin-top:8px;font-size:18px;font-weight:800;color:var(--good);">UA ROI +15~25%</div>
+        </div>
+        <div style="padding:14px;background:#fff;border:1px solid var(--border);border-radius:6px;">
+          <div style="font-size:11px;color:var(--text-3);font-weight:700;letter-spacing:0.06em;margin-bottom:8px;">운영·CS·트렌딩</div>
+          <div style="display:flex;align-items:baseline;gap:8px;">
+            <div style="font-size:11px;color:var(--text-3);">170+ 게임 수동</div>
+            <span style="color:var(--accent-2);font-weight:800;">→</span>
+            <div style="font-size:13px;font-weight:800;color:var(--accent-2);">자동 설계·챗봇·발굴</div>
+          </div>
+          <div style="margin-top:8px;font-size:18px;font-weight:800;color:var(--good);">운영 -20~30%</div>
+        </div>
+      </div>
+    </div>
     <div class="strat-action"><div class="bullet">2.1</div><div>
       <h5>광고 크리에이티브 자동 생성·테스트 (즉시)</h5>
       <p class="now"><strong>현재</strong>: 외부 에이전시 의뢰. 변형 1~2주 소요.</p>
@@ -1819,6 +1912,25 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
   <div style="padding:18px 22px;">
+      <!-- 일본 ARPU 비교 도식 -->
+      <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;">일본 머지 시장 — 글로벌 모바일 매출 2위</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="padding:14px 16px;background:#f1f5f9;border-radius:6px;">
+            <div style="font-size:11px;color:var(--text-3);font-weight:700;letter-spacing:0.06em;margin-bottom:6px;">현재. 한국·기타</div>
+            <div style="font-size:12px;color:var(--text-2);">Springcomes ARPDAU</div>
+            <div style="font-size:24px;font-weight:800;color:var(--text-3);margin-top:4px;">~30 <span style="font-size:13px;font-weight:600;">원/일</span></div>
+          </div>
+          <div style="padding:14px 16px;background:#eef2ff;border:1.5px solid #1e3a8a;border-radius:6px;">
+            <div style="font-size:11px;color:#1e3a8a;font-weight:700;letter-spacing:0.06em;margin-bottom:6px;">일본 머지 ARPU</div>
+            <div style="font-size:12px;color:var(--text-2);">월 ARPU 기준</div>
+            <div style="font-size:24px;font-weight:800;color:#1e3a8a;margin-top:4px;">4,130 <span style="font-size:13px;font-weight:600;">원/월</span></div>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding:10px 14px;background:#fef3c7;border-left:3px solid #b45309;border-radius:4px;font-size:12px;color:var(--text-2);line-height:1.6;">
+          <strong style="color:#b45309;">진입 방식</strong> · KLab·Cygames 협업 또는 자체 법인 + Hello Kitty·산리오 IP 콜라보. ARPU 4,130원 × DAU 10~30만 → <strong style="color:var(--text);">매출 +50~200억</strong>
+        </div>
+      </div>
       <div class="strat-action"><div class="bullet">1.1</div><div>
         <h5>Springcomes 머지 페코 IP 일본 확장</h5>
         <p class="now"><strong>현재</strong>: 일본 매출 비중 작음. 머지 페코 = 일본 친화 캐릭터.</p>
@@ -1840,13 +1952,30 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
   <div style="padding:18px 22px;">
-      <div class="callout" style="margin:0 0 14px;background:var(--accent-soft);border-left-color:var(--accent);">
-        <strong style="color:var(--accent);">투트랙 순차 전략 (1년 검증 후 진입)</strong>
-        <p style="margin:6px 0 0;font-size:12.5px;line-height:1.7;">
-          <strong>Year 1 (2026)</strong>: 4사 모든 게임 광고 BM으로만 검증. D30·D90 잔존, ARPDAU, D7 ROAS 측정<br>
-          <strong>Year 2 (2027~)</strong>: 검증된 hit + LTV 긴 장르 Top 5 게임에만 시즌패스·IAP 도입<br>
-          <strong>Year 3+ (2028~)</strong>: 광고 단가 변동 사이클 진입 시 IAP가 매출 보전 역할 가능 → 광고+IAP 하이브리드 BM 평가
-        </p>
+      <!-- IAP 단계 도입 타임라인 도식 -->
+      <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;">투트랙 순차 — 1년 검증 → Top 5 도입 → 하이브리드</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
+          <div style="padding:14px 16px;background:#fff;border:1px solid var(--border);border-right:none;border-radius:6px 0 0 6px;">
+            <div style="font-size:11px;color:#b45309;font-weight:800;letter-spacing:0.08em;margin-bottom:6px;">YEAR 1 · 2026</div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">광고 BM 검증</div>
+            <div style="font-size:11.5px;color:var(--text-3);line-height:1.55;">D30·D90 잔존, ARPDAU, D7 ROAS 측정</div>
+          </div>
+          <div style="padding:14px 16px;background:#fff;border:1px solid var(--border);border-right:none;">
+            <div style="font-size:11px;color:#1e40af;font-weight:800;letter-spacing:0.08em;margin-bottom:6px;">YEAR 2 · 2027~</div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">Top 5 패스 도입</div>
+            <div style="font-size:11.5px;color:var(--text-3);line-height:1.55;">검증된 hit + LTV 긴 장르 한정</div>
+          </div>
+          <div style="padding:14px 16px;background:#eef2ff;border:1.5px solid #1e3a8a;border-radius:0 6px 6px 0;">
+            <div style="font-size:11px;color:#1e3a8a;font-weight:800;letter-spacing:0.08em;margin-bottom:6px;">YEAR 3+ · 2028~</div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">광고+IAP 하이브리드</div>
+            <div style="font-size:11.5px;color:var(--text-3);line-height:1.55;">단가 변동 시 매출 보전 장치</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-2);">
+          <div>도입 시 게임당 <strong style="color:#1e3a8a;">ARPPU +30~50%</strong></div>
+          <div style="color:var(--text-3);">조기 도입 리스크: 잔존 -5~15%</div>
+        </div>
       </div>
       <div class="strat-action"><div class="bullet">2.1</div><div>
         <h5>IAP 도입 1순위 후보 5개 게임 식별</h5>
