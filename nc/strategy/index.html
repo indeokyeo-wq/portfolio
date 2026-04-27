@@ -334,6 +334,23 @@ table.compare tbody td:first-child { background: var(--accent-soft); font-weight
 .sub-card .sd { font-size:11.5px; color:var(--text-3); line-height:1.6; flex:1; }
 .sub-card .si { font-size:12px; font-weight:700; color:var(--good); padding:7px 10px; background:var(--good-soft); border-left:3px solid var(--good); border-radius:3px; margin-top:auto; }
 
+.ba { background:linear-gradient(135deg,#f8fafc,#fff); border:1px solid var(--border); border-radius:8px; padding:18px 20px; margin-bottom:14px; }
+.ba-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:14px; }
+.ba-row { display:grid; grid-template-columns: 1fr 32px 1fr; align-items:stretch; gap:0; }
+.ba-col { padding:14px 16px; border-radius:6px; display:flex; flex-direction:column; gap:6px; min-height:120px; }
+.ba-before { background:#f8fafc; border-left:3px solid var(--text-4); }
+.ba-after { background:#eff6ff; border-left:3px solid #2563eb; }
+.ba-label { font-size:10.5px; font-weight:800; letter-spacing:0.08em; }
+.ba-before .ba-label { color:var(--text-3); }
+.ba-after .ba-label { color:#2563eb; }
+.ba-content { font-size:12px; color:var(--text-2); line-height:1.6; flex:1; }
+.ba-metric { font-size:18px; font-weight:800; letter-spacing:-0.02em; line-height:1.2; margin-top:auto; }
+.ba-before .ba-metric { color:var(--text-3); }
+.ba-after .ba-metric { color:#2563eb; }
+.ba-arrow { display:flex; align-items:center; justify-content:center; color:#2563eb; font-size:20px; font-weight:800; }
+.ba-impact { margin-top:12px; padding:10px 14px; background:#fef3c7; border-left:3px solid #b45309; border-radius:4px; font-size:12px; color:var(--text-2); line-height:1.6; }
+.ba-impact strong { color:#b45309; }
+
 /* Tab Navigation */
 .tab-nav {
   position: sticky; top: 0; z-index: 50;
@@ -1582,23 +1599,23 @@ html { scroll-behavior: smooth; }
 
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:14px 0 0;">
 
-    <div style="background:#fff;border:1px solid var(--border);border-top:4px solid var(--good);border-radius:8px;padding:18px 20px;">
+    <div style="background:#fff;border:1px solid var(--border);border-top:4px solid #2563eb;border-radius:8px;padding:18px 20px;">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-        <span style="font-size:11px;font-weight:800;color:#fff;background:var(--good);padding:4px 10px;border-radius:3px;letter-spacing:0.06em;">관리</span>
+        <span style="font-size:11px;font-weight:800;color:#fff;background:#2563eb;padding:4px 10px;border-radius:3px;letter-spacing:0.06em;">관리</span>
         <div style="font-size:12px;color:var(--text-3);font-weight:600;">기존 자산 회수</div>
       </div>
-      <a href="#sol-1" style="display:block;padding:14px;background:#f0fdf4;border-radius:6px;margin-bottom:8px;text-decoration:none;color:var(--text);transition:transform 0.15s;border-left:3px solid var(--good);" onmouseover="this.style.transform='translateX(2px)'" onmouseout="this.style.transform=''">
+      <a href="#sol-1" style="display:block;padding:14px;background:#eff6ff;border-radius:6px;margin-bottom:8px;text-decoration:none;color:var(--text);transition:transform 0.15s;border-left:3px solid #2563eb;" onmouseover="this.style.transform='translateX(2px)'" onmouseout="this.style.transform=''">
         <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:32px;height:32px;border-radius:7px;background:var(--good);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;">1</div>
+          <div style="width:32px;height:32px;border-radius:7px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;">1</div>
           <div style="flex:1;min-width:0;">
             <div style="font-size:13.5px;font-weight:700;line-height:1.4;">광고 허브 통합</div>
             <div style="font-size:11.5px;color:var(--text-3);margin-top:2px;">SDK 수수료 내재화</div>
           </div>
         </div>
       </a>
-      <a href="#sol-2" style="display:block;padding:14px;background:#f0fdf4;border-radius:6px;text-decoration:none;color:var(--text);transition:transform 0.15s;border-left:3px solid var(--good);" onmouseover="this.style.transform='translateX(2px)'" onmouseout="this.style.transform=''">
+      <a href="#sol-2" style="display:block;padding:14px;background:#eff6ff;border-radius:6px;text-decoration:none;color:var(--text);transition:transform 0.15s;border-left:3px solid #2563eb;" onmouseover="this.style.transform='translateX(2px)'" onmouseout="this.style.transform=''">
         <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:32px;height:32px;border-radius:7px;background:var(--good);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;">2</div>
+          <div style="width:32px;height:32px;border-radius:7px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;">2</div>
           <div style="flex:1;min-width:0;">
             <div style="font-size:13.5px;font-weight:700;line-height:1.4;">UA Cross-promo</div>
             <div style="font-size:11.5px;color:var(--text-3);margin-top:2px;">자체 트래픽으로 CAC 절감</div>
@@ -1632,23 +1649,23 @@ html { scroll-behavior: smooth; }
       </a>
     </div>
 
-    <div style="background:#fff;border:1px solid var(--border);border-top:4px solid #1e3a8a;border-radius:8px;padding:18px 20px;">
+    <div style="background:#fff;border:1px solid var(--border);border-top:4px solid #2563eb;border-radius:8px;padding:18px 20px;">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-        <span style="font-size:11px;font-weight:800;color:#fff;background:#1e3a8a;padding:4px 10px;border-radius:3px;letter-spacing:0.06em;">확장</span>
+        <span style="font-size:11px;font-weight:800;color:#fff;background:#2563eb;padding:4px 10px;border-radius:3px;letter-spacing:0.06em;">확장</span>
         <div style="font-size:12px;color:var(--text-3);font-weight:600;">권역·M&amp;A</div>
       </div>
-      <a href="#sol-5" style="display:block;padding:14px;background:#eef2ff;border-radius:6px;margin-bottom:8px;text-decoration:none;color:var(--text);transition:transform 0.15s;border-left:3px solid #1e3a8a;" onmouseover="this.style.transform='translateX(2px)'" onmouseout="this.style.transform=''">
+      <a href="#sol-5" style="display:block;padding:14px;background:#eff6ff;border-radius:6px;margin-bottom:8px;text-decoration:none;color:var(--text);transition:transform 0.15s;border-left:3px solid #2563eb;" onmouseover="this.style.transform='translateX(2px)'" onmouseout="this.style.transform=''">
         <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:32px;height:32px;border-radius:7px;background:#1e3a8a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;">5</div>
+          <div style="width:32px;height:32px;border-radius:7px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;">5</div>
           <div style="flex:1;min-width:0;">
             <div style="font-size:13.5px;font-weight:700;line-height:1.4;">일본 권역 단일</div>
             <div style="font-size:11.5px;color:var(--text-3);margin-top:2px;">머지 IP 일본 진출</div>
           </div>
         </div>
       </a>
-      <a href="#sol-6" style="display:block;padding:14px;background:#eef2ff;border-radius:6px;text-decoration:none;color:var(--text);transition:transform 0.15s;border-left:3px solid #1e3a8a;" onmouseover="this.style.transform='translateX(2px)'" onmouseout="this.style.transform=''">
+      <a href="#sol-6" style="display:block;padding:14px;background:#eff6ff;border-radius:6px;text-decoration:none;color:var(--text);transition:transform 0.15s;border-left:3px solid #2563eb;" onmouseover="this.style.transform='translateX(2px)'" onmouseout="this.style.transform=''">
         <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:32px;height:32px;border-radius:7px;background:#1e3a8a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;">6</div>
+          <div style="width:32px;height:32px;border-radius:7px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;">6</div>
           <div style="flex:1;min-width:0;">
             <div style="font-size:13.5px;font-weight:700;line-height:1.4;">IAP 단계 도입</div>
             <div style="font-size:11.5px;color:var(--text-3);margin-top:2px;">Top 5 시즌패스 (2028~)</div>
@@ -1674,40 +1691,29 @@ html { scroll-behavior: smooth; }
   </div>
 <div id="sol-1" style="background:#fff;border:1px solid var(--border);border-radius:6px;margin-bottom:14px;overflow:hidden;scroll-margin-top:80px;">
   <div style="padding:14px 18px;display:flex;align-items:center;gap:14px;background:#fafbfc;border-bottom:1px solid var(--border);">
-    <div style="width:36px;height:36px;border-radius:8px;background:#15803d;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex-shrink:0;">1</div>
+    <div style="width:36px;height:36px;border-radius:8px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex-shrink:0;">1</div>
     <div style="flex:1;min-width:0;">
       <div style="font-size:14px;font-weight:700;color:var(--text);">광고 허브 통합 — JustPlay를 3사 광고 허브로</div>
       <div style="font-size:12.5px;color:var(--text-3);margin-top:2px;line-height:1.5;">Lihuhu·Springcomes 외부 SDK 수수료(추정 10~30%) → JustPlay 통합 시 일부 내재화 가능성 검토</div>
     </div>
   </div>
   <div style="padding:18px 22px;">
-      <!-- 광고 수수료 흐름 도식 -->
-      <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
-        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;">광고 수수료 흐름 — 현재 (Before) vs 통합 허브 (After)</div>
-
-        <div style="margin-bottom:14px;padding:12px 14px;background:#fef2f2;border-left:3px solid #dc2626;border-radius:4px;">
-          <div style="font-size:11px;color:#dc2626;font-weight:700;letter-spacing:0.06em;margin-bottom:8px;">BEFORE · 외부 SDK 분산 운영</div>
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;">
-            <span style="background:#fff;padding:6px 12px;border:1px solid #fecaca;border-radius:4px;font-weight:600;">광고주 (100%)</span>
-            <span style="color:#dc2626;font-weight:800;">→</span>
-            <span style="background:#fff;padding:6px 12px;border:1px solid #fecaca;border-radius:4px;color:#dc2626;font-weight:700;">외부 SDK (수수료 10~30% 추정)</span>
-            <span style="color:#dc2626;font-weight:800;">→</span>
-            <span style="background:#fff;padding:6px 12px;border:1px solid #fecaca;border-radius:4px;font-weight:600;">3사 (60~70% 수령)</span>
+      <div class="ba">
+        <div class="ba-title">광고 수수료 흐름</div>
+        <div class="ba-row">
+          <div class="ba-col ba-before">
+            <div class="ba-label">BEFORE</div>
+            <div class="ba-content">3사 외부 SDK 분산 운영 (AppLovin·Unity·AdMob 등 5~6개)</div>
+            <div class="ba-metric">3사 60~70% 수령</div>
           </div>
-          <div style="font-size:11px;color:var(--text-3);margin-top:8px;">AppLovin · Unity LevelPlay · IronSource · AdMob · Adjoe · Tapjoy 등 5~6개 SDK 분산 → 단가 미집중 + 수수료 leak</div>
-        </div>
-
-        <div style="padding:12px 14px;background:#f0fdf4;border-left:3px solid var(--good);border-radius:4px;">
-          <div style="font-size:11px;color:var(--good);font-weight:700;letter-spacing:0.06em;margin-bottom:8px;">AFTER · JustPlay 통합 허브</div>
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;">
-            <span style="background:#fff;padding:6px 12px;border:1px solid #bbf7d0;border-radius:4px;font-weight:600;">광고주 (100%)</span>
-            <span style="color:var(--good);font-weight:800;">→</span>
-            <span style="background:linear-gradient(135deg,#ea580c,#c2410c);color:#fff;padding:6px 12px;border-radius:4px;font-weight:700;">JustPlay 통합 허브</span>
-            <span style="color:var(--good);font-weight:800;">→</span>
-            <span style="background:#fff;padding:6px 12px;border:1px solid #bbf7d0;border-radius:4px;color:var(--good);font-weight:700;">3사 (90%+ 수령)</span>
+          <div class="ba-arrow">→</div>
+          <div class="ba-col ba-after">
+            <div class="ba-label">AFTER</div>
+            <div class="ba-content">JustPlay 인벤토리로 통합. mediation 수수료 내재화.</div>
+            <div class="ba-metric">3사 90%+ 수령</div>
           </div>
-          <div style="font-size:11px;color:var(--text-3);margin-top:8px;">mediation 수수료 일부 내재화 → <strong style="color:var(--good);">광고 매출 +10~25% 검증 항목</strong> (단가 상향 가정)</div>
         </div>
+        <div class="ba-impact">광고 매출 <strong>+10~25%</strong> · 합산 매출 <strong>+150~370억</strong> (단가 상향 가정)</div>
       </div>
 
       <div class="sub-grid n1">
@@ -1722,27 +1728,29 @@ html { scroll-behavior: smooth; }
 </div>
 <div id="sol-2" style="background:#fff;border:1px solid var(--border);border-radius:6px;margin-bottom:14px;overflow:hidden;scroll-margin-top:80px;">
   <div style="padding:14px 18px;display:flex;align-items:center;gap:14px;background:#fafbfc;border-bottom:1px solid var(--border);">
-    <div style="width:36px;height:36px;border-radius:8px;background:#15803d;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex-shrink:0;">2</div>
+    <div style="width:36px;height:36px;border-radius:8px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex-shrink:0;">2</div>
     <div style="flex:1;min-width:0;">
       <div style="font-size:14px;font-weight:700;color:var(--text);">마케팅 (UA). 더 효율적으로, 더 싸게</div>
       <div style="font-size:12.5px;color:var(--text-3);margin-top:2px;line-height:1.5;">현재 UA 채널: Meta · Google · TikTok · 외부 SDK 분산. 자체 채널 활용 부족</div>
     </div>
   </div>
   <div style="padding:18px 22px;">
-      <!-- UA 효율화 흐름 도식 -->
-      <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
-        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;">UA 비용 구조 — 외부 의존 → 자체 채널 + 측정 자동화</div>
-        <div style="display:flex;align-items:stretch;gap:8px;">
-          <div style="flex:1;padding:12px 14px;background:#fef2f2;border-left:3px solid #dc2626;border-radius:4px;">
-            <div style="font-size:10.5px;color:#dc2626;font-weight:800;letter-spacing:0.06em;margin-bottom:6px;">현재. 외부 의존</div>
-            <div style="font-size:12px;color:var(--text-2);line-height:1.55;">Meta · Google · TikTok 페이드 위주. CPI $2~3</div>
+      <div class="ba">
+        <div class="ba-title">UA 비용 구조</div>
+        <div class="ba-row">
+          <div class="ba-col ba-before">
+            <div class="ba-label">BEFORE</div>
+            <div class="ba-content">Meta · Google · TikTok 외부 페이드 위주</div>
+            <div class="ba-metric">CPI $2~3</div>
           </div>
-          <div style="display:flex;align-items:center;color:var(--good);font-size:18px;font-weight:800;">→</div>
-          <div style="flex:1.3;padding:12px 14px;background:#f0fdf4;border-left:3px solid var(--good);border-radius:4px;">
-            <div style="font-size:10.5px;color:var(--good);font-weight:800;letter-spacing:0.06em;margin-bottom:6px;">대체. 자체 + UGC + 측정</div>
-            <div style="font-size:12px;color:var(--text-2);line-height:1.55;">메인 앱 cross-promo · 인플루언서 UGC · LTV 매트릭스</div>
+          <div class="ba-arrow">→</div>
+          <div class="ba-col ba-after">
+            <div class="ba-label">AFTER</div>
+            <div class="ba-content">자체 cross-promo + UGC + LTV 매트릭스 자동화</div>
+            <div class="ba-metric">CPI $1~1.5</div>
           </div>
         </div>
+        <div class="ba-impact">가중평균 CAC <strong>-15~50%</strong> · 광고 효율 <strong>+10~20%</strong></div>
       </div>
       <div class="sub-grid n4">
         <div class="sub-card">
@@ -1790,32 +1798,22 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
   <div style="padding:18px 22px;">
-      <!-- 사이클 도식 -->
-      <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
-        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;">3개월 협업 사이클</div>
-        <div style="display:flex;align-items:stretch;gap:0;">
-          <div style="flex:1;background:#dbeafe;padding:14px 16px;border-radius:6px 0 0 6px;border-right:2px solid #fff;">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-              <span style="font-size:18px;">🇰🇷</span>
-              <strong style="font-size:13px;color:var(--accent-2);">한국 · Springcomes</strong>
-            </div>
-            <div style="font-size:11.5px;color:var(--text-2);line-height:1.55;">머지 IP·스토리 기획</div>
-            <div style="font-size:14px;font-weight:800;color:var(--accent-2);margin-top:8px;">4주</div>
+      <div class="ba">
+        <div class="ba-title">신작 출시 페이스</div>
+        <div class="ba-row">
+          <div class="ba-col ba-before">
+            <div class="ba-label">BEFORE</div>
+            <div class="ba-content">Springcomes 단독 양산. 한국 인력만 가동.</div>
+            <div class="ba-metric">4~5종/년</div>
           </div>
-          <div style="display:flex;align-items:center;padding:0 6px;color:var(--text-3);font-size:18px;font-weight:800;">→</div>
-          <div style="flex:2;background:#eff6ff;padding:14px 16px;border-radius:0 6px 6px 0;">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-              <span style="font-size:18px;">🇻🇳</span>
-              <strong style="font-size:13px;color:var(--accent-2);">베트남 · Lihuhu</strong>
-            </div>
-            <div style="font-size:11.5px;color:var(--text-2);line-height:1.55;">양산 엔진 · asset 라이브러리 · 광고 SDK 통합</div>
-            <div style="font-size:14px;font-weight:800;color:var(--accent-2);margin-top:8px;">8주</div>
+          <div class="ba-arrow">→</div>
+          <div class="ba-col ba-after">
+            <div class="ba-label">AFTER</div>
+            <div class="ba-content">한국 4주 기획 + 베트남 8주 양산 = 3개월 사이클</div>
+            <div class="ba-metric">8~12종/년</div>
           </div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px dashed var(--border);font-size:12px;color:var(--text-2);">
-          <div>신작 페이스 <strong style="color:var(--text-3);">4~5종/년</strong> → <strong style="color:var(--accent-2);">8~12종/년</strong></div>
-          <div>인건비 효율 <strong style="color:var(--accent-2);">한국 대비 30~35%</strong></div>
-        </div>
+        <div class="ba-impact">3년 누적 Springcomes 매출 <strong>+100~200%</strong> · 인건비 한국 대비 <strong>30~35%</strong></div>
       </div>
       <div class="sub-grid n1">
         <div class="sub-card">
@@ -1836,38 +1834,22 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
   <div style="padding:18px 22px;">
-    <!-- AI 효율 비교 도식 -->
-    <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
-      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;">사람 → AI 자동화 임팩트</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
-        <div style="padding:14px;background:#fff;border:1px solid var(--border);border-radius:6px;">
-          <div style="font-size:11px;color:var(--text-3);font-weight:700;letter-spacing:0.06em;margin-bottom:8px;">광고 크리에이티브</div>
-          <div style="display:flex;align-items:baseline;gap:8px;">
-            <div style="font-size:11px;color:var(--text-3);">사람 1~2주</div>
-            <span style="color:var(--accent-2);font-weight:800;">→</span>
-            <div style="font-size:13px;font-weight:800;color:var(--accent-2);">AI 주 100~500개</div>
-          </div>
-          <div style="margin-top:8px;font-size:18px;font-weight:800;color:var(--good);">CAC -20~30%</div>
+    <div class="ba">
+      <div class="ba-title">AI 자동화 임팩트</div>
+      <div class="ba-row">
+        <div class="ba-col ba-before">
+          <div class="ba-label">BEFORE</div>
+          <div class="ba-content">사람 수동 운영. 크리에이티브 1~2주 · LTV 사후 측정 · 170+ 게임 수동 LiveOps</div>
+          <div class="ba-metric">병목 다수</div>
         </div>
-        <div style="padding:14px;background:#fff;border:1px solid var(--border);border-radius:6px;">
-          <div style="font-size:11px;color:var(--text-3);font-weight:700;letter-spacing:0.06em;margin-bottom:8px;">LTV 예측</div>
-          <div style="display:flex;align-items:baseline;gap:8px;">
-            <div style="font-size:11px;color:var(--text-3);">D90/D365 사후</div>
-            <span style="color:var(--accent-2);font-weight:800;">→</span>
-            <div style="font-size:13px;font-weight:800;color:var(--accent-2);">D1 → 자동 예측</div>
-          </div>
-          <div style="margin-top:8px;font-size:18px;font-weight:800;color:var(--good);">UA ROI +15~25%</div>
-        </div>
-        <div style="padding:14px;background:#fff;border:1px solid var(--border);border-radius:6px;">
-          <div style="font-size:11px;color:var(--text-3);font-weight:700;letter-spacing:0.06em;margin-bottom:8px;">운영·CS·트렌딩</div>
-          <div style="display:flex;align-items:baseline;gap:8px;">
-            <div style="font-size:11px;color:var(--text-3);">170+ 게임 수동</div>
-            <span style="color:var(--accent-2);font-weight:800;">→</span>
-            <div style="font-size:13px;font-weight:800;color:var(--accent-2);">자동 설계·챗봇·발굴</div>
-          </div>
-          <div style="margin-top:8px;font-size:18px;font-weight:800;color:var(--good);">운영 -20~30%</div>
+        <div class="ba-arrow">→</div>
+        <div class="ba-col ba-after">
+          <div class="ba-label">AFTER</div>
+          <div class="ba-content">AI 자동화. 주 100~500 변형 · D1→D365 자동 예측 · 챗봇·트렌딩 자동</div>
+          <div class="ba-metric">3 영역 동시</div>
         </div>
       </div>
+      <div class="ba-impact">CAC <strong>-20~30%</strong> · UA ROI <strong>+15~25%</strong> · 운영 리소스 <strong>-20~30%</strong></div>
     </div>
     <div class="sub-grid n3">
       <div class="sub-card">
@@ -1902,31 +1884,29 @@ html { scroll-behavior: smooth; }
   </div>
 <div id="sol-5" style="background:#fff;border:1px solid var(--border);border-radius:6px;margin-bottom:14px;overflow:hidden;scroll-margin-top:80px;">
   <div style="padding:14px 18px;display:flex;align-items:center;gap:14px;background:#fafbfc;border-bottom:1px solid var(--border);">
-    <div style="width:36px;height:36px;border-radius:8px;background:#1e3a8a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex-shrink:0;">1</div>
+    <div style="width:36px;height:36px;border-radius:8px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex-shrink:0;">1</div>
     <div style="flex:1;min-width:0;">
       <div style="font-size:14px;font-weight:700;color:var(--text);">글로벌 시장 확장</div>
       <div style="font-size:12.5px;color:var(--text-3);margin-top:2px;line-height:1.5;">현재 매출 70~80%가 북미·유럽. 일본·중국·인도·라틴 미진입</div>
     </div>
   </div>
   <div style="padding:18px 22px;">
-      <!-- 일본 ARPU 비교 도식 -->
-      <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
-        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;">일본 머지 시장 — 글로벌 모바일 매출 2위</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div style="padding:14px 16px;background:#f1f5f9;border-radius:6px;">
-            <div style="font-size:11px;color:var(--text-3);font-weight:700;letter-spacing:0.06em;margin-bottom:6px;">현재. 한국·기타</div>
-            <div style="font-size:12px;color:var(--text-2);">Springcomes ARPDAU</div>
-            <div style="font-size:24px;font-weight:800;color:var(--text-3);margin-top:4px;">~30 <span style="font-size:13px;font-weight:600;">원/일</span></div>
+      <div class="ba">
+        <div class="ba-title">일본 머지 시장 — 글로벌 모바일 매출 2위</div>
+        <div class="ba-row">
+          <div class="ba-col ba-before">
+            <div class="ba-label">BEFORE</div>
+            <div class="ba-content">Springcomes 한국·기타 권역. ARPDAU 기준</div>
+            <div class="ba-metric">~30원/일</div>
           </div>
-          <div style="padding:14px 16px;background:#eef2ff;border:1.5px solid #1e3a8a;border-radius:6px;">
-            <div style="font-size:11px;color:#1e3a8a;font-weight:700;letter-spacing:0.06em;margin-bottom:6px;">일본 머지 ARPU</div>
-            <div style="font-size:12px;color:var(--text-2);">월 ARPU 기준</div>
-            <div style="font-size:24px;font-weight:800;color:#1e3a8a;margin-top:4px;">4,130 <span style="font-size:13px;font-weight:600;">원/월</span></div>
+          <div class="ba-arrow">→</div>
+          <div class="ba-col ba-after">
+            <div class="ba-label">AFTER</div>
+            <div class="ba-content">머지 페코 일본 진출. KLab·Cygames 협업 + 산리오 콜라보. 월 ARPU 기준</div>
+            <div class="ba-metric">4,130원/월</div>
           </div>
         </div>
-        <div style="margin-top:12px;padding:10px 14px;background:#fef3c7;border-left:3px solid #b45309;border-radius:4px;font-size:12px;color:var(--text-2);line-height:1.6;">
-          <strong style="color:#b45309;">진입 방식</strong> · KLab·Cygames 협업 또는 자체 법인 + Hello Kitty·산리오 IP 콜라보. ARPU 4,130원 × DAU 10~30만 → <strong style="color:var(--text);">매출 +50~200억</strong>
-        </div>
+        <div class="ba-impact">1년 매출 <strong>+50~200억</strong> (ARPU 4,130원 × DAU 10~30만)</div>
       </div>
       <div class="sub-grid n1">
         <div class="sub-card">
@@ -1944,37 +1924,29 @@ html { scroll-behavior: smooth; }
 </div>
 <div id="sol-6" style="background:#fff;border:1px solid var(--border);border-radius:6px;margin-bottom:14px;overflow:hidden;scroll-margin-top:80px;">
   <div style="padding:14px 18px;display:flex;align-items:center;gap:14px;background:#fafbfc;border-bottom:1px solid var(--border);">
-    <div style="width:36px;height:36px;border-radius:8px;background:#1e3a8a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex-shrink:0;">2</div>
+    <div style="width:36px;height:36px;border-radius:8px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex-shrink:0;">2</div>
     <div style="flex:1;min-width:0;">
       <div style="font-size:14px;font-weight:700;color:var(--text);">IAP 투트랙. 검증된 게임에만 인앱결제 강화 (2단계 순차)</div>
       <div style="font-size:12.5px;color:var(--text-3);margin-top:2px;line-height:1.5;">1년 광고 BM으로 검증 → Top 5 게임에 IAP/시즌패스 도입 → 광고 단가 cyclical 하락 시 매출 보전 장치</div>
     </div>
   </div>
   <div style="padding:18px 22px;">
-      <!-- IAP 단계 도입 타임라인 도식 -->
-      <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
-        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;">투트랙 순차 — 1년 검증 → Top 5 도입 → 하이브리드</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
-          <div style="padding:14px 16px;background:#fff;border:1px solid var(--border);border-right:none;border-radius:6px 0 0 6px;">
-            <div style="font-size:11px;color:#b45309;font-weight:800;letter-spacing:0.08em;margin-bottom:6px;">YEAR 1 · 2026</div>
-            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">광고 BM 검증</div>
-            <div style="font-size:11.5px;color:var(--text-3);line-height:1.55;">D30·D90 잔존, ARPDAU, D7 ROAS 측정</div>
+      <div class="ba">
+        <div class="ba-title">BM 단계 도입</div>
+        <div class="ba-row">
+          <div class="ba-col ba-before">
+            <div class="ba-label">BEFORE · 2026</div>
+            <div class="ba-content">4사 모든 게임 광고 BM으로만 검증. D30·D90 잔존·ARPDAU·D7 ROAS 측정</div>
+            <div class="ba-metric">광고 단일</div>
           </div>
-          <div style="padding:14px 16px;background:#fff;border:1px solid var(--border);border-right:none;">
-            <div style="font-size:11px;color:#1e40af;font-weight:800;letter-spacing:0.08em;margin-bottom:6px;">YEAR 2 · 2027~</div>
-            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">Top 5 패스 도입</div>
-            <div style="font-size:11.5px;color:var(--text-3);line-height:1.55;">검증된 hit + LTV 긴 장르 한정</div>
-          </div>
-          <div style="padding:14px 16px;background:#eef2ff;border:1.5px solid #1e3a8a;border-radius:0 6px 6px 0;">
-            <div style="font-size:11px;color:#1e3a8a;font-weight:800;letter-spacing:0.08em;margin-bottom:6px;">YEAR 3+ · 2028~</div>
-            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">광고+IAP 하이브리드</div>
-            <div style="font-size:11.5px;color:var(--text-3);line-height:1.55;">단가 변동 시 매출 보전 장치</div>
+          <div class="ba-arrow">→</div>
+          <div class="ba-col ba-after">
+            <div class="ba-label">AFTER · 2028~</div>
+            <div class="ba-content">Top 5 게임 패스 도입 → 광고+IAP 하이브리드. 단가 변동 시 매출 보전</div>
+            <div class="ba-metric">광고+IAP</div>
           </div>
         </div>
-        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-2);">
-          <div>도입 시 게임당 <strong style="color:#1e3a8a;">ARPPU +30~50%</strong></div>
-          <div style="color:var(--text-3);">조기 도입 리스크: 잔존 -5~15%</div>
-        </div>
+        <div class="ba-impact">게임당 ARPPU <strong>+30~50%</strong> · 조기 도입 리스크 잔존 -5~15%</div>
       </div>
       <div class="sub-grid n2">
         <div class="sub-card">
@@ -2004,24 +1976,6 @@ html { scroll-behavior: smooth; }
   </div>
 </div>
 
-  <div class="callout" style="background:#fafbfc;border-left-color:var(--text-2);margin-top:24px;padding:20px 26px;">
-    <strong style="color:var(--text);font-size:15px;">퍼블리싱·M&A·투자 판단 프레임 (본부 의사결정 인풋)</strong>
-    <p style="margin:8px 0 12px;font-size:13px;line-height:1.7;color:var(--text-2);">3대 의사결정 주제별 균질화된 평가 기준. 본 포지션은 사업전략 관점의 근거를 제시해 본부 판단의 일관성을 확보.</p>
-    <table class="compare" style="margin-top:6px;font-size:12.5px;">
-      <thead><tr><th style="width:18%;">주제</th><th>핵심 평가축</th><th>본인 자산·근거</th></tr></thead>
-      <tbody>
-        <tr><td><strong>퍼블리싱</strong></td><td>장르 적합성 · LTV 구조 · 본부 운영 캐파 · 권역 핏(특히 일본·북미)</td><td>NCW 퍼블리싱 의사결정 직접 조율 경험 / 글로벌 권역별 BM 현지화 사례</td></tr>
-        <tr><td><strong>M&A</strong></td><td>광고 인벤토리 규모 · 개선 여지 · 에버그린성 · 인수 용이성 (4축 100점)</td><td>game-screening 100개 게임 실배포 — 4축 스코어링 + 재무추정 자동화</td></tr>
-        <tr><td><strong>투자</strong></td><td>시장성 · 장르 적합성 · 수익 구조 · 본사 시너지(공급·UA·운영)</td><td>신규 트렌드 장르 자동 발굴 (실무 액션 ④와 동일 파이프라인)</td></tr>
-      </tbody>
-    </table>
-    <p style="margin:10px 0 0;font-size:12px;color:var(--text-3);line-height:1.65;">※ 평가 가중치·임계치는 본부 정책에 맞춰 조정. 본 프레임 = 평가의 <strong>구조와 데이터 인풋</strong> 제공 / 의사결정 주체는 본부.</p>
-  </div>
-
-  <div class="callout" style="background:#eff6ff;border-left-color:var(--accent);margin-top:14px;">
-    <strong style="color:var(--accent);">솔루션 운영 원칙</strong>
-    <p style="margin:8px 0 0;font-size:13px;line-height:1.75;">각 솔루션 임팩트 = <strong>데이터 진단을 거쳐 검증해야 할 항목</strong>. 카테고리별 진입 우선순위·단계 일정은 <strong>방향성·로드맵 탭</strong>의 Phase 1~4 구조 준용. 본 보고서 범위 = 가설 도출·KPI 측정 설계·의사결정 사이클 제안. 실 의사결정은 사업본부 / 본인은 데이터·자동화 도구 공급으로 지원.</p>
-  </div>
 </section>
 
 <!-- 매출 시나리오 상세 (방향성에서 이전) -->
@@ -2467,7 +2421,31 @@ html { scroll-behavior: smooth; }
 
 <!-- Appendix 01: 산업 best-in-class 대비 3사 위치 -->
 <section data-tab-content="appendix">
-  <h2><span class="num">01</span> 산업 best-in-class 대비 3사 위치</h2>
+  <h2><span class="num">01</span> 의사결정 프레임·운영 원칙</h2>
+  <p class="h2-sub" style="font-style:italic;">본부 의사결정 인풋 평가 프레임 + 솔루션 운영 원칙</p>
+  <div class="callout" style="background:#fafbfc;border-left-color:var(--text-2);margin-top:24px;padding:20px 26px;">
+    <strong style="color:var(--text);font-size:15px;">퍼블리싱·M&A·투자 판단 프레임 (본부 의사결정 인풋)</strong>
+    <p style="margin:8px 0 12px;font-size:13px;line-height:1.7;color:var(--text-2);">3대 의사결정 주제별 균질화된 평가 기준. 본 포지션은 사업전략 관점의 근거를 제시해 본부 판단의 일관성을 확보.</p>
+    <table class="compare" style="margin-top:6px;font-size:12.5px;">
+      <thead><tr><th style="width:18%;">주제</th><th>핵심 평가축</th><th>본인 자산·근거</th></tr></thead>
+      <tbody>
+        <tr><td><strong>퍼블리싱</strong></td><td>장르 적합성 · LTV 구조 · 본부 운영 캐파 · 권역 핏(특히 일본·북미)</td><td>NCW 퍼블리싱 의사결정 직접 조율 경험 / 글로벌 권역별 BM 현지화 사례</td></tr>
+        <tr><td><strong>M&A</strong></td><td>광고 인벤토리 규모 · 개선 여지 · 에버그린성 · 인수 용이성 (4축 100점)</td><td>game-screening 100개 게임 실배포 — 4축 스코어링 + 재무추정 자동화</td></tr>
+        <tr><td><strong>투자</strong></td><td>시장성 · 장르 적합성 · 수익 구조 · 본사 시너지(공급·UA·운영)</td><td>신규 트렌드 장르 자동 발굴 (실무 액션 ④와 동일 파이프라인)</td></tr>
+      </tbody>
+    </table>
+    <p style="margin:10px 0 0;font-size:12px;color:var(--text-3);line-height:1.65;">※ 평가 가중치·임계치는 본부 정책에 맞춰 조정. 본 프레임 = 평가의 <strong>구조와 데이터 인풋</strong> 제공 / 의사결정 주체는 본부.</p>
+  </div>
+
+  <div class="callout" style="background:#eff6ff;border-left-color:var(--accent);margin-top:14px;">
+    <strong style="color:var(--accent);">솔루션 운영 원칙</strong>
+    <p style="margin:8px 0 0;font-size:13px;line-height:1.75;">각 솔루션 임팩트 = <strong>데이터 진단을 거쳐 검증해야 할 항목</strong>. 카테고리별 진입 우선순위·단계 일정은 <strong>방향성·로드맵 탭</strong>의 Phase 1~4 구조 준용. 본 보고서 범위 = 가설 도출·KPI 측정 설계·의사결정 사이클 제안. 실 의사결정은 사업본부 / 본인은 데이터·자동화 도구 공급으로 지원.</p>
+  </div>
+
+</section>
+
+<section data-tab-content="appendix">
+  <h2><span class="num">02</span> 산업 best-in-class 대비 3사 위치</h2>
   <p class="h2-sub" style="font-style:italic;">3사 핵심 지표 vs 산업 최고 수준 비교. 성장 여지 정량화</p>
   <table class="compare" style="margin-top:14px;">
     <thead><tr><th>지표</th><th>JustPlay</th><th>Springcomes</th><th>Lihuhu</th><th>산업 best-in-class</th><th>성장 여지</th></tr></thead>
@@ -2481,7 +2459,7 @@ html { scroll-behavior: smooth; }
 
 <!-- Appendix 02: 산정·추정 기준 -->
 <section data-tab-content="appendix">
-  <h2><span class="num">02</span> 산정·추정 기준</h2>
+  <h2><span class="num">03</span> 산정·추정 기준</h2>
   <p class="h2-sub" style="font-style:italic;">본 보고서에 사용된 수치들의 산정·추정 근거 정리</p>
 
   <div class="glossary" style="margin-top:14px;">
@@ -2549,7 +2527,7 @@ html { scroll-behavior: smooth; }
 
 <!-- 부록 02: 출처 -->
 <section data-tab-content="appendix">
-  <h2><span class="num">03</span> 출처</h2>
+  <h2><span class="num">04</span> 출처</h2>
   <div class="sources">
     <h3>3사 게임 데이터</h3>
     <ul>
