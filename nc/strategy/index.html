@@ -36,15 +36,15 @@
   --good: #15803d; --good-soft: #f0fdf4; --good-tint: #dcfce7;
   --info: #0e7490; --info-soft: #ecfeff; --info-tint: #cffafe;
   --highlight: #fef3c7;
-  --c-just: #7aa7e8;
-  --c-spring: #9cc97b;
-  --c-lihuhu: #b5a4d9;
-  --c-just-soft: #eaf1fb;
-  --c-spring-soft: #eff6e6;
-  --c-lihuhu-soft: #f3eef9;
-  --c-just-deep: #4f7fc4;
-  --c-spring-deep: #6ea24c;
-  --c-lihuhu-deep: #8770b5;
+  --c-just: #ea580c;
+  --c-spring: #15803d;
+  --c-lihuhu: #7c3aed;
+  --c-just-soft: #fff7ed;
+  --c-spring-soft: #f0fdf4;
+  --c-lihuhu-soft: #f5f3ff;
+  --c-just-deep: #c2410c;
+  --c-spring-deep: #166534;
+  --c-lihuhu-deep: #5b21b6;
   --shadow-sm: 0 1px 3px rgba(10,37,64,0.06), 0 1px 2px rgba(10,37,64,0.04);
   --shadow-md: 0 8px 24px rgba(10,37,64,0.08), 0 2px 6px rgba(10,37,64,0.04);
   --shadow-lg: 0 24px 60px rgba(10,37,64,0.10);
@@ -676,9 +676,9 @@ html { scroll-behavior: smooth; }
   <div class="callout" style="background:#fafbfc;border-left-color:var(--text-2);padding:24px 30px;margin-bottom:24px;">
     <strong style="color:var(--text);font-size:15px;letter-spacing:0.02em;">요약</strong>
     <ul style="margin:14px 0 0;padding-left:24px;font-size:16px;line-height:1.95;color:var(--text);">
-      <li>2030 목표 <strong>1.5조원</strong>. 2025 실적 3,846억 대비 <strong>약 4배</strong>.</li>
-      <li>글로벌 시장 <strong>62조원</strong> 대비 3사 점유율 <strong>0.6%</strong>. 외형 확장 여지 충분.</li>
-      <li>운영 게임 <strong>165종 · 4개국</strong>. 관리 효율화·광고 단가 상향가 1차 레버.</li>
+      <li>2030 목표 <strong>1.5조원</strong>. 2025 실적 대비 <strong>약 4배</strong> 달성 필요.</li>
+      <li>글로벌 시장 <strong>62조원</strong> 대비 3사 점유율 <strong>0.6%</strong>. 외형 확장 여지 충분하다 판단.</li>
+      <li>게임 3사 운영 게임 <strong>165종 이상</strong>, 권역 분리로 효율적 관리 체계가 구축되어야 매출 증대 용이할 것으로 추정.</li>
     </ul>
   </div>
 </section>
@@ -717,13 +717,13 @@ html { scroll-behavior: smooth; }
     </div>
     <div class="kpi" style="border-left-color:var(--text-3);">
       <div class="label">2025 4사 합산 매출</div>
-      <div class="value">~3,846 <small>억원/년</small></div>
-      <div class="sub">JustPlay 2,366<span class="src 공시">공시</span> + Lihuhu 1,200<span class="src 공시">공시</span> + Spring 280<span class="src 추정">추정</span><br><strong style="color:var(--good);">2026 자연성장 ~4,270억<span class="src 시나리오">시나리오</span></strong><br><span style="color:var(--text-3);font-size:11px;">JustPlay forecast +88% · Lihuhu·Spring 보수 0%. 강세 +20% / 약세 -5% 병기 (Appendix)</span></div>
+      <div class="value">~3,846 <small>억원</small></div>
+      <div class="sub">JustPlay 2,366<span class="src 공시">공시</span> + Lihuhu 1,200<span class="src 공시">공시</span> + Spring 280<span class="src 추정">추정</span><br><strong style="color:var(--good);">2026 자연성장 ~4,270억<span class="src 시나리오">시나리오</span></strong><br><span style="color:var(--text-3);font-size:11px;">JustPlay 인수 발표 시 forecast +88% · Lihuhu·Spring 보수 0%. 강세 +20% / 약세 -5% 병기 (Appendix)</span></div>
     </div>
     <div class="kpi" style="border-left-color:var(--accent-2);">
       <div class="label">2026 캐주얼 KPI</div>
       <div class="value" style="color:var(--accent-2);">~7,500 <small>억원</small></div>
-      <div class="sub">전사 2.5조 × 캐주얼 30% 비중<span class="src 공시">공시</span><br><strong style="color:#b45309;">2025 대비 약 1.95배 필요</strong><br><span style="color:var(--text-3);font-size:13px;">2026 경영전략 간담회 (2026-03-12)</span></div>
+      <div class="sub">전사 2.5조 × 캐주얼 30% 비중<span class="src 공시">공시</span></div>
     </div>
     <div class="kpi" style="border-left-color:var(--good);">
       <div class="label">2030 캐주얼 매출 목표</div>
@@ -1166,25 +1166,25 @@ html { scroll-behavior: smooth; }
 
   <!-- KPI 카드 (매출 순: JustPlay > Lihuhu > Springcomes > 합산) -->
   <div class="kpi-grid" style="margin-top:18px;">
-    <div class="kpi" style="border-left:none;border-top:4px solid var(--c-just);background:linear-gradient(180deg,var(--c-just-soft) 0%,#fff 70%);box-shadow:0 4px 14px rgba(122,167,232,0.18);">
-      <div class="label" style="color:var(--c-just-deep);">JustPlay</div>
-      <div class="value" style="color:var(--c-just-deep);">2,366 <small style="color:var(--text-3);">억/년</small></div>
-      <div class="sub">DAU 50만 · 운영 게임 35+ · 광고 BM 100%<br>영업이익 <strong>263억/년</strong> · 마진 11%<br><strong style="color:var(--good);">2026 forecast: 4,460억 (+88%)</strong></div>
+    <div class="kpi" style="border-left:none;border-top:4px solid var(--c-just);background:linear-gradient(180deg,var(--c-just-soft) 0%,#fff 70%);box-shadow:0 4px 14px rgba(234,88,12,0.18);">
+      <div class="label" style="color:var(--c-just-deep);display:flex;align-items:center;gap:8px;"><img src="https://d1hbpr09pwz0sk.cloudfront.net/logo_url/justplay-76c255a6" alt="JustPlay" style="width:22px;height:22px;border-radius:5px;object-fit:cover;">JustPlay</div>
+      <div class="value" style="color:var(--c-just-deep);">2,366 <small style="color:var(--text-3);">억</small></div>
+      <div class="sub">DAU 50만 · 운영 게임 35+ · 광고 BM 100%<br>영업이익 <strong>263억</strong> · 마진 11%<br><strong style="color:var(--good);">2026 forecast: 4,460억 (+88%)</strong> <span style="color:var(--text-3);font-size:11px;">— 인수 발표 자료</span></div>
     </div>
-    <div class="kpi" style="border-left:none;border-top:4px solid var(--c-lihuhu);background:linear-gradient(180deg,var(--c-lihuhu-soft) 0%,#fff 70%);box-shadow:0 4px 14px rgba(181,164,217,0.22);">
+    <div class="kpi" style="border-left:none;border-top:4px solid var(--c-lihuhu);background:linear-gradient(180deg,var(--c-lihuhu-soft) 0%,#fff 70%);box-shadow:0 4px 14px rgba(124,58,237,0.20);">
       <div class="label" style="color:var(--c-lihuhu-deep);">Lihuhu</div>
-      <div class="value" style="color:var(--c-lihuhu-deep);">1,200 <small style="color:var(--text-3);">억/년</small></div>
-      <div class="sub">DAU ~60만 · 운영 게임 <strong>100+</strong><br>영업이익 300억/년<br><strong style="color:var(--good);">마진 25% (3사 최고)</strong></div>
+      <div class="value" style="color:var(--c-lihuhu-deep);">1,200 <small style="color:var(--text-3);">억</small></div>
+      <div class="sub">DAU ~60만 · 운영 게임 <strong>100+</strong><br>영업이익 300억<br><strong style="color:var(--good);">마진 25% (3사 최고)</strong></div>
     </div>
-    <div class="kpi" style="border-left:none;border-top:4px solid var(--c-spring);background:linear-gradient(180deg,var(--c-spring-soft) 0%,#fff 70%);box-shadow:0 4px 14px rgba(156,201,123,0.20);">
+    <div class="kpi" style="border-left:none;border-top:4px solid var(--c-spring);background:linear-gradient(180deg,var(--c-spring-soft) 0%,#fff 70%);box-shadow:0 4px 14px rgba(21,128,61,0.20);">
       <div class="label" style="color:var(--c-spring-deep);">Springcomes</div>
-      <div class="value" style="color:var(--c-spring-deep);">280 <small style="color:var(--text-3);">억/년</small></div>
+      <div class="value" style="color:var(--c-spring-deep);">280 <small style="color:var(--text-3);">억</small></div>
       <div class="sub">DAU <strong>250만 (3사 1위)</strong> · 운영 게임 30+<br>광고 메인 + IAP 일부<br>영업이익 추정 5~10%</div>
     </div>
     <div class="kpi" style="border-left:none;border-top:none;background:linear-gradient(135deg,#0a2540 0%,#11315a 50%,#1b6bff 180%);color:#fff;box-shadow:var(--shadow-md);position:relative;overflow:hidden;">
       <div class="label" style="color:rgba(255,255,255,0.9);letter-spacing:0.08em;">3사 합산</div>
-      <div class="value" style="color:#fff;">~3,846 <small style="color:rgba(255,255,255,0.7);">억/년</small></div>
-      <div class="sub" style="color:rgba(255,255,255,0.85);">DAU 합산 <strong style="color:#7fb0ff;">~360만</strong> · 운영 게임 <strong style="color:#7fb0ff;">165+개</strong><br>영업이익 ~<strong style="color:#7fb0ff;">590억/년</strong> · 4개국 분산 운영</div>
+      <div class="value" style="color:#fff;">~3,846 <small style="color:rgba(255,255,255,0.7);">억</small></div>
+      <div class="sub" style="color:rgba(255,255,255,0.85);">DAU 합산 <strong style="color:#7fb0ff;">~360만</strong> · 운영 게임 <strong style="color:#7fb0ff;">165+개</strong><br>영업이익 ~<strong style="color:#7fb0ff;">590억</strong> · 4개국 분산 운영</div>
     </div>
   </div>
 
@@ -1287,55 +1287,6 @@ html { scroll-behavior: smooth; }
   </details>
   <details class="company-details">
     <summary>
-      <div class="brand-icon"><img src="https://www.spcomes.com/imgs/sp.jpg" alt="Springcomes" loading="lazy"></div>
-      <div class="brand-info">
-        <div class="name">Springcomes <span style="font-size:12px;color:var(--text-3);font-weight:500;">· 한국 서울 · 2016 설립</span></div>
-        <div class="tagline">머지 게임 전문 · 매출 <strong>280억</strong> · DAU <strong>250만 (3사 1위)</strong> · 게임 30+ · 누적 인스톨 2~3억 · 머지 IP 4종+</div>
-      </div>
-      <div class="toggle-hint"></div>
-    </summary>
-    <div class="company-body">
-
-      <div class="section-title">A. 트래픽 지표</div>
-      <div class="mini-kpi">
-        <div class="b"><div class="l">DAU</div><div class="v">250만</div></div>
-        <div class="b"><div class="l">누적 다운로드</div><div class="v">2~3억</div></div>
-        <div class="b"><div class="l">운영 게임 수</div><div class="v">30개+</div></div>
-        <div class="b"><div class="l">ARPDAU</div><div class="v">~30원</div></div>
-      </div>
-
-      <div class="section-title">B. 주력 게임 Top 10</div>
-      <div class="games-grid">
-        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/Cdo9RXxx_GBI0FkTLGH2Q3cD1tEylHqlidnXor7afFxsgWJxfW-xcmb3bg6gRHlTaxKS=w128" alt="Kingdom Wars"></div><div class="info"><div class="gname">Kingdom Wars</div><div class="gmeta"><span>1,000만+ DL</span><span>2016~</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.stormdefense" target="_blank">Google Play</a></div></div>
-        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/uyxiB9CeaeLW4TesBI3w8hq3jHRIWB_bfpsbjSXOt7vyC7MdEkOq-zXIhSg2rXIVs8w=w128" alt="Jewels Temple"></div><div class="info"><div class="gname">Jewels Temple (Match-3)</div><div class="gmeta"><span>820만+ DL</span><span>2016</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.jquest" target="_blank">Google Play</a></div></div>
-        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/2j76oUIyaE6yJy0MuUeuh_aCzLpIjP3eLHTe6V3lXhMhN64mGWhgJOVV-bAcft4mcFLk=w128" alt="머지 스위츠"></div><div class="info"><div class="gname">머지 스위츠 (고양이 카페)</div><div class="gmeta"><span>470만 DL</span><span>2023-06</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.emerge" target="_blank">Google Play</a></div></div>
-        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/1HCjMO7fZ_tYi4vefT4N65n9yTmGNp-oURSFghjJ1GqmwVoEETdfjz56LiWsSHnl7A=w128" alt="헬로 타운"></div><div class="info"><div class="gname">헬로 타운 (신입사원 머지)</div><div class="gmeta"><span>440만 DL</span><span>2024-12</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/hello-town-merge-story/id6737850281" target="_blank">App Store</a><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.hellotown" target="_blank">Google Play</a></div></div>
-        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/CR7KxRX5VmWThfZ9-t5RRrQRivc1QMJvN-WJX_Cx8yE4sWiIb87uRkKbRsoTxvKBa-0N=w128" alt="머지 페코"></div><div class="info"><div class="gname">머지 페코</div><div class="gmeta"><span>머지</span><span>일본 친화 IP</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.mergepeko" target="_blank">Google Play</a></div></div>
-        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/7f/5b/967f5b4c-6a2d-a2e1-c840-3397da3ee35a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">벽돌깨기 스타</div><div class="gmeta"><span>아케이드</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/search?q=Springcomes+Brick+Breaker&c=apps" target="_blank">Google Play</a></div></div>
-        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1b/94/e2/1b94e265-46e4-7e24-f28e-9be35f022465/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">돌격 기사단 (방치형 RPG)</div><div class="gmeta"><span>방치형</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6477564391" target="_blank">App Store</a></div></div>
-        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/92/66/cc/9266cc9d-f076-c125-2c0d-f7f5370b2422/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">타임 워: 오리진</div><div class="gmeta"><span>캐주얼</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6504663203" target="_blank">App Store</a></div></div>
-        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d4/a6/77/d4a677f2-330c-71ac-319e-74381398a83c/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">부릉부릉 차빠져유</div><div class="gmeta"><span>보드</span><span>최근작</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6755670967" target="_blank">App Store</a></div></div>
-        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/7f/5b/967f5b4c-6a2d-a2e1-c840-3397da3ee35a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">후르츠 이스케이프</div><div class="gmeta"><span>퍼즐</span><span>최근작</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6755807238" target="_blank">App Store</a></div></div>
-      </div>
-
-      <div class="section-title">C. Top 10 매출 견인 (추정)</div>
-      <div class="chart-card"><p class="desc">최신 hit 머지 2종(헬로 타운·머지 스위츠)이 견인</p><div class="chart-wrap tall"><canvas id="chartParetoSpring"></canvas></div></div>
-
-      <div class="section-title">D. 비즈니스 모델 (BM)</div>
-      <table class="compare"><tbody>
-        <tr><td>한 줄 요약</td><td>DAU 250만 유저가 게임하는 동안 광고 노출 → 광고비 수취. 머지 게임 일부 IAP도 있으나 비중 작음.</td></tr>
-        <tr><td>주력 광고 채널</td><td>Unity Offerwall · Adjoe Playtime · MyChips · Tapjoy · Gamelight 등 외부 SDK 분산</td></tr>
-        <tr><td>D7 ROAS · D30 ROAS</td><td>헬로 타운 D7 50% / D30 66%. 머지 장르 평균 이상</td></tr>
-        <tr><td>잔존율</td><td>머지 스위츠 D7 30% / D30 10%. 머지 장르 표준</td></tr>
-        <tr><td>영업이익률</td><td>미공개 (추정 5~10%)</td></tr>
-      </tbody></table>
-
-      <div class="tip"><span class="tlabel">매출 단가 비대칭 원인</span>DAU 250만 규모 대비 매출 280억 = 외부 SDK 다중 분산 운영 → 단가 분산 + 한국 트래픽 비중에 따른 평균 eCPM 하향 효과로 해석. <strong>JustPlay 채널 통합 시 매출 비선형 증가가 정량 메커니즘으로 가능.</strong></div>
-
-    </div>
-  </details>
-  <details class="company-details">
-    <summary>
       <div class="brand-icon"><img src="https://play-lh.googleusercontent.com/oEDQAqDqY2DCmHAIN32nJM0k9GlB_Iy2aT7rBu6DtDRZenXtdGk8PXJJegqQ7bWtf_Gu" alt="Lihuhu" loading="lazy"></div>
       <div class="brand-info">
         <div class="name">Lihuhu <span style="font-size:12px;color:var(--text-3);font-weight:500;">· 베트남 · 2017 설립</span></div>
@@ -1380,6 +1331,55 @@ html { scroll-behavior: smooth; }
         <tr><td>영업이익률</td><td><strong>25%. 3사 최고</strong> (베트남 인건비 + 양산 효율 + 광고 BM)</td></tr>
         <tr><td>강점·약점</td><td>강점: 양산 효율 / 약점: 게임 수명 짧음 → 신작 회전 의존</td></tr>
       </tbody></table>
+
+    </div>
+  </details>
+  <details class="company-details">
+    <summary>
+      <div class="brand-icon"><img src="https://www.spcomes.com/imgs/sp.jpg" alt="Springcomes" loading="lazy"></div>
+      <div class="brand-info">
+        <div class="name">Springcomes <span style="font-size:12px;color:var(--text-3);font-weight:500;">· 한국 서울 · 2016 설립</span></div>
+        <div class="tagline">머지 게임 전문 · 매출 <strong>280억</strong> · DAU <strong>250만 (3사 1위)</strong> · 게임 30+ · 누적 인스톨 2~3억 · 머지 IP 4종+</div>
+      </div>
+      <div class="toggle-hint"></div>
+    </summary>
+    <div class="company-body">
+
+      <div class="section-title">A. 트래픽 지표</div>
+      <div class="mini-kpi">
+        <div class="b"><div class="l">DAU</div><div class="v">250만</div></div>
+        <div class="b"><div class="l">누적 다운로드</div><div class="v">2~3억</div></div>
+        <div class="b"><div class="l">운영 게임 수</div><div class="v">30개+</div></div>
+        <div class="b"><div class="l">ARPDAU</div><div class="v">~30원</div></div>
+      </div>
+
+      <div class="section-title">B. 주력 게임 Top 10</div>
+      <div class="games-grid">
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/Cdo9RXxx_GBI0FkTLGH2Q3cD1tEylHqlidnXor7afFxsgWJxfW-xcmb3bg6gRHlTaxKS=w128" alt="Kingdom Wars"></div><div class="info"><div class="gname">Kingdom Wars</div><div class="gmeta"><span>1,000만+ DL</span><span>2016~</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.stormdefense" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/uyxiB9CeaeLW4TesBI3w8hq3jHRIWB_bfpsbjSXOt7vyC7MdEkOq-zXIhSg2rXIVs8w=w128" alt="Jewels Temple"></div><div class="info"><div class="gname">Jewels Temple (Match-3)</div><div class="gmeta"><span>820만+ DL</span><span>2016</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.jquest" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/2j76oUIyaE6yJy0MuUeuh_aCzLpIjP3eLHTe6V3lXhMhN64mGWhgJOVV-bAcft4mcFLk=w128" alt="머지 스위츠"></div><div class="info"><div class="gname">머지 스위츠 (고양이 카페)</div><div class="gmeta"><span>470만 DL</span><span>2023-06</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.emerge" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/1HCjMO7fZ_tYi4vefT4N65n9yTmGNp-oURSFghjJ1GqmwVoEETdfjz56LiWsSHnl7A=w128" alt="헬로 타운"></div><div class="info"><div class="gname">헬로 타운 (신입사원 머지)</div><div class="gmeta"><span>440만 DL</span><span>2024-12</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/us/app/hello-town-merge-story/id6737850281" target="_blank">App Store</a><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.hellotown" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://play-lh.googleusercontent.com/CR7KxRX5VmWThfZ9-t5RRrQRivc1QMJvN-WJX_Cx8yE4sWiIb87uRkKbRsoTxvKBa-0N=w128" alt="머지 페코"></div><div class="info"><div class="gname">머지 페코</div><div class="gmeta"><span>머지</span><span>일본 친화 IP</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/apps/details?id=com.spcomes.mergepeko" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/7f/5b/967f5b4c-6a2d-a2e1-c840-3397da3ee35a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">벽돌깨기 스타</div><div class="gmeta"><span>아케이드</span></div></div><div class="links"><a class="gp" href="https://play.google.com/store/search?q=Springcomes+Brick+Breaker&c=apps" target="_blank">Google Play</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1b/94/e2/1b94e265-46e4-7e24-f28e-9be35f022465/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">돌격 기사단 (방치형 RPG)</div><div class="gmeta"><span>방치형</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6477564391" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/92/66/cc/9266cc9d-f076-c125-2c0d-f7f5370b2422/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">타임 워: 오리진</div><div class="gmeta"><span>캐주얼</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6504663203" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d4/a6/77/d4a677f2-330c-71ac-319e-74381398a83c/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">부릉부릉 차빠져유</div><div class="gmeta"><span>보드</span><span>최근작</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6755670967" target="_blank">App Store</a></div></div>
+        <div class="gcard"><div class="icon"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/7f/5b/967f5b4c-6a2d-a2e1-c840-3397da3ee35a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg" alt=""></div><div class="info"><div class="gname">후르츠 이스케이프</div><div class="gmeta"><span>퍼즐</span><span>최근작</span></div></div><div class="links"><a class="ios" href="https://apps.apple.com/kr/app/id6755807238" target="_blank">App Store</a></div></div>
+      </div>
+
+      <div class="section-title">C. Top 10 매출 견인 (추정)</div>
+      <div class="chart-card"><p class="desc">최신 hit 머지 2종(헬로 타운·머지 스위츠)이 견인</p><div class="chart-wrap tall"><canvas id="chartParetoSpring"></canvas></div></div>
+
+      <div class="section-title">D. 비즈니스 모델 (BM)</div>
+      <table class="compare"><tbody>
+        <tr><td>한 줄 요약</td><td>DAU 250만 유저가 게임하는 동안 광고 노출 → 광고비 수취. 머지 게임 일부 IAP도 있으나 비중 작음.</td></tr>
+        <tr><td>주력 광고 채널</td><td>Unity Offerwall · Adjoe Playtime · MyChips · Tapjoy · Gamelight 등 외부 SDK 분산</td></tr>
+        <tr><td>D7 ROAS · D30 ROAS</td><td>헬로 타운 D7 50% / D30 66%. 머지 장르 평균 이상</td></tr>
+        <tr><td>잔존율</td><td>머지 스위츠 D7 30% / D30 10%. 머지 장르 표준</td></tr>
+        <tr><td>영업이익률</td><td>미공개 (추정 5~10%)</td></tr>
+      </tbody></table>
+
+      <div class="tip"><span class="tlabel">매출 단가 비대칭 원인</span>DAU 250만 규모 대비 매출 280억 = 외부 SDK 다중 분산 운영 → 단가 분산 + 한국 트래픽 비중에 따른 평균 eCPM 하향 효과로 해석. <strong>JustPlay 채널 통합 시 매출 비선형 증가가 정량 메커니즘으로 가능.</strong></div>
 
     </div>
   </details>
@@ -1616,7 +1616,7 @@ html { scroll-behavior: smooth; }
             <div class="ba-metric">3사 90원+ / 100원</div>
           </div>
         </div>
-        <div class="ba-impact">광고 매출 <strong>+10~25%</strong> · 합산 매출 <strong>+150~370억/년</strong> (단가 상향 가정)</div>
+        <div class="ba-impact">광고 매출 <strong>+10~25%</strong> · 합산 매출 <strong>+150~370억</strong> (단가 상향 가정)</div>
       </div>
 
       <div class="sub-grid n1">
@@ -1653,26 +1653,26 @@ html { scroll-behavior: smooth; }
             <div class="ba-metric">CPI $1~1.5</div>
           </div>
         </div>
-        <div class="ba-impact">가중평균 CAC <strong>-15~50%</strong> · 광고 효율 <strong>+10~20%</strong> · 매출 영향 <strong>+200~500억/년</strong></div>
+        <div class="ba-impact">가중평균 CAC <strong>-15~50%</strong> · 광고 효율 <strong>+10~20%</strong> · 매출 영향 <strong>+200~500억</strong></div>
       </div>
       <div class="sub-grid n4">
         <div class="sub-card">
           <div class="sn">2.1</div>
           <div class="st">JustPlay 메인 앱 cross-promo</div>
           <div class="sd">자체 트래픽(2,500만+)에서 Lihuhu·Springcomes 게임 자동 추천. 비율 10% → 40%.</div>
-          <div class="si">CAC -15~30% · 인스톨 +20~40% · 매출 영향 <strong>+150억/년</strong></div>
+          <div class="si">CAC -15~30% · 인스톨 +20~40% · 매출 영향 <strong>+150억</strong></div>
         </div>
         <div class="sub-card">
           <div class="sn">2.2</div>
           <div class="st">인플루언서·UGC (Royal Match 모델)</div>
           <div class="sd">TikTok·Shorts 자생적 확산. 인플루언서 50명 시드 + UGC 캠페인.</div>
-          <div class="si">CAC -30~50% · 매출 영향 <strong>+80~120억/년</strong> (UA 비용 절감 분 매출 회수)</div>
+          <div class="si">CAC -30~50% · 매출 영향 <strong>+80~120억</strong> (UA 비용 절감 분 매출 회수)</div>
         </div>
         <div class="sub-card">
           <div class="sn">2.3</div>
           <div class="st">다채널 동시 가동 → 재배분</div>
           <div class="sd">Meta Advantage+ · Google · TikTok · AppLovin AXON. 3사 데이터 풀링.</div>
-          <div class="si">광고 효율 +10~20% · 매출 영향 <strong>+50~100억/년</strong></div>
+          <div class="si">광고 효율 +10~20% · 매출 영향 <strong>+50~100억</strong></div>
         </div>
         <div class="sub-card">
           <div class="sn">2.4</div>
@@ -1759,19 +1759,19 @@ html { scroll-behavior: smooth; }
         <div class="sn">2.1</div>
         <div class="st">광고 크리에이티브 자동 생성</div>
         <div class="sd">Midjourney·Runway·Sora로 주 100~500개 변형. 위닝 소재 발굴 5~10배 가속.</div>
-        <div class="si">CAC -20~30% · 매출 영향 <strong>+100~150억/년</strong></div>
+        <div class="si">CAC -20~30% · 매출 영향 <strong>+100~150억</strong></div>
       </div>
       <div class="sub-card">
         <div class="sn">2.2</div>
         <div class="st">LTV 예측 모델 (D1 → D90/D365)</div>
         <div class="sd">첫 24시간 행동으로 LTV 자동 예측 → CAC 상한 자동 산정 → UA 의사결정 자동화.</div>
-        <div class="si">UA ROI +15~25% · 매출 영향 <strong>+150~250억/년</strong></div>
+        <div class="si">UA ROI +15~25% · 매출 영향 <strong>+150~250억</strong></div>
       </div>
       <div class="sub-card">
         <div class="sn">2.3</div>
         <div class="st">운영 자동화 (LiveOps·CS·트렌딩)</div>
         <div class="sd">과거 데이터 학습 → 시즌패스 자동 설계. 5개국어 챗봇. 차트 스크래핑.</div>
-        <div class="si">운영 -20~30% · LiveOps 매출 +10~25% · 매출 영향 <strong>+200~400억/년</strong></div>
+        <div class="si">운영 -20~30% · LiveOps 매출 +10~25% · 매출 영향 <strong>+200~400억</strong></div>
       </div>
     </div>
   </div>
@@ -1849,7 +1849,7 @@ html { scroll-behavior: smooth; }
             <div class="ba-metric">검증 30+종</div>
           </div>
         </div>
-        <div class="ba-impact">검증 게임당 ARPPU <strong>+30~50%</strong> · 30종 기준 매출 영향 <strong>+600~900억/년</strong> · 조기 도입 리스크 잔존 -5~15%</div>
+        <div class="ba-impact">검증 게임당 ARPPU <strong>+30~50%</strong> · 30종 기준 매출 영향 <strong>+600~900억</strong> · 조기 도입 리스크 잔존 -5~15%</div>
       </div>
       <div class="sub-grid n2">
         <div class="sub-card">
@@ -1861,8 +1861,8 @@ html { scroll-behavior: smooth; }
         <div class="sub-card">
           <div class="sn">2.2</div>
           <div class="st">시즌 패스 단계 도입 (2028~)</div>
-          <div class="sd">검증 30+종 한정. 30일 보상 트랙 + 일일 미션 + 한정 스킨 (무료+유료 2단). Royal Match·Candy Crush 모델. 30종 기준 평균 매출 영향 게임당 +20~30억/년.</div>
-          <div class="si">게임당 ARPPU +30~50% · 30종 기준 매출 +600~900억/년</div>
+          <div class="sd">검증 30+종 한정. 30일 보상 트랙 + 일일 미션 + 한정 스킨 (무료+유료 2단). Royal Match·Candy Crush 모델. 30종 기준 평균 매출 영향 게임당 +20~30억.</div>
+          <div class="si">게임당 ARPPU +30~50% · 30종 기준 매출 +600~900억</div>
         </div>
       </div>
       <div class="tip" style="margin-top:14px;">
