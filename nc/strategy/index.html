@@ -1928,7 +1928,21 @@ html { scroll-behavior: smooth; }
   </div>
 </div>
 
-  <div class="callout" style="background:#eff6ff;border-left-color:var(--accent);margin-top:24px;">
+  <div class="callout" style="background:#fafbfc;border-left-color:var(--text-2);margin-top:24px;padding:20px 26px;">
+    <strong style="color:var(--text);font-size:15px;">퍼블리싱·M&A·투자 판단 프레임 (본부 의사결정 인풋)</strong>
+    <p style="margin:8px 0 12px;font-size:13px;line-height:1.7;color:var(--text-2);">3대 의사결정 주제별 균질화된 평가 기준. 본 포지션은 사업전략 관점의 근거를 제시해 본부 판단의 일관성을 확보.</p>
+    <table class="compare" style="margin-top:6px;font-size:12.5px;">
+      <thead><tr><th style="width:18%;">주제</th><th>핵심 평가축</th><th>본인 자산·근거</th></tr></thead>
+      <tbody>
+        <tr><td><strong>퍼블리싱</strong></td><td>장르 적합성 · LTV 구조 · 본부 운영 캐파 · 권역 핏(특히 일본·북미)</td><td>NCW 퍼블리싱 의사결정 직접 조율 경험 / 글로벌 권역별 BM 현지화 사례</td></tr>
+        <tr><td><strong>M&A</strong></td><td>광고 인벤토리 규모 · 개선 여지 · 에버그린성 · 인수 용이성 (4축 100점)</td><td>game-screening 100개 게임 실배포 — 4축 스코어링 + 재무추정 자동화</td></tr>
+        <tr><td><strong>투자</strong></td><td>시장성 · 장르 적합성 · 수익 구조 · 본사 시너지(공급·UA·운영)</td><td>신규 트렌드 장르 자동 발굴 (실무 액션 ④와 동일 파이프라인)</td></tr>
+      </tbody>
+    </table>
+    <p style="margin:10px 0 0;font-size:12px;color:var(--text-3);line-height:1.65;">※ 평가 가중치·임계치는 본부 정책에 맞춰 조정. 본 프레임 = 평가의 <strong>구조와 데이터 인풋</strong> 제공 / 의사결정 주체는 본부.</p>
+  </div>
+
+  <div class="callout" style="background:#eff6ff;border-left-color:var(--accent);margin-top:14px;">
     <strong style="color:var(--accent);">솔루션 운영 원칙</strong>
     <p style="margin:8px 0 0;font-size:13px;line-height:1.75;">각 솔루션 임팩트 = <strong>데이터 진단을 거쳐 검증해야 할 항목</strong>. 카테고리별 진입 우선순위·단계 일정은 <strong>방향성·로드맵 탭</strong>의 Phase 1~4 구조 준용. 본 보고서 범위 = 가설 도출·KPI 측정 설계·의사결정 사이클 제안. 실 의사결정은 사업본부 / 본인은 데이터·자동화 도구 공급으로 지원.</p>
   </div>
@@ -2013,9 +2027,46 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
 
+<!-- UA 판단 프레임워크 + 자회사 UA 모니터링 -->
+<section data-tab-content="plan">
+  <h2><span class="num">02</span> UA 판단 프레임워크. 자회사 UA 성과의 본부 해석 기준</h2>
+  <p class="h2-sub" style="font-style:italic;">본 포지션은 UA를 직접 집행하지 않음. 자회사(JustPlay·Lihuhu·Springcomes) UA 조직이 집행한 성과를 데이터 관점에서 모니터링하고, 본부 차원의 방향성 판단으로 환원하는 역할.</p>
+
+  <div class="dir-grid" style="grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top:14px;">
+
+    <div class="dir-card" style="border-left-color:var(--accent);padding:18px 22px;">
+      <div class="dn" style="color:var(--accent);">판단 게이트 (4단)</div>
+      <div class="dh" style="font-size:15.5px;margin-bottom:10px;">채널·소재·예산 재배분 임계선</div>
+      <ul style="margin:0;padding-left:20px;font-size:13px;line-height:1.85;color:var(--text);">
+        <li><strong>D1·D7 ROAS</strong> 장르 벤치마크 대비 ±20% 이내 → 운영 유지</li>
+        <li><strong>CPI</strong> 장르별 LTV 역산 CAC 임계선 초과 → 채널 재배분</li>
+        <li><strong>CTR</strong> 산업 표준 50% 미만 → 소재 즉시 교체 (B&S 10주년 검증 사이클 준용)</li>
+        <li><strong>D30 잔존</strong> 장르 평균 미달 시 채널·타겟 재진단 (UA 책임 vs 게임 책임 분리)</li>
+      </ul>
+    </div>
+
+    <div class="dir-card" style="border-left-color:var(--good);padding:18px 22px;">
+      <div class="dn" style="color:var(--good);">자회사 UA 모니터링 원칙</div>
+      <div class="dh" style="font-size:15.5px;margin-bottom:10px;">집행은 자회사 / 해석·방향성은 본부</div>
+      <ul style="margin:0;padding-left:20px;font-size:13px;line-height:1.85;color:var(--text);">
+        <li><strong>3사 통합 KPI 보드</strong>: ROAS·CAC·LTV·D7/D30 잔존 단일 지표 기준 정렬</li>
+        <li><strong>이상 신호 탐지</strong>: 장르 벤치마크 이탈 자동 알림 → 자회사 협의 트리거</li>
+        <li><strong>본부 환원</strong>: 단가·소재·국가별 패턴을 본부 사업 방향성 판단 인풋으로 전환</li>
+        <li><strong>AI 자동 리포팅 (실무 액션 ②와 직결)</strong>: 일·주 단위 자동 보드 → 매니저 해석 시간 확보</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="tip" style="margin-top:14px;">
+    <span class="tlabel">프레임워크 운영 원칙</span>
+    임계선·게이트 수치는 <strong>데이터 진단을 거쳐 단계별 보정</strong>. 본 보고서는 판단 기준의 구조와 자회사-본부 역할 분리 원칙을 제시. UA 캠페인 직접 집행이 아닌 <strong>'분석·전략 수립 포지션'</strong>으로서 자회사 UA 성과를 본부 의사결정으로 연결.
+  </div>
+</section>
+
 <!-- 90일 → 실무 계획 탭 -->
 <section data-tab-content="plan">
-  <h2><span class="num">02</span> 본 포지션 첫 90일. 가장 빠른 액션부터</h2>
+  <h2><span class="num">03</span> 본 포지션 첫 90일. 가장 빠른 액션부터</h2>
   <p class="h2-sub">진단 → 설계 → 실행. 90일 안에 매출 +10~15% 정량 입증 가능한 액션 우선</p>
 
   <div class="phase-grid">
