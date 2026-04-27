@@ -331,7 +331,7 @@ table.compare tbody td:first-child { background: var(--accent-soft); font-weight
 .sub-card { background:#fff; border:1px solid var(--border); border-radius:6px; padding:14px 16px; display:flex; flex-direction:column; gap:6px; }
 .sub-card .sn { font-size:10.5px; font-weight:800; color:var(--accent-2); background:var(--accent-soft); padding:3px 7px; border-radius:3px; align-self:flex-start; letter-spacing:0.04em; }
 .sub-card .st { font-size:13.5px; font-weight:700; color:var(--text); line-height:1.4; letter-spacing:-0.01em; }
-.sub-card .sd { font-size:11.5px; color:var(--text-3); line-height:1.6; flex:1; }
+.sub-card .sd { font-size:11.5px; color:var(--text); line-height:1.6; flex:1; }
 .sub-card .si { font-size:12px; font-weight:700; color:var(--good); padding:7px 10px; background:var(--good-soft); border-left:3px solid var(--good); border-radius:3px; margin-top:auto; }
 
 .ba { background:linear-gradient(135deg,#f8fafc,#fff); border:1px solid var(--border); border-radius:8px; padding:18px 20px; margin-bottom:14px; }
@@ -343,13 +343,13 @@ table.compare tbody td:first-child { background: var(--accent-soft); font-weight
 .ba-label { font-size:10.5px; font-weight:800; letter-spacing:0.08em; }
 .ba-before .ba-label { color:var(--text-3); }
 .ba-after .ba-label { color:#2563eb; }
-.ba-content { font-size:12px; color:var(--text-2); line-height:1.6; flex:1; }
+.ba-content { font-size:12.5px; color:var(--text); line-height:1.6; flex:1; }
 .ba-metric { font-size:18px; font-weight:800; letter-spacing:-0.02em; line-height:1.2; margin-top:auto; }
 .ba-before .ba-metric { color:var(--text-3); }
 .ba-after .ba-metric { color:#2563eb; }
 .ba-arrow { display:flex; align-items:center; justify-content:center; color:#2563eb; font-size:20px; font-weight:800; }
-.ba-impact { margin-top:12px; padding:10px 14px; background:#fef3c7; border-left:3px solid #b45309; border-radius:4px; font-size:12px; color:var(--text-2); line-height:1.6; }
-.ba-impact strong { color:#b45309; }
+.ba-impact { margin-top:12px; padding:10px 14px; background:#fef3c7; border-left:3px solid #b45309; border-radius:4px; font-size:12.5px; color:var(--text); line-height:1.6; }
+.ba-impact strong { color:var(--text); }
 
 /* Tab Navigation */
 .tab-nav {
@@ -1702,13 +1702,13 @@ html { scroll-behavior: smooth; }
         <div class="ba-title">광고 수수료 흐름</div>
         <div class="ba-row">
           <div class="ba-col ba-before">
-            <div class="ba-label">BEFORE</div>
+            <div class="ba-label">As-is</div>
             <div class="ba-content">3사 외부 SDK 분산 운영 (AppLovin·Unity·AdMob 등 5~6개)</div>
             <div class="ba-metric">3사 60~70% 수령</div>
           </div>
           <div class="ba-arrow">→</div>
           <div class="ba-col ba-after">
-            <div class="ba-label">AFTER</div>
+            <div class="ba-label">To-be</div>
             <div class="ba-content">JustPlay 인벤토리로 통합. mediation 수수료 내재화.</div>
             <div class="ba-metric">3사 90%+ 수령</div>
           </div>
@@ -1739,13 +1739,13 @@ html { scroll-behavior: smooth; }
         <div class="ba-title">UA 비용 구조</div>
         <div class="ba-row">
           <div class="ba-col ba-before">
-            <div class="ba-label">BEFORE</div>
+            <div class="ba-label">As-is</div>
             <div class="ba-content">Meta · Google · TikTok 외부 페이드 위주</div>
             <div class="ba-metric">CPI $2~3</div>
           </div>
           <div class="ba-arrow">→</div>
           <div class="ba-col ba-after">
-            <div class="ba-label">AFTER</div>
+            <div class="ba-label">To-be</div>
             <div class="ba-content">자체 cross-promo + UGC + LTV 매트릭스 자동화</div>
             <div class="ba-metric">CPI $1~1.5</div>
           </div>
@@ -1802,13 +1802,13 @@ html { scroll-behavior: smooth; }
         <div class="ba-title">신작 출시 페이스</div>
         <div class="ba-row">
           <div class="ba-col ba-before">
-            <div class="ba-label">BEFORE</div>
+            <div class="ba-label">As-is</div>
             <div class="ba-content">Springcomes 단독 양산. 한국 인력만 가동.</div>
             <div class="ba-metric">4~5종/년</div>
           </div>
           <div class="ba-arrow">→</div>
           <div class="ba-col ba-after">
-            <div class="ba-label">AFTER</div>
+            <div class="ba-label">To-be</div>
             <div class="ba-content">한국 4주 기획 + 베트남 8주 양산 = 3개월 사이클</div>
             <div class="ba-metric">8~12종/년</div>
           </div>
@@ -1838,13 +1838,13 @@ html { scroll-behavior: smooth; }
       <div class="ba-title">AI 자동화 임팩트</div>
       <div class="ba-row">
         <div class="ba-col ba-before">
-          <div class="ba-label">BEFORE</div>
+          <div class="ba-label">As-is</div>
           <div class="ba-content">사람 수동 운영. 크리에이티브 1~2주 · LTV 사후 측정 · 170+ 게임 수동 LiveOps</div>
           <div class="ba-metric">병목 다수</div>
         </div>
         <div class="ba-arrow">→</div>
         <div class="ba-col ba-after">
-          <div class="ba-label">AFTER</div>
+          <div class="ba-label">To-be</div>
           <div class="ba-content">AI 자동화. 주 100~500 변형 · D1→D365 자동 예측 · 챗봇·트렌딩 자동</div>
           <div class="ba-metric">3 영역 동시</div>
         </div>
@@ -1895,13 +1895,13 @@ html { scroll-behavior: smooth; }
         <div class="ba-title">일본 머지 시장 — 글로벌 모바일 매출 2위</div>
         <div class="ba-row">
           <div class="ba-col ba-before">
-            <div class="ba-label">BEFORE</div>
+            <div class="ba-label">As-is</div>
             <div class="ba-content">Springcomes 한국·기타 권역. ARPDAU 기준</div>
             <div class="ba-metric">~30원/일</div>
           </div>
           <div class="ba-arrow">→</div>
           <div class="ba-col ba-after">
-            <div class="ba-label">AFTER</div>
+            <div class="ba-label">To-be</div>
             <div class="ba-content">머지 페코 일본 진출. KLab·Cygames 협업 + 산리오 콜라보. 월 ARPU 기준</div>
             <div class="ba-metric">4,130원/월</div>
           </div>
