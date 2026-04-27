@@ -460,7 +460,7 @@ html { scroll-behavior: smooth; }
     <span><span class="tab-num">03</span><br>솔루션</span>
   </button>
   <button class="tab-btn" data-tab="plan">
-    <span><span class="tab-num">04</span><br>실무 계획</span>
+    <span><span class="tab-num">04</span><br>AI 시스템 구축</span>
   </button>
   <button class="tab-btn" data-tab="appendix">
     <span><span class="tab-num">05</span><br>Appendix</span>
@@ -1826,7 +1826,7 @@ html { scroll-behavior: smooth; }
     <div style="width:36px;height:36px;border-radius:8px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex-shrink:0;">2</div>
     <div style="flex:1;min-width:0;">
       <div style="font-size:14px;font-weight:700;color:var(--text);">AI 효율 가속 — 운영·UA·LiveOps 자동화</div>
-      <div style="font-size:12.5px;color:var(--text-3);margin-top:2px;line-height:1.5;">170+ 게임 운영 리소스 절감 + 광고 크리에이티브 자동화 + LTV 예측 모델 (실무 계획 탭 상세)</div>
+      <div style="font-size:12.5px;color:var(--text-3);margin-top:2px;line-height:1.5;">170+ 게임 운영 리소스 절감 + 광고 크리에이티브 자동화 + LTV 예측 모델 (AI 시스템 구축 탭 상세)</div>
     </div>
   </div>
   <div style="padding:18px 22px;">
@@ -2257,82 +2257,107 @@ html { scroll-behavior: smooth; }
 </section>
 
 
-<!-- 실무 계획. 헤드 요약 + AI 핵심 액션 4건 (3방향 매핑) -->
+<!-- AI 시스템 구축 — 4건 -->
 <section data-tab-content="plan">
-  <h2><span class="num">01</span> AI 핵심 액션. 즉시 3건 + 3개월 1건 (3방향 매핑)</h2>
-  <p class="h2-sub" style="font-style:italic;">3방향(관리·효율·확장) 솔루션과 1:1 매핑. 본인이 직접 만들어 운영 중인 시스템 자산을 NC 환경에 이식.</p>
+  <h2><span class="num">01</span> 솔루션 실행에 필요한 AI 시스템 4건</h2>
+  <p class="h2-sub">3건은 운영 중. 1건은 NC에 이식 가능. 모두 본인이 직접 구축한 자산.</p>
 
-  <!-- 실무 계획 요약 -->
-  <div class="callout" style="background:linear-gradient(135deg,#eff6ff,#fff);border-left-color:var(--accent);margin:14px 0;padding:20px 26px;">
-    <strong style="color:var(--accent);font-size:16px;">요약</strong>
-    <ul style="margin:14px 0 0;padding-left:24px;font-size:15px;line-height:1.95;color:var(--text);">
-      <li><strong style="color:var(--accent);">관리 방향 (즉시 2건)</strong>. <strong>광고 크리에이티브 자동화</strong> + <strong>LTV·ROAS 자동 보드</strong> / Springcomes 단가 상향 직결</li>
-      <li><strong style="color:var(--accent);">효율 방향 (즉시 1건)</strong>. <strong>사업리뷰·KPI 자동 보고 파이프라인</strong> / 170+ 게임 통합 운영 리소스 절감</li>
-      <li><strong style="color:var(--accent);">효율 + 확장 방향 (3개월 1건)</strong>. <strong>게임 평가·스크리닝 자동 분석</strong> / Genre Lab 인풋 + M&A 후보 평가 동시 커버</li>
-      <li><strong style="color:var(--accent);">전제</strong>. 4건 모두 본인이 이미 운영 중인 시스템 (밀리 BigQuery 파이프라인 · Airbridge 대시보드 · game-screening 100개 실배포 · B&S 10주년 캠페인 운영) 기반. 강의 추정치 아님.</li>
-    </ul>
+  <!-- 4 시스템 카드 (2x2) -->
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px;">
+
+    <!-- 시스템 1 -->
+    <div style="background:#fff;border:1px solid var(--border);border-top:4px solid #2563eb;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:36px;height:36px;border-radius:8px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;">1</div>
+          <div style="font-size:16px;font-weight:800;color:var(--text);">광고 크리에이티브 자동화</div>
+        </div>
+        <span style="font-size:10.5px;font-weight:800;color:var(--text);background:#dcfce7;padding:4px 9px;border-radius:3px;letter-spacing:0.04em;">운영 중</span>
+      </div>
+      <div style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:12px;">
+        Midjourney·Runway·Sora로 주 100~500개 변형 → Meta·TikTok 자동 입찰 → 위닝 소재 발굴 5~10배.
+      </div>
+      <div style="font-size:12px;color:var(--text);line-height:1.6;padding:10px 12px;background:#f8fafc;border-radius:4px;margin-bottom:10px;">
+        <strong>본인 자산</strong>. B&S 10주년 캠페인 운영 (CTR 1% → 3%) + 5에이전트 파이프라인 전용
+      </div>
+      <div style="margin-top:auto;padding:8px 12px;background:#fef3c7;border-left:3px solid #b45309;border-radius:4px;font-size:12.5px;color:var(--text);font-weight:700;">
+        CAC -20~30%
+      </div>
+    </div>
+
+    <!-- 시스템 2 -->
+    <div style="background:#fff;border:1px solid var(--border);border-top:4px solid #2563eb;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:36px;height:36px;border-radius:8px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;">2</div>
+          <div style="font-size:16px;font-weight:800;color:var(--text);">LTV 예측 · ROAS 자동 보드</div>
+        </div>
+        <span style="font-size:10.5px;font-weight:800;color:var(--text);background:#dcfce7;padding:4px 9px;border-radius:3px;letter-spacing:0.04em;">운영 중</span>
+      </div>
+      <div style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:12px;">
+        유저 첫 24시간 행동 → D90/D365 LTV 예측 → CAC 상한 자동 산정 → 채널·국가별 ROAS 보드.
+      </div>
+      <div style="font-size:12px;color:var(--text);line-height:1.6;padding:10px 12px;background:#f8fafc;border-radius:4px;margin-bottom:10px;">
+        <strong>본인 자산</strong>. 밀리 Airbridge MMP × AI 대시보드 — 장르별 LTV 측정 + CAC 임계선 규칙화
+      </div>
+      <div style="margin-top:auto;padding:8px 12px;background:#fef3c7;border-left:3px solid #b45309;border-radius:4px;font-size:12.5px;color:var(--text);font-weight:700;">
+        UA ROI +15~25%
+      </div>
+    </div>
+
+    <!-- 시스템 3 -->
+    <div style="background:#fff;border:1px solid var(--border);border-top:4px solid #2563eb;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:36px;height:36px;border-radius:8px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;">3</div>
+          <div style="font-size:16px;font-weight:800;color:var(--text);">KPI·사업리뷰 자동 리포팅</div>
+        </div>
+        <span style="font-size:10.5px;font-weight:800;color:var(--text);background:#dcfce7;padding:4px 9px;border-radius:3px;letter-spacing:0.04em;">운영 중</span>
+      </div>
+      <div style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:12px;">
+        BigQuery → QA 검증 → 인사이트 생성 → Confluence·슬라이드 자동 업로드. 위클리·먼슬리·임원 보고 자동.
+      </div>
+      <div style="font-size:12px;color:var(--text);line-height:1.6;padding:10px 12px;background:#f8fafc;border-radius:4px;margin-bottom:10px;">
+        <strong>본인 자산</strong>. 밀리 매일 도는 프로덕션 (Python + Claude Code + MCP)
+      </div>
+      <div style="margin-top:auto;padding:8px 12px;background:#fef3c7;border-left:3px solid #b45309;border-radius:4px;font-size:12.5px;color:var(--text);font-weight:700;">
+        매니저 부하 -50%
+      </div>
+    </div>
+
+    <!-- 시스템 4 -->
+    <div style="background:#fff;border:1px solid var(--border);border-top:4px solid #2563eb;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:36px;height:36px;border-radius:8px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;">4</div>
+          <div style="font-size:16px;font-weight:800;color:var(--text);">게임 평가·스크리닝 자동 분석</div>
+        </div>
+        <span style="font-size:10.5px;font-weight:800;color:var(--text);background:#dcfce7;padding:4px 9px;border-radius:3px;letter-spacing:0.04em;">운영 중</span>
+      </div>
+      <div style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:12px;">
+        Google Play 공개 데이터 + Claude AI → 100점 스코어링(인벤토리·개선여지·에버그린성·인수용이성) + 재무 추정 자동.
+      </div>
+      <div style="font-size:12px;color:var(--text);line-height:1.6;padding:10px 12px;background:#f8fafc;border-radius:4px;margin-bottom:10px;">
+        <strong>본인 자산</strong>. 100개 게임 실배포·라이브
+      </div>
+      <a href="https://indeokyeo-wq.github.io/game-screening/index-light.html" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;background:#2563eb;color:#fff;text-decoration:none;border-radius:6px;font-size:13px;font-weight:700;margin-bottom:10px;letter-spacing:-0.01em;">
+        라이브 대시보드 보기 <span style="font-size:15px;">→</span>
+      </a>
+      <div style="margin-top:auto;padding:8px 12px;background:#fef3c7;border-left:3px solid #b45309;border-radius:4px;font-size:12.5px;color:var(--text);font-weight:700;">
+        M&A 평가 사이클 -70%
+      </div>
+    </div>
+
   </div>
 
-  <!-- 핵심 AI 액션 4건 (2x2 그리드) -->
-  <div class="dir-grid" style="grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top:18px;">
-
-    <!-- AI ① 관리 방향 / 즉시 -->
-    <div class="dir-card" style="border-left-color:var(--good);padding:20px 22px;">
-      <div class="dn" style="color:var(--good);">관리 · 즉시</div>
-      <div class="dh" style="font-size:16px;margin-bottom:10px;">① 광고 크리에이티브 자동 생성·테스트</div>
-      <p class="dd" style="line-height:1.8;font-size:13px;">
-        <strong>방법</strong>: Midjourney·Runway·Sora로 1주 100~500개 변형 자동 생성 → Meta·TikTok 자동 입찰 → 위닝 소재 발굴 속도 5~10배 ↑.<br>
-        <strong>본인 자산</strong>: B&S 10주년 캠페인 직접 운영 경험 (CTR 1%대 → 3% 개선 · 소재 즉시 교체 사이클) + 5에이전트 파이프라인 구조를 광고 소재 파이프라인으로 전용.<br>
-        <strong>선정 이유</strong>: F(광고 최적화) + B(유통) 직접 지원. 매출 직결 ROI 가장 명확.
-      </p>
-      <div style="margin-top:12px;padding:8px 12px;background:#dcfce7;border-radius:4px;font-size:12px;color:#166534;line-height:1.5;font-weight:700;">
-        임팩트. CAC -20~30%      </div>
-    </div>
-
-    <!-- AI ② 관리 방향 / 즉시 -->
-    <div class="dir-card" style="border-left-color:var(--good);padding:20px 22px;">
-      <div class="dn" style="color:var(--good);">관리 · 즉시</div>
-      <div class="dh" style="font-size:16px;margin-bottom:10px;">② LTV 예측 + 채널별 ROAS 자동 보드</div>
-      <p class="dd" style="line-height:1.8;font-size:13px;">
-        <strong>방법</strong>: 신규 유저 첫 24시간 행동(세션·결제·광고 시청)으로 <strong>D90/D365 LTV 예측</strong> → CAC 상한 자동 산정 → 채널·소재·국가별 ROAS 보드 자동 갱신.<br>
-        <strong>본인 자산</strong>: 밀리에서 운영 중인 <strong>Airbridge MMP × AI 대시보드</strong> 자동화 파이프라인 (장르별 LTV 측정 + CAC 임계선 규칙화) NC 3사 통합 환경에 이식.<br>
-        <strong>선정 이유</strong>: F + C(UA Cross-promo) 데이터 인프라. 90일 플랜 Day 1~30 핵심 산출물.
-      </p>
-      <div style="margin-top:12px;padding:8px 12px;background:#dcfce7;border-radius:4px;font-size:12px;color:#166534;line-height:1.5;font-weight:700;">
-        임팩트. UA ROI +15~25%      </div>
-    </div>
-
-    <!-- AI ③ 효율 방향 / 즉시 -->
-    <div class="dir-card" style="border-left-color:var(--good);padding:20px 22px;">
-      <div class="dn" style="color:var(--good);">효율 · 즉시</div>
-      <div class="dh" style="font-size:16px;margin-bottom:10px;">③ 사업리뷰·KPI 자동 보고 파이프라인</div>
-      <p class="dd" style="line-height:1.8;font-size:13px;">
-        <strong>방법</strong>: BigQuery → QA 검증 → 인사이트 생성 → Confluence/슬라이드 자동 업로드. 위클리·먼슬리 사업리뷰 + 임원 보고 자동화. 170+ 게임 단위 KPI 모니터링.<br>
-        <strong>본인 자산</strong>: 밀리에서 <strong>매일 도는 프로덕션</strong>으로 운영 중 (Python + Claude Code + MCP). 동일 구조 NC 환경에 이식.<br>
-        <strong>선정 이유</strong>: A(공급) + 본부 운영 효율 직접 지원. 매니저 본인 업무 부하 -50% → 분석·의사결정에 시간 집중.
-      </p>
-      <div style="margin-top:12px;padding:8px 12px;background:#dcfce7;border-radius:4px;font-size:12px;color:#166534;line-height:1.5;font-weight:700;">
-        임팩트. 운영 리소스 -50%      </div>
-    </div>
-
-    <!-- AI ④ 효율 + 확장 방향 / 3개월 -->
-    <div class="dir-card" style="border-left-color:var(--accent);padding:20px 22px;">
-      <div class="dn" style="color:var(--accent);">효율 + 확장 · 3개월</div>
-      <div class="dh" style="font-size:16px;margin-bottom:10px;">④ 게임 평가·스크리닝 자동 분석</div>
-      <p class="dd" style="line-height:1.8;font-size:13px;">
-        <strong>방법</strong>: Google Play 공개 데이터 + Claude AI 스코어링 → 100점 평가(광고 인벤토리·개선 여지·에버그린성·인수 용이성) + 재무추정 자동 산출. (a) 신규 트렌드 장르 자동 발굴 → Genre Lab 인풋, (b) 추가 M&A 후보 평가 동시 활용.<br>
-        <strong>본인 자산</strong>: <strong>game-screening 대시보드 — 100개 게임·100점 스코어링·재무추정 실배포</strong> (<a href="https://indeokyeo-wq.github.io/game-screening/" target="_blank" style="color:var(--accent);">indeokyeo-wq.github.io/game-screening</a>).<br>
-        <strong>선정 이유</strong>: A2(Genre Lab) + D(글로벌·M&A) 동시 커버. NC 추가 인수 검토 시 즉시 적용 가능.
-      </p>
-      <div style="margin-top:12px;padding:8px 12px;background:#dbeafe;border-radius:4px;font-size:12px;color:#1e40af;line-height:1.5;font-weight:700;">
-        임팩트. M&A 평가 사이클 -70% · 양산 큐 신뢰도 ↑      </div>
-    </div>
-
+  <!-- 솔루션 매핑 한 줄 -->
+  <div style="margin-top:18px;padding:14px 18px;background:#f8fafc;border:1px solid var(--border);border-radius:6px;font-size:12.5px;color:var(--text);line-height:1.7;">
+    <strong>솔루션 매핑</strong> · 시스템 1·2 → 솔루션 4 (AI 효율) · 시스템 2 → 솔루션 2.4 (LTV·CAC) · 시스템 3 → 솔루션 4.3 (운영 자동화) · 시스템 4 → 솔루션 5·6 (확장)
   </div>
 
   <div class="tip" style="margin-top:14px;">
-    <span class="tlabel">추가 풀 (단계별 진입)</span>
-    국가별 ROAS 모니터링 (②에 통합) · Trending 장르 스크래핑 (④에 통합) · 유저 리뷰 자동 분류 · 유저 세그먼트 맞춤 오퍼링 · LiveOps 자동 기획 · 다국어 CS 챗봇. Phase 2~3 검증 게이트 통과 후 단계별 진입.
+    <span class="tlabel">확장 풀</span>
+    국가별 ROAS 모니터링 · Trending 장르 스크래핑 · 유저 리뷰 분류 · 세그먼트 오퍼링 · LiveOps 자동 기획 · 다국어 CS 챗봇. Phase 2~3 검증 게이트 통과 후 단계별 진입.
   </div>
 </section>
 
@@ -2349,7 +2374,7 @@ html { scroll-behavior: smooth; }
       <ul style="margin:0;padding-left:20px;font-size:13px;line-height:1.85;color:var(--text);">
         <li><strong>D1·D7 ROAS</strong> 장르 벤치마크 대비 ±20% 이내 → 운영 유지</li>
         <li><strong>CPI</strong> 장르별 LTV 역산 CAC 임계선 초과 → 채널 재배분</li>
-        <li><strong>CTR</strong> 산업 표준 50% 미만 → 소재 즉시 교체 (B&S 10주년 검증 사이클 준용)</li>
+        <li><strong>CTR</strong> 산업 표준 50% 미만 → 소재 교체 (B&S 10주년 검증 사이클 준용)</li>
         <li><strong>D30 잔존</strong> 장르 평균 미달 시 채널·타겟 재진단 (UA 책임 vs 게임 책임 분리)</li>
       </ul>
     </div>
@@ -2387,7 +2412,7 @@ html { scroll-behavior: smooth; }
         <li>3사 170+ 게임 매출 분포 도출 (상위 10개가 정말 80%인지 검증)</li>
         <li>Top 10 게임 × 유저당 매출 · 잔존율 · 광고 단가 매핑</li>
         <li>JustPlay 광고 인벤토리 규모·단가·보상 비율 · Lihuhu·Springcomes의 외부 SDK 의존도 측정</li>
-        <li><strong>AI ②·③ 즉시 가동</strong>. LTV·ROAS 자동 보드 + 사업리뷰 자동 파이프라인 NC 환경 이식 (밀리 운영 중 시스템 직접 적용)</li>
+        <li><strong>AI 시스템 2·3 가동</strong>. LTV·ROAS 자동 보드 + 사업리뷰 자동 파이프라인을 NC 환경에 이식 (밀리 운영 중 시스템 직접 적용)</li>
       </ul>
     </div>
     <div class="phase">
@@ -2409,7 +2434,7 @@ html { scroll-behavior: smooth; }
         <li><strong>A2 Genre Lab</strong> 운영 시범 시작 (6~10주 사이클)</li>
         <li><strong>D1 일본 시장</strong> 진출 협상 시작 (머지 페코 IP)</li>
         <li>임원 보고 표준 대시보드 v1 (KPI 4종 + 매출 곡선 + 로드맵 마일스톤)</li>
-        <li><strong>AI ① 광고 크리에이티브 자동화</strong> PoC 결과 보고 + <strong>AI ④ Game Screening</strong> NC 적용 시범 (Genre Lab 후보 1~2개 발굴)</li>
+        <li><strong>AI 시스템 1 (광고 크리에이티브)</strong> PoC 결과 보고 + <strong>AI 시스템 4 (Game Screening)</strong> NC 적용 시범 (Genre Lab 후보 1~2개 발굴)</li>
       </ul>
     </div>
   </div>
