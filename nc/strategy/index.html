@@ -1487,7 +1487,7 @@ html { scroll-behavior: smooth; }
 
 <!-- OVERVIEW -->
 <section data-tab-content="solution">
-  <h2><span class="num">00</span> 솔루션 한눈에</h2>
+  <h2><span class="num">00</span> 솔루션</h2>
   <p class="h2-sub">6 카테고리. 클릭 시 상세 카드로 이동.</p>
 
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:14px 0 0;">
@@ -1576,7 +1576,7 @@ html { scroll-behavior: smooth; }
   <h2><span class="num">01</span> 관리</h2>
   <div class="callout" style="background:#fafbfc;border-left-color:var(--text-2);margin:14px 0 24px;padding:24px 30px;">
     <p style="margin:0;font-size:18px;line-height:1.7;color:var(--text);font-weight:500;letter-spacing:-0.012em;">
-      보유 트래픽·IP·광고 인벤토리에서 외부 유출 매출 회수. 단가를 산업 평균 수준까지 상향.
+      보유 트래픽·IP·광고 인벤토리에서 외부 유출 매출 회수. 외부 SDK 분산 운영을 본부 통합 허브로 전환해 누수 차단.
     </p>
     <p style="margin:8px 0 0;font-size:15px;line-height:1.7;color:var(--text-2);letter-spacing:-0.005em;">
       Phase 1~2 가장 빠른 손익 개선 영역. 실측 후 우선순위 확정.
@@ -1597,26 +1597,19 @@ html { scroll-behavior: smooth; }
           <div class="ba-col ba-before">
             <div class="ba-label">As-is</div>
             <div class="ba-content">광고주가 광고비 100원 지불 → 외부 SDK(AppLovin·Unity·AdMob 등 5~6개)가 30~40원 수수료로 회수 → 3사가 60~70원만 수령</div>
-            <div class="ba-metric">3사 60~70원 / 100원</div>
+            <div class="ba-metric">광고 매출 60~70원<br><span style="font-size:11px;font-weight:600;color:var(--text-3);">/ 광고비 100원 기준</span></div>
           </div>
           <div class="ba-arrow">→</div>
           <div class="ba-col ba-after">
             <div class="ba-label">To-be</div>
             <div class="ba-content">광고주 100원 → JustPlay 통합 허브가 직접 처리 → 외부 mediation 수수료 내재화 → 3사가 90원+ 수령</div>
-            <div class="ba-metric">3사 90원+ / 100원</div>
+            <div class="ba-metric">광고 매출 90원+<br><span style="font-size:11px;font-weight:600;color:var(--text-3);">/ 광고비 100원 기준</span></div>
           </div>
         </div>
         <div class="ba-impact">광고 매출 <strong>+10~25%</strong> · 합산 매출 <strong>+150~370억</strong> (단가 상향 가정)</div>
       </div>
 
-      <div class="sub-grid n1">
-        <div class="sub-card">
-          <div class="sn">1.1</div>
-          <div class="st">JustPlay 자체 인벤토리로 라우팅</div>
-          <div class="sd">3사 광고 노출을 통합 허브로. SDK 수수료(10~30%) 내재화 + 자체 채널 확보.</div>
-          <div class="si">광고 마진 +10~25% · 매출 +150~370억</div>
-        </div>
-      </div>
+
   </div>
 </div>
 <div id="sol-2" style="background:#fff;border:1px solid var(--border);border-radius:6px;margin-bottom:14px;overflow:hidden;scroll-margin-top:80px;">
@@ -1708,14 +1701,7 @@ html { scroll-behavior: smooth; }
         </div>
         <div class="ba-impact">3년 누적 Springcomes 매출 <strong>+100~200%</strong> · 인건비 한국 대비 <strong>30~35%</strong></div>
       </div>
-      <div class="sub-grid n1">
-        <div class="sub-card">
-          <div class="sn">1.1</div>
-          <div class="st">한국·베트남 협업 양산 사이클</div>
-          <div class="sd">한국(머지 IP·스토리) + 베트남(엔진·asset·SDK) 분업. 신작 4~5 → 8~12종/년. 인건비 효율 한국 대비 30~35%.</div>
-          <div class="si">3년 누적 Springcomes 매출 +100~200%</div>
-        </div>
-      </div>
+
   </div>
 </div>
 <div id="sol-4" style="background:#fff;border:1px solid var(--border);border-radius:6px;margin-bottom:14px;overflow:hidden;scroll-margin-top:80px;">
@@ -1795,20 +1781,13 @@ html { scroll-behavior: smooth; }
           <div class="ba-arrow">→</div>
           <div class="ba-col ba-after">
             <div class="ba-label">To-be</div>
-            <div class="ba-content">머지 페코 일본 진출. KLab·Cygames 협업 + 산리오 콜라보. 월 ARPU 기준</div>
+            <div class="ba-content">머지 페코 일본 진출. 일본 퍼블리셔(KLab·Cygames) 협업 또는 자체 법인 + Hello Kitty·산리오 IP 콜라보로 광고+IAP 하이브리드 신작</div>
             <div class="ba-metric">4,130원/월</div>
           </div>
         </div>
         <div class="ba-impact">1년 매출 <strong>+50~200억</strong> (ARPU 4,130원 × DAU 10~30만)</div>
       </div>
-      <div class="sub-grid n1">
-        <div class="sub-card">
-          <div class="sn">1.1</div>
-          <div class="st">머지 페코 IP 일본 확장 (산리오 콜라보)</div>
-          <div class="sd">일본 퍼블리셔(KLab·Cygames) 협업 또는 자체 법인. Hello Kitty·산리오 IP 콜라보로 광고+IAP 하이브리드 신작.</div>
-          <div class="si">1년 매출 +50~200억 (ARPU 4,130원 × DAU 10~30만)</div>
-        </div>
-      </div>
+
       <div class="tip" style="margin:14px 0 0;">
         <span class="tlabel">인도·라틴은 조건부</span>
         Phase 3 일본 검증 통과 시 검토. 본 보고서 범위 = 일본 단일 진입까지.
@@ -2235,7 +2214,7 @@ html { scroll-behavior: smooth; }
         <tr style="border-bottom:1px solid var(--border);">
           <td style="padding:14px 10px;border-right:1px solid var(--border);background:#fff7ed;vertical-align:top;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-              <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#1e40af);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;letter-spacing:-0.04em;box-shadow:0 3px 8px rgba(234,88,12,0.25);">JP</div>
+              <img src="https://d1hbpr09pwz0sk.cloudfront.net/logo_url/justplay-76c255a6" alt="" style="width:44px;height:44px;border-radius:10px;object-fit:cover;box-shadow:0 3px 8px rgba(37,99,235,0.25);">
               <strong style="color:var(--c-just);font-size:13px;">JustPlay</strong>
             </div>
             <div style="font-size:10.5px;color:var(--text-3);line-height:1.5;">광고 인벤토리 통합 허브 운영 주체</div>
@@ -2252,7 +2231,7 @@ html { scroll-behavior: smooth; }
         <tr style="border-bottom:1px solid var(--border);">
           <td style="padding:14px 10px;border-right:1px solid var(--border);background:#f5f3ff;vertical-align:top;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-              <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#1f2937,#111827);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;letter-spacing:-0.04em;box-shadow:0 3px 8px rgba(124,58,237,0.25);">LH</div>
+              <img src="https://play-lh.googleusercontent.com/oEDQAqDqY2DCmHAIN32nJM0k9GlB_Iy2aT7rBu6DtDRZenXtdGk8PXJJegqQ7bWtf_Gu" alt="" style="width:44px;height:44px;border-radius:10px;object-fit:cover;box-shadow:0 3px 8px rgba(31,41,55,0.25);">
               <strong style="color:var(--c-lihuhu);font-size:13px;">Lihuhu</strong>
             </div>
             <div style="font-size:10.5px;color:var(--text-3);line-height:1.5;">양산 라인·인건비 효율 자산 / 27년부터 이식</div>
@@ -2269,7 +2248,7 @@ html { scroll-behavior: smooth; }
         <tr>
           <td style="padding:14px 10px;border-right:1px solid var(--border);background:#f0fdf4;vertical-align:top;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-              <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#15803d,#166534);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;letter-spacing:-0.04em;box-shadow:0 3px 8px rgba(21,128,61,0.25);">SC</div>
+              <img src="https://www.spcomes.com/imgs/sp.jpg" alt="" style="width:44px;height:44px;border-radius:10px;object-fit:cover;box-shadow:0 3px 8px rgba(21,128,61,0.25);">
               <strong style="color:var(--c-spring);font-size:13px;">Springcomes</strong>
             </div>
             <div style="font-size:10.5px;color:var(--text-3);line-height:1.5;">트래픽·머지 IP 자산 / 단가 상향 + 일본 진출 주체</div>
@@ -2289,7 +2268,23 @@ html { scroll-behavior: smooth; }
   <div class="tip" style="margin-top:14px;">
     <span class="tlabel">매트릭스 활용</span>
     행(게임사) × 열(분기) 단위 핵심 책임 액션 분배. 주요 역할: <strong>JustPlay = 광고 허브 운영 / Lihuhu = 양산 라인 + 27년부터 이식 / Springcomes = 단가 상향 + 27년 일본 진출</strong>.
+  </div>
+</section>
 
+<!-- 다음 탭 이동 버튼 (AI 시스템 구축) -->
+<section data-tab-content="solution">
+  <div style="display:flex;justify-content:flex-end;margin:36px 0 12px;">
+    <button onclick="showTab('plan');window.scrollTo({top:0,behavior:'smooth'});" style="
+      background:#1e3a8a;
+      color:#fff;border:none;padding:18px 36px;font-size:16px;font-weight:700;
+      border-radius:8px;cursor:pointer;box-shadow:0 4px 12px rgba(30,58,138,0.20);
+      letter-spacing:-0.01em;font-family:inherit;display:flex;align-items:center;gap:10px;
+      transition:transform 0.15s,box-shadow 0.15s;
+    " onmouseover="this.style.background='#1e40af';this.style.transform='translateY(-1px)'"
+       onmouseout="this.style.background='#1e3a8a';this.style.transform=''">
+      AI 시스템 구축 보기 <span style="font-size:18px;">→</span>
+    </button>
+  </div>
 </section>
 
 
