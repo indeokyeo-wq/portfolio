@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, initial-scale=1">
+<title>NC 모바일 캐주얼 게임 분석 포트폴리오 · 여인덕</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #eef1f5; --surface: #ffffff; --soft: #f1f5f9; --soft-2: #f8fafc;
+  --border: #e5e9f0; --border-strong: #cbd5e1;
+  --ink: #0a2540; --ink-2: #334155; --ink-3: #64748b; --ink-4: #94a3b8;
+  --accent: #0a2540; --accent-2: #1b6bff; --accent-soft: #eef4ff; --accent-tint: #dbe6ff;
+  --warn: #b45309; --warn-soft: #fffbeb; --warn-tint: #fef3c7;
+  --good: #15803d; --good-soft: #f0fdf4; --good-tint: #dcfce7;
+  --info: #0e7490; --info-soft: #ecfeff;
+  --bad: #b91c1c; --bad-soft: #fef2f2; --bad-tint: #fecaca;
+  --highlight: #fef3c7;
+  --c-just: #2563eb; --c-just-soft: #eff6ff; --c-just-deep: #1e40af;
+  --c-spring: #15803d; --c-spring-soft: #f0fdf4; --c-spring-deep: #166534;
+  --c-lihuhu: #1f2937; --c-lihuhu-soft: #f3f4f6; --c-lihuhu-deep: #111827;
+  --c-bench: #7c3aed; --c-bench-soft: #f5f3ff;
+  --shadow-md: 0 12px 36px rgba(15,23,42,0.12), 0 2px 6px rgba(15,23,42,0.04);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,"Noto Sans KR",sans-serif;line-height:1.6;letter-spacing:-0.006em;-webkit-font-smoothing:antialiased;font-feature-settings:'tnum' 1, 'ss01' 1;}
+
+.deck{display:flex;flex-direction:column;align-items:center;gap:28px;padding:32px 16px 64px;width:100%;}
+.slide{width:1280px;max-width:100%;height:720px;background:var(--surface);box-shadow:var(--shadow-md);padding:42px 64px 64px;position:relative;overflow:hidden;page-break-after:always;display:flex;flex-direction:column;border-radius:2px;margin:0 auto;align-self:center;}
+
+/* Chrome */
+.nc-logo{height:32px;width:auto;display:block;}
+.slide-no{position:absolute;bottom:18px;right:64px;font-size:11px;color:var(--ink-4);letter-spacing:0.08em;font-variant-numeric:tabular-nums;}
+.slide-foot{position:absolute;bottom:20px;left:64px;font-size:11px;color:var(--ink-4);display:flex;align-items:center;gap:12px;}
+.slide-foot strong{color:var(--ink-2);font-weight:700;}
+.slide-foot .dot{width:4px;height:4px;border-radius:50%;background:var(--ink-4);}
+
+.s-eyebrow{font-size:11px;color:var(--accent-2);font-weight:800;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
+.s-eyebrow::before{content:'';width:28px;height:2px;background:var(--accent-2);}
+.s-title{font-size:30px;font-weight:800;color:var(--ink);line-height:1.25;letter-spacing:-0.022em;margin:0 0 8px;}
+.s-subtitle{font-size:14.5px;color:var(--ink-3);margin:0 0 22px;line-height:1.65;max-width:980px;}
+
+/* Cover */
+.slide.cover{background:radial-gradient(ellipse 700px 500px at 100% 0%, rgba(27,107,255,0.06), transparent 60%), radial-gradient(ellipse 600px 500px at 0% 100%, rgba(10,37,64,0.05), transparent 60%), linear-gradient(135deg,#ffffff 0%, #f8fafc 100%);padding:64px 72px;justify-content:space-between;}
+.cover-top{display:flex;justify-content:space-between;align-items:center;}
+.cover-date{font-size:12.5px;font-weight:700;color:var(--ink-3);letter-spacing:0.12em;}
+.cover-center{margin:auto 0;}
+.cover-eyebrow{font-size:13px;color:var(--accent-2);font-weight:800;letter-spacing:0.24em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:14px;}
+.cover-eyebrow::before{content:'';width:36px;height:2px;background:var(--accent-2);}
+.cover-title{font-size:54px;font-weight:800;color:var(--ink);line-height:1.18;letter-spacing:-0.028em;margin:0 0 22px;}
+.cover-title span{color:#003876;}
+.cover-sub{font-size:18px;color:var(--ink-2);line-height:1.7;max-width:980px;font-weight:500;}
+.cover-meta{display:flex;gap:32px;align-items:center;padding-top:24px;border-top:1px solid var(--border);font-size:13px;color:var(--ink-3);}
+.cover-meta strong{color:var(--ink);font-weight:700;}
+
+/* Common blocks */
+.row{display:flex;gap:18px;}
+.col{flex:1;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:18px 20px;}
+.card.soft{background:var(--soft-2);}
+.card.b-just{border-top:3px solid var(--c-just);}
+.card.b-spring{border-top:3px solid var(--c-spring);}
+.card.b-lihuhu{border-top:3px solid var(--c-lihuhu);}
+.card.b-accent{border-top:3px solid var(--accent-2);}
+.card.b-warn{border-top:3px solid var(--warn);}
+.card.b-good{border-top:3px solid var(--good);}
+.card.b-bad{border-top:3px solid var(--bad);}
+.k-h{font-size:10.5px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px;}
+.k-h.just{color:var(--c-just);}.k-h.spring{color:var(--c-spring);}.k-h.lihuhu{color:var(--c-lihuhu);}.k-h.warn{color:var(--warn);}.k-h.good{color:var(--good);}.k-h.bad{color:var(--bad);}.k-h.accent{color:var(--accent-2);}
+.k-t{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.4;}
+.k-b{font-size:12.5px;color:var(--ink-2);line-height:1.65;}
+.k-b ul{margin:4px 0 0 16px;}
+.k-b li{margin-bottom:2px;}
+
+/* Key message hero */
+.hero{background:linear-gradient(135deg,#0a2540 0%, #11315a 60%, #1b6bff 180%);color:#fff;padding:24px 28px;border-radius:8px;position:relative;overflow:hidden;margin-bottom:18px;}
+.hero::before{content:'';position:absolute;right:-60px;top:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(27,107,255,0.28),transparent 70%);}
+.hero .label{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#7fb0ff;font-weight:800;margin-bottom:10px;position:relative;}
+.hero p{font-size:15px;color:#fff;line-height:1.75;position:relative;margin:0;}
+.hero p strong{color:#7fb0ff;font-weight:700;}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;font-size:12px;}
+th{text-align:left;padding:9px 10px;background:var(--soft);color:var(--ink-2);font-weight:700;border-bottom:1px solid var(--border);font-size:11.5px;letter-spacing:0.02em;}
+td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--ink-2);line-height:1.55;vertical-align:top;}
+td strong{color:var(--ink);font-weight:700;}
+.tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:3px;font-weight:700;letter-spacing:0.04em;}
+.tag.just{background:var(--c-just-soft);color:var(--c-just-deep);}
+.tag.spring{background:var(--c-spring-soft);color:var(--c-spring-deep);}
+.tag.lihuhu{background:var(--c-lihuhu-soft);color:var(--c-lihuhu-deep);}
+.tag.warn{background:var(--warn-tint);color:var(--warn);}
+.tag.good{background:var(--good-tint);color:var(--good);}
+.tag.bad{background:var(--bad-tint);color:var(--bad);}
+.tag.bench{background:var(--c-bench-soft);color:var(--c-bench);}
+
+/* Source pill */
+.src{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:0.04em;margin-left:5px;vertical-align:1px;}
+.src.공시{color:#475569;background:#e2e8f0;}
+.src.추정{color:#b45309;background:#fef3c7;}
+.src.리뷰{color:#7c3aed;background:#f5f3ff;}
+.src.체험{color:#1b6bff;background:#dbe6ff;}
+.src.scrape{color:#0e7490;background:#cffafe;}
+
+/* Quote */
+.quote{font-size:12.5px;color:var(--ink-2);line-height:1.6;padding:10px 14px;background:var(--soft-2);border-left:3px solid var(--c-bench);border-radius:0 4px 4px 0;margin-bottom:8px;}
+.quote .who{display:block;font-size:10.5px;color:var(--ink-4);margin-top:4px;font-weight:600;}
+
+/* Step / flow */
+.steps{display:flex;gap:0;align-items:stretch;}
+.step{flex:1;background:var(--surface);border:1px solid var(--border);padding:14px 16px;position:relative;}
+.step + .step{border-left:none;}
+.step .sn{font-size:10px;letter-spacing:0.18em;color:var(--accent-2);font-weight:800;margin-bottom:4px;}
+.step .st{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.step .sd{font-size:11.5px;color:var(--ink-3);line-height:1.55;}
+.step::after{content:'';position:absolute;right:-7px;top:50%;transform:translateY(-50%);width:14px;height:14px;background:var(--surface);border-right:1px solid var(--border);border-top:1px solid var(--border);transform:translateY(-50%) rotate(45deg);z-index:2;}
+.step:last-child::after{display:none;}
+
+/* Chart wrap */
+.chartwrap{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px;height:100%;}
+.chartwrap canvas{max-height:100%;}
+
+/* Numbers */
+.bignum{font-size:28px;font-weight:800;color:var(--ink);letter-spacing:-0.02em;font-variant-numeric:tabular-nums;line-height:1.1;}
+.bignum .unit{font-size:14px;color:var(--ink-3);font-weight:700;margin-left:3px;}
+.bignum.just{color:var(--c-just);}
+.bignum.spring{color:var(--c-spring);}
+.bignum.lihuhu{color:var(--c-lihuhu);}
+.bignum.warn{color:var(--warn);}
+.bignum.bad{color:var(--bad);}
+.bignum.good{color:var(--good);}
+
+/* Footer brand */
+.brand-just{color:var(--c-just);font-weight:700;}
+.brand-spring{color:var(--c-spring);font-weight:700;}
+.brand-lihuhu{color:var(--c-lihuhu);font-weight:700;}
+
+/* Closing */
+.slide.closing{background:linear-gradient(135deg,#f8fafc 0%, #eef4ff 100%);}
+
+/* App icon thumbnails */
+.icon-strip{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;margin:8px 0 14px;}
+.icon-card{display:flex;flex-direction:column;align-items:center;width:88px;text-align:center;}
+.icon-card img{width:64px;height:64px;border-radius:14px;box-shadow:0 4px 10px rgba(10,37,64,0.12);border:1px solid var(--border);object-fit:cover;background:#fff;}
+.icon-card .ic-name{font-size:10.5px;color:var(--ink-2);margin-top:6px;line-height:1.25;font-weight:600;}
+.icon-card .ic-dev{font-size:9px;color:var(--ink-4);margin-top:2px;letter-spacing:0.02em;}
+
+/* Company wordmark badges */
+.bi{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:4px;font-weight:800;font-size:11.5px;letter-spacing:0.08em;}
+.bi.just{background:var(--c-just-soft);color:var(--c-just-deep);border:1px solid #bfdbfe;}
+.bi.spring{background:var(--c-spring-soft);color:var(--c-spring-deep);border:1px solid #bbf7d0;}
+.bi.lihuhu{background:var(--c-lihuhu-soft);color:var(--c-lihuhu-deep);border:1px solid #d1d5db;}
+.bi.nc{background:#fff;color:#003876;border:1px solid #bfdbfe;font-weight:800;}
+.bi::before{content:'';width:8px;height:8px;border-radius:2px;}
+.bi.just::before{background:var(--c-just);}
+.bi.spring::before{background:var(--c-spring);}
+.bi.lihuhu::before{background:var(--c-lihuhu);}
+.bi.nc::before{background:#003876;}
+
+/* Idea card */
+.idea-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px;}
+.idea{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px 14px;border-top:3px solid var(--accent-2);}
+.idea .in{font-size:9.5px;font-weight:800;letter-spacing:0.16em;color:var(--accent-2);margin-bottom:4px;}
+.idea .it{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.35;}
+.idea .id{font-size:11px;color:var(--ink-3);line-height:1.55;}
+
+/* Game gallery (slide 3) · horizontal rows */
+.gg-row{display:flex;flex-direction:column;gap:6px;padding:8px 12px 10px;background:var(--soft-2);border:1px solid var(--border);border-radius:8px;}
+.gg-row.just{border-left:4px solid var(--c-just);}
+.gg-row.lihuhu{border-left:4px solid var(--c-lihuhu);}
+.gg-row.spring{border-left:4px solid var(--c-spring);}
+.gg-row.bench{border-left:4px solid var(--c-bench);background:var(--c-bench-soft);}
+.gg-head{display:flex;align-items:center;gap:10px;}
+.gg-head .logo{width:24px;height:24px;border-radius:6px;object-fit:cover;flex-shrink:0;background:#fff;border:1px solid var(--border);}
+.gg-head .name{font-size:13px;font-weight:800;color:var(--ink);letter-spacing:-0.005em;}
+.gg-head .meta{font-size:10.5px;color:var(--ink-4);font-weight:600;margin-left:8px;}
+.gg-grid{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;}
+.gg-tile{display:flex;flex-direction:column;align-items:center;width:102px;text-align:center;}
+.gg-ico{position:relative;width:90px;height:90px;border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;box-shadow:0 6px 14px rgba(15,23,42,0.14);border:1px solid rgba(255,255,255,0.6);letter-spacing:0.01em;}
+.gg-ico span{position:absolute;z-index:0;text-align:center;padding:0 3px;line-height:1.15;}
+.gg-ico img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;background:transparent;}
+.gg-name{font-size:11px;font-weight:700;color:var(--ink);margin-top:5px;line-height:1.25;}
+.gg-mark{font-size:9.5px;color:var(--ink-4);margin-top:1px;font-weight:500;line-height:1.25;}
+
+@media print{
+  body{background:#fff;}
+  .deck{gap:0;padding:0;}
+  .slide{box-shadow:none;margin:0;border-radius:0;}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- ============================================== -->
+<!-- SLIDE 1: COVER                                  -->
+<!-- ============================================== -->
+<section class="slide cover">
+  <div class="cover-top">
+    <img src="NCSOFT CI-Blue.png" alt="NCSOFT" class="nc-logo" style="height:36px;">
+    <span class="cover-date">2026 · 05</span>
+  </div>
+  <div class="cover-center">
+    <h1 class="cover-title">NC 모바일 캐주얼 게임<br><span>분석 포트폴리오</span></h1>
+  </div>
+  <div class="cover-meta" style="display:flex;flex-direction:column;align-items:flex-end;padding-top:0;border-top:none;">
+    <div style="text-align:right;min-width:220px;padding-bottom:16px;">
+      <div style="font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:0.04em;">작성자</div>
+      <div style="font-size:16px;color:#003876;font-weight:800;margin-top:2px;">여인덕</div>
+      <div style="font-size:11px;color:var(--ink-3);font-weight:600;margin-top:4px;letter-spacing:0.04em;">직무</div>
+      <div style="font-size:13px;color:var(--ink);font-weight:700;margin-top:2px;">사업 전략 / 데이터 분석 담당자</div>
+    </div>
+    <div style="width:100%;border-top:1px solid var(--border);"></div>
+  </div>
+  <div class="slide-no">01 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 2: INDEX (좌·우 분할)                     -->
+<!-- ============================================== -->
+<section class="slide">
+  <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:48px;flex:1;align-items:stretch;">
+    <!-- 좌측: 큰 제목 + 분석 흐름 -->
+    <div style="display:flex;flex-direction:column;justify-content:center;padding:8px 0;">
+      <div style="font-size:13px;font-weight:800;color:var(--ink-3);letter-spacing:0.16em;margin-bottom:8px;">CONTENTS</div>
+      <h1 style="font-size:64px;font-weight:900;color:#003876;line-height:1.05;letter-spacing:-0.02em;margin:0;">Index</h1>
+      <div style="width:60px;height:4px;background:#003876;margin:18px 0 18px 0;border-radius:2px;"></div>
+      <p style="font-size:15px;font-weight:600;color:var(--ink-2);line-height:1.6;margin:0;">3사 게임 직접 플레이하며 시장 현황 파악 및 피드백 정리.<br>각 회사 <strong style="color:#003876;">시장 현황 → 수익화 구조 → 피드백</strong> 구조로 분석.</p>
+    </div>
+
+    <!-- 우측: 챕터 3개 목차 리스트 -->
+    <div style="display:flex;flex-direction:column;justify-content:center;gap:24px;padding:8px 0;">
+      <!-- Chapter 1 · JustPlay -->
+      <div style="display:flex;align-items:center;gap:18px;padding-bottom:20px;border-bottom:1px solid var(--border);">
+        <div style="font-size:38px;font-weight:900;color:var(--c-just);letter-spacing:-0.04em;line-height:1;width:50px;font-variant-numeric:tabular-nums;">01</div>
+        <div style="flex:1;">
+          <div style="font-size:11px;font-weight:800;color:var(--ink-3);letter-spacing:0.1em;">CHAPTER 1</div>
+          <div style="font-size:22px;font-weight:800;color:var(--c-just-deep);margin-top:2px;">JustPlay</div>
+        </div>
+        <div style="display:flex;gap:6px;font-size:11px;color:var(--ink-3);font-weight:600;">
+          <span style="background:var(--c-just-soft);color:var(--c-just-deep);padding:3px 8px;border-radius:4px;">04 현황</span>
+          <span style="background:var(--c-just-soft);color:var(--c-just-deep);padding:3px 8px;border-radius:4px;">05 수익화 구조</span>
+          <span style="background:var(--c-just-soft);color:var(--c-just-deep);padding:3px 8px;border-radius:4px;">06 플레이 피드백</span>
+        </div>
+      </div>
+      <!-- Chapter 2 · Lihuhu -->
+      <div style="display:flex;align-items:center;gap:18px;padding-bottom:20px;border-bottom:1px solid var(--border);">
+        <div style="font-size:38px;font-weight:900;color:var(--c-lihuhu);letter-spacing:-0.04em;line-height:1;width:50px;font-variant-numeric:tabular-nums;">02</div>
+        <div style="flex:1;">
+          <div style="font-size:11px;font-weight:800;color:var(--ink-3);letter-spacing:0.1em;">CHAPTER 2</div>
+          <div style="font-size:22px;font-weight:800;color:var(--c-lihuhu-deep);margin-top:2px;">Lihuhu</div>
+        </div>
+        <div style="display:flex;gap:6px;font-size:11px;color:var(--ink-3);font-weight:600;">
+          <span style="background:var(--c-lihuhu-soft);color:var(--c-lihuhu-deep);padding:3px 8px;border-radius:4px;">07 현황</span>
+          <span style="background:var(--c-lihuhu-soft);color:var(--c-lihuhu-deep);padding:3px 8px;border-radius:4px;">08 수익화 구조</span>
+          <span style="background:var(--c-lihuhu-soft);color:var(--c-lihuhu-deep);padding:3px 8px;border-radius:4px;">09 플레이 피드백</span>
+        </div>
+      </div>
+      <!-- Chapter 3 · Springcomes -->
+      <div style="display:flex;align-items:center;gap:18px;">
+        <div style="font-size:38px;font-weight:900;color:var(--c-spring);letter-spacing:-0.04em;line-height:1;width:50px;font-variant-numeric:tabular-nums;">03</div>
+        <div style="flex:1;">
+          <div style="font-size:11px;font-weight:800;color:var(--ink-3);letter-spacing:0.1em;">CHAPTER 3</div>
+          <div style="font-size:22px;font-weight:800;color:var(--c-spring-deep);margin-top:2px;">Springcomes</div>
+        </div>
+        <div style="display:flex;gap:6px;font-size:11px;color:var(--ink-3);font-weight:600;">
+          <span style="background:var(--c-spring-soft);color:var(--c-spring-deep);padding:3px 8px;border-radius:4px;">10 현황</span>
+          <span style="background:var(--c-spring-soft);color:var(--c-spring-deep);padding:3px 8px;border-radius:4px;">11 수익화 구조</span>
+          <span style="background:var(--c-spring-soft);color:var(--c-spring-deep);padding:3px 8px;border-radius:4px;">12 플레이 피드백</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:none;">
+    <!-- JustPlay -->
+    <div style="background:#fff;border:1px solid var(--border);border-top:6px solid var(--c-just);border-radius:10px;padding:24px 22px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+        <div style="width:56px;height:56px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#2563eb,#1e40af);box-shadow:0 4px 10px rgba(37,99,235,0.20);flex-shrink:0;"><img src="https://d1hbpr09pwz0sk.cloudfront.net/logo_url/justplay-76c255a6" alt="JustPlay" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div>
+          <div style="font-size:11px;font-weight:800;color:var(--ink-3);letter-spacing:0.08em;">CHAPTER 1</div>
+          <div style="font-size:26px;font-weight:800;color:var(--c-just-deep);line-height:1.1;margin-top:2px;">JustPlay</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:16px;color:var(--ink-2);line-height:1.4;">
+        <div style="display:flex;align-items:center;gap:10px;"><span style="background:var(--c-just);color:#fff;font-size:13px;font-weight:800;padding:4px 10px;border-radius:5px;min-width:32px;text-align:center;">04</span>시장 현황</div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="background:var(--c-just);color:#fff;font-size:13px;font-weight:800;padding:4px 10px;border-radius:5px;min-width:32px;text-align:center;">05</span>수익화 구조</div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="background:var(--c-just);color:#fff;font-size:13px;font-weight:800;padding:4px 10px;border-radius:5px;min-width:32px;text-align:center;">06</span>피드백</div>
+      </div>
+    </div>
+    <!-- Lihuhu -->
+    <div style="background:#fff;border:1px solid var(--border);border-top:6px solid var(--c-lihuhu);border-radius:10px;padding:24px 22px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+        <div style="width:56px;height:56px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);box-shadow:0 4px 10px rgba(31,41,55,0.20);flex-shrink:0;"><img src="https://play-lh.googleusercontent.com/oEDQAqDqY2DCmHAIN32nJM0k9GlB_Iy2aT7rBu6DtDRZenXtdGk8PXJJegqQ7bWtf_Gu" alt="Lihuhu" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div>
+          <div style="font-size:11px;font-weight:800;color:var(--ink-3);letter-spacing:0.08em;">CHAPTER 2</div>
+          <div style="font-size:26px;font-weight:800;color:var(--c-lihuhu-deep);line-height:1.1;margin-top:2px;">Lihuhu</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:16px;color:var(--ink-2);line-height:1.4;">
+        <div style="display:flex;align-items:center;gap:10px;"><span style="background:var(--c-lihuhu);color:#fff;font-size:13px;font-weight:800;padding:4px 10px;border-radius:5px;min-width:32px;text-align:center;">07</span>시장 현황</div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="background:var(--c-lihuhu);color:#fff;font-size:13px;font-weight:800;padding:4px 10px;border-radius:5px;min-width:32px;text-align:center;">08</span>수익화 구조</div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="background:var(--c-lihuhu);color:#fff;font-size:13px;font-weight:800;padding:4px 10px;border-radius:5px;min-width:32px;text-align:center;">09</span>피드백</div>
+      </div>
+    </div>
+    <!-- Springcomes -->
+    <div style="background:#fff;border:1px solid var(--border);border-top:6px solid var(--c-spring);border-radius:10px;padding:24px 22px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+        <div style="width:56px;height:56px;border-radius:12px;overflow:hidden;background:#fff;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(21,128,61,0.18);flex-shrink:0;"><img src="https://www.spcomes.com/imgs/sp.jpg" alt="Springcomes" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div>
+          <div style="font-size:11px;font-weight:800;color:var(--ink-3);letter-spacing:0.08em;">CHAPTER 3</div>
+          <div style="font-size:23px;font-weight:800;color:var(--c-spring-deep);line-height:1.1;margin-top:2px;">Springcomes</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:16px;color:var(--ink-2);line-height:1.4;">
+        <div style="display:flex;align-items:center;gap:10px;"><span style="background:var(--c-spring);color:#fff;font-size:13px;font-weight:800;padding:4px 10px;border-radius:5px;min-width:32px;text-align:center;">10</span>시장 현황</div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="background:var(--c-spring);color:#fff;font-size:13px;font-weight:800;padding:4px 10px;border-radius:5px;min-width:32px;text-align:center;">11</span>수익화 구조</div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="background:var(--c-spring);color:#fff;font-size:13px;font-weight:800;padding:4px 10px;border-radius:5px;min-width:32px;text-align:center;">12</span>피드백</div>
+      </div>
+    </div>
+    <!-- 종합 -->
+    <div style="background:#fff;border:1px solid var(--border);border-top:6px solid var(--accent-2);border-radius:10px;padding:24px 22px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+        <div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#1b6bff,#0a2540);box-shadow:0 4px 10px rgba(27,107,255,0.20);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;">📊</div>
+        <div>
+          <div style="font-size:11px;font-weight:800;color:var(--ink-3);letter-spacing:0.08em;">CHAPTER 4</div>
+          <div style="font-size:26px;font-weight:800;color:var(--accent-2);line-height:1.1;margin-top:2px;">종합</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:16px;color:var(--ink-2);line-height:1.4;">
+        <div style="display:flex;align-items:center;gap:10px;"><span style="background:var(--accent-2);color:#fff;font-size:13px;font-weight:800;padding:4px 10px;border-radius:5px;min-width:32px;text-align:center;">13</span>3사 강화 방향</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-no">02 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 3: 플레이한 게임 갤러리                    -->
+<!-- ============================================== -->
+<section class="slide">
+  <h2 class="s-title" style="margin-bottom:6px;">플레이 게임 리스트</h2>
+  <p class="s-subtitle">3사 대표 게임 + 시장 대표 게임 직접 플레이 · BM·광고·결제 동선 확인</p>
+
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
+
+    <!-- ROW 1: JustPlay 8 -->
+    <div class="gg-row just">
+      <div class="gg-head">
+        <img class="logo" src="https://d1hbpr09pwz0sk.cloudfront.net/logo_url/justplay-76c255a6" alt="JustPlay" onerror="this.style.display='none'">
+        <span class="name" style="color:var(--c-just-deep);">JustPlay</span>
+      </div>
+      <div class="gg-grid">
+        <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#2563eb,#1e40af);"><span>머지<br>블래스트</span><img src="https://play-lh.googleusercontent.com/MjZeG5rB_JBJ4Ztai8-eR7EWR86dsOJMypCFurXQRjhT5Ov-75CBnkUDbUm52925z_o=w128" alt="" onerror="this.remove()"></div><div class="gg-name">머지 블래스트</div></div>
+        <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#2563eb,#1e40af);"><span>트레저<br>마스터</span><img src="https://play-lh.googleusercontent.com/_lYcwhk15kEQDqliKxajVrdi9tsEDrS-ipQdIONx8wGW5OBbi0gReAukFre-7YQ5cfiD3WRi1c2P9SOe1HYcJ5g=w128" alt="" onerror="this.remove()"></div><div class="gg-name">트레저 마스터</div></div>
+        <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#2563eb,#1e40af);"><span>우든<br>퍼즐</span><img src="https://play-lh.googleusercontent.com/X-nt9ZCqvp8MqC10qfHCMCI1m6mHsmzaIs9WvKijhu7iLI7qKUjuBFnTNfOqy4D1Jzk=w128" alt="" onerror="this.remove()"></div><div class="gg-name">우든 퍼즐 블리스</div></div>
+        <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#2563eb,#1e40af);"><span>슈가<br>러시</span><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7b/e0/0a/7be00af7-7735-2258-349e-03a81005a51c/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="" onerror="this.remove()"></div><div class="gg-name">슈가 러시 매치3</div></div>
+        <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#2563eb,#1e40af);"><span>스파이럴<br>드롭</span><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e6/a3/c5/e6a3c597-551a-cfa8-dbf9-6e53a9bb677f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="" onerror="this.remove()"></div><div class="gg-name">스파이럴 드롭</div></div>
+        <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#2563eb,#1e40af);"><span>갑부</span><img src="https://nng-phinf.pstatic.net/MjAyMjA4MTZfMjE0/MDAxNjYwNjQ2NTgwODI5.xnpaGWUHgCj7GLxlrg1Hb-iEidny48k1OfDtXgEcV_og.bZqn3I3X0iQJVQqR8gmg57-6noykgHDCebrtzBAOSocg.PNG/1024.png" alt="" onerror="this.remove()"></div><div class="gg-name">갑부: 장사의 시대</div><div class="gg-mark">로열티 미션</div></div>
+        <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#2563eb,#1e40af);"><span>블록<br>버스터</span><img src="https://play-lh.googleusercontent.com/bxWKZjk30-UlpUkr4O3IkVJF2kEqlMC8jaLP34UqxKYUk_3gNvYwKsT75_PQhYN0vH1LChEldSxmr6R_IJ3uhZE=w240-h480-rw" alt="" onerror="this.remove()"></div><div class="gg-name">블록버스터 아케이드</div></div>
+        <div style="flex:1;min-width:200px;align-self:stretch;display:flex;align-items:center;padding:10px 14px;background:#fff;border:1px dashed #cbd5e1;border-radius:8px;font-size:11.5px;color:var(--ink-2);line-height:1.55;"><span><strong style="color:var(--c-just-deep);">JustPlay 게임 플레이 경험</strong><br>광고 → 코인 → 출금 동선 파악</span></div>
+      </div>
+    </div>
+
+    <!-- ROW 2: Lihuhu + Springcomes 같은 행 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <!-- Lihuhu 3 -->
+      <div class="gg-row lihuhu">
+        <div class="gg-head">
+          <img class="logo" src="https://play-lh.googleusercontent.com/oEDQAqDqY2DCmHAIN32nJM0k9GlB_Iy2aT7rBu6DtDRZenXtdGk8PXJJegqQ7bWtf_Gu" alt="Lihuhu" onerror="this.style.display='none'">
+          <span class="name" style="color:var(--c-lihuhu-deep);">Lihuhu</span>
+        </div>
+        <div class="gg-grid">
+          <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#374151,#111827);"><span>매치<br>트리플</span><img src="https://play-lh.googleusercontent.com/Fyj84R_cBe1AVt7Er17nVGyWe1z_S4xsTIQjNTHOV2lJV4YH8MD1ZIEBB-oeLhmDGg=w128" alt="" onerror="this.remove()"></div><div class="gg-name">매치 트리플 3D</div></div>
+          <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#374151,#111827);"><span>타일즈<br>인홀</span><img src="https://play-lh.googleusercontent.com/CfHfhV6zdIZnuBpe_srJ0CyRVjmUOhL-yPACV5J1gNZrqGsjkSn9IjdyvPCNaqjz_LwE" alt="" onerror="this.remove()"></div><div class="gg-name">타일즈 인홀</div></div>
+          <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#374151,#111827);"><span>파킹<br>마스터</span><img src="https://play-lh.googleusercontent.com/8YxG41z9Xu-fNogLZzB_wB5M57ds09AN_QjIIHnbYmpYndsLDFKcgjbaS8H9hElbVVY=w128" alt="" onerror="this.remove()"></div><div class="gg-name">파킹 마스터 3D</div></div>
+          <div style="flex:1;min-width:200px;align-self:stretch;display:flex;align-items:center;padding:10px 14px;background:#fff;border:1px dashed #cbd5e1;border-radius:8px;font-size:11.5px;color:var(--ink-2);line-height:1.55;"><span><strong style="color:var(--c-lihuhu-deep);">매치 장르 플레이 경험</strong><br>cross-promo 광고 파악</span></div>
+        </div>
+      </div>
+
+      <!-- Springcomes 3 -->
+      <div class="gg-row spring">
+        <div class="gg-head">
+          <img class="logo" src="https://www.spcomes.com/imgs/sp.jpg" alt="Springcomes" onerror="this.style.display='none'">
+          <span class="name" style="color:var(--c-spring-deep);">Springcomes</span>
+        </div>
+        <div class="gg-grid">
+          <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#15803d,#166534);"><span>헬로<br>타운</span><img src="https://play-lh.googleusercontent.com/1HCjMO7fZ_tYi4vefT4N65n9yTmGNp-oURSFghjJ1GqmwVoEETdfjz56LiWsSHnl7A=w128" alt="" onerror="this.remove()"></div><div class="gg-name">헬로타운</div></div>
+          <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#15803d,#166534);"><span>정리의<br>여왕</span><img src="https://play-lh.googleusercontent.com/GvOziOEmbRrkWQU1Wu24eKLzcbuKTL2P89Cwu9E8mWyt6m7VSgISfUesurrNNqgGp-w=w240-h480-rw" alt="" onerror="this.remove()"></div><div class="gg-name">정리의 여왕</div></div>
+          <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#15803d,#166534);"><span>머지<br>페코</span><img src="https://play-lh.googleusercontent.com/CR7KxRX5VmWThfZ9-t5RRrQRivc1QMJvN-WJX_Cx8yE4sWiIb87uRkKbRsoTxvKBa-0N=w128" alt="" onerror="this.remove()"></div><div class="gg-name">머지 페코</div></div>
+          <div style="flex:1;min-width:200px;align-self:stretch;display:flex;align-items:center;padding:10px 14px;background:#fff;border:1px dashed #cbd5e1;border-radius:8px;font-size:11.5px;color:var(--ink-2);line-height:1.55;"><span><strong style="color:var(--c-spring-deep);">머지 장르 플레이 경험</strong><br>머지 IP 결제 동선 파악</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 3: 대표작 4 -->
+    <div class="gg-row bench">
+      <div class="gg-head">
+        <span class="name" style="color:var(--c-bench);">모바일 캐주얼 대표작</span>
+      </div>
+      <div class="gg-grid">
+        <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#dc2626,#991b1b);"><span>로열<br>매치</span><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/05/59/1a/05591a60-de46-85b6-3ca6-d134e68c77d6/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="" onerror="this.remove()"></div><div class="gg-name">로열 매치</div><div class="gg-mark">매치-3 IAP 1위</div></div>
+        <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);"><span>탱글<br>마스터</span><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/49/af/cb/49afcbcb-5190-f43c-89ba-b32673d8c943/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="" onerror="this.remove()"></div><div class="gg-name">탱글 마스터 3D</div><div class="gg-mark">Hybrid</div></div>
+        <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#ea580c,#c2410c);"><span>가십<br>하버</span><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/19/7c/b1/197cb1b3-8633-a880-9e78-9379a4a2585b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="" onerror="this.remove()"></div><div class="gg-name">가십 하버</div><div class="gg-mark">머지 글로벌 1위</div></div>
+        <div class="gg-tile"><div class="gg-ico" style="background:linear-gradient(135deg,#0891b2,#155e75);"><span>머지<br>맨션</span><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2c/8e/8e/2c8e8e37-ced8-b18f-1f60-3db28c981a17/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="" onerror="this.remove()"></div><div class="gg-name">머지 맨션</div><div class="gg-mark">머지+스토리</div></div>
+        <div style="flex:1;min-width:200px;align-self:stretch;display:flex;align-items:center;padding:10px 14px;background:#fff;border:1px dashed #cbd5e1;border-radius:8px;font-size:11.5px;color:var(--ink-2);line-height:1.55;"><span><strong style="color:var(--c-bench);">시장 대표작 플레이 경험</strong><br>각 장르 글로벌 1·2위 시장 좌표 파악</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-no">03 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 4: JustPlay · 1.1 수익화 구조 (BM · 시장 광고) -->
+<!-- ============================================== -->
+<section class="slide">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+    <h2 class="s-title" style="margin-bottom:0;">JustPlay_현황</h2>
+    <span class="bi just">JUSTPLAY</span>
+  </div>
+
+  <!-- 핵심 메시지 hero + JustPlay 아이콘 -->
+  <div style="display:grid;grid-template-columns:1fr auto;gap:14px;margin-bottom:12px;align-items:stretch;">
+    <div style="display:flex;align-items:center;padding:0 4px;">
+      <p style="font-size:22px;font-weight:700;color:#003876;line-height:1.45;margin:0;letter-spacing:-0.01em;">
+        리워드 광고 미디어 카테고리 <strong>광고 송출 1위</strong><br>JustDice 그룹 합산 점유율 <strong>60~70%</strong> · 카테고리 절반의 광고 인벤토리 지배력 보유
+      </p>
+    </div>
+    <!-- JustPlay 아이콘만 -->
+    <div style="display:flex;align-items:center;justify-content:center;background:var(--c-just-soft);border:1px solid #bfdbfe;border-radius:6px;padding:6px;">
+      <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#2563eb,#1e40af);box-shadow:0 2px 6px rgba(37,99,235,0.18);"><img src="https://d1hbpr09pwz0sk.cloudfront.net/logo_url/justplay-76c255a6" alt="JustPlay" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+    </div>
+  </div>
+
+  <!-- 1.1.a BM 4-box -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+    <span style="background:var(--c-just);color:#fff;font-weight:800;font-size:10px;padding:3px 8px;border-radius:4px;letter-spacing:0.06em;">1.1.a BM 구조</span>
+    <span style="font-size:11px;color:var(--ink-3);font-weight:600;">자사 광고 SDK 통합 + Offerwall 중개 · 두 줄기 마진 회수</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
+    <div style="background:#fff;border:1px solid var(--border);border-top:3px solid var(--c-just);border-radius:6px;padding:9px 11px;">
+      <div style="font-size:9.5px;font-weight:800;color:var(--c-just);letter-spacing:0.06em;margin-bottom:3px;">매출원 ① · 50~70%</div>
+      <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;">자사 게임 광고</div>
+      <div style="font-size:10.5px;color:var(--ink-3);line-height:1.5;">Gimica Games 앞단 배치 → 자사 SDK로 직접 송출 · 광고 $1.00 → <strong>마진 $0.75</strong></div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-top:3px solid var(--c-just);border-radius:6px;padding:9px 11px;">
+      <div style="font-size:9.5px;font-weight:800;color:var(--c-just);letter-spacing:0.06em;margin-bottom:3px;">매출원 ② · 20~35%</div>
+      <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;">Offerwall (UA 중개)</div>
+      <div style="font-size:10.5px;color:var(--ink-3);line-height:1.5;">외부 게임사 UA $5 · 페이백 $2 → <strong>마진 $3</strong> · eCPM $400~530</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-top:3px solid var(--c-just);border-radius:6px;padding:9px 11px;">
+      <div style="font-size:9.5px;font-weight:800;color:var(--c-just);letter-spacing:0.06em;margin-bottom:3px;">SDK 내재화</div>
+      <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;">수수료 30~40% 흡수</div>
+      <div style="font-size:10.5px;color:var(--ink-3);line-height:1.5;">자사 SDK 통합 → 외부 미디에이션 수수료 <strong>30~40% 내재화</strong></div>
+    </div>
+      </div>
+
+  <!-- 1.1.b 시장 광고 송출 + 단가 비교 -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+    <span style="background:var(--c-just);color:#fff;font-weight:800;font-size:10px;padding:3px 8px;border-radius:4px;letter-spacing:0.06em;">1.1.b 경쟁사 비교</span>
+    <span style="font-size:11px;color:var(--ink-3);font-weight:600;">리워드 앱 7사 · 동일 비즈니스 모델 기준 · Sensor Tower + Meta Ad Library 추정 · <strong>2026 forecast</strong> · 환율 1 USD = 1,500원</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px;">
+    <div style="background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+      <table style="width:100%;border-collapse:collapse;font-size:11px;">
+        <thead>
+          <tr style="background:var(--soft);">
+            <th style="text-align:left;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">회사 · 본사</th>
+            <th style="text-align:right;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">월 UA</th>
+            <th style="text-align:right;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">SOV</th>
+            <th style="text-align:right;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);white-space:nowrap;">연 매출 추정<br><span style="font-size:8.5px;font-weight:600;color:var(--ink-4);">(2026 forecast)</span></th>
+            <th style="text-align:left;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">포지션</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:var(--c-just-soft);">
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);"><strong style="color:var(--c-just-deep);">★ JustPlay</strong> · 🇩🇪</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;"><strong>110억</strong></td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">38%</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;"><strong>~4,000억</strong></td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--c-just-deep);font-weight:600;">광고 송출 1위 · 매출 압도적 1위</td>
+          </tr>
+          <tr style="background:var(--c-just-soft);">
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);">Cash Giraffe · 🇩🇪 JustDice</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">20.6억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">7%</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~280억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">동일 그룹 · 신흥시장 확장</td>
+          </tr>
+          <tr style="background:#fef3c7;">
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);"><strong style="color:var(--warn);">🔥 Mistplay</strong> · 🇨🇦</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">61.6억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">21%</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~800억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">카테고리 2위 · Tier-1 영어권 집중</td>
+          </tr>
+          <tr style="background:#fef3c7;">
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);"><strong style="color:var(--warn);">🔥 FreeCash</strong> · 🇳🇱</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">48억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">17%</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~650억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">유럽 성장 1위 (FT1000 3위)</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);">adjoe · 🇩🇪</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">27.4억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">10%</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~1,400억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">SDK 통합 모델 · AppsFlyer 2025 성장 1위</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);">AppStation · 🇨🇦</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">9.6억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">3%</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~100억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">Mistplay 클론 · Tier-1 타깃</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;">Swagbucks · 🇺🇸</td>
+            <td style="padding:6px 10px;text-align:right;font-variant-numeric:tabular-nums;">6.8억</td>
+            <td style="padding:6px 10px;text-align:right;font-variant-numeric:tabular-nums;">2%</td>
+            <td style="padding:6px 10px;text-align:right;font-variant-numeric:tabular-nums;">~350억</td>
+            <td style="padding:6px 10px;color:var(--ink-3);">GPT 본가 · 웹 메인 (모바일 보조)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="background:var(--c-just-soft);border:1px solid #bfdbfe;border-left:3px solid var(--c-just);border-radius:6px;padding:10px 12px;">
+        <div style="font-size:9.5px;font-weight:800;color:var(--c-just-deep);letter-spacing:0.06em;margin-bottom:3px;">JustDice 합산 1위</div>
+        <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">JustPlay + Cash Giraffe = 동일 모회사 · <strong>카테고리 광고 송출 60~70%</strong> 점유 추정.</div>
+      </div>
+      <div style="background:var(--c-just-soft);border:1px solid #bfdbfe;border-left:3px solid var(--c-just);border-radius:6px;padding:10px 12px;">
+        <div style="font-size:9.5px;font-weight:800;color:var(--c-just-deep);letter-spacing:0.06em;margin-bottom:3px;">UA 효율 우위</div>
+        <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">월 UA 110억 · CPI 1,712원 기준 <strong>신규 설치 약 640만/월</strong> · 카테고리 최대 인벤토리·매출 1위 압도력.</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#0a2540 0%, #1b6bff 220%);color:#fff;padding:10px 12px;border-radius:6px;">
+        <div style="font-size:9.5px;font-weight:800;color:#7fb0ff;letter-spacing:0.06em;margin-bottom:3px;">포지션 요약</div>
+        <div style="font-size:11px;line-height:1.55;">리워드 광고 미디어 카테고리에서 <strong style="color:#7fb0ff;">매출·광고 송출 모두 1위</strong> · JustDice 그룹 합산 점유율 <strong style="color:#7fb0ff;">60~70%</strong> · NC 인수 자산 = 카테고리 절반의 광고 인벤토리 지배력.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:10px;font-size:10px;color:var(--ink-4);font-style:italic;line-height:1.5;padding:6px 10px;background:#f8fafc;border-left:2px solid #cbd5e1;border-radius:3px;">
+    ※ 비교 기준: <strong>리워드 광고 미디어 카테고리 7사</strong> (JustPlay · Cash Giraffe · Mistplay · FreeCash · adjoe · AppStation · Swagbucks) · 동일 BM(자사 광고 + Offerwall 중개) 기준 비교. <strong>Mistplay · FreeCash</strong>가 JustPlay와 1:1 카테고리 일치, 나머지는 인접 모델.
+  </div>
+  <div class="slide-no">04 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 5: JustPlay · 1.2 유저 경로 + 매출 흐름      -->
+<!-- ============================================== -->
+<section class="slide">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+    <h2 class="s-title" style="margin-bottom:0;">JustPlay_수익화 구조</h2>
+    <span class="bi just">JUSTPLAY</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr auto;gap:14px;margin-bottom:18px;align-items:stretch;">
+    <div style="display:flex;align-items:center;padding:0 4px;">
+      <p style="font-size:20px;font-weight:700;color:#003876;line-height:1.4;margin:0;letter-spacing:-0.01em;">
+        단순 광고 매체가 아닌 <strong>2-sided 광고 마켓플레이스</strong> · 자사 SDK로 외부 수수료 30~40% 내재화 + Offerwall 중개 마진 동시 확보
+      </p>
+    </div>
+    <!-- JustPlay 아이콘만 -->
+    <div style="display:flex;align-items:center;justify-content:center;background:var(--c-just-soft);border:1px solid #bfdbfe;border-radius:6px;padding:6px;">
+      <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#2563eb,#1e40af);box-shadow:0 2px 6px rgba(37,99,235,0.18);"><img src="https://d1hbpr09pwz0sk.cloudfront.net/logo_url/justplay-76c255a6" alt="JustPlay" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+    </div>
+  </div>
+
+  <!-- 유저 경로 6단계 (원본 브랜드 아이콘) -->
+  <div style="margin-top:14px;background:var(--c-just-soft);border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;margin-bottom:10px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="background:var(--c-just);color:#fff;font-weight:800;font-size:10.5px;padding:3px 9px;border-radius:4px;letter-spacing:0.06em;">📍 유저 경로</span>
+      <span style="font-size:11.5px;font-weight:700;color:var(--c-just-deep);">UA 유입 → 앱 설치 → 게임 선택 → 광고 시청 → 달러 적립 → PayPal 출금</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 14px 1fr 14px 1fr 14px 1fr 14px 1fr 14px 1fr;gap:0;align-items:center;">
+      <!-- STEP 01: Google + Meta -->
+      <div style="background:#fff;border:1px solid #bfdbfe;border-radius:6px;padding:8px 6px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:42px;margin-bottom:5px;">
+          <div style="display:flex;flex-direction:column;align-items:center;line-height:1;gap:2px;">
+            <span style="font-size:12px;font-weight:900;letter-spacing:-0.02em;"><span style="color:#4285F4;">G</span><span style="color:#ea4335;">o</span><span style="color:#fbbc05;">o</span><span style="color:#4285F4;">g</span><span style="color:#34a853;">l</span><span style="color:#ea4335;">e</span></span>
+            <span style="font-size:8px;color:var(--ink-3);font-weight:700;">Ads</span>
+            <div style="width:60%;height:1px;background:#e5e9f0;margin:1px 0;"></div>
+            <span style="font-size:11px;font-weight:900;color:#0866FF;letter-spacing:-0.02em;">Meta</span>
+          </div>
+        </div>
+        <div style="font-size:9px;color:var(--c-just);font-weight:800;letter-spacing:0.06em;">STEP 01</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--ink);margin-top:2px;">UA 유입</div>
+        <div style="font-size:9.5px;color:var(--ink-3);margin-top:2px;line-height:1.4;">광고 도달</div>
+      </div>
+      <div style="text-align:center;font-size:16px;color:var(--c-just);font-weight:800;">→</div>
+      <!-- STEP 02: JustPlay -->
+      <div style="background:#fff;border:1px solid #bfdbfe;border-radius:6px;padding:8px 6px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:42px;margin-bottom:5px;">
+          <div style="width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,#2563eb,#1e40af);display:flex;align-items:center;justify-content:center;color:#fff;font-size:9.5px;font-weight:900;letter-spacing:-0.02em;box-shadow:0 2px 5px rgba(37,99,235,0.20);">JustPlay</div>
+        </div>
+        <div style="font-size:9px;color:var(--c-just);font-weight:800;letter-spacing:0.06em;">STEP 02</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--ink);margin-top:2px;">앱 설치</div>
+        <div style="font-size:9.5px;color:var(--ink-3);margin-top:2px;line-height:1.4;">Google Play · iOS</div>
+      </div>
+      <div style="text-align:center;font-size:16px;color:var(--c-just);font-weight:800;">→</div>
+      <!-- STEP 03: Gimica 게임 + OW -->
+      <div style="background:#fff;border:1px solid #bfdbfe;border-radius:6px;padding:8px 6px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:42px;margin-bottom:5px;gap:3px;">
+          <div style="width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,#2563eb,#1e40af);overflow:hidden;"><img src="https://play-lh.googleusercontent.com/MjZeG5rB_JBJ4Ztai8-eR7EWR86dsOJMypCFurXQRjhT5Ov-75CBnkUDbUm52925z_o=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+          <div style="width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,#2563eb,#1e40af);overflow:hidden;"><img src="https://play-lh.googleusercontent.com/_lYcwhk15kEQDqliKxajVrdi9tsEDrS-ipQdIONx8wGW5OBbi0gReAukFre-7YQ5cfiD3WRi1c2P9SOe1HYcJ5g=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+          <div style="width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:800;">OW</div>
+        </div>
+        <div style="font-size:9px;color:var(--c-just);font-weight:800;letter-spacing:0.06em;">STEP 03</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--ink);margin-top:2px;">게임 선택</div>
+        <div style="font-size:9.5px;color:var(--ink-3);margin-top:2px;line-height:1.4;">Gimica Games / OW</div>
+      </div>
+      <div style="text-align:center;font-size:16px;color:var(--c-just);font-weight:800;">→</div>
+      <!-- STEP 04: AdMob + AppLovin -->
+      <div style="background:#fff;border:1px solid #bfdbfe;border-radius:6px;padding:8px 6px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:42px;margin-bottom:5px;flex-direction:column;gap:3px;">
+          <span style="background:#4285F4;color:#fff;font-weight:800;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.02em;">AdMob</span>
+          <span style="background:#fc4445;color:#fff;font-weight:800;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.02em;">AppLovin</span>
+        </div>
+        <div style="font-size:9px;color:var(--c-just);font-weight:800;letter-spacing:0.06em;">STEP 04</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--ink);margin-top:2px;">광고 시청</div>
+        <div style="font-size:9.5px;color:var(--ink-3);margin-top:2px;line-height:1.4;">인터스티셜 + RV</div>
+      </div>
+      <div style="text-align:center;font-size:16px;color:var(--c-just);font-weight:800;">→</div>
+      <!-- STEP 05: $ -->
+      <div style="background:#fff;border:1px solid #bfdbfe;border-radius:6px;padding:8px 6px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:42px;margin-bottom:5px;">
+          <div style="width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,#15803d,#166534);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;line-height:1;box-shadow:0 2px 5px rgba(21,128,61,0.25);">
+            <span style="font-size:8px;opacity:0.85;font-weight:700;letter-spacing:0.04em;">USD</span>
+            <span style="font-size:18px;font-weight:900;margin-top:1px;">$</span>
+          </div>
+        </div>
+        <div style="font-size:9px;color:var(--c-just);font-weight:800;letter-spacing:0.06em;">STEP 05</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--ink);margin-top:2px;">달러 적립</div>
+        <div style="font-size:9.5px;color:var(--ink-3);margin-top:2px;line-height:1.4;">최소 $0.04</div>
+      </div>
+      <div style="text-align:center;font-size:16px;color:var(--c-just);font-weight:800;">→</div>
+      <!-- STEP 06: PayPal -->
+      <div style="background:#fff;border:1px solid #bfdbfe;border-radius:6px;padding:8px 6px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:42px;margin-bottom:5px;">
+          <div style="width:56px;height:40px;border-radius:8px;background:#fff;border:1px solid #bfdbfe;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;">
+            <span style="font-size:13px;font-weight:900;color:#003087;letter-spacing:-0.04em;">Pay</span>
+            <span style="font-size:13px;font-weight:900;color:#009cde;letter-spacing:-0.04em;margin-top:-2px;">Pal</span>
+          </div>
+        </div>
+        <div style="font-size:9px;color:var(--c-just);font-weight:800;letter-spacing:0.06em;">STEP 06</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--ink);margin-top:2px;">PayPal 출금</div>
+        <div style="font-size:9.5px;color:var(--ink-3);margin-top:2px;line-height:1.4;">PayPal 송금</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 💰 매출 흐름 (원본 슬라이드 5 L1→L4) -->
+  <div style="background:var(--c-just-soft);border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="background:var(--c-just);color:#fff;font-weight:800;font-size:10.5px;padding:3px 9px;border-radius:4px;letter-spacing:0.06em;">💰 매출 흐름</span>
+      <span style="font-size:11.5px;font-weight:700;color:var(--c-just-deep);">자사 게임 앞단 배치 → 광고 마진 회수 + Offerwall 중개로 추가 매출</span>
+    </div>
+
+    <!-- 매출원 ① 자사 게임 광고 -->
+    <div style="background:#fff;border:1px solid #bfdbfe;border-radius:6px;padding:8px 11px;margin-bottom:6px;">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px;">
+        <span style="background:var(--c-just);color:#fff;font-weight:800;font-size:9.5px;padding:2px 8px;border-radius:3px;letter-spacing:0.04em;">매출원 ①</span>
+        <span style="font-size:11.5px;font-weight:800;color:var(--c-just-deep);">자사 게임 광고 · 비중 50~70%</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 12px 1fr 12px 1fr 12px 1fr;gap:0;align-items:center;">
+        <div style="background:var(--c-just-soft);border:1px solid #bfdbfe;border-radius:5px;padding:6px 8px;text-align:center;">
+          <div style="display:flex;justify-content:center;gap:3px;margin-bottom:4px;height:24px;align-items:center;">
+            <div style="width:24px;height:24px;border-radius:5px;overflow:hidden;background:linear-gradient(135deg,#2563eb,#1e40af);"><img src="https://play-lh.googleusercontent.com/MjZeG5rB_JBJ4Ztai8-eR7EWR86dsOJMypCFurXQRjhT5Ov-75CBnkUDbUm52925z_o=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+            <div style="width:24px;height:24px;border-radius:5px;overflow:hidden;background:linear-gradient(135deg,#2563eb,#1e40af);"><img src="https://play-lh.googleusercontent.com/_lYcwhk15kEQDqliKxajVrdi9tsEDrS-ipQdIONx8wGW5OBbi0gReAukFre-7YQ5cfiD3WRi1c2P9SOe1HYcJ5g=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+            <div style="width:24px;height:24px;border-radius:5px;overflow:hidden;background:linear-gradient(135deg,#2563eb,#1e40af);"><img src="https://play-lh.googleusercontent.com/X-nt9ZCqvp8MqC10qfHCMCI1m6mHsmzaIs9WvKijhu7iLI7qKUjuBFnTNfOqy4D1Jzk=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+          </div>
+          <div style="font-size:9px;color:var(--c-just);font-weight:800;letter-spacing:0.04em;">L1</div>
+          <div style="font-size:10.5px;font-weight:700;color:var(--ink);">Gimica 자사 게임</div>
+          <div style="font-size:9px;color:var(--ink-3);margin-top:1px;">JustPlay 앱 앞단 배치</div>
+        </div>
+        <div style="text-align:center;font-size:14px;color:var(--c-just);font-weight:800;">→</div>
+        <div style="background:#fff;border:1px solid #bfdbfe;border-radius:5px;padding:6px 8px;text-align:center;">
+          <div style="display:flex;justify-content:center;gap:3px;margin-bottom:4px;height:24px;align-items:center;">
+            <span style="background:#4285F4;color:#fff;font-weight:800;font-size:8px;padding:3px 6px;border-radius:3px;">AdMob</span>
+            <span style="background:#fc4445;color:#fff;font-weight:800;font-size:8px;padding:3px 6px;border-radius:3px;">AppLovin</span>
+          </div>
+          <div style="font-size:9px;color:var(--c-just);font-weight:800;letter-spacing:0.04em;">L2</div>
+          <div style="font-size:10.5px;font-weight:700;color:var(--ink);">광고 자동 롤링</div>
+          <div style="font-size:9px;color:var(--ink-3);margin-top:1px;">자사 SDK 통합</div>
+        </div>
+        <div style="text-align:center;font-size:14px;color:var(--c-just);font-weight:800;">→</div>
+        <div style="background:#fff;border:1px solid #bfdbfe;border-radius:5px;padding:6px 8px;text-align:center;">
+          <div style="display:flex;justify-content:center;align-items:center;height:24px;margin-bottom:4px;">
+            <div style="font-size:17px;font-weight:900;color:var(--good);letter-spacing:-0.02em;">100<span style="font-size:11px;">%</span></div>
+          </div>
+          <div style="font-size:9px;color:var(--c-just);font-weight:800;letter-spacing:0.04em;">L3</div>
+          <div style="font-size:10.5px;font-weight:700;color:var(--ink);">광고 매출 회수</div>
+          <div style="font-size:9px;color:var(--ink-3);margin-top:1px;">SDK 수수료 30~40% 내재화</div>
+        </div>
+        <div style="text-align:center;font-size:14px;color:var(--c-just);font-weight:800;">→</div>
+        <div style="background:#fff;border:1px solid #bfdbfe;border-radius:5px;padding:6px 8px;text-align:center;">
+          <div style="display:flex;justify-content:center;align-items:center;height:24px;margin-bottom:4px;gap:4px;">
+            <span style="font-size:14px;">💰</span>
+            <span style="font-size:11px;font-weight:800;color:var(--ink-3);">▶</span>
+            <span style="font-size:11px;font-weight:800;color:var(--good);">$0.75</span>
+          </div>
+          <div style="font-size:9px;color:var(--c-just);font-weight:800;letter-spacing:0.04em;">L4</div>
+          <div style="font-size:10.5px;font-weight:700;color:var(--ink);">페이백 + 마진</div>
+          <div style="font-size:9px;color:var(--ink-3);margin-top:1px;">$1.00 − $0.25 = $0.75</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 매출원 ② Offerwall -->
+    <div style="background:#fef9ed;border:1px solid #fde68a;border-radius:6px;padding:8px 11px;">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px;">
+        <span style="background:var(--warn);color:#fff;font-weight:800;font-size:9.5px;padding:2px 8px;border-radius:3px;letter-spacing:0.04em;">매출원 ②</span>
+        <span style="font-size:11.5px;font-weight:800;color:var(--warn);">Offerwall (외부 게임사 UA 중개) · 비중 20~35%</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 12px 1fr 12px 1fr 12px 1fr;gap:0;align-items:center;">
+        <div style="background:#fff;border:1px solid #fde68a;border-radius:5px;padding:6px 8px;text-align:center;">
+          <div style="display:flex;justify-content:center;gap:4px;margin-bottom:4px;height:24px;align-items:center;">
+            <div style="width:22px;height:22px;border-radius:5px;overflow:hidden;background:linear-gradient(135deg,#dc2626,#991b1b);"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/05/59/1a/05591a60-de46-85b6-3ca6-d134e68c77d6/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+            <span style="font-size:12px;color:var(--bad);font-weight:800;">$5</span>
+          </div>
+          <div style="font-size:9px;color:var(--warn);font-weight:800;letter-spacing:0.04em;">L1</div>
+          <div style="font-size:10.5px;font-weight:700;color:var(--ink);">외부 게임사</div>
+          <div style="font-size:9px;color:var(--ink-3);margin-top:1px;">UA 광고비 $5 지불</div>
+        </div>
+        <div style="text-align:center;font-size:14px;color:var(--warn);font-weight:800;">→</div>
+        <div style="background:#fff;border:1px solid #fde68a;border-radius:5px;padding:6px 8px;text-align:center;">
+          <div style="display:flex;justify-content:center;align-items:center;height:24px;margin-bottom:4px;">
+            <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:3px;padding:2px 6px;font-size:8.5px;color:var(--warn);font-weight:700;text-align:left;line-height:1.2;"><div>📋 7일 플레이</div><div>💎 보상 받기</div></div>
+          </div>
+          <div style="font-size:9px;color:var(--warn);font-weight:800;letter-spacing:0.04em;">L2</div>
+          <div style="font-size:10.5px;font-weight:700;color:var(--ink);">미션 게시판</div>
+          <div style="font-size:9px;color:var(--ink-3);margin-top:1px;">"7일 플레이 → 보상"</div>
+        </div>
+        <div style="text-align:center;font-size:14px;color:var(--warn);font-weight:800;">→</div>
+        <div style="background:#fff;border:1px solid #fde68a;border-radius:5px;padding:6px 8px;text-align:center;">
+          <div style="display:flex;justify-content:center;align-items:center;height:24px;margin-bottom:4px;gap:4px;">
+            <span style="font-size:14px;">💰</span>
+            <span style="font-size:12px;font-weight:800;color:var(--good);">$2</span>
+          </div>
+          <div style="font-size:9px;color:var(--warn);font-weight:800;letter-spacing:0.04em;">L3</div>
+          <div style="font-size:10.5px;font-weight:700;color:var(--ink);">유저 페이백</div>
+          <div style="font-size:9px;color:var(--ink-3);margin-top:1px;">$2 지급</div>
+        </div>
+        <div style="text-align:center;font-size:14px;color:var(--warn);font-weight:800;">→</div>
+        <div style="background:#fff;border:1px solid #fde68a;border-radius:5px;padding:6px 8px;text-align:center;">
+          <div style="display:flex;justify-content:center;align-items:center;height:24px;margin-bottom:4px;gap:3px;">
+            <span style="font-size:10px;font-weight:800;color:var(--ink-3);">$5−$2</span>
+            <span style="font-size:12px;font-weight:800;color:var(--ink-3);">=</span>
+            <span style="font-size:13px;font-weight:900;color:var(--good);">$3</span>
+          </div>
+          <div style="font-size:9px;color:var(--warn);font-weight:800;letter-spacing:0.04em;">L4</div>
+          <div style="font-size:10.5px;font-weight:700;color:var(--ink);">JustPlay 마진 $3</div>
+          <div style="font-size:9px;color:var(--ink-3);margin-top:1px;">eCPM $400~530 (RV 25배)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-no">05 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 8: JustPlay · 1.2 게임 피드백              -->
+<!-- ============================================== -->
+<section class="slide">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+    <h2 class="s-title" style="margin-bottom:0;">JustPlay_플레이 피드백</h2>
+    <span class="bi just">JUSTPLAY</span>
+  </div>
+
+  <!-- 핵심 메시지 hero + 체험 게임 strip -->
+  <div style="display:grid;grid-template-columns:1fr auto;gap:14px;margin-bottom:8px;align-items:stretch;">
+    <div style="display:flex;align-items:center;padding:0 4px;">
+      <p style="font-size:19px;font-weight:700;color:#003876;line-height:1.4;margin:0;letter-spacing:-0.01em;">
+        <strong>JustPlay 유저는 '돈 번다는 동력'으로 지속</strong><br>"얼마 벌고 있는지·얼마 더 벌 수 있는지" 강화 시 플레이 동력 강화
+      </p>
+    </div>
+    <!-- 체험 게임 아이콘만 strip -->
+    <div style="display:flex;gap:6px;align-items:center;background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:6px;">
+      <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#2563eb,#1e40af);box-shadow:0 2px 6px rgba(37,99,235,0.18);"><img src="https://play-lh.googleusercontent.com/MjZeG5rB_JBJ4Ztai8-eR7EWR86dsOJMypCFurXQRjhT5Ov-75CBnkUDbUm52925z_o=w128" alt="머지 블래스트" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+      <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#2563eb,#1e40af);box-shadow:0 2px 6px rgba(37,99,235,0.18);"><img src="https://nng-phinf.pstatic.net/MjAyMjA4MTZfMjE0/MDAxNjYwNjQ2NTgwODI5.xnpaGWUHgCj7GLxlrg1Hb-iEidny48k1OfDtXgEcV_og.bZqn3I3X0iQJVQqR8gmg57-6noykgHDCebrtzBAOSocg.PNG/1024.png" alt="갑부" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+      <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#2563eb,#1e40af);box-shadow:0 2px 6px rgba(37,99,235,0.18);"><img src="https://play-lh.googleusercontent.com/bxWKZjk30-UlpUkr4O3IkVJF2kEqlMC8jaLP34UqxKYUk_3gNvYwKsT75_PQhYN0vH1LChEldSxmr6R_IJ3uhZE=w240-h480-rw" alt="블록버스터" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+    </div>
+  </div>
+
+  <!-- 좋았던 점 / 보완점 (compact 한 줄) -->
+  <div style="display:grid;grid-template-columns:1.1fr 1.9fr;gap:12px;margin-bottom:14px;">
+    <!-- 좋았던 점 -->
+    <div style="background:var(--good-soft);border:1px solid #bbf7d0;border-radius:8px;padding:10px 13px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:var(--good);color:#fff;font-size:9.5px;font-weight:800;padding:2px 8px;border-radius:3px;letter-spacing:0.06em;">✅ 좋았던 점</span>
+        <span style="font-size:10px;color:var(--good);font-weight:700;">단기 동기 부여 작동</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div style="display:flex;gap:8px;align-items:flex-start;">
+          <span style="width:20px;height:20px;border-radius:50%;background:var(--good);color:#fff;font-weight:800;font-size:9.5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">01</span>
+          <div>
+            <div style="font-size:11.5px;font-weight:800;color:var(--ink);margin-bottom:2px;">동기 부여 · "더 벌 수 있겠는데?"</div>
+            <div style="font-size:10.5px;color:var(--ink-2);line-height:1.5;">홈 화면·코인 잔액·출금 가능 안내 모두 "더 하면 더 받는다" 신호로 통일.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:flex-start;">
+          <span style="width:20px;height:20px;border-radius:50%;background:var(--good);color:#fff;font-weight:800;font-size:9.5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">02</span>
+          <div style="flex:1;">
+            <div style="font-size:11.5px;font-weight:800;color:var(--ink);margin-bottom:4px;">실시간 적립 알림으로 <strong>단기 동기 부여</strong></div>
+            <!-- 알림 mock -->
+            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:8px;align-items:center;">
+              <div style="display:flex;flex-direction:column;gap:2px;">
+                <div style="background:#fff;border:1px solid #bbf7d0;border-radius:4px;padding:2px 7px;font-size:9.5px;color:var(--good);font-weight:700;display:flex;justify-content:space-between;align-items:center;">💰 +120 coin<span style="color:var(--ink-4);font-weight:500;font-size:8.5px;">방금 전</span></div>
+                <div style="background:#fff;border:1px solid #bbf7d0;border-radius:4px;padding:2px 7px;font-size:9.5px;color:var(--good);font-weight:700;display:flex;justify-content:space-between;align-items:center;">💰 +85 coin<span style="color:var(--ink-4);font-weight:500;font-size:8.5px;">30초 전</span></div>
+                <div style="background:#fff;border:1px solid #bbf7d0;border-radius:4px;padding:2px 7px;font-size:9.5px;color:var(--good);font-weight:700;display:flex;justify-content:space-between;align-items:center;">💰 +200 coin<span style="color:var(--ink-4);font-weight:500;font-size:8.5px;">1분 전</span></div>
+              </div>
+              <div style="font-size:10.5px;color:var(--ink-2);line-height:1.5;">"방금 +120 coin" 알림이 꾸준히 떠 <strong>플레이 동력 형성</strong>.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 보완점 3 -->
+    <div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:var(--warn);color:#fff;font-size:9.5px;font-weight:800;padding:2px 8px;border-radius:3px;letter-spacing:0.06em;">🎯 보완하면 좋을 점</span>
+        <span style="font-size:10px;color:var(--warn);font-weight:700;">체감 → 시스템 → 지속성</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+        <div style="background:linear-gradient(180deg,#fffbeb 0%, #fef3c7 100%);border:2px solid var(--warn);border-radius:8px;padding:9px 11px;box-shadow:0 4px 10px rgba(180,83,9,0.10);">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+            <span style="width:22px;height:22px;border-radius:50%;background:var(--warn);color:#fff;font-weight:800;font-size:10px;display:flex;align-items:center;justify-content:center;">03</span>
+            <span style="font-size:10px;font-weight:800;color:var(--warn);">체감의 공백</span>
+          </div>
+          <div style="font-size:12px;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:3px;">"그래서 한 달에 얼마?"</div>
+          <div style="font-size:10.5px;color:var(--ink-2);line-height:1.5;">즉시 알림은 작동하지만 <strong>월간 예상 수익</strong>이 가시화되면 재방문 동력 강화 여지.</div>
+          <div style="margin-top:6px;padding:5px 7px;background:#fff;border-radius:4px;font-size:9.5px;color:var(--ink-3);line-height:1.4;">📱 외부 리뷰: <em>"The more you play, the less they pay."</em></div>
+        </div>
+        <div style="background:linear-gradient(180deg,#eef4ff 0%, #dbe6ff 100%);border:2px solid var(--accent-2);border-radius:8px;padding:9px 11px;box-shadow:0 4px 10px rgba(27,107,255,0.12);">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+            <span style="width:22px;height:22px;border-radius:50%;background:var(--accent-2);color:#fff;font-weight:800;font-size:10px;display:flex;align-items:center;justify-content:center;">04</span>
+            <span style="font-size:10px;font-weight:800;color:var(--accent-2);">시스템 보완 필요</span>
+          </div>
+          <div style="font-size:12px;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:3px;">"푸시는 오는데 와닿지 않음"</div>
+          <div style="font-size:10.5px;color:var(--ink-2);line-height:1.5;">"+120 coin" 푸시 외에 <strong>총 누적·출금 도달 시점</strong>이 한 화면에 함께 보이면 동력 보강.</div>
+          <div style="margin-top:6px;padding:5px 7px;background:#fff;border-radius:4px;font-size:9.5px;color:var(--ink-3);line-height:1.4;">📊 정착 평균 (외부): 월 $10~30 · 사용자도 비슷한 수준 도달.</div>
+        </div>
+        <div style="background:linear-gradient(180deg,#f0fdf4 0%, #dcfce7 100%);border:2px solid #15803d;border-radius:8px;padding:9px 11px;box-shadow:0 4px 10px rgba(21,128,61,0.12);">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+            <span style="width:22px;height:22px;border-radius:50%;background:#15803d;color:#fff;font-weight:800;font-size:10px;display:flex;align-items:center;justify-content:center;">05</span>
+            <span style="font-size:10px;font-weight:800;color:#15803d;">지속성 회복</span>
+          </div>
+          <div style="font-size:12px;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:3px;">"피로도 상쇄 동력"</div>
+          <div style="font-size:10.5px;color:var(--ink-2);line-height:1.5;">체감이 잡히면 광고 피로도가 높아도 유저가 남음 → <strong>광고 시청량 지속</strong>.</div>
+          <div style="margin-top:6px;padding:5px 7px;background:#fff;border-radius:4px;font-size:9.5px;color:var(--ink-3);line-height:1.4;">📈 ARPDAU 575 → 700원대 진입 시 카테고리 단가 우위.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시스템 보완 제안 with mock-ups -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+    <span style="background:var(--accent-2);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:4px;letter-spacing:0.06em;">💡 제안</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1.8fr;gap:12px;">
+    <!-- 제안 ①: 예상 수익 게이지 mock -->
+    <div class="card b-accent" style="padding:10px 12px;display:flex;flex-direction:column;">
+      <div class="k-h accent">제안 ① "오늘 N분 → 얼마"</div>
+      <div style="background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin:6px 0;">
+        <div style="font-size:9.5px;color:var(--ink-3);font-weight:700;margin-bottom:6px;">오늘 플레이 시간 → 예상 보상</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:4px;padding:4px 7px;">
+            <span style="background:#dbeafe;color:#1e40af;font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;">10분</span>
+            <span style="font-size:10px;color:var(--ink-3);">→</span>
+            <span style="font-size:13px;font-weight:900;color:var(--good);">$0.50</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:4px;padding:4px 7px;">
+            <span style="background:#dbeafe;color:#1e40af;font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;">30분</span>
+            <span style="font-size:10px;color:var(--ink-3);">→</span>
+            <span style="font-size:13px;font-weight:900;color:var(--good);">$1.40</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:4px;padding:4px 7px;">
+            <span style="background:#dbeafe;color:#1e40af;font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;">1시간</span>
+            <span style="font-size:10px;color:var(--ink-3);">→</span>
+            <span style="font-size:13px;font-weight:900;color:var(--good);">$2.80</span>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">플레이 시간 단위로 보상을 직접 환산 · 유저가 가성비를 즉시 판단 가능.</div>
+      <div style="margin-top:auto;padding:6px 9px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;font-size:10.5px;color:#15803d;line-height:1.5;"><strong>★ 기대 효과:</strong> 월간 페이스 가시화 → 재방문 동력 강화 · 출금까지 거리감 명확화</div>
+    </div>
+    <!-- 제안 ②: 출금 진척률 mock -->
+    <div class="card b-accent" style="padding:10px 12px;display:flex;flex-direction:column;">
+      <div class="k-h accent">제안 ② "이번 주 N분 → 얼마"</div>
+      <div style="background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin:6px 0;">
+        <div style="font-size:9.5px;color:var(--ink-3);font-weight:700;margin-bottom:6px;">이번 주 플레이 시간 → 누적 보상</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:4px;padding:4px 7px;">
+            <span style="background:#dbeafe;color:#1e40af;font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;">3시간</span>
+            <span style="font-size:10px;color:var(--ink-3);">→</span>
+            <span style="font-size:13px;font-weight:900;color:var(--good);">$8.40</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:4px;padding:4px 7px;">
+            <span style="background:#dbeafe;color:#1e40af;font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;">5시간</span>
+            <span style="font-size:10px;color:var(--ink-3);">→</span>
+            <span style="font-size:13px;font-weight:900;color:var(--good);">$14.00</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:4px;padding:4px 7px;">
+            <span style="background:#dbeafe;color:#1e40af;font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;">10시간</span>
+            <span style="font-size:10px;color:var(--ink-3);">→</span>
+            <span style="font-size:13px;font-weight:900;color:var(--good);">$28.00</span>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">주간 페이스 가시화 · "이만큼 하면 이만큼 받는다" 직관 형성.</div>
+      <div style="margin-top:auto;padding:6px 9px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;font-size:10.5px;color:#15803d;line-height:1.5;"><strong>★ 기대 효과:</strong> 주간 페이스 직관 → 재방문 동력 강화 · 광고 시청 지속</div>
+    </div>
+    <!-- 제안 ③: 단가 추이 가시화 (플레이 동력 강화) -->
+    <div class="card b-accent" style="padding:10px 12px;display:flex;flex-direction:column;">
+      <div class="k-h accent">제안 ③ 단가 추이 가시화</div>
+      <div style="background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin:6px 0;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;">
+          <span style="font-size:9.5px;color:var(--ink-3);font-weight:700;">광고 1회당 보상 (지난 7일)</span>
+          <span style="font-size:11px;color:var(--good);font-weight:800;">오늘 14c · 평균 12c</span>
+        </div>
+        <!-- 7일 단가 차트 -->
+        <div style="display:flex;align-items:flex-end;gap:4px;height:36px;margin-bottom:3px;">
+          <div style="flex:1;height:65%;background:var(--c-just);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:72%;background:var(--c-just);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:78%;background:var(--c-just);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:70%;background:var(--c-just);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:82%;background:var(--c-just);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:75%;background:var(--c-just);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:92%;background:var(--good);border-radius:2px 2px 0 0;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:8.5px;color:var(--ink-4);">
+          <span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span style="color:var(--good);font-weight:800;">오늘</span>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">단가 추이를 매일 노출 · "오늘이 단가 좋은 날" 신호로 즉시 플레이 동력 형성 · 출금까지의 경로 투명화.</div>
+      <div style="margin-top:auto;padding:6px 9px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;font-size:10.5px;color:#15803d;line-height:1.5;"><strong>★ 기대 효과:</strong> 시간대별 즉시 플레이 동력 형성 · 단가 투명화로 신뢰 강화</div>
+    </div>
+  </div>
+
+  <div class="slide-no">06 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 9: Lihuhu · 2.1 수익화 구조 (BM + 광고 송출량) -->
+<!-- ============================================== -->
+<section class="slide">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+    <h2 class="s-title" style="margin-bottom:0;">Lihuhu_현황</h2>
+    <span class="bi lihuhu">LIHUHU</span>
+  </div>
+
+  <!-- 핵심 발견 hero + 게임 아이콘 -->
+  <div style="display:grid;grid-template-columns:1fr auto;gap:14px;margin-bottom:12px;align-items:stretch;">
+    <div style="display:flex;align-items:center;padding:0 4px;">
+      <p style="font-size:22px;font-weight:700;color:#003876;line-height:1.45;margin:0;letter-spacing:-0.01em;">
+        <strong>100개 자사 게임 cross-promo로 외부 UA 비용 절감</strong> · 영업이익률 <strong>25%</strong> (3사 최고) <span class="src 공시">공시</span>
+      </p>
+    </div>
+    <!-- Lihuhu 아이콘만 -->
+    <div style="display:flex;align-items:center;justify-content:center;background:var(--c-lihuhu-soft);border:1px solid #d1d5db;border-radius:6px;padding:6px;">
+      <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);box-shadow:0 2px 6px rgba(31,41,55,0.18);"><img src="https://play-lh.googleusercontent.com/oEDQAqDqY2DCmHAIN32nJM0k9GlB_Iy2aT7rBu6DtDRZenXtdGk8PXJJegqQ7bWtf_Gu" alt="Lihuhu" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+    </div>
+  </div>
+
+  <!-- BM 4-box -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+    <span style="background:var(--c-lihuhu);color:#fff;font-weight:800;font-size:10px;padding:3px 8px;border-radius:4px;letter-spacing:0.06em;">2.1.a BM 구조</span>
+    <span style="font-size:11px;color:var(--ink-3);font-weight:600;">광고 95% + IAP 5% <span class="src 공시">공시</span> · 내부 비중은 직접 체험·하이퍼캐주얼 벤치 <span class="src 추정">추정</span></span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
+    <div style="background:#fff;border:1px solid var(--border);border-top:3px solid var(--c-lihuhu);border-radius:6px;padding:9px 11px;">
+      <div style="font-size:9.5px;font-weight:800;color:var(--c-lihuhu);letter-spacing:0.06em;margin-bottom:3px;">매출원 ① · 65%</div>
+      <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;">인터스티셜 광고</div>
+      <div style="font-size:10.5px;color:var(--ink-3);line-height:1.5;">레벨 종료·전환 시 자동 노출 · 후반 레벨일수록 빈도 가파르게 상승.</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-top:3px solid var(--c-lihuhu);border-radius:6px;padding:9px 11px;">
+      <div style="font-size:9.5px;font-weight:800;color:var(--c-lihuhu);letter-spacing:0.06em;margin-bottom:3px;">매출원 ② · 30%</div>
+      <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;">리워드 광고</div>
+      <div style="font-size:10.5px;color:var(--ink-3);line-height:1.5;">Revive · 부스트 · 보상 2배 · 광고 시청 1회당 게임 내 가치 지급.</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-top:3px solid var(--c-lihuhu);border-radius:6px;padding:9px 11px;">
+      <div style="font-size:9.5px;font-weight:800;color:var(--c-lihuhu);letter-spacing:0.06em;margin-bottom:3px;">매출원 ③ · 5%</div>
+      <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;">광고 제거 IAP</div>
+      <div style="font-size:10.5px;color:var(--ink-3);line-height:1.5;">$2~8 단가 · 매치트리플3D는 코인 100개로 광고 스킵 옵션 병행.</div>
+    </div>
+  </div>
+
+  <!-- 광고 송출량 시장 비교 -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+    <span style="background:var(--c-lihuhu);color:#fff;font-weight:800;font-size:10px;padding:3px 8px;border-radius:4px;letter-spacing:0.06em;">2.1.b 시장 광고 송출 비교</span>
+    <span style="font-size:11px;color:var(--ink-3);font-weight:600;">하이퍼캐주얼 카테고리 6사 추정치</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px;">
+    <!-- 좌측: 6사 비교 테이블 -->
+    <div style="background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+      <table style="width:100%;border-collapse:collapse;font-size:11px;">
+        <thead>
+          <tr style="background:var(--soft);">
+            <th style="text-align:left;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">회사 · 본사</th>
+            <th style="text-align:left;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">대표 게임</th>
+            <th style="text-align:right;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">연 매출</th>
+            <th style="text-align:right;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);white-space:nowrap;">월 UA</th>
+            <th style="text-align:right;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);white-space:nowrap;">Meta 광고</th>
+            <th style="text-align:left;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);white-space:nowrap;">포지션</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:7px 10px;border-bottom:1px solid var(--border);white-space:nowrap;">Voodoo · 🇫🇷</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">Helix Jump · Magic Tiles 3</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">1조 3,700억+</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">350억+</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">50K+ (cap)</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">하이퍼캐주얼 절대 1위</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);">Habby · 🇨🇳</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">Archero · Survivor.io</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">6,850억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">150억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~15K</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">하이브리드 캐주얼 (Archero)</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);">Rollic · 🇹🇷 (Zynga)</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">Tangle Master 3D · Go Knots 3D</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">5,480억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">120억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~12K</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">탱글마스터 3D 등</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);"><strong style="color:var(--warn);">🔥 Tripledot</strong> · 🇬🇧</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--warn);font-weight:600;">3 Tiles · Solitaire</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">4,110억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">90억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~8K</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--warn);font-weight:600;">3 Tiles = 매치트리플3D 직접 경쟁</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);">SayGames · 🇧🇾</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">Cake Sort · Color Match</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">2,740억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">60억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~5K</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">하이퍼캐주얼 양산</td>
+          </tr>
+          <tr style="background:var(--c-lihuhu-soft);">
+            <td style="padding:7px 10px;"><strong style="color:var(--c-lihuhu-deep);">★ Lihuhu</strong> · 🇻🇳 베트남</td>
+            <td style="padding:7px 10px;color:var(--c-lihuhu-deep);font-weight:600;">매치트리플 3D · 타일즈 인홀</td>
+            <td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;"><strong>1,200억</strong></td>
+            <td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;"><strong>~30억</strong></td>
+            <td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;"><strong>3~5K</strong></td>
+            <td style="padding:7px 10px;color:var(--c-lihuhu-deep);font-weight:600;">중위권 + 자사 cross-promo 강함 · 영업이익률 25% 최고</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 우측: 핵심 시사점 -->
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="background:var(--c-lihuhu-soft);border:1px solid #d1d5db;border-left:3px solid var(--c-lihuhu);border-radius:6px;padding:10px 12px;">
+        <div style="font-size:9.5px;font-weight:800;color:var(--c-lihuhu-deep);letter-spacing:0.06em;margin-bottom:3px;">자사 cross-promo 효율</div>
+        <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">파킹마스터 3D 안 광고 대부분이 <strong>다른 Lihuhu 게임 설치 광고</strong> · 외부 UA 의존도 ↓ → 영업이익률 25% 가능.</div>
+      </div>
+      <div style="background:#fef3c7;border:1px solid #fde68a;border-left:3px solid var(--warn);border-radius:6px;padding:10px 12px;">
+        <div style="font-size:9.5px;font-weight:800;color:var(--warn);letter-spacing:0.06em;margin-bottom:3px;">Tripledot 직접 경쟁</div>
+        <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">매치트리플3D = Tripledot 3 Tiles 동일 메카닉. 시장 1위와 매출 격차 약 3배.</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#0a2540,#1f2937);color:#fff;padding:10px 12px;border-radius:6px;">
+        <div style="font-size:9.5px;font-weight:800;color:#fbbf24;letter-spacing:0.06em;margin-bottom:3px;">시사점</div>
+        <div style="font-size:11px;line-height:1.55;">외부 광고 송출은 카테고리 중위권 · 진짜 자산은 <strong style="color:#fbbf24;">자사 cross-promo + 100개 양산 능력 + 영업이익률 25%</strong> (3사 최고).</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:10px;font-size:10px;color:var(--ink-4);font-style:italic;line-height:1.5;padding:6px 10px;background:#f8fafc;border-left:2px solid #cbd5e1;border-radius:3px;">
+    ※ 비교 기준: <strong>하이퍼캐주얼 양산 카테고리 6사</strong> (Voodoo · Habby · Rollic · Tripledot · SayGames · Lihuhu) · 동일 비즈니스 모델(다수 게임 cross-promo 양산) 기준 비교. <strong>Tripledot 3 Tiles만 매치트리플 3D와 1:1 장르 일치</strong>, 나머지는 동일 양산 모델 기준 비교.
+  </div>
+  <div class="slide-no">07 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 10 (NEW): Lihuhu · 2.0 유저 경로 + 수익화 흐름 -->
+<!-- ============================================== -->
+<section class="slide">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+    <h2 class="s-title" style="margin-bottom:0;">Lihuhu_수익화 구조</h2>
+    <span class="bi lihuhu">LIHUHU</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr auto;gap:14px;margin-bottom:12px;align-items:stretch;">
+    <div style="display:flex;align-items:center;padding:0 4px;">
+      <p style="font-size:22px;font-weight:700;color:#003876;line-height:1.45;margin:0;letter-spacing:-0.01em;">
+        <strong>100개 자사 게임 cross-promo가 만드는 닫힌 순환</strong> · 광고 매출 + UA 비용 절감 → 마진 25%
+      </p>
+    </div>
+    <!-- Lihuhu 아이콘만 -->
+    <div style="display:flex;align-items:center;justify-content:center;background:var(--c-lihuhu-soft);border:1px solid #d1d5db;border-radius:6px;padding:6px;">
+      <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);box-shadow:0 2px 6px rgba(31,41,55,0.18);"><img src="https://play-lh.googleusercontent.com/oEDQAqDqY2DCmHAIN32nJM0k9GlB_Iy2aT7rBu6DtDRZenXtdGk8PXJJegqQ7bWtf_Gu" alt="Lihuhu" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+    </div>
+  </div>
+
+  <!-- 유저 경로 5단계 -->
+  <div style="background:var(--c-lihuhu-soft);border:1px solid #d1d5db;border-radius:8px;padding:13px 16px;margin-bottom:10px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="background:var(--c-lihuhu);color:#fff;font-weight:800;font-size:11px;padding:3px 9px;border-radius:4px;letter-spacing:0.06em;">📍 유저 경로</span>
+      <span style="font-size:12.5px;font-weight:700;color:var(--c-lihuhu-deep);">외부 UA → 게임 A → 광고 노출 → 자사 광고 클릭 → 게임 B (사이클 반복)</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 14px 1fr 14px 1fr 14px 1fr 14px 1fr;gap:0;align-items:center;">
+      <!-- STEP 01 -->
+      <div style="background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:9px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:11px;margin:0 auto 5px;background:#fff;border:1px solid #d1d5db;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:3px;box-shadow:0 2px 5px rgba(10,37,64,0.06);"><span style="font-size:10px;font-weight:900;color:#0866FF;letter-spacing:-0.02em;">Meta</span><div style="width:60%;height:1px;background:#e5e9f0;"></div><span style="font-size:9px;font-weight:900;color:#dc2626;letter-spacing:-0.02em;">Voodoo</span></div>
+        <div style="font-size:10px;color:var(--c-lihuhu);font-weight:800;letter-spacing:0.06em;">STEP 01</div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink);margin-top:3px;">유입</div>
+        <div style="font-size:10px;color:var(--ink-3);line-height:1.45;margin-top:3px;">외부 UA (Meta/Voodoo) or 자연검색</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-lihuhu);font-weight:800;">→</div>
+      <!-- STEP 02 -->
+      <div style="background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:9px;text-align:center;position:relative;">
+        <div style="position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:4px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);border:1px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,0.15);"><img src="https://play-lh.googleusercontent.com/oEDQAqDqY2DCmHAIN32nJM0k9GlB_Iy2aT7rBu6DtDRZenXtdGk8PXJJegqQ7bWtf_Gu" alt="Lihuhu" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="width:48px;height:48px;border-radius:11px;margin:0 auto 5px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);box-shadow:0 3px 8px rgba(31,41,55,0.25);"><img src="https://play-lh.googleusercontent.com/Fyj84R_cBe1AVt7Er17nVGyWe1z_S4xsTIQjNTHOV2lJV4YH8MD1ZIEBB-oeLhmDGg=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:10px;color:var(--c-lihuhu);font-weight:800;letter-spacing:0.06em;">STEP 02</div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink);margin-top:3px;">게임 A 플레이</div>
+        <div style="font-size:10px;color:var(--ink-3);line-height:1.45;margin-top:3px;">예: 매치트리플 3D · 레벨 진행</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-lihuhu);font-weight:800;">→</div>
+      <!-- STEP 03 -->
+      <div style="background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:9px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:11px;margin:0 auto 5px;background:#fff;border:1px solid #d1d5db;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;box-shadow:0 2px 5px rgba(10,37,64,0.06);"><span style="background:#4285F4;color:#fff;font-weight:800;font-size:8px;padding:2px 6px;border-radius:3px;letter-spacing:0.02em;">AdMob</span><span style="background:#000;color:#fff;font-weight:800;font-size:8px;padding:2px 6px;border-radius:3px;letter-spacing:0.02em;">Unity</span></div>
+        <div style="font-size:10px;color:var(--c-lihuhu);font-weight:800;letter-spacing:0.06em;">STEP 03</div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink);margin-top:3px;">광고 노출</div>
+        <div style="font-size:10px;color:var(--ink-3);line-height:1.45;margin-top:3px;">인터스티셜+리워드 (레벨 10+ 빈도↑)</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-lihuhu);font-weight:800;">→</div>
+      <!-- STEP 04 -->
+      <div style="background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:9px;text-align:center;position:relative;">
+        <div style="position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:4px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);border:1px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,0.15);"><img src="https://play-lh.googleusercontent.com/oEDQAqDqY2DCmHAIN32nJM0k9GlB_Iy2aT7rBu6DtDRZenXtdGk8PXJJegqQ7bWtf_Gu" alt="Lihuhu" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="width:48px;height:48px;border-radius:11px;margin:0 auto 5px;background:linear-gradient(135deg,#374151,#111827);display:flex;align-items:center;justify-content:center;padding:3px;gap:2px;box-shadow:0 3px 8px rgba(31,41,55,0.25);"><img src="https://play-lh.googleusercontent.com/CfHfhV6zdIZnuBpe_srJ0CyRVjmUOhL-yPACV5J1gNZrqGsjkSn9IjdyvPCNaqjz_LwE" alt="" style="width:19px;height:19px;border-radius:4px;object-fit:cover;" onerror="this.remove()"><img src="https://play-lh.googleusercontent.com/8YxG41z9Xu-fNogLZzB_wB5M57ds09AN_QjIIHnbYmpYndsLDFKcgjbaS8H9hElbVVY=w128" alt="" style="width:19px;height:19px;border-radius:4px;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:10px;color:var(--c-lihuhu);font-weight:800;letter-spacing:0.06em;">STEP 04</div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink);margin-top:3px;">자사 광고 송출</div>
+        <div style="font-size:10px;color:var(--ink-3);line-height:1.45;margin-top:3px;">House Ads 1순위 → 게임 B 설치</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-lihuhu);font-weight:800;">→</div>
+      <!-- STEP 05 -->
+      <div style="background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:9px;text-align:center;position:relative;">
+        <div style="position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:4px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);border:1px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,0.15);"><img src="https://play-lh.googleusercontent.com/oEDQAqDqY2DCmHAIN32nJM0k9GlB_Iy2aT7rBu6DtDRZenXtdGk8PXJJegqQ7bWtf_Gu" alt="Lihuhu" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="width:48px;height:48px;border-radius:11px;margin:0 auto 5px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);box-shadow:0 3px 8px rgba(31,41,55,0.25);"><img src="https://play-lh.googleusercontent.com/CfHfhV6zdIZnuBpe_srJ0CyRVjmUOhL-yPACV5J1gNZrqGsjkSn9IjdyvPCNaqjz_LwE" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:10px;color:var(--c-lihuhu);font-weight:800;letter-spacing:0.06em;">STEP 05</div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink);margin-top:3px;">게임 B 플레이</div>
+        <div style="font-size:10px;color:var(--ink-3);line-height:1.45;margin-top:3px;">예: 타일즈 인홀 · 100개 카탈로그 순환</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 매출 흐름 도식 -->
+  <div style="background:var(--c-lihuhu-soft);border:1px solid #d1d5db;border-radius:8px;padding:13px 16px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="background:var(--c-lihuhu);color:#fff;font-weight:800;font-size:11px;padding:3px 9px;border-radius:4px;letter-spacing:0.06em;">💰 매출 흐름</span>
+      <span style="font-size:12.5px;font-weight:700;color:var(--c-lihuhu-deep);">광고 매출 100원 → 자사·외부 분기 → 영업이익 25원 (마진 25%)</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 14px 1.7fr 14px 1fr 14px 1fr;gap:0;align-items:center;">
+      <!-- L1: 광고 매출 -->
+      <div style="background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:10px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:34px;margin-bottom:5px;gap:4px;">
+          <span style="font-size:20px;">📺</span>
+          <span style="font-size:18px;font-weight:900;color:var(--c-lihuhu-deep);">100</span>
+          <span style="font-size:11px;color:var(--ink-3);font-weight:700;">원</span>
+        </div>
+        <div style="font-size:10px;color:var(--c-lihuhu);font-weight:800;letter-spacing:0.06em;">L1</div>
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin-top:2px;">광고 매출</div>
+        <div style="font-size:10px;color:var(--ink-3);margin-top:2px;">인터스티셜+리워드+MREC</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-lihuhu);font-weight:800;">→</div>
+      <!-- L2: 분기 -->
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="background:var(--c-lihuhu-soft);border:1px solid var(--c-lihuhu);border-radius:6px;padding:7px 10px;display:flex;align-items:center;gap:8px;">
+          <span style="background:var(--c-lihuhu);color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;white-space:nowrap;">자사 House Ads</span>
+          <span style="font-size:13px;font-weight:900;color:var(--c-lihuhu-deep);">60~80원</span>
+          <span style="font-size:10px;color:var(--ink-3);line-height:1.4;">매출 + 신규 설치 (UA 비용 절감)</span>
+        </div>
+        <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:7px 10px;display:flex;align-items:center;gap:8px;">
+          <span style="background:var(--warn);color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;white-space:nowrap;">외부 광고주</span>
+          <span style="font-size:13px;font-weight:900;color:var(--warn);">20~40원</span>
+          <span style="font-size:10px;color:var(--ink-3);line-height:1.4;">매출만 (eCPM 입찰)</span>
+        </div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-lihuhu);font-weight:800;">→</div>
+      <!-- L3: 운영비 -->
+      <div style="background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:10px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:34px;margin-bottom:5px;gap:4px;">
+          <span style="font-size:13px;font-weight:800;color:var(--ink-3);">−</span>
+          <span style="font-size:18px;font-weight:900;color:var(--bad);">10~15</span>
+          <span style="font-size:11px;color:var(--ink-3);font-weight:700;">원</span>
+        </div>
+        <div style="font-size:10px;color:var(--c-lihuhu);font-weight:800;letter-spacing:0.06em;">L3</div>
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin-top:2px;">운영비 차감</div>
+        <div style="font-size:10px;color:var(--ink-3);margin-top:2px;">인건비·미디에이션 수수료</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-lihuhu);font-weight:800;">→</div>
+      <!-- L4: 영업이익 -->
+      <div style="background:linear-gradient(135deg,#0a2540,#14532d);color:#fff;border-radius:6px;padding:10px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:34px;margin-bottom:5px;gap:4px;">
+          <span style="font-size:20px;color:#fbbf24;">★</span>
+          <span style="font-size:20px;font-weight:900;color:#86efac;">25</span>
+          <span style="font-size:11px;color:#86efac;font-weight:700;">원</span>
+        </div>
+        <div style="font-size:10px;color:#86efac;font-weight:800;letter-spacing:0.06em;">L4</div>
+        <div style="font-size:12px;font-weight:800;margin-top:2px;">영업이익</div>
+        <div style="font-size:10px;color:#86efac;margin-top:2px;">마진 25% (3사 최고)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 인사이트 카드 3개 -->
+  <div class="grid-3" style="margin-top:10px;">
+    <div class="card b-lihuhu">
+      <div class="k-h lihuhu">높은 순환 효율</div>
+      <div class="k-b" style="font-size:11.5px;">유저 1명 = 100개 카탈로그 안에서 평균 <strong>2~3개 게임</strong> 설치·플레이 추정 · 외부 UA 1회 비용으로 다중 LTV 회수</div>
+    </div>
+    <div class="card b-lihuhu">
+      <div class="k-h lihuhu">UA 비용 내재화</div>
+      <div class="k-b" style="font-size:11.5px;">자사 House Ads 부분 = 광고 매출 + 신규 설치 동시 효과 · <strong>UA 비용 60~80% 절감</strong> → 마진 25% 핵심 동력</div>
+    </div>
+    <div class="card b-lihuhu">
+      <div class="k-h lihuhu">NC 인수 후 시너지</div>
+      <div class="k-b" style="font-size:11.5px;">JustPlay DAU 50M 트래픽이 cross-promo 풀에 합류 → 외부 UA 의존 추가 감소 · <strong>마진 25% → 30%+ 가능성</strong></div>
+    </div>
+  </div>
+
+  <div class="slide-no">08 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 11: Lihuhu · 2.2 게임 피드백              -->
+<!-- ============================================== -->
+<section class="slide">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+    <h2 class="s-title" style="margin-bottom:0;">Lihuhu_플레이 피드백</h2>
+    <span class="bi lihuhu">LIHUHU</span>
+  </div>
+
+  <!-- 핵심 메시지 hero + Lihuhu 아이콘 -->
+  <div style="display:grid;grid-template-columns:1fr auto;gap:12px;margin-bottom:8px;align-items:stretch;">
+    <div style="display:flex;align-items:center;padding:0 4px;">
+      <p style="font-size:18px;font-weight:700;color:#003876;line-height:1.4;margin:0;letter-spacing:-0.01em;">
+        <strong>리워드 광고 많아서 계속 누르게 되는 구조</strong> · 다만 후반부로 갈수록 광고 빈도가 가파르게 상승<br><strong style="color:var(--c-lihuhu-deep);">JustPlay 일일 챌린지 연동</strong>으로 UA 추가 인입 + 광고 부담 분산 가능<br><span style="font-size:11px;font-weight:600;color:#475569;">선택 기준: 다운로드 TOP 3 · 매출 long tail (Match Triple 3D 월 $130K · 100+ 게임 합산 1,200억)</span>
+      </p>
+    </div>
+    <!-- 체험 게임 아이콘 strip (compact) -->
+    <div style="display:flex;gap:6px;align-items:center;background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:5px 8px;">
+      <div style="display:flex;flex-direction:column;align-items:center;width:50px;text-align:center;">
+        <div style="width:40px;height:40px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);box-shadow:0 2px 6px rgba(31,41,55,0.18);"><img src="https://play-lh.googleusercontent.com/CfHfhV6zdIZnuBpe_srJ0CyRVjmUOhL-yPACV5J1gNZrqGsjkSn9IjdyvPCNaqjz_LwE" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:8.5px;font-weight:700;color:var(--ink);margin-top:2px;line-height:1.15;">타일즈 인홀</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;width:50px;text-align:center;">
+        <div style="width:40px;height:40px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);box-shadow:0 2px 6px rgba(31,41,55,0.18);"><img src="https://play-lh.googleusercontent.com/Fyj84R_cBe1AVt7Er17nVGyWe1z_S4xsTIQjNTHOV2lJV4YH8MD1ZIEBB-oeLhmDGg=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:8.5px;font-weight:700;color:var(--ink);margin-top:2px;line-height:1.15;">매치트리플 3D</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;width:50px;text-align:center;">
+        <div style="width:40px;height:40px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);box-shadow:0 2px 6px rgba(31,41,55,0.18);"><img src="https://play-lh.googleusercontent.com/8YxG41z9Xu-fNogLZzB_wB5M57ds09AN_QjIIHnbYmpYndsLDFKcgjbaS8H9hElbVVY=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:8.5px;font-weight:700;color:var(--ink);margin-top:2px;line-height:1.15;">파킹 마스터</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3종 게임 피드백 (좋았던 점/보완점 sub-section) -->
+  <div class="grid-3" style="margin-bottom:8px;">
+    <div class="card b-lihuhu" style="padding:9px 11px;">
+      <div class="k-h lihuhu" style="display:flex;align-items:center;gap:6px;font-size:11px;"><img src="https://play-lh.googleusercontent.com/CfHfhV6zdIZnuBpe_srJ0CyRVjmUOhL-yPACV5J1gNZrqGsjkSn9IjdyvPCNaqjz_LwE" alt="" style="width:48px;height:48px;border-radius:9px;object-fit:cover;box-shadow:0 2px 6px rgba(31,41,55,0.22);" onerror="this.remove()">타일즈 인홀</div>
+      <div style="font-size:10px;color:var(--good);font-weight:800;margin-top:6px;margin-bottom:3px;letter-spacing:0.04em;">✅ 좋았던 점</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">머지류보다 피드백 빠르고 손맛 좋음 · 10분간 광고 없이 몰입 가능.</div>
+      <div style="font-size:10px;color:var(--warn);font-weight:800;margin-top:6px;margin-bottom:3px;letter-spacing:0.04em;">🎯 보완점</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">레벨 10 이후 광고 빈도 증가 · 광고 페이스 튜닝 여지.</div>
+    </div>
+    <div class="card b-lihuhu" style="padding:9px 11px;">
+      <div class="k-h lihuhu" style="display:flex;align-items:center;gap:6px;font-size:11px;"><img src="https://play-lh.googleusercontent.com/Fyj84R_cBe1AVt7Er17nVGyWe1z_S4xsTIQjNTHOV2lJV4YH8MD1ZIEBB-oeLhmDGg=w128" alt="" style="width:48px;height:48px;border-radius:9px;object-fit:cover;box-shadow:0 2px 6px rgba(31,41,55,0.22);" onerror="this.remove()">매치 트리플 3D</div>
+      <div style="font-size:10px;color:var(--good);font-weight:800;margin-top:6px;margin-bottom:3px;letter-spacing:0.04em;">✅ 좋았던 점</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">레벨 진행 따라 난이도 점진적 상승 · 그 과정에서 재미 누적되는 설계 양호.</div>
+      <div style="font-size:10px;color:var(--warn);font-weight:800;margin-top:6px;margin-bottom:3px;letter-spacing:0.04em;">🎯 보완점</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">광고 노출 효율 중심 · 탱글마스터 3D 등 Hybrid 진화 대비 IAP 가치·시즌 콘텐츠 보강 여지.</div>
+    </div>
+    <div class="card b-lihuhu" style="padding:9px 11px;">
+      <div class="k-h lihuhu" style="display:flex;align-items:center;gap:6px;font-size:11px;"><img src="https://play-lh.googleusercontent.com/8YxG41z9Xu-fNogLZzB_wB5M57ds09AN_QjIIHnbYmpYndsLDFKcgjbaS8H9hElbVVY=w128" alt="" style="width:48px;height:48px;border-radius:9px;object-fit:cover;box-shadow:0 2px 6px rgba(31,41,55,0.22);" onerror="this.remove()">파킹 마스터 3D</div>
+      <div style="font-size:10px;color:var(--good);font-weight:800;margin-top:6px;margin-bottom:3px;letter-spacing:0.04em;">✅ 좋았던 점</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">광고 시청 → 보상 구조 표준 · 자사 cross-promo UA 인벤토리 기여 큼.</div>
+      <div style="font-size:10px;color:var(--warn);font-weight:800;margin-top:6px;margin-bottom:3px;letter-spacing:0.04em;">🎯 보완점</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">플레이 길어질수록 광고 비중 증가 · 광고 페이스 튜닝 여지.</div>
+    </div>
+  </div>
+
+  <!-- Hybrid 전환 mockup 3종 -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+    <span style="background:var(--accent-2);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:4px;letter-spacing:0.06em;">💡 제안</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 2.4fr;gap:10px;">
+    <!-- mockup ①: 광고 빈도 조절 -->
+    <div class="card b-accent" style="padding:8px 11px;display:flex;flex-direction:column;">
+      <div class="k-h accent">제안 ① 광고 빈도 튜닝</div>
+      <div style="background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin:6px 0;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">
+          <span style="font-size:9.5px;color:var(--ink-3);font-weight:700;">레벨별 광고 간격</span>
+          <span style="font-size:10px;color:var(--c-just);font-weight:800;">현재 → 제안</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:4px;height:24px;margin-bottom:3px;">
+          <span style="font-size:9px;color:var(--ink-4);">LV1</span>
+          <div style="flex:1;height:6px;background:#e2e8f0;border-radius:3px;position:relative;"><div style="width:25%;height:100%;background:var(--good);border-radius:3px;"></div></div>
+          <span style="font-size:9px;color:var(--good);font-weight:700;">2분</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:4px;height:24px;">
+          <span style="font-size:9px;color:var(--ink-4);">LV10+</span>
+          <div style="flex:1;height:6px;background:#e2e8f0;border-radius:3px;position:relative;"><div style="width:90%;height:100%;background:var(--bad);border-radius:3px;"></div></div>
+          <span style="font-size:9px;color:var(--bad);font-weight:700;">15초</span>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">레벨 10 이후 광고 간격 단축에 따른 광고 피로도 증가 · 광고 빈도 조정으로 플레이 동인 강화.</div>
+      <div style="margin-top:auto;padding:5px 8px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;font-size:10px;color:#15803d;line-height:1.45;"><strong>★ 기대:</strong> 별점 회복 · D7 retention +5~8%p</div>
+    </div>
+    <!-- 제안 ②: JustPlay 일일 챌린지 인입 (제안 ①과 연결) -->
+    <div class="card b-accent" style="padding:8px 11px;display:flex;flex-direction:column;">
+      <div class="k-h accent">제안 ② JustPlay 일일 챌린지 인입 (제안 ①과 연결)</div>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:10px;margin:6px 0;">
+        <!-- 좌측: 매출 동선 설명 -->
+        <div style="background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;">
+          <div style="font-size:10px;font-weight:800;color:var(--ink-2);margin-bottom:5px;letter-spacing:0.04em;">매출 회수 동선</div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div style="display:flex;align-items:flex-start;gap:6px;">
+              <span style="background:var(--accent-2);color:#fff;font-size:9px;font-weight:800;padding:1px 6px;border-radius:3px;flex-shrink:0;">①</span>
+              <span style="font-size:10.5px;color:var(--ink-2);line-height:1.4;">제안 ①로 레벨 10 이후 광고 빈도 조정 → 광고 피로도 슬롯 비움</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:6px;">
+              <span style="background:var(--c-just);color:#fff;font-size:9px;font-weight:800;padding:1px 6px;border-radius:3px;flex-shrink:0;">②</span>
+              <span style="font-size:10.5px;color:var(--ink-2);line-height:1.4;">JustPlay 일일 챌린지에서 린후후 게임 인입 → 비운 슬롯 신규 유저로 채움</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:6px;">
+              <span style="background:var(--good);color:#fff;font-size:9px;font-weight:800;padding:1px 6px;border-radius:3px;flex-shrink:0;">③</span>
+              <span style="font-size:10.5px;color:var(--ink-2);line-height:1.4;">더 많은 유저가 레벨 10+ 까지 플레이 → <strong>인당 광고 매출 ↑</strong></span>
+            </div>
+          </div>
+        </div>
+        <!-- 우측: JustPlay 일일 챌린지 → Lihuhu 게임 mockup -->
+        <div style="background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;">
+          <div style="font-size:9.5px;color:var(--ink-3);font-weight:700;margin-bottom:5px;">JustPlay 일일 챌린지 → 린후후</div>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:4px 7px;display:flex;align-items:center;gap:5px;">
+              <div style="width:22px;height:22px;border-radius:5px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);flex-shrink:0;"><img src="https://play-lh.googleusercontent.com/Fyj84R_cBe1AVt7Er17nVGyWe1z_S4xsTIQjNTHOV2lJV4YH8MD1ZIEBB-oeLhmDGg=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+              <span style="font-size:9.5px;font-weight:700;color:var(--ink);flex:1;">매치트리플 3D · 7일 플레이</span>
+              <span style="font-size:9.5px;color:var(--good);font-weight:800;">+$3</span>
+            </div>
+            <div style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:4px 7px;display:flex;align-items:center;gap:5px;">
+              <div style="width:22px;height:22px;border-radius:5px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);flex-shrink:0;"><img src="https://play-lh.googleusercontent.com/CfHfhV6zdIZnuBpe_srJ0CyRVjmUOhL-yPACV5J1gNZrqGsjkSn9IjdyvPCNaqjz_LwE" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+              <span style="font-size:9.5px;font-weight:700;color:var(--ink);flex:1;">타일즈 인홀 · 레벨 30 도달</span>
+              <span style="font-size:9.5px;color:var(--good);font-weight:800;">+$5</span>
+            </div>
+            <div style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:4px 7px;display:flex;align-items:center;gap:5px;">
+              <div style="width:22px;height:22px;border-radius:5px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);flex-shrink:0;"><img src="https://play-lh.googleusercontent.com/8YxG41z9Xu-fNogLZzB_wB5M57ds09AN_QjIIHnbYmpYndsLDFKcgjbaS8H9hElbVVY=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+              <span style="font-size:9.5px;font-weight:700;color:var(--ink);flex:1;">파킹 마스터 3D · 레벨 20</span>
+              <span style="font-size:9.5px;color:var(--good);font-weight:800;">+$2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">제안 ①로 광고 부담 분산 → 그 슬롯을 JustPlay 일일 챌린지로 인입된 신규 유저로 채움 · NC 인수 시너지로 외부 UA 1회 비용에 다중 LTV 회수.</div>
+      <div style="margin-top:auto;padding:5px 8px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;font-size:10px;color:#15803d;line-height:1.45;"><strong>★ 기대:</strong> 외부 UA 비용 절감 · 레벨 10+ 정착률 ↑ · <strong>인당 광고 매출 ↑</strong></div>
+    </div>
+  </div>
+
+  <div class="slide-no">09 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 11: Springcomes · 3.1 수익화 구조 (BM + 시장 광고) -->
+<!-- ============================================== -->
+<section class="slide">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+    <h2 class="s-title" style="margin-bottom:0;">Springcomes_현황</h2>
+    <span class="bi spring">SPRINGCOMES</span>
+  </div>
+
+  <!-- 핵심 발견 hero + 게임 아이콘 -->
+  <div style="display:grid;grid-template-columns:1fr auto;gap:14px;margin-bottom:12px;align-items:stretch;">
+    <div style="display:flex;align-items:center;padding:0 4px;">
+      <p style="font-size:22px;font-weight:700;color:#003876;line-height:1.45;margin:0;letter-spacing:-0.01em;">
+        <strong>D7 ROAS 50% · D30 66%</strong> · IAP 결제 동선은 글로벌 1위 수준과 유사<br>광고 + IAP 함께 운영하는 하이브리드 BM
+      </p>
+    </div>
+    <!-- Springcomes 아이콘만 -->
+    <div style="display:flex;align-items:center;justify-content:center;background:var(--c-spring-soft);border:1px solid #bbf7d0;border-radius:6px;padding:6px;">
+      <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;background:#fff;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(21,128,61,0.18);"><img src="https://www.spcomes.com/imgs/sp.jpg" alt="Springcomes" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+    </div>
+  </div>
+
+  <!-- 3.1.a BM 4-box -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+    <span style="background:var(--c-spring);color:#fff;font-weight:800;font-size:10px;padding:3px 8px;border-radius:4px;letter-spacing:0.06em;">3.1.a BM 구조</span>
+    <span style="font-size:11px;color:var(--ink-3);font-weight:600;">IAP 중심 + 자유 시청 광고 보조 · D7 ROAS 50% 검증</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
+    <div style="background:#fff;border:1px solid var(--border);border-top:3px solid var(--c-spring);border-radius:6px;padding:9px 11px;">
+      <div style="font-size:9.5px;font-weight:800;color:var(--c-spring);letter-spacing:0.06em;margin-bottom:3px;">매출원 ① · 핵심</div>
+      <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;">IAP 결제</div>
+      <div style="font-size:10.5px;color:var(--ink-3);line-height:1.5;">다이아·행동력·아이템 패키지 · 머지 IP 결제 동선 자리잡힘.</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-top:3px solid var(--c-spring);border-radius:6px;padding:9px 11px;">
+      <div style="font-size:9.5px;font-weight:800;color:var(--c-spring);letter-spacing:0.06em;margin-bottom:3px;">매출원 ② · 보조</div>
+      <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;">자유 시청 광고</div>
+      <div style="font-size:10.5px;color:var(--ink-3);line-height:1.5;">"광고 보고 다이아·행동력 보너스" · 광고 강제 노출 거의 없음.</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-top:3px solid var(--c-spring);border-radius:6px;padding:9px 11px;">
+      <div style="font-size:9.5px;font-weight:800;color:var(--c-spring);letter-spacing:0.06em;margin-bottom:3px;">결제 동선 정착도</div>
+      <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;">D7 ROAS 50% · D30 66%</div>
+      <div style="font-size:10.5px;color:var(--ink-3);line-height:1.5;">머지 IP 결제 동선 자리잡힘 · 시즌패스·콘텐츠 바인딩 BM 추가로 ARPPU 확장 여지.</div>
+    </div>
+  </div>
+
+  <!-- 3.1.b 시장 광고 송출 비교 -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+    <span style="background:var(--c-spring);color:#fff;font-weight:800;font-size:10px;padding:3px 8px;border-radius:4px;letter-spacing:0.06em;">3.1.b 시장 광고 송출 비교</span>
+    <span style="font-size:11px;color:var(--ink-3);font-weight:600;">머지·매치-3 IAP 카테고리 6사 · Springcomes = IAP는 자리잡힘, UA 규모는 카테고리 최하위</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px;">
+    <!-- 6사 비교 테이블 -->
+    <div style="background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+      <table style="width:100%;border-collapse:collapse;font-size:11px;">
+        <thead>
+          <tr style="background:var(--soft);">
+            <th style="text-align:left;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">회사 · 본사</th>
+            <th style="text-align:left;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">대표 게임</th>
+            <th style="text-align:right;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">연 매출</th>
+            <th style="text-align:right;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">월 UA</th>
+            <th style="text-align:right;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">Meta 광고</th>
+            <th style="text-align:left;padding:7px 10px;font-size:10px;font-weight:800;color:var(--ink-2);letter-spacing:0.04em;border-bottom:1px solid var(--border);">포지션</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);"><strong style="color:var(--bad);">🔥 Dream Games</strong> · 🇹🇷</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--bad);font-weight:600;">Royal Match</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">1조 7,800억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">3,800억+</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">50K+ (cap)</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--bad);font-weight:600;">매치-3 IAP 글로벌 1위</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);">Playrix · 🇮🇪</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">Gardenscapes · Homescapes</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">1조 3,700억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">2,300억+</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">30K+</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">매치-3 + 메타게임 (Playrix 누적 15조)</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);"><strong style="color:var(--warn);">🔥 Microfun</strong> · 🇨🇳</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--warn);font-weight:600;">Gossip Harbor</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">3,425억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">750억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~8K</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--warn);font-weight:600;">머지 글로벌 1위 (헬로타운 직접 좌표)</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);">Metacore · 🇫🇮</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">Merge Mansion</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">3,425억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">800억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~10K</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">머지+스토리 IAP 2위</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);">Trailmix · 🇬🇧</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">Merge Mayor</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">2,055억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">500억</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">~5K</td>
+            <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--ink-3);">머지 시뮬 신생 도전자</td>
+          </tr>
+          <tr style="background:var(--c-spring-soft);">
+            <td style="padding:7px 10px;"><strong style="color:var(--c-spring-deep);">★ Springcomes</strong> · 🇰🇷</td>
+            <td style="padding:7px 10px;color:var(--c-spring-deep);font-weight:600;">헬로타운 · 머지 페코</td>
+            <td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;"><strong>280억</strong></td>
+            <td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;"><strong>~7억</strong></td>
+            <td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;"><strong>~500</strong></td>
+            <td style="padding:7px 10px;color:var(--c-spring-deep);font-weight:600;">머지 후발 · IAP 검증 (D7 ROAS 50%) · UA 규모 작음</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 우측 시사점 -->
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="background:var(--c-spring-soft);border:1px solid #bbf7d0;border-left:3px solid var(--c-spring);border-radius:6px;padding:10px 12px;">
+        <div style="font-size:9.5px;font-weight:800;color:var(--c-spring-deep);letter-spacing:0.06em;margin-bottom:3px;">검증된 결제 동선</div>
+        <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">D7 ROAS 50% / D30 66% · <strong>IAP 결제 동선 글로벌 1위 수준</strong> · 머지 IP 안에 결제 의지 검증.</div>
+      </div>
+      <div style="background:#fef3c7;border:1px solid #fde68a;border-left:3px solid var(--warn);border-radius:6px;padding:10px 12px;">
+        <div style="font-size:9.5px;font-weight:800;color:var(--warn);letter-spacing:0.06em;margin-bottom:3px;">UA 규모 격차</div>
+        <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">Gossip Harbor 월 UA 750억 vs 헬로타운 ~7억 · <strong>약 100배 차이</strong>. NC가 자본·UA 채널 부어 줄 수 있는 영역.</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#0a2540,#14532d);color:#fff;padding:10px 12px;border-radius:6px;">
+        <div style="font-size:9.5px;font-weight:800;color:#86efac;letter-spacing:0.06em;margin-bottom:3px;">시사점</div>
+        <div style="font-size:11px;line-height:1.55;">IAP 결제 동선은 글로벌 1위 수준으로 검증 · 다만 <strong style="color:#86efac;">UA 규모·메타게임 깊이는 카테고리 1·2위 대비 약점</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:10px;font-size:10px;color:var(--ink-4);font-style:italic;line-height:1.5;padding:6px 10px;background:#f8fafc;border-left:2px solid #cbd5e1;border-radius:3px;">
+    ※ 비교 기준: <strong>머지·매치-3 IAP 카테고리 6사</strong> (Royal Match · Gardenscapes · Gossip Harbor · Merge Mansion · Merge Mayor · 헬로타운) · IAP 중심 BM 기준 비교. <strong>Gossip Harbor · Merge Mansion · Merge Mayor</strong>가 헬로타운과 1:1 머지 장르 일치, Royal Match·Gardenscapes는 매치-3+메타게임 인접 좌표.
+  </div>
+  <div class="slide-no">10 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 11 (NEW): Springcomes · 3.0 유저 경로 + 수익화 흐름 -->
+<!-- ============================================== -->
+<section class="slide">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+    <h2 class="s-title" style="margin-bottom:0;">Springcomes_수익화 구조</h2>
+    <span class="bi spring">SPRINGCOMES</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr auto;gap:14px;margin-bottom:12px;align-items:stretch;">
+    <div style="display:flex;align-items:center;padding:0 4px;">
+      <p style="font-size:22px;font-weight:700;color:#003876;line-height:1.45;margin:0;letter-spacing:-0.01em;">
+        <strong>DAU 250만 (3사 1위 트래픽)</strong> · 머지 IP IAP 결제 동선 검증 · 3사 중 유료 결제 동선 검증된 자산
+      </p>
+    </div>
+    <!-- Springcomes 아이콘만 -->
+    <div style="display:flex;align-items:center;justify-content:center;background:var(--c-spring-soft);border:1px solid #bbf7d0;border-radius:6px;padding:6px;">
+      <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;background:#fff;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(21,128,61,0.18);"><img src="https://www.spcomes.com/imgs/sp.jpg" alt="Springcomes" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+    </div>
+  </div>
+
+  <!-- 유저 경로 5단계 -->
+  <div style="background:var(--c-spring-soft);border:1px solid #bbf7d0;border-radius:8px;padding:13px 16px;margin-bottom:10px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="background:var(--c-spring);color:#fff;font-weight:800;font-size:11px;padding:3px 9px;border-radius:4px;letter-spacing:0.06em;">📍 유저 경로</span>
+      <span style="font-size:12.5px;font-weight:700;color:var(--c-spring-deep);">유입 → 헬로타운 다운로드 → 머지 코어 플레이 → 게임 육성 → IAP 결제</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 14px 1fr 14px 1fr 14px 1fr 14px 1fr;gap:0;align-items:center;">
+      <!-- STEP 01 -->
+      <div style="background:#fff;border:1px solid #bbf7d0;border-radius:6px;padding:9px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:11px;margin:0 auto 5px;background:#fff;border:1px solid #bbf7d0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;box-shadow:0 2px 5px rgba(10,37,64,0.06);"><span style="font-size:10px;font-weight:900;color:#0866FF;letter-spacing:-0.02em;">Meta</span><div style="width:60%;height:1px;background:#e5e9f0;"></div><span style="font-size:8.5px;font-weight:700;color:var(--ink-3);">자연검색</span></div>
+        <div style="font-size:10px;color:var(--c-spring);font-weight:800;letter-spacing:0.06em;">STEP 01</div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink);margin-top:3px;">유입</div>
+        <div style="font-size:10px;color:var(--ink-3);line-height:1.45;margin-top:3px;">머지 카테고리 외부 UA + 자연 검색 (일본 친화 IP)</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-spring);font-weight:800;">→</div>
+      <!-- STEP 02 -->
+      <div style="background:#fff;border:1px solid #bbf7d0;border-radius:6px;padding:9px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:11px;margin:0 auto 5px;overflow:hidden;background:linear-gradient(135deg,#15803d,#166534);box-shadow:0 3px 8px rgba(21,128,61,0.25);"><img src="https://play-lh.googleusercontent.com/1HCjMO7fZ_tYi4vefT4N65n9yTmGNp-oURSFghjJ1GqmwVoEETdfjz56LiWsSHnl7A=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:10px;color:var(--c-spring);font-weight:800;letter-spacing:0.06em;">STEP 02</div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink);margin-top:3px;">다운로드</div>
+        <div style="font-size:10px;color:var(--ink-3);line-height:1.45;margin-top:3px;">헬로타운 440만 + 머지 스위츠 470만 등 IP 4종</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-spring);font-weight:800;">→</div>
+      <!-- STEP 03 -->
+      <div style="background:#fff;border:1px solid #bbf7d0;border-radius:6px;padding:9px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:11px;margin:0 auto 5px;background:linear-gradient(135deg,#15803d,#166534);display:flex;align-items:center;justify-content:center;padding:3px;gap:2px;box-shadow:0 3px 8px rgba(21,128,61,0.25);"><img src="https://play-lh.googleusercontent.com/GvOziOEmbRrkWQU1Wu24eKLzcbuKTL2P89Cwu9E8mWyt6m7VSgISfUesurrNNqgGp-w=w240-h480-rw" alt="" style="width:19px;height:19px;border-radius:4px;object-fit:cover;" onerror="this.remove()"><img src="https://play-lh.googleusercontent.com/CR7KxRX5VmWThfZ9-t5RRrQRivc1QMJvN-WJX_Cx8yE4sWiIb87uRkKbRsoTxvKBa-0N=w128" alt="" style="width:19px;height:19px;border-radius:4px;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:10px;color:var(--c-spring);font-weight:800;letter-spacing:0.06em;">STEP 03</div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink);margin-top:3px;">머지 코어 플레이</div>
+        <div style="font-size:10px;color:var(--ink-3);line-height:1.45;margin-top:3px;">행동력 소모 → 광고 시청 보너스 or IAP 결제</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-spring);font-weight:800;">→</div>
+      <!-- STEP 04 -->
+      <div style="background:#fff;border:1px solid #bbf7d0;border-radius:6px;padding:9px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:11px;margin:0 auto 5px;overflow:hidden;background:linear-gradient(135deg,#15803d,#166534);box-shadow:0 3px 8px rgba(21,128,61,0.25);"><img src="https://play-lh.googleusercontent.com/1HCjMO7fZ_tYi4vefT4N65n9yTmGNp-oURSFghjJ1GqmwVoEETdfjz56LiWsSHnl7A=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:10px;color:var(--c-spring);font-weight:800;letter-spacing:0.06em;">STEP 04</div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink);margin-top:3px;">게임 육성</div>
+        <div style="font-size:10px;color:var(--ink-3);line-height:1.45;margin-top:3px;">레벨 진행 + 머지 코어 누적 (헬로타운 D7 ROAS 50%)</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-spring);font-weight:800;">→</div>
+      <!-- STEP 05 -->
+      <div style="background:#fff;border:1px solid #bbf7d0;border-radius:6px;padding:9px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:11px;margin:0 auto 5px;background:linear-gradient(135deg,#7c3aed,#5b21b6);display:flex;align-items:center;justify-content:center;color:#fff;line-height:1;box-shadow:0 3px 8px rgba(124,58,237,0.25);font-size:22px;">💎</div>
+        <div style="font-size:10px;color:var(--c-spring);font-weight:800;letter-spacing:0.06em;">STEP 05</div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--ink);margin-top:3px;">IAP 결제</div>
+        <div style="font-size:10px;color:var(--ink-3);line-height:1.45;margin-top:3px;">다이아·시즌패스 IAP로 게임 진행 (D30 ROAS 66%)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 매출 흐름 도식 -->
+  <div style="background:var(--c-spring-soft);border:1px solid #bbf7d0;border-radius:8px;padding:13px 16px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="background:var(--c-spring);color:#fff;font-weight:800;font-size:11px;padding:3px 9px;border-radius:4px;letter-spacing:0.06em;">💰 매출 흐름</span>
+      <span style="font-size:12.5px;font-weight:700;color:var(--c-spring-deep);">매출 100원 → 광고·IAP 분기 → 단가 분산 손실 → 영업이익 5~10원 (마진 5~10%)</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 14px 1.7fr 14px 1fr 14px 1fr;gap:0;align-items:center;">
+      <!-- L1: 매출 -->
+      <div style="background:#fff;border:1px solid #bbf7d0;border-radius:6px;padding:10px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:34px;margin-bottom:5px;gap:4px;">
+          <span style="font-size:20px;">💰</span>
+          <span style="font-size:18px;font-weight:900;color:var(--c-spring-deep);">100</span>
+          <span style="font-size:11px;color:var(--ink-3);font-weight:700;">원</span>
+        </div>
+        <div style="font-size:10px;color:var(--c-spring);font-weight:800;letter-spacing:0.06em;">L1</div>
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin-top:2px;">총 매출</div>
+        <div style="font-size:10px;color:var(--ink-3);margin-top:2px;">광고 + IAP 혼합 BM</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-spring);font-weight:800;">→</div>
+      <!-- L2: BM 분기 -->
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:7px 10px;display:flex;align-items:center;gap:8px;">
+          <span style="background:var(--warn);color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;white-space:nowrap;">광고 매출</span>
+          <span style="font-size:13px;font-weight:900;color:var(--warn);">~70원</span>
+          <span style="font-size:10px;color:var(--ink-3);line-height:1.4;">외부 SDK 다중 분산 (단가↓)</span>
+        </div>
+        <div style="background:var(--c-spring-soft);border:1px solid var(--c-spring);border-radius:6px;padding:7px 10px;display:flex;align-items:center;gap:8px;">
+          <span style="background:var(--c-spring);color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;white-space:nowrap;">IAP 매출</span>
+          <span style="font-size:13px;font-weight:900;color:var(--c-spring-deep);">~30원</span>
+          <span style="font-size:10px;color:var(--ink-3);line-height:1.4;">헬로타운 결제 동선 (D30 ROAS 66%)</span>
+        </div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-spring);font-weight:800;">→</div>
+      <!-- L3: 운영비 + 분산 손실 -->
+      <div style="background:#fff;border:1px solid #bbf7d0;border-radius:6px;padding:10px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:34px;margin-bottom:5px;gap:4px;">
+          <span style="font-size:13px;font-weight:800;color:var(--ink-3);">−</span>
+          <span style="font-size:18px;font-weight:900;color:var(--bad);">90~95</span>
+          <span style="font-size:11px;color:var(--ink-3);font-weight:700;">원</span>
+        </div>
+        <div style="font-size:10px;color:var(--c-spring);font-weight:800;letter-spacing:0.06em;">L3</div>
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin-top:2px;">운영비 + 단가 분산</div>
+        <div style="font-size:10px;color:var(--ink-3);margin-top:2px;">인력·서버 + 외부 SDK 손실</div>
+      </div>
+      <div style="text-align:center;font-size:17px;color:var(--c-spring);font-weight:800;">→</div>
+      <!-- L4: 영업이익 -->
+      <div style="background:linear-gradient(135deg,#0a2540,#14532d);color:#fff;border-radius:6px;padding:10px;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;height:34px;margin-bottom:5px;gap:4px;">
+          <span style="font-size:20px;color:#fbbf24;">★</span>
+          <span style="font-size:20px;font-weight:900;color:#86efac;">5~10</span>
+          <span style="font-size:11px;color:#86efac;font-weight:700;">원</span>
+        </div>
+        <div style="font-size:10px;color:#86efac;font-weight:800;letter-spacing:0.06em;">L4</div>
+        <div style="font-size:12px;font-weight:800;margin-top:2px;">영업이익</div>
+        <div style="font-size:10px;color:#86efac;margin-top:2px;">마진 5~10% (3사 최저) <span class="src 추정">추정</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 인사이트 카드 3개 -->
+  <div class="grid-3" style="margin-top:10px;">
+    <div class="card b-spring">
+      <div class="k-h spring">DAU 250만 = 3사 1위</div>
+      <div class="k-b" style="font-size:11.5px;">트래픽 풀 자체는 가장 큼 · 누적 다운로드 2~3억 · 머지 IP 4종 (일본 친화) · <strong>사용자 자산은 보유, 매출 잠재력은 미실현</strong></div>
+    </div>
+    <div class="card b-spring">
+      <div class="k-h spring">단가 분산 영역</div>
+      <div class="k-b" style="font-size:11.5px;">외부 SDK 다중 분산 운영 · NC 통합 단가 협상으로 광고 매출 추가 회수 기회 · 영업이익률 5~10% → 15~20% 보강 여지</div>
+    </div>
+    <div class="card b-spring">
+      <div class="k-h spring">NC 인수 시너지 메커니즘</div>
+      <div class="k-b" style="font-size:11.5px;">JustPlay 채널 통합 + 2027 일본 진출 (머지 IP 4종) · <strong>매출 280억 → 600~900억 / 마진 5~10% → 15~20%</strong> · "비선형 증가" 정량 메커니즘</div>
+    </div>
+  </div>
+
+  <div class="slide-no">11 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 12 (was 12): Springcomes · 3.2 게임 피드백 -->
+<!-- ============================================== -->
+<section class="slide">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+    <h2 class="s-title" style="margin-bottom:0;">Springcomes_플레이 피드백</h2>
+    <span class="bi spring">SPRINGCOMES</span>
+  </div>
+
+  <!-- 핵심 메시지 hero + 체험 게임 아이콘 -->
+  <div style="display:grid;grid-template-columns:1fr auto;gap:14px;margin-bottom:12px;align-items:stretch;">
+    <div style="display:flex;align-items:center;padding:0 4px;">
+      <p style="font-size:22px;font-weight:700;color:#003876;line-height:1.45;margin:0;letter-spacing:-0.01em;">
+        <strong>Springcomes는 3사 중 게임성·여성향 IP 강점</strong> · <strong>IAP 강화 방향</strong>으로 키울 수 있는 자산<br><strong>JustPlay 활용하여 UA 강화 · IAP 통해 매출 증대 필요</strong>
+      </p>
+    </div>
+    <!-- 체험 게임 아이콘 strip (compact) -->
+    <div style="display:flex;gap:6px;align-items:center;background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:5px 8px;">
+      <div style="display:flex;flex-direction:column;align-items:center;width:50px;text-align:center;">
+        <div style="width:40px;height:40px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#15803d,#166534);box-shadow:0 2px 6px rgba(21,128,61,0.18);"><img src="https://play-lh.googleusercontent.com/1HCjMO7fZ_tYi4vefT4N65n9yTmGNp-oURSFghjJ1GqmwVoEETdfjz56LiWsSHnl7A=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:8.5px;font-weight:700;color:var(--ink);margin-top:2px;line-height:1.15;">헬로타운</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;width:50px;text-align:center;">
+        <div style="width:40px;height:40px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#15803d,#166534);box-shadow:0 2px 6px rgba(21,128,61,0.18);"><img src="https://play-lh.googleusercontent.com/GvOziOEmbRrkWQU1Wu24eKLzcbuKTL2P89Cwu9E8mWyt6m7VSgISfUesurrNNqgGp-w=w240-h480-rw" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:8.5px;font-weight:700;color:var(--ink);margin-top:2px;line-height:1.15;">정리의 여왕</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;width:50px;text-align:center;">
+        <div style="width:40px;height:40px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#15803d,#166534);box-shadow:0 2px 6px rgba(21,128,61,0.18);"><img src="https://play-lh.googleusercontent.com/CR7KxRX5VmWThfZ9-t5RRrQRivc1QMJvN-WJX_Cx8yE4sWiIb87uRkKbRsoTxvKBa-0N=w128" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="font-size:8.5px;font-weight:700;color:var(--ink);margin-top:2px;line-height:1.15;">머지 페코</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 좋았던 점 / 보완점 grid -->
+  <div style="display:grid;grid-template-columns:1.1fr 1.9fr;gap:12px;margin-bottom:12px;">
+    <!-- 좋았던 점 -->
+    <div style="background:var(--good-soft);border:1px solid #bbf7d0;border-radius:8px;padding:10px 13px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:var(--good);color:#fff;font-size:9.5px;font-weight:800;padding:2px 8px;border-radius:3px;letter-spacing:0.06em;">✅ 좋았던 점</span>
+        <span style="font-size:10px;color:var(--good);font-weight:700;">아트 · 머지 코어 검증</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div style="background:#fff;border:1px solid #bbf7d0;border-radius:5px;padding:7px 9px;">
+          <div style="font-size:11px;font-weight:800;color:var(--ink);margin-bottom:2px;">아트·UX 평가 우수</div>
+          <div style="font-size:10.5px;color:var(--ink-2);line-height:1.5;">App Store 4.75 · Google Play 4.6 · <em>"cute, cozy, fun, offline"</em> 코멘트 누적.</div>
+        </div>
+        <div style="background:#fff;border:1px solid #bbf7d0;border-radius:5px;padding:7px 9px;">
+          <div style="font-size:11px;font-weight:800;color:var(--ink);margin-bottom:2px;">머지 코어 + IAP 검증</div>
+          <div style="font-size:10.5px;color:var(--ink-2);line-height:1.5;">D7 ROAS 50% · D30 66% · <strong>결제 동선이 작동</strong>하는 자산.</div>
+        </div>
+        <div style="background:#fff;border:1px solid #bbf7d0;border-radius:5px;padding:7px 9px;">
+          <div style="font-size:11px;font-weight:800;color:var(--ink);margin-bottom:2px;">광고 강제 노출 없음</div>
+          <div style="font-size:10.5px;color:var(--ink-2);line-height:1.5;">유저 자유 시청 광고 구조 → IAP 결제 환경 보호.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 보완점 -->
+    <div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:var(--warn);color:#fff;font-size:9.5px;font-weight:800;padding:2px 8px;border-radius:3px;letter-spacing:0.06em;">🎯 보완하면 좋을 점</span>
+        <span style="font-size:10px;color:var(--warn);font-weight:700;">컨셉 → 보상 곡선 → IAP 깊이 (3트랙)</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+        <div style="background:linear-gradient(180deg,#fffbeb 0%, #fef3c7 100%);border:2px solid var(--warn);border-radius:8px;padding:9px 11px;box-shadow:0 4px 10px rgba(180,83,9,0.10);">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+            <span style="width:22px;height:22px;border-radius:50%;background:var(--warn);color:#fff;font-weight:800;font-size:10px;display:flex;align-items:center;justify-content:center;">①</span>
+            <span style="font-size:10px;font-weight:800;color:var(--warn);">컨셉 가시화</span>
+          </div>
+          <div style="font-size:11.5px;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:3px;">"카페 사장 → 어디까지?"</div>
+          <div style="font-size:10.5px;color:var(--ink-2);line-height:1.5;">초반 성장 곡선 추상적 · 프랜차이즈·도시 단위 확장 동선 또렷이.</div>
+        </div>
+        <div style="background:linear-gradient(180deg,#eef4ff 0%, #dbe6ff 100%);border:2px solid var(--accent-2);border-radius:8px;padding:9px 11px;box-shadow:0 4px 10px rgba(27,107,255,0.12);">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+            <span style="width:22px;height:22px;border-radius:50%;background:var(--accent-2);color:#fff;font-weight:800;font-size:10px;display:flex;align-items:center;justify-content:center;">②</span>
+            <span style="font-size:10px;font-weight:800;color:var(--accent-2);">보상 곡선 재설계</span>
+          </div>
+          <div style="font-size:11.5px;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:3px;">"레벨업 보상이 박함"</div>
+          <div style="font-size:10.5px;color:var(--ink-2);line-height:1.5;">다이아 10·행동력 10 단위 → 직원 1명 + 다이아 50 단위로 확대.</div>
+        </div>
+        <div style="background:linear-gradient(180deg,#f0fdf4 0%, #dcfce7 100%);border:2px solid #15803d;border-radius:8px;padding:9px 11px;box-shadow:0 4px 10px rgba(21,128,61,0.12);">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+            <span style="width:22px;height:22px;border-radius:50%;background:#15803d;color:#fff;font-weight:800;font-size:10px;display:flex;align-items:center;justify-content:center;">③</span>
+            <span style="font-size:10px;font-weight:800;color:#15803d;">IAP 깊이</span>
+          </div>
+          <div style="font-size:11.5px;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:3px;">"시즌패스가 약함"</div>
+          <div style="font-size:10.5px;color:var(--ink-2);line-height:1.5;">월 결제 동선 신설 시 ARPU 상승 폭 최대 · Royal Match 좌표.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IAP 진화 mock-up 3종 -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+    <span style="background:var(--accent-2);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:4px;letter-spacing:0.06em;">💡 제안</span>
+  </div>
+  <div class="grid-3">
+    <!-- mockup ①: 컨셉 성장 곡선 -->
+    <div class="card b-accent" style="padding:10px 12px;display:flex;flex-direction:column;">
+      <div class="k-h accent">제안 ① 컨셉 가시화</div>
+      <div style="background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin:6px 0;">
+        <div style="font-size:9.5px;color:var(--ink-3);font-weight:700;margin-bottom:5px;">성장 단계 로드맵</div>
+        <div style="display:flex;align-items:center;gap:3px;">
+          <div style="flex:1;background:linear-gradient(135deg,#15803d,#16a34a);color:#fff;font-size:9px;font-weight:800;padding:4px 5px;border-radius:3px;text-align:center;">🍰<br>카페</div>
+          <span style="font-size:10px;color:var(--ink-4);">→</span>
+          <div style="flex:1;background:#e2e8f0;border:1px dashed #94a3b8;color:var(--ink-4);font-size:9px;font-weight:700;padding:4px 5px;border-radius:3px;text-align:center;">🏪<br>프랜차이즈</div>
+          <span style="font-size:10px;color:var(--ink-4);">→</span>
+          <div style="flex:1;background:#e2e8f0;border:1px dashed #94a3b8;color:var(--ink-4);font-size:9px;font-weight:700;padding:4px 5px;border-radius:3px;text-align:center;">🏙️<br>도시</div>
+        </div>
+        <div style="font-size:9px;color:var(--ink-4);text-align:center;margin-top:5px;">현재 단계 → 다음 목표</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">"내가 이걸 키워서 어디까지 가는 건가" · 단계 가시화로 동기 부여.</div>
+    </div>
+    <!-- mockup ②: 레벨업 보상 비교 -->
+    <div class="card b-accent" style="padding:10px 12px;display:flex;flex-direction:column;">
+      <div class="k-h accent">제안 ② 보상 곡선 재설계</div>
+      <div style="background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin:6px 0;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;">
+          <span style="font-size:9.5px;color:var(--ink-3);font-weight:700;">레벨업 보상 비교</span>
+          <span style="font-size:9px;color:var(--accent-2);font-weight:700;">현재 → 제안</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+          <span style="font-size:9px;color:var(--bad);font-weight:700;width:30px;">현재</span>
+          <div style="display:flex;gap:3px;align-items:center;font-size:9px;">
+            <span style="background:#fee2e2;color:var(--bad);padding:2px 5px;border-radius:3px;font-weight:700;">💎10</span>
+            <span style="background:#fee2e2;color:var(--bad);padding:2px 5px;border-radius:3px;font-weight:700;">⚡10</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="font-size:9px;color:var(--good);font-weight:700;width:30px;">제안</span>
+          <div style="display:flex;gap:3px;align-items:center;font-size:9px;">
+            <span style="background:#dcfce7;color:var(--good);padding:2px 5px;border-radius:3px;font-weight:700;">💎50</span>
+            <span style="background:#dcfce7;color:var(--good);padding:2px 5px;border-radius:3px;font-weight:700;">👨‍🍳직원1</span>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">레벨업 보상 단위 확대 · 굿플레이 피드백 강화로 결제 동력 보강.</div>
+    </div>
+    <!-- mockup ③: 시즌패스 -->
+    <div class="card b-accent" style="padding:10px 12px;display:flex;flex-direction:column;">
+      <div class="k-h accent">제안 ③ 시즌패스 IAP</div>
+      <div style="background:var(--soft-2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin:6px 0;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;">
+          <span style="font-size:9.5px;color:var(--ink-3);font-weight:700;">헬로타운 시즌 1</span>
+          <span style="font-size:10px;color:var(--c-spring);font-weight:800;">9,900원 / 월</span>
+        </div>
+        <div style="display:flex;gap:2px;margin-bottom:4px;">
+          <div style="flex:1;height:12px;background:var(--c-spring);border-radius:2px 0 0 2px;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:800;">1</div>
+          <div style="flex:1;height:12px;background:var(--c-spring);display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:800;">2</div>
+          <div style="flex:1;height:12px;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--ink-4);font-weight:700;">3</div>
+          <div style="flex:1;height:12px;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--ink-4);font-weight:700;">4</div>
+          <div style="flex:1;height:12px;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--ink-4);font-weight:700;">5</div>
+          <div style="flex:1;height:12px;background:#e2e8f0;border-radius:0 2px 2px 0;display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--ink-4);font-weight:700;">…30</div>
+        </div>
+        <div style="font-size:9px;color:var(--ink-4);text-align:center;">Day 2/30 진행 · 직원 +1 보상</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">시즌패스·콘텐츠 바인딩 BM 배치 → ARPPU 강화 레버 확보.</div>
+    </div>
+  </div>
+
+  
+  <div class="slide-no">12 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 13: 3사 요약 재조립                       -->
+<!-- ============================================== -->
+<section class="slide">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+    <h2 class="s-title" style="margin-bottom:0;">3사 요약 · 진단 + 강화 방향</h2>
+    <div style="display:flex;gap:6px;"><span class="bi just">JUSTPLAY</span><span class="bi lihuhu">LIHUHU</span><span class="bi spring">SPRINGCOMES</span></div>
+  </div>
+  <p class="s-subtitle">앞에서 다룬 3사 분석을 한 페이지로 정리 · 진단 + 강화 방향. Moving Eye는 라이브옵스 자산 성격으로 본 분석에서는 별도.</p>
+
+  <!-- 3사 헤드 메시지 -->
+  <div style="background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:11px 16px;margin:8px 0 10px 0;">
+    <div style="display:flex;flex-direction:column;gap:5px;font-size:13px;line-height:1.5;">
+      <div><strong style="color:var(--c-just-deep);min-width:90px;display:inline-block;">JustPlay :</strong> UA 트래픽 자산 자리잡힘 · 보상 체감 시스템화로 플레이 동력 강화하여 광고 매출 증대</div>
+      <div><strong style="color:var(--c-lihuhu-deep);min-width:90px;display:inline-block;">Lihuhu :</strong> 100+ 자사 게임 cross-promo 효율 · 광고 페이스 조정 + JustPlay 인입으로 인당 매출 ↑</div>
+      <div><strong style="color:var(--c-spring-deep);min-width:90px;display:inline-block;">Springcomes :</strong> JustPlay UA 강화 + 시즌패스 IAP로 ARPPU 증대</div>
+    </div>
+  </div>
+
+  <!-- 3사 카드 -->
+  <div class="grid-3" style="margin-top:4px;">
+    <!-- JustPlay -->
+    <div class="card b-just" style="padding:15px 17px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <div style="width:42px;height:42px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#2563eb,#1e40af);box-shadow:0 3px 8px rgba(37,99,235,0.22);"><img src="https://d1hbpr09pwz0sk.cloudfront.net/logo_url/justplay-76c255a6" alt="JustPlay" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="flex:1;">
+          <div style="font-size:17px;font-weight:800;color:var(--c-just-deep);">JustPlay</div>
+          <div style="font-size:11px;color:var(--ink-3);font-weight:600;">광고 미디어 모델 · 자리잡힘</div>
+        </div>
+      </div>
+
+      <div style="font-size:10px;font-weight:800;color:var(--c-just);letter-spacing:0.06em;margin-top:8px;margin-bottom:4px;">📊 진단</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">자사 게임 광고 50~70% + Offerwall 20~35% 이중 BM · JustDice 그룹(JustPlay+Cash Giraffe) 합산 60~70% 점유 · 광고 송출 1위</div>
+      <div style="font-size:10px;font-weight:800;color:var(--c-just);letter-spacing:0.06em;margin-top:8px;margin-bottom:4px;">💡 강화 방향</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">
+        <ul style="margin:0;padding-left:14px;">
+          <li>일일 챌린지에 NC 4사 게임 통합 → 4사 cross-promo</li>
+          <li>보상 체감 시스템화 (오늘 N분 → 얼마)</li>
+          <li>광고 매출 추가 회수 + 외부 UA 비용 절감</li>
+        </ul>
+      </div>
+      <!-- 강화 도식 -->
+      <div style="margin-top:10px;background:var(--c-just-soft);border:1px solid #bfdbfe;border-radius:6px;padding:8px;display:flex;align-items:center;gap:4px;font-size:9.5px;">
+        <div style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:5px 4px;flex:1;text-align:center;font-weight:700;color:var(--ink-2);line-height:1.25;">Gimica 7종<br>일일 챌린지</div>
+        <span style="color:var(--c-just);font-weight:800;">→</span>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:5px 4px;flex:1;text-align:center;font-weight:700;color:var(--ink-2);line-height:1.25;">+ 4사<br>통합</div>
+        <span style="color:var(--c-just);font-weight:800;">→</span>
+        <div style="background:var(--c-just);color:#fff;border-radius:4px;padding:5px 4px;flex:1;text-align:center;font-weight:800;line-height:1.25;">광고 매출 ↑<br>UA 비용 ↓</div>
+      </div>
+    </div>
+
+    <!-- Lihuhu -->
+    <div class="card b-lihuhu" style="padding:15px 17px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <div style="width:42px;height:42px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#374151,#111827);box-shadow:0 3px 8px rgba(31,41,55,0.22);"><img src="https://play-lh.googleusercontent.com/oEDQAqDqY2DCmHAIN32nJM0k9GlB_Iy2aT7rBu6DtDRZenXtdGk8PXJJegqQ7bWtf_Gu" alt="Lihuhu" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="flex:1;">
+          <div style="font-size:17px;font-weight:800;color:var(--c-lihuhu-deep);">Lihuhu</div>
+          <div style="font-size:11px;color:var(--ink-3);font-weight:600;">양산 + 영업이익률 25% (3사 최고)</div>
+        </div>
+      </div>
+
+      <div style="font-size:10px;font-weight:800;color:var(--c-lihuhu);letter-spacing:0.06em;margin-top:8px;margin-bottom:4px;">📊 진단</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">100+ 자사 게임 cross-promo · 영업이익률 25% (3사 최고) · 매출 1,200억 · Match Triple 3D 10M+ DL</div>
+      <div style="font-size:10px;font-weight:800;color:var(--c-lihuhu);letter-spacing:0.06em;margin-top:8px;margin-bottom:4px;">💡 강화 방향</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">
+        <ul style="margin:0;padding-left:14px;">
+          <li>레벨 10+ 광고 빈도 조정 (광고 피로도 완화)</li>
+          <li>JustPlay 일일 챌린지 인입 (신규 유저 확보)</li>
+          <li>인당 광고 매출 ↑ · 다중 LTV 회수</li>
+        </ul>
+      </div>
+      <!-- 강화 도식 -->
+      <div style="margin-top:10px;background:var(--c-lihuhu-soft);border:1px solid #d1d5db;border-radius:6px;padding:8px;display:flex;align-items:center;gap:4px;font-size:9.5px;">
+        <div style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:5px 4px;flex:1;text-align:center;font-weight:700;color:var(--ink-2);line-height:1.25;">광고 피로도<br>완화</div>
+        <span style="color:var(--c-lihuhu);font-weight:800;">→</span>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:5px 4px;flex:1;text-align:center;font-weight:700;color:var(--ink-2);line-height:1.25;">JustPlay<br>UA 인입</div>
+        <span style="color:var(--c-lihuhu);font-weight:800;">→</span>
+        <div style="background:var(--c-lihuhu);color:#fff;border-radius:4px;padding:5px 4px;flex:1;text-align:center;font-weight:800;line-height:1.25;">인당<br>매출 ↑</div>
+      </div>
+    </div>
+
+    <!-- Springcomes -->
+    <div class="card b-spring" style="padding:15px 17px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <div style="width:42px;height:42px;border-radius:9px;overflow:hidden;background:#fff;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(21,128,61,0.22);"><img src="https://www.spcomes.com/imgs/sp.jpg" alt="Springcomes" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()"></div>
+        <div style="flex:1;">
+          <div style="font-size:17px;font-weight:800;color:var(--c-spring-deep);">Springcomes</div>
+          <div style="font-size:11px;color:var(--ink-3);font-weight:600;">머지 IP · IAP 결제 동선 검증</div>
+        </div>
+      </div>
+
+      <div style="font-size:10px;font-weight:800;color:var(--c-spring);letter-spacing:0.06em;margin-top:8px;margin-bottom:4px;">📊 진단</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">DAU 250만 (3사 1위 트래픽) · D7 ROAS 50% · D30 66% · 머지 IP 결제 동선 검증 · 아트·UX 평가 우수</div>
+      <div style="font-size:10px;font-weight:800;color:var(--c-spring);letter-spacing:0.06em;margin-top:8px;margin-bottom:4px;">💡 강화 방향</div>
+      <div style="font-size:11px;color:var(--ink-2);line-height:1.55;">
+        <ul style="margin:0;padding-left:14px;">
+          <li>JustPlay 활용 UA 강화 · 신규 유저 확보</li>
+          <li>컨셉 가시화 + 보상 곡선 재설계로 게임 육성 동력</li>
+          <li>시즌패스·다이아 IAP로 ARPPU 강화 → 매출 ↑</li>
+        </ul>
+      </div>
+      <!-- 강화 도식 -->
+      <div style="margin-top:10px;background:var(--c-spring-soft);border:1px solid #bbf7d0;border-radius:6px;padding:8px;display:flex;align-items:center;gap:4px;font-size:9.5px;">
+        <div style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:5px 4px;flex:1;text-align:center;font-weight:700;color:var(--ink-2);line-height:1.25;">JustPlay<br>UA 강화</div>
+        <span style="color:var(--c-spring);font-weight:800;">→</span>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:5px 4px;flex:1;text-align:center;font-weight:700;color:var(--ink-2);line-height:1.25;">게임 육성<br>+ IAP</div>
+        <span style="color:var(--c-spring);font-weight:800;">→</span>
+        <div style="background:var(--c-spring);color:#fff;border-radius:4px;padding:5px 4px;flex:1;text-align:center;font-weight:800;line-height:1.25;">매출 증대<br>ARPPU ↑</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-no">13 / 15</div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- (DELETED) Solution ③ 캐주얼·4X SLG -->
+<!-- ============================================== -->
+
+
+
+<!-- ============================================== -->
+<!-- SLIDE 14: Appendix · 출처                       -->
+<!-- ============================================== -->
+<section class="slide">
+  <h2 class="s-title" style="margin-bottom:6px;">Appendix · 출처</h2>
+  <p class="s-subtitle">본 분석에서 인용한 외부 수치·자료의 출처. 회사 내부 비공개 데이터 대신 공개 자료 + 직접 플레이 기반.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px;">
+
+    <!-- 회사·매출·인수가 -->
+    <div class="card" style="padding:14px 16px;border-top:4px solid #003876;">
+      <div style="font-size:11px;font-weight:800;color:#003876;letter-spacing:0.08em;margin-bottom:8px;">① 회사 · 매출 · 인수가</div>
+      <ul style="margin:0;padding-left:16px;font-size:12px;color:var(--ink-2);line-height:1.7;">
+        <li>NC 2026년 1분기 잠정실적 공시 (2026.05)</li>
+        <li>NC 4사 인수가 (JustPlay 2,989억 / Lihuhu 1,534억 등) 공시 · IR 자료</li>
+        <li>JustPlay 2025·2026 forecast — JustPlay 자체 발표</li>
+        <li>Lihuhu 매출 1,200억 · 영업이익률 25% — 회사 공개 IR</li>
+      </ul>
+    </div>
+
+    <!-- 게임 지표 -->
+    <div class="card" style="padding:14px 16px;border-top:4px solid var(--c-just);">
+      <div style="font-size:11px;font-weight:800;color:var(--c-just-deep);letter-spacing:0.08em;margin-bottom:8px;">② 게임 지표 (DAU · ROAS · DL)</div>
+      <ul style="margin:0;padding-left:16px;font-size:12px;color:var(--ink-2);line-height:1.7;">
+        <li>Sensor Tower · AppMagic — DAU · DL · 매출 추정</li>
+        <li>Springcomes D7 ROAS 50% · D30 66% — 회사 공개 자료</li>
+        <li>Match Triple 3D 10M+ DL — Google Play 공식</li>
+        <li>Royal Match · Merge Mansion 매출 — Sensor Tower 2024</li>
+      </ul>
+    </div>
+
+    <!-- 광고 시장 트렌드 -->
+    <div class="card" style="padding:14px 16px;border-top:4px solid var(--c-lihuhu);">
+      <div style="font-size:11px;font-weight:800;color:var(--c-lihuhu-deep);letter-spacing:0.08em;margin-bottom:8px;">③ 광고 시장 · BM 트렌드</div>
+      <ul style="margin:0;padding-left:16px;font-size:12px;color:var(--ink-2);line-height:1.7;">
+        <li>IDC · 인게임 광고 시장 규모 · CAGR (2026)</li>
+        <li>Sensor Tower Game Taxonomy — 장르 분류 기준</li>
+        <li>Offerwall eCPM · 리워드 비디오 eCPM — 광고 미디어 업계 공개치</li>
+        <li>JustDice 그룹 카테고리 점유율 — AppMagic · 업계 리포트</li>
+      </ul>
+    </div>
+
+    <!-- 직접 플레이 -->
+    <div class="card" style="padding:14px 16px;border-top:4px solid var(--c-spring);">
+      <div style="font-size:11px;font-weight:800;color:var(--c-spring-deep);letter-spacing:0.08em;margin-bottom:8px;">④ 직접 플레이 (1차 데이터)</div>
+      <ul style="margin:0;padding-left:16px;font-size:12px;color:var(--ink-2);line-height:1.7;">
+        <li>JustPlay 7종 · Lihuhu 3종 · Springcomes 3종 직접 설치 · 플레이</li>
+        <li>대표작 4종(Royal Match · Tangle Master · Gossip Harbor · Merge Mansion) 비교 플레이</li>
+        <li>광고 송출 빈도 · 보상 동선 · 결제 동선 — 본인 기록</li>
+        <li>피드백 슬라이드(6 · 9 · 12)의 UX·BM 평가 = 본 데이터 기반</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div style="margin-top:12px;padding:9px 14px;background:var(--soft);border:1px solid var(--border);border-radius:6px;font-size:11.5px;color:var(--ink-3);line-height:1.55;">
+    ※ 본 분석은 외부 공개 자료 + 직접 플레이 기반. 회사 내부 KPI · 비공개 데이터 미접근 상태에서 작성. 입사 후 실제 본부 데이터로 재교정 필요.
+  </div>
+
+  <div class="slide-no">14 / 15</div>
+</section>
+
+<!-- ============================================== -->
+<!-- SLIDE 15: 엔딩 · E.O.D (흰 배경, NC blue)        -->
+<!-- ============================================== -->
+<section class="slide" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;">
+  <div style="text-align:center;">
+    <div style="font-size:88px;font-weight:900;letter-spacing:0.12em;color:#003876;line-height:1;">E.O.D</div>
+    <div style="margin-top:18px;width:60px;height:3px;background:#003876;margin-left:auto;margin-right:auto;border-radius:2px;"></div>
+    <div style="margin-top:24px;font-size:16px;color:#003876;font-weight:600;letter-spacing:0.06em;">감사합니다</div>
+  </div>
+  <div class="slide-no" style="color:#003876;">15 / 15</div>
+</section>
+
+</div>
+
+
+</body>
+</html>
