@@ -1174,8 +1174,11 @@ function showTagPop(x, y){
 }
 function hideTagPop(){ const p = $('#tagpop'); if(p) p.classList.remove('on'); }
 
-function cellStyle(b){
+/** 칸 색. 🔴 계획 열은 색을 쓰지 않는다 — 실적과 헷갈린다는 사용자 판단(F-21).
+ *  색은 '실제로 쓴 시간'을 나타내는 신호로만 남긴다. */
+function cellStyle(b, m){
   if(!b) return '';
+  if(m === 'plan') return 'color:var(--sub);';
   const c = catById(b.catId);
   const col = c ? c.color : '#94a3b8';
   return 'background:'+col+'1f;border-left:3px solid '+col+';color:'+col+';';
@@ -1237,9 +1240,9 @@ function renderWeekGrid(){
       const et = ev[d] ? ev[d][i] : null;
       const now = (d===today && i===ns) ? ' now' : '';
       h += '<div class="wg-ev'+(et?' has':'')+'" title="'+esc(et||'')+'"></div>';
-      h += '<div class="cell'+(hh?' hh':'')+(p?' filled':'')+now+'" data-m="plan" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(p)+'">'
+      h += '<div class="cell'+(hh?' hh':'')+(p?' filled':'')+now+'" data-m="plan" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(p, 'plan')+'">'
          + esc(cellText(p)) + '</div>';
-      h += '<div class="cell'+(hh?' hh':'')+(a?' filled':'')+now+'" data-m="actual" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(a)+'">'
+      h += '<div class="cell'+(hh?' hh':'')+(a?' filled':'')+now+'" data-m="actual" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(a, 'actual')+'">'
          + esc(cellText(a)) + '</div>';
     }
   }
@@ -1568,7 +1571,7 @@ function refreshGridCells(){
     if(el.classList.contains('editing')) return;   // 편집 중인 칸은 건드리지 않는다
     const day = M.days[el.dataset.d];
     const b = day ? day[el.dataset.m][+el.dataset.s] : null;
-    el.setAttribute('style', cellStyle(b));
+    el.setAttribute('style', cellStyle(b, el.dataset.m));
     el.classList.toggle('filled', !!b);
     el.textContent = cellText(b);
   });
