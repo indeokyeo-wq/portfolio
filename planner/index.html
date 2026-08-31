@@ -134,6 +134,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .wg .wg-tm{font-size:10.5px;color:var(--mute);padding:0 6px;display:flex;align-items:center;justify-content:flex-end;
     border-right:1px solid var(--line);border-bottom:1px solid #f1f3f6;height:22px}
 .wg .wg-tm.hh{color:var(--ink);font-weight:700;border-bottom-color:var(--line)}
+.wg .wg-tm.hf{font-size:9px;color:var(--line-strong);letter-spacing:-.4px}
 .wg .wg-ev{border-bottom:1px solid #f1f3f6;border-left:2px solid var(--line-strong);background:var(--card)}
 .wg .wg-ev.has{background:#94a3b8}
 .wg .cell{height:22px;border-bottom:1px solid #f1f3f6;border-left:1px solid var(--line);font-size:11px;padding:0 5px;
@@ -141,10 +142,15 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .wg .cell.hh{border-bottom-color:var(--line)}
 .wg .cell.now{box-shadow:inset 0 0 0 2px rgba(37,99,235,.5)}
 .wg .cell.filled{font-weight:600}
-.wg .cell[data-m="actual"]{cursor:text}
+.wg .cell{cursor:text}
+.wg.drag .cell{cursor:crosshair}
 .wg .cell.sel{outline:2px solid var(--key);outline-offset:-2px;position:relative;z-index:2}
 .wg .cell.editing{padding:0}
 .cellin{width:100%;height:100%;border:0;outline:0;font:inherit;font-size:11px;padding:0 5px;background:#fff;color:var(--ink)}
+.catrow{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.catrow .cc{width:40px;height:32px;padding:0;border:1px solid var(--line);border-radius:8px;background:var(--card);flex:none}
+.catrow .cn{flex:1;min-width:0}
+.btn.sm{padding:5px 10px;font-size:12px}
 .hintbar{font-size:11px;color:var(--mute)}
 .hintbar b{color:var(--sub);font-weight:700}
 .wklb{font-size:14px;font-weight:700;color:var(--ink);min-width:112px;text-align:center}
@@ -329,15 +335,15 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
                   <button data-mode="plan" class="on">계획</button>
                   <button data-mode="actual">실적</button>
                 </span>
-                <span class="hintbar"><b>계획</b> 열은 분류를 골라 드래그 · <b>실적</b> 열은 칸을 눌러 바로 입력</span>
+                <span class="hintbar">계획·실적 <b>어느 칸이든 눌러서 바로 입력</b> · 드래그로 범위를 잡고 분류를 누르면 태그가 붙습니다</span>
                 <button class="chip" id="dragTg">드래그 칠하기 <b style="color:var(--mute)">OFF</b></button>
                 <button class="chip" id="nightTg">야간 00~06 <b style="color:var(--mute)">숨김</b></button>
               </div>
-              <div class="palrow"><span class="lb">분류</span><span id="palCats"></span></div>
+              <div class="palrow"><span class="lb">분류</span><span id="palCats"></span><button class="chip" id="catEdit" title="분류 추가 · 이름 · 색 바꾸기">✏️ 분류 편집</button></div>
               <div class="palrow"><span class="lb">목표</span><span id="palGoals"></span></div>
             </div>
             <div class="wgwrap"><div class="wgscroll"><div class="wg" id="wgrid"></div></div></div>
-            <div class="legend"><span id="legendTxt">실적 칸: 눌러서 입력 · <b>Enter</b>/<b>↓</b> 아래 칸으로 계속 입력 · <b>Tab</b> 다음 날 · <b>Esc</b> 편집 종료 · <b>Del</b> 지우기 · <b>Ctrl+D</b> 위 칸 복사 — 분류는 같은 시간 계획에서 자동으로 따라옵니다</span></div>
+            <div class="legend"><span id="legendTxt">계획·실적 칸 모두: 눌러서 입력 · <b>Enter</b>/<b>↓</b> 아래 칸으로 계속 입력 · <b>Tab</b> 다음 날 · <b>Esc</b> 편집 종료 · <b>Del</b> 지우기 · <b>Ctrl+D</b> 위 칸 복사 — 분류는 같은 시간 반대편 칸에서 자동으로 따라옵니다</span></div>
           </div>
         </div>
 
@@ -1003,6 +1009,7 @@ let curTab  = 'today';
 let mode    = 'plan';                    // 그리드 입력 모드
 let brush   = {catId:'biz', goalId:null};
 let paintDate = null;                    // 드래그 중 잠긴 날짜 (열 넘어가기 방지)
+let paintMode = null;                    // 드래그 중 잠긴 열 (계획/실적 넘어가기 방지)
 let nightOn = false;                     // 야간(00:00~06:00) 표시 여부
 
 /** 화면에 그릴 시작 슬롯. 기본은 06:00(12) — 단 그 앞에 기록이 있으면 자동으로 열어준다 */
@@ -1056,6 +1063,71 @@ function renderPalette(){
     : '<span class="tiny muted">목표 탭에서 목표를 만들면 여기에 나옵니다</span>';
 }
 
+/* --- 분류 편집 (F-18.3) — 고정 6개가 아니라 직접 추가·수정·삭제 --- */
+const CATPAL = ['#64748b','#2563eb','#7c3aed','#db2777','#059669','#d97706',
+                '#dc2626','#0891b2','#65a30d','#9333ea','#ea580c','#0d9488'];
+
+function catRowHTML(c){
+  return '<div class="catrow" data-cid="'+esc(c.id)+'">'
+       + '<input type="color" class="cc" value="'+esc(c.color||'#64748b')+'">'
+       + '<input class="cn" maxlength="12" placeholder="분류 이름" value="'+esc(c.name||'')+'">'
+       + '<button class="btn ghost sm" data-cdel="1">삭제</button></div>';
+}
+
+function openCatEditor(){
+  const body =
+      '<div id="catList">' + M.categories.map(catRowHTML).join('') + '</div>'
+    + '<div style="margin-top:8px"><button class="btn ghost" id="catAdd">+ 분류 추가</button></div>'
+    + '<div class="tiny muted" style="margin-top:10px;line-height:1.6">'
+    + '색을 누르면 색을 바꿉니다 · 이름을 비우면 그 줄은 사라집니다.<br>'
+    + '분류를 삭제해도 <b>써 놓은 글자는 지워지지 않고</b> 미지정(회색)으로만 바뀝니다.</div>';
+
+  openModal('분류 편집', body, ()=>{
+    const next = [];
+    for(const r of $$('#catList .catrow')){
+      const name = r.querySelector('.cn').value.trim();
+      if(!name) continue;
+      next.push({id:r.dataset.cid, name, color:r.querySelector('.cc').value || '#64748b'});
+    }
+    if(!next.length){ toast('분류는 최소 1개 필요합니다'); return false; }
+
+    const keep = new Set(next.map(c=>c.id));
+    let hit = 0;
+    for(const dk of Object.keys(M.days)){
+      const day = M.days[dk];
+      for(const m of ['plan','actual']){
+        const arr = day[m]; if(!Array.isArray(arr)) continue;
+        for(let i=0;i<arr.length;i++){
+          const b = arr[i];
+          if(!b || !b.catId || keep.has(b.catId)) continue;
+          if(b.label){ b.catId = null; } else { arr[i] = null; }
+          hit++;
+        }
+      }
+    }
+    for(const g of M.goals) if(g.catId && !keep.has(g.catId)) g.catId = next[0].id;
+    for(const k of Object.keys(M.labelCats||{})) if(!keep.has(M.labelCats[k])) delete M.labelCats[k];
+    if(brush && brush.catId && !keep.has(brush.catId)) brush = {catId:next[0].id, goalId:null};
+
+    M.categories = next;
+    saveModel(); renderToday(); renderGoals();
+    toast('분류 저장됨' + (hit ? ' · ' + hit + '칸 미지정 처리' : ''));
+  }, '저장');
+
+  $('#catAdd').onclick = ()=>{
+    const n = $$('#catList .catrow').length;
+    $('#catList').insertAdjacentHTML('beforeend',
+      catRowHTML({id:'c'+uid(), name:'', color:CATPAL[n % CATPAL.length]}));
+    const rows = $$('#catList .catrow');
+    rows[rows.length-1].querySelector('.cn').focus();
+  };
+  $('#catList').onclick = e=>{
+    const b = e.target.closest('[data-cdel]'); if(!b) return;
+    if($$('#catList .catrow').length <= 1){ toast('분류는 최소 1개 필요합니다'); return; }
+    b.closest('.catrow').remove();
+  };
+}
+
 function cellStyle(b){
   if(!b) return '';
   const c = catById(b.catId);
@@ -1101,7 +1173,7 @@ function renderWeekGrid(){
   const s0 = firstSlot();
   for(let i=s0; i<SLOTS; i++){
     const hh = i%2===0;
-    h += '<div class="wg-tm'+(hh?' hh':'')+'">'+(hh?slotLabel(i):'')+'</div>';
+    h += '<div class="wg-tm'+(hh?' hh':' hf')+'">'+slotLabel(i)+'</div>';
     for(const d of dates){
       const day = M.days[d];
       const p  = day ? day.plan[i]   : null, a  = day ? day.actual[i]   : null;
@@ -1147,14 +1219,15 @@ const selRange = () => {
 };
 const cellEl = (d,m,i) => $('#wgrid .cell[data-m="'+m+'"][data-d="'+d+'"][data-s="'+i+'"]');
 
-/** 실적에 글자를 쓰면 분류를 알아서 붙인다.
- *  ① 같은 시간대 '계획'의 분류를 물려받고
+/** 칸에 글자를 쓰면 분류를 알아서 붙인다.
+ *  ① 같은 시간대 반대편 칸(계획↔실적)의 분류를 물려받고
  *  ② 없으면 전에 같은 말을 썼을 때의 분류를 기억해서 쓰고
  *  ③ 그것도 없으면 미지정(회색) — 나중에 범위로 입히면 된다
  *  이 연결이 끊기면 시트에서처럼 '입력은 했는데 합계가 0'이 된다 */
-function autoCat(d, i, label){
+function autoCat(d, m, i, label){
   const day = M.days[d];
-  const p = day && day.plan[i];
+  const other = (m === 'actual') ? 'plan' : 'actual';
+  const p = day && day[other] && day[other][i];
   if(p) return {catId:p.catId, goalId:p.goalId||null};
   const k = (label||'').trim();
   if(k && M.labelCats && M.labelCats[k]) return {catId:M.labelCats[k], goalId:null};
@@ -1168,16 +1241,20 @@ function learnLabel(label, catId){
   M.labelCats[k] = catId;
 }
 
-/* --- 계획 열: 분류 칠하기 --- */
+/* --- 분류 칠하기 (계획·실적 어느 열이든) --- */
 function paintCell(el){
   if(!el || !el.classList.contains('cell')) return;
-  if(el.dataset.m !== 'plan') return;             // 계획 열에서만 칠한다
+  const m = el.dataset.m;
+  if(m !== 'plan' && m !== 'actual') return;
+  if(paintMode && m !== paintMode) return;        // 드래그는 시작한 열 안에서만
   const i = +el.dataset.s, d = el.dataset.d || curDate;
   if(paintDate && d !== paintDate) return;        // 드래그는 시작한 날짜 안에서만
   const day = ensureDay(d);
-  if(paintErase){ day.plan[i] = null; return; }
+  if(paintErase){ day[m][i] = null; return; }
   const g = brush.goalId ? goalById(brush.goalId) : null;
-  day.plan[i] = {catId: g ? g.catId : brush.catId, goalId: brush.goalId||null, label:null};
+  const prev = day[m][i];
+  day[m][i] = {catId: g ? g.catId : brush.catId, goalId: brush.goalId||null,
+               label: prev ? (prev.label||null) : null};   // 써 놓은 글자는 보존
 }
 
 /* --- 선택 --- */
@@ -1212,7 +1289,6 @@ function applyCatToSelection(catId, goalId){
   const day = ensureDay(sel.d);
   for(const i of selRange()){
     const cur = day[sel.m][i];
-    if(sel.m==='actual' && !cur) continue;         // 실적은 글자 있는 칸에만 입힌다
     const label = cur ? cur.label : null;
     day[sel.m][i] = {catId, goalId: goalId||null, label: label||null};
     learnLabel(label, catId);
@@ -1221,10 +1297,11 @@ function applyCatToSelection(catId, goalId){
   return true;
 }
 
-/* --- 실적 칸 인라인 편집 (엑셀식) --- */
-function editCell(d, i, seed){
-  const el = cellEl(d, 'actual', i); if(!el) return;
-  const cur = ensureDay(d).actual[i];
+/* --- 칸 인라인 편집 (엑셀식) — 계획·실적 양쪽 --- */
+function editCell(d, m, i, seed){
+  if(m !== 'plan' && m !== 'actual') return;
+  const el = cellEl(d, m, i); if(!el) return;
+  const cur = ensureDay(d)[m][i];
   editing = true;
   el.classList.add('editing');
   el.innerHTML = '';
@@ -1243,21 +1320,21 @@ function editCell(d, i, seed){
     if(done) return; done = true;
     const v = inp.value.trim();
     const day = ensureDay(d);
-    if(!v) day.actual[i] = null;
+    if(!v) day[m][i] = null;
     else{
-      const prev = day.actual[i];
-      const c = (prev && prev.catId) ? {catId:prev.catId, goalId:prev.goalId||null} : autoCat(d, i, v);
-      day.actual[i] = {catId:c.catId, goalId:c.goalId, label:v};
+      const prev = day[m][i];
+      const c = (prev && prev.catId) ? {catId:prev.catId, goalId:prev.goalId||null} : autoCat(d, m, i, v);
+      day[m][i] = {catId:c.catId, goalId:c.goalId, label:v};
       learnLabel(v, c.catId);
     }
     editing = false;
     saveModel(); renderWeekGrid(); renderWeekSummary(); updateAgg();
-    if(di || dd) moveSel(di||0, dd||0); else select(d, 'actual', i, false);
-    if(keepEdit && sel) editCell(sel.d, sel.s);
+    if(di || dd) moveSel(di||0, dd||0); else select(d, m, i, false);
+    if(keepEdit && sel) editCell(sel.d, sel.m, sel.s);
   };
   const cancel = () => {
     if(done) return; done = true;
-    editing = false; renderWeekGrid(); select(d, 'actual', i, false);
+    editing = false; renderWeekGrid(); select(d, m, i, false);
   };
   inp.addEventListener('keydown', e=>{
     e.stopPropagation();
@@ -1290,20 +1367,19 @@ function bindGrid(){
     const m = el.dataset.m, d = el.dataset.d, i = +el.dataset.s;
     downEl = el; downX = e.clientX; downY = e.clientY; moved = false;
     touchStart = (e.pointerType !== 'mouse');
-    paintDate = d;
+    paintDate = d; paintMode = m;
 
-    if(m === 'plan'){
+    if(dragPaint){
+      // 드래그 칠하기 ON — 계획·실적 어느 열이든 분류를 칠한다
       paintErase = (brush === null);
-      // 마우스는 즉시 드래그 페인팅. 터치는 스크롤과 구분해야 하므로 pointerup까지 기다린다
-      if(!touchStart || dragPaint){
-        painting = true;
-        grid.setPointerCapture && grid.setPointerCapture(e.pointerId);
-        paintCell(el); refreshGridCells();
-        e.preventDefault();
-      }
+      painting = true;
+      grid.setPointerCapture && grid.setPointerCapture(e.pointerId);
+      paintCell(el); refreshGridCells();
+      e.preventDefault();
     }else{
+      // 기본 — 누르면 그 칸에 바로 입력, 끌면 범위 선택
       selecting = true;
-      select(d, 'actual', i, e.shiftKey);
+      select(d, m, i, e.shiftKey);
       grid.setPointerCapture && grid.setPointerCapture(e.pointerId);
     }
   });
@@ -1318,8 +1394,8 @@ function bindGrid(){
     }
     if(selecting && moved && sel){
       const el = document.elementFromPoint(e.clientX, e.clientY);
-      if(el && el.classList.contains('cell') && el.dataset.m === 'actual' && el.dataset.d === sel.d){
-        select(sel.d, 'actual', +el.dataset.s, true);
+      if(el && el.classList.contains('cell') && el.dataset.m === sel.m && el.dataset.d === sel.d){
+        select(sel.d, sel.m, +el.dataset.s, true);
         e.preventDefault();
       }
     }
@@ -1327,18 +1403,18 @@ function bindGrid(){
 
   const finish = commit =>{
     if(commit){ renderWeekGrid(); updateAgg(); renderWeekSummary(); saveModel(); }
-    painting = false; selecting = false; downEl = null; touchStart = false; paintDate = null;
+    painting = false; selecting = false; downEl = null; touchStart = false; paintDate = null; paintMode = null;
   };
   window.addEventListener('pointerup', ()=>{
     if(painting){ finish(true); return; }
     if(selecting){
       const tap = !moved, el = downEl;
       finish(false);
-      if(tap && el) editCell(el.dataset.d, +el.dataset.s);   // 탭 = 그 자리에서 바로 입력
+      if(tap && el) editCell(el.dataset.d, el.dataset.m, +el.dataset.s);   // 탭 = 그 자리에서 바로 입력
       return;
     }
-    // 터치 탭(계획 열): 움직이지 않았으면 한 칸만 칠한다
-    if(downEl && touchStart && !moved && downEl.dataset.m === 'plan'){ paintCell(downEl); finish(true); return; }
+    // 드래그 칠하기 ON 상태의 터치 탭: 움직이지 않았으면 한 칸만 칠한다
+    if(downEl && touchStart && !moved){ paintCell(downEl); finish(true); return; }
     finish(false);
   });
   window.addEventListener('pointercancel', ()=>finish(painting));
@@ -1359,7 +1435,7 @@ function bindGrid(){
     else if(k === 'ArrowLeft'){ e.preventDefault(); moveSel(0, -1); }
     else if(k === 'Enter' || k === 'F2'){
       e.preventDefault();
-      if(sel.m === 'actual') editCell(sel.d, sel.s);
+      editCell(sel.d, sel.m, sel.s);
     }
     else if(k === 'Delete' || k === 'Backspace'){
       e.preventDefault();
@@ -1372,12 +1448,12 @@ function bindGrid(){
         for(const i of r) day[sel.m][i] = src ? Object.assign({}, src) : null;
       });
     }
-    else if(sel.m === 'actual' && !e.ctrlKey && !e.metaKey && !e.altKey){
+    else if(!e.ctrlKey && !e.metaKey && !e.altKey){
       // 엑셀처럼 그냥 쳐도 입력이 시작된다.
       // ⚠️ 한글 IME 조합 중에는 keydown 이 실제 글자를 주지 않는다(key='Process').
       //    그래서 이 경로는 '보조'일 뿐이고, 본 경로는 클릭·Enter·방향키로 편집창을 여는 것이다.
-      if(e.isComposing || k === 'Process'){ e.preventDefault(); editCell(sel.d, sel.s); }
-      else if(k.length === 1){ e.preventDefault(); editCell(sel.d, sel.s, k); }
+      if(e.isComposing || k === 'Process'){ e.preventDefault(); editCell(sel.d, sel.m, sel.s); }
+      else if(k.length === 1){ e.preventDefault(); editCell(sel.d, sel.m, sel.s, k); }
     }
   });
 }
@@ -1752,8 +1828,8 @@ function bindAll(){
     $('#dragTg').innerHTML = '드래그 칠하기 <b style="color:' + (dragPaint?'var(--key)':'var(--mute)') + '">' + (dragPaint?'ON':'OFF') + '</b>';
     $('#wgrid').classList.toggle('drag', dragPaint);
     $('#legendTxt').textContent = dragPaint
-      ? '드래그 칠하기 ON — 그리드 위에서는 페이지가 스크롤되지 않습니다'
-      : '요일 머리를 누르면 그 날이 선택됩니다 · 드래그는 같은 날 안에서만 이어집니다 · 회색 좌측 띠 = 일정';
+      ? '드래그 칠하기 ON — 계획·실적 어느 열이든 끌어서 분류를 칠합니다 (글자는 지워지지 않습니다) · 그리드 위에서는 페이지가 스크롤되지 않습니다'
+      : '칸을 누르면 바로 입력 · 끌면 범위 선택 → 분류를 누르면 태그가 붙습니다 · 회색 좌측 띠 = 일정';
   };
   $('#nightTg').onclick = ()=>{
     nightOn = !nightOn;
@@ -1761,6 +1837,7 @@ function bindAll(){
     $('#nightTg').innerHTML = '야간 00~06 <b style="color:' + (nightOn?'var(--key)':'var(--mute)') + '">' + (nightOn?'표시':'숨김') + '</b>';
     renderWeekGrid();
   };
+  $('#catEdit').onclick = openCatEditor;
   $('#palCats').onclick = e=>{
     const b = e.target.closest('[data-cat]'); if(!b) return;
     const era = b.dataset.cat === '__erase';
