@@ -131,6 +131,18 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .wg .wg-h2{position:sticky;top:30px;z-index:3;height:19px;background:var(--card2);border-bottom:1px solid var(--line);
     font-size:10px;font-weight:600;color:var(--mute);display:flex;align-items:center;justify-content:center}
 .wg .wg-h2.ds{border-left:2px solid var(--line-strong)}
+.wg .wg-lb{font-size:9.5px;font-weight:700;color:var(--sub);padding:0 6px;display:flex;align-items:center;justify-content:flex-end;
+    text-align:right;line-height:1.25;background:var(--card2);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.wg .wg-in{grid-column:span 3;border-left:2px solid var(--line-strong);border-bottom:1px solid var(--line);background:var(--card)}
+.wg .wg-in textarea,.wg .wg-in input{width:100%;display:block;border:0;outline:0;background:transparent;
+    font-family:inherit;color:var(--ink);padding:4px 6px;resize:none;box-sizing:border-box}
+.wg .wg-in input{height:26px;font-size:11.5px;font-weight:600}
+.wg .wg-in textarea{height:66px;font-size:10.5px;line-height:1.5;overflow:auto}
+.wg .wg-in input::placeholder,.wg .wg-in textarea::placeholder{color:var(--line-strong);font-weight:400}
+.wg .wg-in.one{background:var(--warn-bg)}
+.wg .wg-in.one input{color:#92400e}
+.wg .wg-in.t{box-shadow:inset 0 0 0 2px rgba(37,99,235,.16)}
+.wg input,.wg textarea{user-select:text;-webkit-user-select:text}
 .wg .wg-tm{font-size:10.5px;color:var(--mute);padding:0 6px;display:flex;align-items:center;justify-content:flex-end;
     border-right:1px solid var(--line);border-bottom:1px solid #f1f3f6;height:22px}
 .wg .wg-tm.hh{color:var(--ink);font-weight:700;border-bottom-color:var(--line)}
@@ -318,11 +330,6 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
       <button class="tbtn" id="btnCopyPlan">계획 → 실적 복사</button>
     </div>
 
-    <div class="onething">
-      <label>🔥 오늘의 원싱</label>
-      <input id="oneThing" placeholder="오늘 이것 하나만 끝내면 성공인 일">
-    </div>
-
     <div class="cols">
       <div class="stack">
         <div class="card">
@@ -343,7 +350,7 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
               <div class="palrow"><span class="lb">목표</span><span id="palGoals"></span></div>
             </div>
             <div class="wgwrap"><div class="wgscroll"><div class="wg" id="wgrid"></div></div></div>
-            <div class="legend"><span id="legendTxt">계획·실적 칸 모두: 눌러서 입력 · <b>Enter</b>/<b>↓</b> 아래 칸으로 계속 입력 · <b>Tab</b> 다음 날 · <b>Esc</b> 편집 종료 · <b>Del</b> 지우기 · <b>Ctrl+D</b> 위 칸 복사 — 분류는 같은 시간 반대편 칸에서 자동으로 따라옵니다</span></div>
+            <div class="legend"><span id="legendTxt">계획·실적 칸 모두: 눌러서 입력 · <b>Enter</b>/<b>↓</b> 아래 칸으로 계속 입력 · <b>Tab</b> 다음 날 · <b>Esc</b> 편집 종료 · <b>Del</b> 지우기 · <b>Ctrl+C</b>/<b>Ctrl+V</b> 블록 복사·붙여넣기 · <b>Ctrl+D</b> 위 칸 복사 — 분류는 같은 시간 반대편 칸에서 자동으로 따라옵니다</span></div>
           </div>
         </div>
 
@@ -380,10 +387,6 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
           <div class="bd" id="habToday"></div>
         </div>
 
-        <div class="card">
-          <div class="hd"><h3>감사일기</h3></div>
-          <div class="bd" id="gratBox"></div>
-        </div>
       </div>
     </div>
 
@@ -1010,6 +1013,7 @@ let mode    = 'plan';                    // 그리드 입력 모드
 let brush   = {catId:'biz', goalId:null};
 let paintDate = null;                    // 드래그 중 잠긴 날짜 (열 넘어가기 방지)
 let paintMode = null;                    // 드래그 중 잠긴 열 (계획/실적 넘어가기 방지)
+let paintLabel = null;                   // 드래그 시작 칸의 글자 — 끌고 간 칸에도 같이 적는다
 let nightOn = false;                     // 야간(00:00~06:00) 표시 여부
 
 /** 화면에 그릴 시작 슬롯. 기본은 06:00(12) — 단 그 앞에 기록이 있으면 자동으로 열어준다 */
@@ -1027,6 +1031,7 @@ let selecting = false;
 let sel = null;      // 선택 시작 {d, m, s}
 let selEnd = null;   // 선택 끝 슬롯 (같은 날·같은 열 안에서만)
 let editing = false;
+let clipCells = null;   // Ctrl+C 로 담아 둔 칸들 (블록 단위 복사·붙여넣기)
 
 /* ==========================================================
    렌더 — TODAY
@@ -1035,14 +1040,12 @@ function renderToday(){
   const day = ensureDay(curDate);
   $('#dateIn').value = curDate;
   $('#dowLb').textContent = DOW[dowOf(curDate)] + '요일';
-  $('#oneThing').value = day.oneThing || '';
   $('#aggMode').textContent = mode==='plan' ? '계획' : '실적';
   renderPalette();
   renderWeekGrid();
   renderWeekSummary();
   renderTodoList();
   renderHabToday();
-  renderGrat();
   updateAgg();
 }
 
@@ -1128,6 +1131,16 @@ function openCatEditor(){
   };
 }
 
+/** 감사일기 3칸 ↔ 여러 줄 텍스트 (그리드 상단 칸에서 한 덩어리로 쓴다) */
+function gratText(d){
+  const g = (M.days[d] && M.days[d].gratitude) || ['','',''];
+  return g.some(x => x && x.trim()) ? g.join('\n') : '';
+}
+function setGratText(d, v){
+  const L = String(v).split('\n');
+  ensureDay(d).gratitude = [L[0]||'', L[1]||'', L.slice(2).join('\n')];
+}
+
 function cellStyle(b){
   if(!b) return '';
   const c = catById(b.catId);
@@ -1168,8 +1181,19 @@ function renderWeekGrid(){
   h += '<div class="wg-h2"></div>';
   for(let k=0;k<7;k++) h += '<div class="wg-h2 ds"></div><div class="wg-h2">계획</div><div class="wg-h2">실적</div>';
 
+  // 상단 고정 입력 — 원싱 / 감사일기 (요일별)
+  h += '<div class="wg-lb">🔥 원싱</div>';
+  for(const d of dates){
+    h += '<div class="wg-in one'+(d===today?' t':'')+'">'
+       + '<input data-one="'+d+'" placeholder="'+(d===today?'이것 하나만 끝내면 성공':'')+'" value="'+esc((M.days[d]&&M.days[d].oneThing)||'')+'"></div>';
+  }
+  h += '<div class="wg-lb">감사<br>일기</div>';
+  for(const d of dates){
+    h += '<div class="wg-in'+(d===today?' t':'')+'">'
+       + '<textarea data-grat="'+d+'" placeholder="'+(d===today?'1.&#10;2.&#10;3.':'')+'">'+esc(gratText(d))+'</textarea></div>';
+  }
+
   // 본문
-  const same = (x,y) => x && y && x.catId===y.catId && x.goalId===y.goalId && x.label===y.label;
   const s0 = firstSlot();
   for(let i=s0; i<SLOTS; i++){
     const hh = i%2===0;
@@ -1177,14 +1201,13 @@ function renderWeekGrid(){
     for(const d of dates){
       const day = M.days[d];
       const p  = day ? day.plan[i]   : null, a  = day ? day.actual[i]   : null;
-      const pv = (day && i>0) ? day.plan[i-1] : null, av = (day && i>0) ? day.actual[i-1] : null;
       const et = ev[d] ? ev[d][i] : null;
       const now = (d===today && i===ns) ? ' now' : '';
       h += '<div class="wg-ev'+(et?' has':'')+'" title="'+esc(et||'')+'"></div>';
       h += '<div class="cell'+(hh?' hh':'')+(p?' filled':'')+now+'" data-m="plan" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(p)+'">'
-         + esc(same(p,pv) ? '' : cellText(p)) + '</div>';
+         + esc(cellText(p)) + '</div>';
       h += '<div class="cell'+(hh?' hh':'')+(a?' filled':'')+now+'" data-m="actual" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(a)+'">'
-         + esc(same(a,av) ? '' : cellText(a)) + '</div>';
+         + esc(cellText(a)) + '</div>';
     }
   }
   $('#wgrid').innerHTML = h;
@@ -1254,7 +1277,7 @@ function paintCell(el){
   const g = brush.goalId ? goalById(brush.goalId) : null;
   const prev = day[m][i];
   day[m][i] = {catId: g ? g.catId : brush.catId, goalId: brush.goalId||null,
-               label: prev ? (prev.label||null) : null};   // 써 놓은 글자는 보존
+               label: (prev && prev.label) || paintLabel || null};   // 글자는 보존하고, 없으면 시작 칸의 글자를 잇는다
 }
 
 /* --- 선택 --- */
@@ -1287,9 +1310,16 @@ function moveSel(di, dd){
 function applyCatToSelection(catId, goalId){
   if(!sel) return false;
   const day = ensureDay(sel.d);
-  for(const i of selRange()){
+  const r = selRange();
+  // 범위 안의 글자가 한 종류뿐이면 그 글자를 범위 전체에 채운다.
+  // (00:00 에 '수면' 하나 쓰고 00:00~06:00 을 잡아 태그하면 여섯 시간이 전부 '수면')
+  // 서로 다른 글자가 섞여 있으면 각자의 글자를 그대로 둔다.
+  const seen = [];
+  for(const i of r){ const c = day[sel.m][i]; if(c && c.label && seen.indexOf(c.label) < 0) seen.push(c.label); }
+  const seed = seen.length === 1 ? seen[0] : null;
+  for(const i of r){
     const cur = day[sel.m][i];
-    const label = cur ? cur.label : null;
+    const label = (cur && cur.label) || seed;
     day[sel.m][i] = {catId, goalId: goalId||null, label: label||null};
     learnLabel(label, catId);
   }
@@ -1353,6 +1383,13 @@ function editCell(d, m, i, seed){
 function bindGrid(){
   const grid = $('#wgrid');
 
+  // 상단 원싱 / 감사일기 — 요일별로 그 자리에서 입력
+  grid.addEventListener('input', e=>{
+    const t = e.target;
+    if(t.dataset.one !== undefined){ ensureDay(t.dataset.one).oneThing = t.value; saveModel(); return; }
+    if(t.dataset.grat !== undefined){ setGratText(t.dataset.grat, t.value); saveModel(); return; }
+  });
+
   // 요일 머리 클릭 = 그 날 선택
   grid.addEventListener('click', e=>{
     const b = e.target.closest('[data-pick]'); if(!b) return;
@@ -1372,6 +1409,8 @@ function bindGrid(){
     if(dragPaint){
       // 드래그 칠하기 ON — 계획·실적 어느 열이든 분류를 칠한다
       paintErase = (brush === null);
+      const st = M.days[d] && M.days[d][m][i];
+      paintLabel = (st && st.label) || null;      // 시작 칸에 글자가 있으면 끌고 간 칸에도 적는다
       painting = true;
       grid.setPointerCapture && grid.setPointerCapture(e.pointerId);
       paintCell(el); refreshGridCells();
@@ -1403,7 +1442,8 @@ function bindGrid(){
 
   const finish = commit =>{
     if(commit){ renderWeekGrid(); updateAgg(); renderWeekSummary(); saveModel(); }
-    painting = false; selecting = false; downEl = null; touchStart = false; paintDate = null; paintMode = null;
+    painting = false; selecting = false; downEl = null; touchStart = false;
+    paintDate = null; paintMode = null; paintLabel = null;
   };
   window.addEventListener('pointerup', ()=>{
     if(painting){ finish(true); return; }
@@ -1447,6 +1487,32 @@ function bindGrid(){
         const r = selRange(), src = day[sel.m][Math.max(0, r[0]-1)];
         for(const i of r) day[sel.m][i] = src ? Object.assign({}, src) : null;
       });
+    }
+    else if((e.ctrlKey || e.metaKey) && (k === 'c' || k === 'C' || k === 'x' || k === 'X')){
+      e.preventDefault();
+      const cut = (k === 'x' || k === 'X');
+      const day = M.days[sel.d];
+      clipCells = selRange().map(i => {
+        const b = day ? day[sel.m][i] : null;
+        return b ? JSON.parse(JSON.stringify(b)) : null;
+      });
+      if(cut) bulk(d2 => { for(const i of selRange()) d2[sel.m][i] = null; });
+      toast(clipCells.length + '칸 ' + (cut ? '잘라냄' : '복사됨') + ' — Ctrl+V 로 붙여넣기');
+    }
+    else if((e.ctrlKey || e.metaKey) && (k === 'v' || k === 'V')){
+      e.preventDefault();
+      if(!clipCells || !clipCells.length){ toast('복사한 칸이 없습니다'); return; }
+      const start = selRange()[0];
+      const n = Math.min(clipCells.length, SLOTS - start);
+      bulk(day => {
+        for(let j=0; j<n; j++){
+          const b = clipCells[j];
+          day[sel.m][start + j] = b ? JSON.parse(JSON.stringify(b)) : null;
+        }
+      });
+      select(sel.d, sel.m, start, false);
+      selEnd = start + n - 1; paintSelection();
+      toast(n + '칸 붙여넣음');
     }
     else if(!e.ctrlKey && !e.metaKey && !e.altKey){
       // 엑셀처럼 그냥 쳐도 입력이 시작된다.
@@ -1543,12 +1609,6 @@ function renderHabToday(){
       }).join('')
     : '<p class="tiny muted" style="margin:0">오늘 배정된 습관이 없습니다.</p>';
 }
-function renderGrat(){
-  const day = ensureDay(curDate);
-  $('#gratBox').innerHTML = [0,1,2].map(i =>
-    '<input class="gt" data-grat="'+i+'" placeholder="'+(i+1)+'. 오늘 감사한 일" value="'+esc(day.gratitude[i]||'')+'">').join('');
-}
-
 /* ==========================================================
    렌더 — 목표
    ========================================================== */
@@ -1854,13 +1914,6 @@ function bindAll(){
     renderPalette();
   };
 
-  // 원싱 / 감사일기
-  $('#oneThing').oninput = e=>{ ensureDay(curDate).oneThing = e.target.value; saveModel(); };
-  $('#gratBox').addEventListener('input', e=>{
-    const i = e.target.dataset.grat; if(i===undefined) return;
-    ensureDay(curDate).gratitude[+i] = e.target.value; saveModel();
-  });
-
   // 습관 체크
   $('#habToday').addEventListener('change', e=>{
     const id = e.target.dataset.hab; if(!id) return;
@@ -2000,7 +2053,12 @@ function bindAll(){
     if(dirty && backend()!=='none'){ e.preventDefault(); e.returnValue = ''; }
   });
   document.addEventListener('visibilitychange', ()=>{ if(!document.hidden && dirty) pushRemote(); });
-  setInterval(()=>{ if(curTab==='today' && curDate===todayStr() && !painting) renderWeekGrid(); }, 60000);
+  // 상단 원싱·감사일기를 쓰는 중이면 다시 그리지 않는다 (포커스·커서 유실 방지)
+  setInterval(()=>{
+    if(curTab!=='today' || curDate!==todayStr() || painting || editing) return;
+    if($('#wgrid input:focus, #wgrid textarea:focus')) return;
+    renderWeekGrid();
+  }, 60000);
 })();
 </script>
 </body>
