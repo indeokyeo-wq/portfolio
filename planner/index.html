@@ -128,7 +128,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .wg .wg-day.sat{color:#2563eb} .wg .wg-day.sat b{color:#2563eb}
 .wg .wg-day.t{background:var(--key-soft)}
 .wg .wg-day.sel{box-shadow:inset 0 -3px 0 var(--key)}
-.wg .wg-h2{position:sticky;top:30px;z-index:3;height:19px;background:var(--card2);border-bottom:1px solid var(--line);
+.wg .wg-h2{position:sticky;top:29px;z-index:3;height:19px;background:var(--card2);border-bottom:1px solid var(--line);
     font-size:10px;font-weight:600;color:var(--mute);display:flex;align-items:center;justify-content:center}
 .wg .wg-h2.ds{border-left:2px solid var(--line-strong)}
 .wg .wg-lb{font-size:9.5px;font-weight:700;color:var(--sub);padding:0 6px;display:flex;align-items:center;justify-content:flex-end;
@@ -353,7 +353,6 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
                 </span>
                 <span class="hintbar">칸을 <b>눌러서 바로 입력</b> · <b>끌면 그 자리에 분류 창</b>이 뜹니다</span>
                 <button class="chip" id="dragTg">드래그 칠하기 <b style="color:var(--mute)">OFF</b></button>
-                <button class="chip" id="nightTg">야간 00~06 <b style="color:var(--mute)">숨김</b></button>
               </div>
               <div class="palrow"><span class="lb">분류</span><span id="palCats"></span><button class="chip" id="catEdit" title="분류 추가 · 이름 · 색 바꾸기">✏️ 분류 편집</button></div>
             </div>
@@ -1030,18 +1029,11 @@ let brush   = {catId:'biz', goalId:null};
 let paintDate = null;                    // 드래그 중 잠긴 날짜 (열 넘어가기 방지)
 let paintMode = null;                    // 드래그 중 잠긴 열 (계획/실적 넘어가기 방지)
 let paintLabel = null;                   // 드래그 시작 칸의 글자 — 끌고 간 칸에도 같이 적는다
-let nightOn = false;                     // 야간(00:00~06:00) 표시 여부
 
 /** 화면에 그릴 시작 슬롯. 기본은 06:00(12) — 단 그 앞에 기록이 있으면 자동으로 열어준다 */
-function firstSlot(){
-  if(nightOn) return 0;
-  for(const d of weekDates(curDate)){
-    const day = M.days[d]; if(!day) continue;
-    for(let i=0; i<12; i++) if(day.plan[i] || day.actual[i]) return 0;
-  }
-  for(const e of M.events) if(e.startSlot < 12 && weekDates(curDate).includes(e.date)) return 0;
-  return 12;
-}
+/** 그리드 첫 슬롯. 🔴 항상 00:00 부터 보여 준다 (F-22.2).
+ *  야간 접기는 "새벽 기록이 화면에서 사라진다"는 이유로 없앴다 — 되살리지 말 것. */
+function firstSlot(){ return 0; }
 let painting= false, paintErase = false, dragPaint = false;
 let selecting = false;
 let sel = null;      // 선택 시작 {d, m, s}
@@ -1213,11 +1205,8 @@ function renderWeekGrid(){
        + (w===0?' sun':w===6?' sat':'')+'" data-pick="'+d+'">'
        + DOW[w] + '<b>' + (+d.slice(8)) + '</b></div>';
   }
-  // 헤더 2 — 계획 / 실적
-  h += '<div class="wg-h2"></div>';
-  for(let k=0;k<7;k++) h += '<div class="wg-h2 ds"></div><div class="wg-h2">계획</div><div class="wg-h2">실적</div>';
-
-  // 상단 고정 입력 — 원싱 / 감사일기 (요일별)
+  // 원싱 / 감사일기 — 날짜 바로 아래. 🔴 계획/실적 머리보다 위여야 한다.
+  // 아래에 두면 원싱이 계획·실적 열에 속한 것처럼 보여서 헷갈린다 (F-22.1)
   h += '<div class="wg-lb">🔥 원싱</div>';
   for(const d of dates){
     h += '<div class="wg-in one'+(d===today?' t':'')+'">'
@@ -1228,6 +1217,10 @@ function renderWeekGrid(){
     h += '<div class="wg-in'+(d===today?' t':'')+'">'
        + '<textarea data-grat="'+d+'" placeholder="'+(d===today?'1.&#10;2.&#10;3.':'')+'">'+esc(gratText(d))+'</textarea></div>';
   }
+
+  // 헤더 2 — 계획 / 실적 (여기서부터 시간 기록)
+  h += '<div class="wg-h2"></div>';
+  for(let k=0;k<7;k++) h += '<div class="wg-h2 ds"></div><div class="wg-h2">계획</div><div class="wg-h2">실적</div>';
 
   // 본문
   const s0 = firstSlot();
@@ -1896,12 +1889,6 @@ function bindAll(){
     $('#legendTxt').textContent = dragPaint
       ? '드래그 칠하기 ON — 계획·실적 어느 열이든 끌어서 분류를 칠합니다 (글자는 지워지지 않습니다) · 그리드 위에서는 페이지가 스크롤되지 않습니다'
       : '칸을 누르면 바로 입력 · 끌면 범위 선택 → 분류를 누르면 태그가 붙습니다 · 회색 좌측 띠 = 일정';
-  };
-  $('#nightTg').onclick = ()=>{
-    nightOn = !nightOn;
-    $('#nightTg').classList.toggle('on', nightOn);
-    $('#nightTg').innerHTML = '야간 00~06 <b style="color:' + (nightOn?'var(--key)':'var(--mute)') + '">' + (nightOn?'표시':'숨김') + '</b>';
-    renderWeekGrid();
   };
   $('#tagpop').onclick = e=>{
     const b = e.target.closest('[data-tp]'); if(!b) return;
