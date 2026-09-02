@@ -109,6 +109,30 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .calnote{display:flex;gap:14px;align-items:center;font-size:11px;color:var(--mute);margin-top:10px;flex-wrap:wrap}
 .calnote i{width:9px;height:9px;border-radius:3px;display:inline-block;margin-right:4px}
 
+/* ---------- Memo (F-16) ---------- */
+.note{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:var(--card)}
+.note.pin{border-color:#f7d774;background:#fffdf3}
+.note .nt{font-size:13px;line-height:1.55;white-space:pre-wrap;word-break:break-word;cursor:text}
+.note .nt:hover{background:var(--card2);border-radius:6px}
+.note textarea{width:100%;border:1px solid var(--key);border-radius:6px;padding:6px 8px;font-size:13px;line-height:1.55;min-height:60px;resize:vertical}
+.note .nm{display:flex;align-items:center;gap:6px;margin-top:7px}
+.note .nm .dt2{font-size:10px;color:var(--mute);margin-right:auto}
+.note .nm button{font-size:11px;color:var(--sub);border:1px solid var(--line);background:var(--card);border-radius:6px;padding:2px 8px}
+.note .nm button:hover{border-color:var(--line-strong)}
+
+/* ---------- Monthly 2열 (F-28) ---------- */
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+@media (max-width:1100px){ .cols2{grid-template-columns:1fr} }
+
+/* ---------- 오늘 집계 이중 바 (F-25) ---------- */
+.dualrow{display:flex;align-items:center;gap:8px;margin:7px 0}
+.dualrow .lb2{font-size:11px;font-weight:700;color:var(--mute);width:26px;flex:none}
+.dualrow b{font-size:12px;width:46px;text-align:right;flex:none}
+.dual{flex:1;height:18px;border-radius:6px;background:#eef1f5;overflow:hidden;display:flex}
+.dual i{display:block;height:100%}
+.bar{position:relative}
+.bar u{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--ink);opacity:.45;border-radius:1px}
+
 /* ---------- palette ---------- */
 .pal{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
 .palrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
@@ -340,10 +364,11 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
       </div>
     </div>
     <nav class="snav">
-      <button class="snav-btn on" data-tab="today">주간</button>
-      <button class="snav-btn" data-tab="cal">캘린더</button>
-      <button class="snav-btn" data-tab="goals">목표</button>
-      <button class="snav-btn" data-tab="review">회고</button>
+      <button class="snav-btn" data-tab="cal">Calendar</button>
+      <button class="snav-btn" data-tab="review">Monthly</button>
+      <button class="snav-btn on" data-tab="today">Weekly</button>
+      <button class="snav-btn" data-tab="goals">Target</button>
+      <button class="snav-btn" data-tab="memo">Memo</button>
     </nav>
   </div>
 </div>
@@ -371,18 +396,13 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
           <div class="bd">
             <div class="pal">
               <div class="palrow">
-                <span class="lb">집계</span>
-                <span class="mode" id="modeSw">
-                  <button data-mode="plan">계획</button>
-                  <button data-mode="actual" class="on">실적</button>
-                </span>
                 <span class="hintbar">칸을 <b>눌러서 바로 입력</b> · <b>끌면 그 자리에 분류 창</b>이 뜹니다</span>
                 <button class="chip" id="dragTg">드래그 칠하기 <b style="color:var(--mute)">OFF</b></button>
               </div>
               <div class="palrow"><span class="lb">분류</span><span id="palCats"></span><button class="chip" id="catEdit" title="분류 추가 · 이름 · 색 바꾸기">✏️ 분류 편집</button></div>
             </div>
             <div class="wgwrap"><div class="wgscroll"><div class="wg" id="wgrid"></div></div></div>
-            <div class="legend"><span id="legendTxt">계획·실적 칸 모두: 눌러서 입력 · <b>Enter</b>/<b>↓</b> 아래 칸으로 계속 입력 · <b>Tab</b> 다음 날 · <b>Esc</b> 편집 종료 · <b>Del</b> 지우기 · <b>Ctrl+C</b>/<b>Ctrl+V</b> 블록 복사·붙여넣기 · <b>Ctrl+D</b> 위 칸 복사 — 분류는 같은 시간 반대편 칸에서 자동으로 따라옵니다</span></div>
+            <div class="legend"><span id="legendTxt">계획·실적 칸 모두: 눌러서 입력 · <b>Enter</b>/<b>↓</b> 아래 칸으로 계속 입력 · <b>Tab</b> 다음 날 · <b>Esc</b> 편집 종료 · <b>Del</b> 지우기 · <b>Ctrl+C</b>/<b>Ctrl+V</b> 블록 복사·붙여넣기 (범위를 잡고 붙이면 범위 전체에 반복) · <b>Ctrl+D</b> 위 칸 복사 — 분류는 같은 시간 반대편 칸에서 자동으로 따라옵니다</span></div>
           </div>
         </div>
 
@@ -390,12 +410,10 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
 
       <div class="stack">
         <div class="card">
-          <div class="hd"><h3>오늘 집계</h3><span class="spacer"></span><span class="tiny muted" id="aggMode">실적</span></div>
+          <div class="hd"><h3>오늘 집계</h3><span class="spacer"></span><span class="tiny muted">계획 vs 실적</span></div>
           <div class="bd">
-            <div class="donutbox">
-              <div id="donut"></div>
-              <div class="dlist" id="donutList"></div>
-            </div>
+            <div id="dayDual"></div>
+            <div class="dlist" id="donutList" style="margin-top:10px"></div>
           </div>
         </div>
 
@@ -449,24 +467,40 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
           </div>
         </div>
       </div>
-      <div class="cols">
-        <div class="card">
-          <div class="hd"><h3>주간 회고</h3><span class="spacer"></span><span class="tiny muted" id="rvWk"></span></div>
-          <div class="bd">
-            <div class="f2">
-              <div class="fld"><label>집중시간 (h)</label><input id="rvFocus" type="number" step="0.5"></div>
-              <div class="fld"><label>낭비시간 (h)</label><input id="rvWaste" type="number" step="0.5"></div>
+      <div class="calbar">
+        <button class="btn ghost sm" id="moPrev">‹</button>
+        <div class="mtitle" id="moTitle"></div>
+        <button class="btn ghost sm" id="moNext">›</button>
+        <button class="btn ghost sm" id="moCur">이번 달</button>
+      </div>
+      <div class="cols2">
+        <div class="stack">
+          <div class="card">
+            <div class="hd"><h3>시간 사용 현황</h3><span class="spacer"></span><span class="tiny muted">실적 기준 · 자동 집계</span></div>
+            <div class="bd">
+              <div class="donutbox"><div id="moDonut"></div><div class="dlist" id="moList"></div></div>
+              <div id="moCat" style="margin-top:14px"></div>
             </div>
-            <div class="f2">
-              <div class="fld"><label>달성률 (%)</label><input id="rvRate" type="number"></div>
-              <div class="fld"><label>만족도 (1–5)</label><input id="rvSat" type="number" min="1" max="5"></div>
-            </div>
-            <div class="fld"><label>회고</label><textarea class="gt" id="rvText" placeholder="이번 주 잘한 것 / 아쉬운 것 / 다음 주 조정"></textarea></div>
+          </div>
+          <div class="card">
+            <div class="hd"><h3>목표별 현황</h3><span class="spacer"></span><span class="tiny muted">이 달 투입 시간</span></div>
+            <div class="bd" id="moGoal"></div>
           </div>
         </div>
-        <div class="card">
-          <div class="hd"><h3>감사일기 타임라인</h3></div>
-          <div class="bd" id="jrList" style="max-height:520px;overflow:auto"></div>
+        <div class="stack">
+          <div class="card">
+            <div class="hd"><h3>복기 / 다음 달 계획</h3><span class="spacer"></span><span class="tiny muted">그 달에 저장됩니다</span></div>
+            <div class="bd">
+              <div class="fld"><label>요약</label><textarea class="gt" id="moSum" placeholder="이번 달을 한 문단으로"></textarea></div>
+              <div class="fld"><label style="color:var(--good)">잘한 점</label><textarea class="gt" id="moGood"></textarea></div>
+              <div class="fld"><label style="color:var(--bad)">못한 점</label><textarea class="gt" id="moBad"></textarea></div>
+              <div class="fld"><label>다음 달 계획</label><textarea class="gt" id="moPlan" placeholder="독서 — · 사업 — · 업무 —"></textarea></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="hd"><h3>감사일기 타임라인</h3><span class="spacer"></span><span class="tiny muted" id="jrCnt"></span></div>
+            <div class="bd" id="jrList" style="max-height:420px;overflow:auto"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -488,6 +522,20 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
       <span><i style="background:var(--key)"></i>개인 일정</span>
       <span><i style="background:var(--mute)"></i>회사 일정</span>
       <span>날짜 숫자를 누르면 그 주의 주간 화면으로 갑니다 · 빈 칸을 누르면 일정이 추가됩니다</span>
+    </div>
+  </section>
+
+  <section class="panel" id="p-memo">
+    <div class="card" style="max-width:860px;margin:0 auto">
+      <div class="hd"><h3>Memo</h3><span class="spacer"></span><span class="tiny muted" id="noteCnt"></span></div>
+      <div class="bd">
+        <div class="addrow" style="margin-bottom:10px">
+          <input id="noteIn" placeholder="생각나는 것, 남겨둘 정보를 바로 적으세요 — Enter 로 추가">
+          <button class="btn" id="noteAdd">추가</button>
+        </div>
+        <input id="noteQ" class="lblin" style="width:100%;margin-bottom:12px" placeholder="🔍 검색">
+        <div id="noteList"></div>
+      </div>
     </div>
   </section>
 </div>
@@ -518,7 +566,7 @@ const SEED = {
     {id:'health', name:'건강', color:'#059669'},
     {id:'etc',    name:'기타', color:'#d97706'}
   ],
-  goals: [], krs: [], habits: [], days: {}, events: [], weeks: {}, labelCats: {}
+  goals: [], krs: [], habits: [], days: {}, events: [], weeks: {}, labelCats: {}, months: {}, notes: []
 };
 
 /* ==========================================================
@@ -570,6 +618,20 @@ function eventsOn(date){
   return M.events.filter(e => e && e.date && date >= e.date && date <= (e.endDate || e.date));
 }
 const evById = id => M.events.find(e=>e.id===id) || null;
+
+/** 그 달의 모든 날짜 */
+function monthDates(ym){
+  const [y,m] = ym.split('-').map(Number);
+  const n = new Date(y, m, 0).getDate();
+  return Array.from({length:n}, (_,i)=>ym+'-'+pad2(i+1));
+}
+/** 월 단위 보관함 (복기·다음 달 계획). 저장할 때만 만든다 */
+function ensureMonth(ym){
+  if(!M.months[ym] || typeof M.months[ym]!=='object') M.months[ym] = {};
+  const o = M.months[ym];
+  for(const k of ['summary','good','bad','plan']) if(typeof o[k]!=='string') o[k] = '';
+  return o;
+}
 
 function emptyDay(){
   return { oneThing:'', plan:new Array(SLOTS).fill(null), actual:new Array(SLOTS).fill(null),
@@ -768,10 +830,11 @@ function fillMissing(){                     // 스키마가 바뀌어도 기존 
   if(!M || typeof M!=='object') M = JSON.parse(JSON.stringify(SEED));
   for(const k of Object.keys(SEED)) if(M[k]===undefined) M[k] = JSON.parse(JSON.stringify(SEED[k]));
   if(!Array.isArray(M.categories) || !M.categories.length) M.categories = JSON.parse(JSON.stringify(SEED.categories));
-  for(const k of ['goals','krs','habits','events']) if(!Array.isArray(M[k])) M[k]=[];
+  for(const k of ['goals','krs','habits','events','notes']) if(!Array.isArray(M[k])) M[k]=[];
   if(!M.days  || typeof M.days!=='object')  M.days  = {};
   if(!M.weeks || typeof M.weeks!=='object') M.weeks = {};
   if(!M.labelCats || typeof M.labelCats!=='object') M.labelCats = {};
+  if(!M.months || typeof M.months!=='object') M.months = {};
   // 기타 할 일이 '그 날'에서 '그 주'로 옮겨졌다 (F-20.7). 기존 입력을 잃지 않게 한 번만 이관한다
   if(!M.todosMovedToWeek){
     for(const d of Object.keys(M.days)){
@@ -1095,8 +1158,8 @@ let curDate = todayStr();
 let curTab  = 'today';
 let calMonth = todayStr().slice(0,7);
 let calShow  = { personal:true, work:true };    // 화면 상태 — 저장하지 않는다
+let revMonth = todayStr().slice(0,7);           // Monthly 탭이 보고 있는 달
 let calOpen  = null;                            // '+N개 더' 로 펼친 날짜          // 'YYYY-MM' — 캘린더 탭이 보고 있는 달
-let mode    = 'actual';                  // 집계 기준 (기본: 실적)
 let brush   = {catId:'biz', goalId:null};
 let paintDate = null;                    // 드래그 중 잠긴 날짜 (열 넘어가기 방지)
 let paintMode = null;                    // 드래그 중 잠긴 열 (계획/실적 넘어가기 방지)
@@ -1120,7 +1183,6 @@ function renderToday(){
   const day = ensureDay(curDate);
   $('#dateIn').value = curDate;
   $('#dowLb').textContent = DOW[dowOf(curDate)] + '요일';
-  $('#aggMode').textContent = mode==='plan' ? '계획' : '실적';
   renderPalette();
   renderWeekGrid();
   renderWeekSummary();
@@ -1621,11 +1683,14 @@ function bindGrid(){
     else if((e.ctrlKey || e.metaKey) && (k === 'v' || k === 'V')){
       e.preventDefault();
       if(!clipCells || !clipCells.length){ toast('복사한 칸이 없습니다'); return; }
-      const start = selRange()[0];
-      const n = Math.min(clipCells.length, SLOTS - start);
+      // 범위를 여러 칸 잡아뒀으면 그 범위 전체에 반복해서 채운다 (F-27).
+      // 한 칸만 잡았으면 복사한 블록 길이만큼 붙는다 (기존 동작)
+      const r = selRange();
+      const start = r[0];
+      const n = Math.min(r.length > 1 ? r.length : clipCells.length, SLOTS - start);
       bulk(day => {
         for(let j=0; j<n; j++){
-          const b = clipCells[j];
+          const b = clipCells[j % clipCells.length];
           day[sel.m][start + j] = b ? JSON.parse(JSON.stringify(b)) : null;
         }
       });
@@ -1655,20 +1720,26 @@ function refreshGridCells(){
 }
 
 function updateAgg(){
-  // 오늘 도넛 — 현재 모드 기준
-  const agg = aggByCategory([curDate], mode);
-  const parts = catsWithNone()
-    .map(c => ({name:c.name, color:c.color, v: agg[c.id]||0}))
-    .filter(p => p.v > 0)
-    .sort((a,b)=>b.v-a.v);
-  const total = parts.reduce((s,p)=>s+p.v, 0);
-  $('#donut').innerHTML = donutSVG(parts, total);
-  $('#donutList').innerHTML = parts.length
-    ? parts.map(p =>
-        '<div class="row"><i style="background:'+p.color+'"></i><span class="n">'+esc(p.name)+'</span>'+
-        '<span class="v">'+fmtH(p.v)+'</span><span class="muted tiny">'+Math.round(p.v/total*100)+'%</span></div>').join('')
-    : '<span class="tiny muted">실적 칸에 기록하면 즉시 집계됩니다</span>';
-  $('#aggMode').textContent = mode==='plan' ? '계획' : '실적';
+  // 오늘 집계 — 계획·실적을 한 번에 (F-25). 두 바의 길이가 서로 비교되도록 같은 눈금을 쓴다
+  const ap = aggByCategory([curDate], 'plan');
+  const aa = aggByCategory([curDate], 'actual');
+  const cats = catsWithNone();
+  const tp = cats.reduce((s,c)=>s+(ap[c.id]||0), 0);
+  const ta = cats.reduce((s,c)=>s+(aa[c.id]||0), 0);
+  const maxT = Math.max(tp, ta, 0.5);
+  const stack = agg => cats.map(c=>{
+    const v = agg[c.id]||0;
+    return v ? '<i style="width:'+(v/maxT*100)+'%;background:'+c.color+'" title="'+esc(c.name)+' '+fmtH(v)+'"></i>' : '';
+  }).join('');
+  $('#dayDual').innerHTML =
+    '<div class="dualrow"><span class="lb2">계획</span><div class="dual">'+stack(ap)+'</div><b>'+fmtH(tp)+'</b></div>'+
+    '<div class="dualrow"><span class="lb2">실적</span><div class="dual">'+stack(aa)+'</div><b>'+fmtH(ta)+'</b></div>';
+  const rows = cats.map(c=>({c, a:aa[c.id]||0, p:ap[c.id]||0})).filter(r=>r.a||r.p).sort((x,y)=>y.a-x.a);
+  $('#donutList').innerHTML = rows.length
+    ? rows.map(r =>
+        '<div class="row"><i style="background:'+r.c.color+'"></i><span class="n">'+esc(r.c.name)+'</span>'+
+        '<span class="v">'+fmtH(r.a)+'</span><span class="muted tiny">/ 계획 '+fmtH(r.p)+'</span></div>').join('')
+    : '<span class="tiny muted">계획·실적 칸에 기록하면 즉시 집계됩니다</span>';
 
   renderWeekSummary();
 }
@@ -1772,35 +1843,48 @@ function renderHabitBlock(h){
 /** 이번 주 집계 — 주간 그리드 아래에 붙는다 (구 '주간' 탭) */
 /** 이번 주 분류별 달성 — 실적 기준. 계획이 있으면 대비 %, 없으면 실적 시간만.
  *  분류가 안 붙은 시간도 '미지정'으로 보여 준다 (합계가 사라지지 않게). */
-function renderWeekSummary(){
-  const dates = weekDates(curDate);
+/** 기간의 분류별 달성 바 HTML. 주간(#catBars)과 Monthly(#moCat)가 같이 쓴다.
+    바 길이 = 절대 시간량 (F-26) — 11.5h 와 3h 가 같은 길이로 보이던 문제 수정.
+    달성률(%)은 숫자로, 계획량 위치는 세로 눈금으로 */
+function catBarsHTML(dates){
   const ca = aggByCategory(dates, 'actual'), cp = aggByCategory(dates, 'plan');
   const rows = catsWithNone()
     .map(c => ({c, a: ca[c.id]||0, p: cp[c.id]||0}))
     .filter(r => r.a || r.p)
     .sort((x,y) => y.a - x.a);
+  if(!rows.length) return '';
   const ta = rows.reduce((s,r)=>s+r.a, 0), tp = rows.reduce((s,r)=>s+r.p, 0);
-
+  const maxH = Math.max(...rows.map(r=>Math.max(r.a, r.p)), 0.5);
+  return rows.map(r=>{
+      const pct = r.p > 0 ? Math.round(r.a/r.p*100) : (r.a > 0 ? 100 : 0);
+      const cls = r.p === 0 ? '' : (pct >= 100 ? 'ok' : pct >= 50 ? '' : 'warn');
+      return '<div class="gbar"><div class="t">'
+        + '<span class="gcell"><i style="display:inline-block;width:8px;height:8px;border-radius:3px;background:'+r.c.color+'"></i>'+esc(r.c.name)+'</span>'
+        + '<b>'+fmtH(r.a)+(r.p ? ' / '+fmtH(r.p)+' · '+pct+'%' : '')+'</b></div>'
+        + '<div class="bar"><i class="'+cls+'" style="width:'+clamp(r.a/maxH*100,0,100)+'%"></i>'
+        + (r.p ? '<u style="left:'+clamp(r.p/maxH*100,0,100)+'%"></u>' : '')
+        + '</div></div>';
+    }).join('')
+    + '<div class="gbar" style="border-top:1px solid var(--line);padding-top:8px;margin-top:4px">'
+    + '<div class="t"><span class="gcell"><b>합계</b></span><b>'+fmtH(ta)+(tp ? ' / '+fmtH(tp) : '')+'</b></div></div>';
+}
+function renderWeekSummary(){
+  const dates = weekDates(curDate);
   const lb = $('#wkRangeLb');
   if(lb) lb.textContent = dates[0].slice(5).replace('-','/') + ' ~ ' + dates[6].slice(5).replace('-','/');
-
-  $('#catBars').innerHTML = rows.length
-    ? rows.map(r=>{
-        const pct = r.p > 0 ? Math.round(r.a/r.p*100) : (r.a > 0 ? 100 : 0);
-        const cls = r.p === 0 ? '' : (pct >= 100 ? 'ok' : pct >= 50 ? '' : 'warn');
-        return '<div class="gbar"><div class="t">'
-          + '<span class="gcell"><i style="display:inline-block;width:8px;height:8px;border-radius:3px;background:'+r.c.color+'"></i>'+esc(r.c.name)+'</span>'
-          + '<b>'+fmtH(r.a)+(r.p ? ' / '+fmtH(r.p)+' · '+pct+'%' : '')+'</b></div>'
-          + '<div class="bar"><i class="'+cls+'" style="width:'+clamp(pct,0,100)+'%"></i></div></div>';
-      }).join('')
-      + '<div class="gbar" style="border-top:1px solid var(--line);padding-top:8px;margin-top:4px">'
-      + '<div class="t"><span class="gcell"><b>합계</b></span><b>'+fmtH(ta)+(tp ? ' / '+fmtH(tp) : '')+'</b></div></div>'
-    : '<span class="tiny muted">실적 칸에 기록하면 이번 주 분류별로 쌓입니다</span>';
+  $('#catBars').innerHTML = catBarsHTML(dates)
+    || '<span class="tiny muted">실적 칸에 기록하면 이번 주 분류별로 쌓입니다</span>';
 }
 
 /* ==========================================================
    렌더 — 회고
    ========================================================== */
+function moShift(n){
+  const [y,m] = revMonth.split('-').map(Number);
+  const d = new Date(y, m-1+n, 1);
+  revMonth = d.getFullYear()+'-'+pad2(d.getMonth()+1);
+  renderReview();
+}
 function renderReview(){
   const st = streakDays(), tot = totalStats();
   $('#kStreak').textContent = st + '일';
@@ -1811,20 +1895,52 @@ function renderReview(){
   bar.style.width = clamp(st/21*100, 0, 100) + '%';
   bar.className = st>=21 ? 'ok' : st>=10 ? '' : 'warn';
 
-  const wk = weekKey(curDate);
-  const w = M.weeks[wk] || {};
-  $('#rvWk').textContent = wk.slice(5) + ' 주';
-  $('#rvFocus').value = w.focusH ?? '';
-  $('#rvWaste').value = w.wasteH ?? '';
-  $('#rvRate').value  = w.rate   ?? '';
-  $('#rvSat').value   = w.sat    ?? '';
-  $('#rvText').value  = w.review ?? '';
+  const ym = revMonth, [y,m] = ym.split('-').map(Number);
+  $('#moTitle').textContent = y + '년 ' + m + '월';
+  const dates = monthDates(ym);
 
-  const days = Object.keys(M.days).filter(d => (M.days[d].gratitude||[]).some(x=>x&&x.trim())).sort().reverse().slice(0, 40);
+  // ① 시간 사용 현황 — 노션에서 수기로 붙이던 파이차트가 여기서 자동으로 나온다
+  const aa = aggByCategory(dates, 'actual');
+  const parts = catsWithNone()
+    .map(c => ({name:c.name, color:c.color, v: aa[c.id]||0}))
+    .filter(p => p.v > 0)
+    .sort((a,b)=>b.v-a.v);
+  const total = parts.reduce((s,p)=>s+p.v, 0);
+  $('#moDonut').innerHTML = donutSVG(parts, total);
+  $('#moList').innerHTML = parts.length
+    ? parts.map(p =>
+        '<div class="row"><i style="background:'+p.color+'"></i><span class="n">'+esc(p.name)+'</span>'+
+        '<span class="v">'+fmtH(p.v)+'</span><span class="muted tiny">'+Math.round(p.v/total*100)+'%</span></div>').join('')
+    : '<span class="tiny muted">이 달 실적 기록이 아직 없습니다</span>';
+  $('#moCat').innerHTML = catBarsHTML(dates);
+
+  // ② 목표별 현황 — 이 달 목표별 투입 시간
+  const ga = aggByGoal(dates, 'actual');
+  const grows = M.goals.map(g => ({g, h: ga[g.id]||0})).sort((a,b)=>b.h-a.h);
+  const gmax = Math.max(...grows.map(r=>r.h), 0.5);
+  $('#moGoal').innerHTML = grows.length
+    ? grows.map(r =>
+        '<div class="gbar"><div class="t"><span class="gcell">'+esc(r.g.title)+'</span><b>'+fmtH(r.h)+'</b></div>'+
+        '<div class="bar"><i style="width:'+clamp(r.h/gmax*100,0,100)+'%"></i></div></div>').join('')
+    : '<span class="tiny muted">Target 탭에서 목표를 만들고 칸에 연결하면 여기 쌓입니다</span>';
+
+  // ③ 복기 / 다음 달 계획 — 그 달 저장분. 편집 중에는 값을 덮지 않는다
+  const mo = M.months[ym] || {};
+  const ae = document.activeElement;
+  for(const [id, k] of [['moSum','summary'],['moGood','good'],['moBad','bad'],['moPlan','plan']]){
+    const el = $('#'+id);
+    if(el !== ae) el.value = mo[k] || '';
+  }
+
+  // ④ 감사일기 — 그 달 것만
+  const days = Object.keys(M.days)
+    .filter(d => d.startsWith(ym) && (M.days[d].gratitude||[]).some(x=>x&&x.trim()))
+    .sort().reverse();
+  $('#jrCnt').textContent = days.length ? days.length + '일' : '';
   $('#jrList').innerHTML = days.length
     ? days.map(d => '<div class="jr"><div class="dt">'+d+' ('+DOW[dowOf(d)]+')</div><ul>'+
         M.days[d].gratitude.filter(x=>x&&x.trim()).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>').join('')
-    : '<p class="tiny muted" style="margin:0">TODAY 탭에서 감사일기를 적으면 여기 쌓입니다.</p>';
+    : '<p class="tiny muted" style="margin:0">Weekly 탭에서 감사일기를 적으면 이 달 것이 여기 쌓입니다.</p>';
 }
 
 /* ==========================================================
@@ -1833,6 +1949,7 @@ function renderReview(){
 function renderAll(){
   if(curTab==='today')  renderToday();
   if(curTab==='cal')    renderCalendar();
+  if(curTab==='memo')   renderNotes();
   if(curTab==='goals')  renderGoals();
   if(curTab==='review') renderReview();
   renderSync();
@@ -1843,10 +1960,39 @@ function switchTab(t){
   $$('.panel').forEach(p=>p.classList.toggle('on', p.id==='p-'+t));
   renderAll();
 }
-function syncModeUI(){
-  $$('#modeSw button').forEach(b=>b.classList.toggle('on', b.dataset.mode===mode));
-  $('#aggMode').textContent = mode==='plan' ? '계획' : '실적';
+/* 집계 토글은 F-25 에서 제거됐다 — 계획·실적을 항상 같이 보여 준다 */
+
+/* ==========================================================
+   Memo (F-16) — 빠른 캡처 + 승격. 캡처와 정리 사이 단계가 노션에는 없었다
+   ========================================================== */
+let noteQ = '';                 // 검색어 — 화면 상태
+let noteEditId = null;          // 인라인 편집 중인 메모
+function renderNotes(){
+  const q = noteQ.trim().toLowerCase();
+  const list = M.notes
+    .filter(n => !q || (n.text||'').toLowerCase().includes(q))
+    .sort((a,b) => (b.pinned?1:0)-(a.pinned?1:0) || (b.createdAt||0)-(a.createdAt||0));
+  $('#noteCnt').textContent = M.notes.length ? M.notes.length + '개' : '';
+  $('#noteList').innerHTML = list.length
+    ? list.map(n => {
+        const d = n.createdAt ? ymd(new Date(n.createdAt)) : '';
+        const body = (noteEditId === n.id)
+          ? '<textarea data-nedit="'+n.id+'">'+esc(n.text||'')+'</textarea>'
+          : '<div class="nt" data-ntext="'+n.id+'">'+esc(n.text||'')+'</div>';
+        return '<div class="note'+(n.pinned?' pin':'')+'">'+body+
+          '<div class="nm"><span class="dt2">'+d+'</span>'+
+          '<button data-npin="'+n.id+'">'+(n.pinned?'📌 핀 해제':'📌 핀')+'</button>'+
+          '<button data-ntodo="'+n.id+'">→할일</button>'+
+          '<button data-nev="'+n.id+'">→일정</button>'+
+          '<button data-ndel="'+n.id+'" style="color:var(--bad)">삭제</button></div></div>';
+      }).join('')
+    : '<p class="tiny muted" style="margin:0">'+(q ? '검색 결과가 없습니다' : '첫 메모를 적어 보세요. 나중에 →할일 / →일정으로 보낼 수 있습니다.')+'</p>';
+  if(noteEditId){
+    const ta = $('#noteList textarea[data-nedit]');
+    if(ta){ ta.focus(); ta.selectionStart = ta.value.length; }
+  }
 }
+const noteById = id => M.notes.find(n=>n.id===id) || null;
 
 /* ==========================================================
    캘린더 (F-15)
@@ -2113,7 +2259,6 @@ function bindAll(){
   $('#dateIn').onchange  = e=>{ curDate = e.target.value || todayStr(); renderToday(); };
 
   // 모드 / 팔레트
-  $('#modeSw').onclick = e=>{ const b=e.target.closest('button'); if(!b) return; mode=b.dataset.mode; syncModeUI(); updateAgg(); };
   $('#dragTg').onclick = ()=>{
     dragPaint = !dragPaint;
     $('#dragTg').classList.toggle('on', dragPaint);
@@ -2154,7 +2299,7 @@ function bindAll(){
     const d = ensureDay(curDate);
     let n = 0;
     for(let i=0;i<SLOTS;i++) if(d.plan[i] && !d.actual[i]){ d.actual[i] = JSON.parse(JSON.stringify(d.plan[i])); n++; }
-    saveModel(); mode='actual'; syncModeUI(); renderWeekGrid(); updateAgg(); renderWeekSummary();
+    saveModel(); renderWeekGrid(); updateAgg(); renderWeekSummary();
     toast(n ? n+'칸 복사됨 — 다른 것만 고치세요' : '복사할 계획이 없습니다');
   };
   $('#btnApplyHabits').onclick = ()=>{
@@ -2225,14 +2370,45 @@ function bindAll(){
     if(k){ k.current = +b.value||0; saveModel(); }
   });
 
-  // 회고
-  const wsave = ()=>{
-    const k = weekKey(curDate);
-    Object.assign(ensureWeek(curDate), {focusH:$('#rvFocus').value, wasteH:$('#rvWaste').value,
-                  rate:$('#rvRate').value, sat:$('#rvSat').value, review:$('#rvText').value});
+  // Memo (F-16)
+  const noteAdd = ()=>{
+    const t = $('#noteIn').value.trim();
+    if(!t) return;
+    M.notes.push({ id:'n'+uid(), text:t, pinned:false, createdAt:Date.now(), ut:Date.now() });
+    $('#noteIn').value = '';
+    saveModel(); renderNotes();
+  };
+  $('#noteAdd').onclick = noteAdd;
+  $('#noteIn').addEventListener('keydown', e=>{ if(e.key==='Enter' && !e.isComposing) noteAdd(); });
+  $('#noteQ').addEventListener('input', e=>{ noteQ = e.target.value; renderNotes(); });
+  $('#noteList').addEventListener('click', e=>{
+    const g = a => { const el = e.target.closest('['+a+']'); return el ? el.getAttribute(a) : null; };
+    let id;
+    if((id = g('data-npin'))){ const n = noteById(id); if(n){ n.pinned = !n.pinned; n.ut = Date.now(); saveModel(); renderNotes(); } return; }
+    if((id = g('data-ndel'))){ const i = M.notes.findIndex(n=>n.id===id); if(i>=0){ M.notes.splice(i,1); saveModel(); renderNotes(); toast('메모 삭제됨'); } return; }
+    if((id = g('data-ntodo'))){ const n = noteById(id); if(n){ ensureWeek(todayStr()).todos.push({ text:n.text, grade:'', catId:(M.categories[0]||{}).id||null }); saveModel(); toast('이번 주 기타 할 일로 보냈습니다 ✓'); } return; }
+    if((id = g('data-nev'))){ const n = noteById(id); if(n) dlgEvent(null, todayStr(), { title:n.text.split('\n')[0].slice(0,60), note:n.text }); return; }
+    if((id = g('data-ntext'))){ noteEditId = id; renderNotes(); return; }
+  });
+  // 인라인 편집: 벗어나면 저장. 글자를 지웠어도 메모는 남긴다 (규칙 6 — 삭제는 삭제 버튼으로만)
+  $('#noteList').addEventListener('focusout', e=>{
+    const ta = e.target.closest('textarea[data-nedit]'); if(!ta) return;
+    const n = noteById(ta.getAttribute('data-nedit'));
+    if(n && n.text !== ta.value){ n.text = ta.value; n.ut = Date.now(); saveModel(); }
+    noteEditId = null; renderNotes();
+  });
+
+  // Monthly (F-28) — 주간 회고 입력(rv*)은 화면에서 빠졌다. M.weeks 의 기존 데이터는 그대로 남는다
+  $('#moPrev').onclick = ()=>moShift(-1);
+  $('#moNext').onclick = ()=>moShift(1);
+  $('#moCur').onclick  = ()=>{ revMonth = todayStr().slice(0,7); renderReview(); };
+  const mosave = ()=>{
+    Object.assign(ensureMonth(revMonth), {
+      summary:$('#moSum').value, good:$('#moGood').value, bad:$('#moBad').value, plan:$('#moPlan').value, ut:Date.now()
+    });
     saveModel();
   };
-  ['#rvFocus','#rvWaste','#rvRate','#rvSat','#rvText'].forEach(s => $(s).addEventListener('input', wsave));
+  ['#moSum','#moGood','#moBad','#moPlan'].forEach(s2 => $(s2).addEventListener('input', mosave));
 
   // 도구
   $('#btnSync').onclick = dlgSync;
@@ -2273,7 +2449,6 @@ function bindAll(){
 (async function init(){
   await loadModel();
   bindAll();
-  syncModeUI();
   switchTab('today');
   renderSync();
   startPolling();
