@@ -124,6 +124,46 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 
 /* ---------- 커스텀 페이지 (F-29) ---------- */
 .snav-btn.add{color:var(--mute);font-weight:800;padding-left:10px;padding-right:10px}
+/* F-33 Summary 대시보드 */
+.sum-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.sum-head h2{font-size:18px;letter-spacing:-.01em}
+.sum-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+@media (max-width:1100px){ .sum-grid{grid-template-columns:1fr 1fr} }
+@media (max-width:700px){ .sum-grid{grid-template-columns:1fr} }
+.golink{font-size:11px;color:var(--key);font-weight:700;padding:2px 7px;border-radius:6px;white-space:nowrap}
+.golink:hover{background:var(--key-soft)}
+.sum-one{font-size:14px;font-weight:700;margin:0 0 8px;line-height:1.35}
+.sum-one.empty{font-weight:500;color:var(--mute)}
+.sum-line{font-size:12px;color:var(--sub);margin-top:6px;display:flex;justify-content:space-between;gap:8px}
+.sum-line b{color:var(--ink)}
+.sum-mo{display:flex;gap:14px;align-items:center;margin-top:10px}
+.sum-mo .dlist{flex:1;min-width:0}
+.strk{display:flex;align-items:center;gap:8px;font-size:12px;margin:6px 0}
+.strk .n{width:60px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.strk .n i{width:8px;height:8px;border-radius:3px;flex:none}
+.strk .dots{display:flex;gap:3px;flex:1}
+.strk .dots i{flex:1;height:11px;border-radius:3px;background:#eef1f5}
+.strk b{width:52px;text-align:right;flex:none;font-variant-numeric:tabular-nums;color:var(--sub)}
+.grass{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,12px);grid-auto-columns:12px;gap:3px;overflow-x:auto;justify-content:start}
+.grass i{width:12px;height:12px;border-radius:3px;background:#eef1f5}
+.grass i.l1{background:#bfdbfe}.grass i.l2{background:#60a5fa}.grass i.l3{background:#2563eb}
+.grass i.td{outline:2px solid var(--ink);outline-offset:-2px}
+.grass-lg{display:flex;gap:10px;font-size:11px;color:var(--mute);margin-top:8px;align-items:center}
+.grass-lg i{display:inline-block;width:10px;height:10px;border-radius:3px;background:#eef1f5;margin-right:3px;vertical-align:-1px}
+.sum-memo{font-size:12.5px;padding:5px 0;border-bottom:1px solid #f1f3f6;display:flex;gap:6px;align-items:baseline}
+.sum-memo:last-child{border-bottom:none}
+.sum-memo .tx{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sum-memo .dt{font-size:11px;color:var(--mute);flex:none}
+.sum-todo{display:flex;gap:8px;font-size:12.5px;padding:4px 0;align-items:center}
+.sum-todo .g{width:16px;color:var(--mute);font-weight:700;text-align:center;flex:none}
+.sum-todo .c{font-size:10px;color:var(--mute);margin-left:auto;flex:none}
+.sum-pg{display:flex;justify-content:space-between;align-items:center;width:100%;padding:7px 0;border-bottom:1px solid #f1f3f6;font-size:12.5px;text-align:left;gap:8px}
+.sum-pg:last-child{border-bottom:none}
+.sum-pg:hover{color:var(--key)}
+.sum-pg .v{font-variant-numeric:tabular-nums;color:var(--sub);flex:none}
+.sum-grat{font-size:12.5px;padding:4px 0}
+.sum-grat .dt{font-size:11px;color:var(--mute);font-weight:700}
+.sum-grat ul{margin:2px 0 0;padding-left:16px}
 .snav-btn.add:hover{color:var(--key)}
 .tplcard{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line);border-radius:10px;
   padding:12px 14px;margin-bottom:8px;background:var(--card)}
@@ -517,9 +557,10 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
       </div>
     </div>
     <nav class="snav">
+      <button class="snav-btn" data-tab="sum">Summary</button>
+      <button class="snav-btn on" data-tab="today">Weekly</button>
       <button class="snav-btn" data-tab="cal">Calendar</button>
       <button class="snav-btn" data-tab="review">Monthly</button>
-      <button class="snav-btn on" data-tab="today">Weekly</button>
       <button class="snav-btn" data-tab="goals">Target</button>
       <button class="snav-btn" data-tab="memo">Memo</button>
       <span id="pageTabs" style="display:contents"></span>
@@ -529,6 +570,23 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
 </div>
 
 <div class="wrap">
+
+  <!-- ============ SUMMARY (F-33) ============ -->
+  <section class="panel" id="p-sum">
+    <div class="sum-head"><h2 id="sumDate"></h2><span class="tiny muted">모든 현황을 한 화면에 · 카드 우측 링크로 그 탭에 갑니다</span></div>
+    <div class="sum-grid">
+      <div class="card"><div class="hd"><h3>오늘</h3><span class="spacer"></span><span class="tiny muted" id="sumNow"></span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumToday"></div></div>
+      <div class="card"><div class="hd"><h3>이번 주 · 분류 달성</h3><span class="spacer"></span><span class="tiny muted" id="sumWkLb"></span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumWeek"></div></div>
+      <div class="card"><div class="hd"><h3>이 달</h3><span class="spacer"></span><span class="tiny muted" id="sumMoLb"></span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumMonth"></div></div>
+      <div class="card"><div class="hd"><h3>다가오는 일정</h3><span class="spacer"></span><span class="tiny muted">D-day</span><button class="golink" data-go="cal">Calendar →</button></div><div class="bd" id="sumUp"></div></div>
+      <div class="card"><div class="hd"><h3>분류별 연속 기록</h3><span class="spacer"></span><span class="tiny muted">최근 14일 · 실적 기준</span></div><div class="bd" id="sumStreak"></div></div>
+      <div class="card"><div class="hd"><h3>기타 할 일</h3><span class="spacer"></span><span class="tiny muted">이번 주 · 미완료</span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumTodo"></div></div>
+      <div class="card"><div class="hd"><h3>메모</h3><span class="spacer"></span><span class="tiny muted" id="sumMemoCnt"></span><button class="golink" data-go="memo">Memo →</button></div><div class="bd" id="sumMemo"></div></div>
+      <div class="card"><div class="hd"><h3>감사일기</h3><span class="spacer"></span><span class="tiny muted">최근 3일</span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumGrat"></div></div>
+      <div class="card"><div class="hd"><h3>내 페이지</h3><span class="spacer"></span><span class="tiny muted">이 달 집계</span></div><div class="bd" id="sumPages"></div></div>
+    </div>
+    <div class="card" style="margin-top:16px"><div class="hd"><h3>기록 잔디</h3><span class="spacer"></span><span class="tiny muted">최근 12주 · 하루 실적량</span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumHeat"></div></div>
+  </section>
 
   <!-- ============ TODAY ============ -->
   <section class="panel on" id="p-today">
@@ -2247,14 +2305,13 @@ function catBarsHTML(dates){
     + '<div class="t"><span class="gcell"><b>합계</b></span><b>'+fmtH(ta)+(tp ? ' / '+fmtH(tp) : '')+'</b></div></div>';
 }
 /** 다가오는 일정 3개 + D-n (F-15.10). 완료·지난 것 제외 */
-function renderUpcoming(){
-  const box = $('#upcoming'); if(!box) return;
+function upcomingHTML(n){
   const today = todayStr();
   const list = M.events
     .filter(e => e && e.date && !e.done && (e.endDate||e.date) >= today)
     .sort((a,b)=> a.date < b.date ? -1 : a.date > b.date ? 1 : (a.startSlot|0)-(b.startSlot|0))
-    .slice(0, 3);
-  box.innerHTML = list.length
+    .slice(0, n);
+  return list.length
     ? list.map(e=>{
         const dd = Math.round((parseYmd(e.date) - parseYmd(today)) / 86400000);
         const lb = dd <= 0 ? '오늘' : 'D-'+dd;
@@ -2265,6 +2322,163 @@ function renderUpcoming(){
           + '<span class="t">'+e.date.slice(5).replace('-','/')+' ('+DOW[dowOf(e.date)]+') '+esc(e.title||'')+'</span></button>';
       }).join('')
     : '<span class="tiny muted">Calendar 탭에서 일정을 넣으면 여기 D-day 로 뜹니다</span>';
+}
+function renderUpcoming(){
+  const box = $('#upcoming'); if(!box) return;
+  box.innerHTML = upcomingHTML(3);
+}
+
+/* ==========================================================
+   렌더 — Summary 대시보드 (F-33)
+   전부 읽기 전용 요약. 데이터는 다른 탭 것을 그대로 집계한다 (별도 저장 없음)
+   ========================================================== */
+function dualBarsHTML(ap, aa){
+  const cats = catsWithNone();
+  const tp = cats.reduce((s,c)=>s+(ap[c.id]||0), 0);
+  const ta = cats.reduce((s,c)=>s+(aa[c.id]||0), 0);
+  const maxT = Math.max(tp, ta, 0.5);
+  const stack = agg => cats.map(c=>{
+    const v = agg[c.id]||0;
+    return v ? '<i style="width:'+(v/maxT*100)+'%;background:'+c.color+'" title="'+esc(c.name)+' '+fmtH(v)+'"></i>' : '';
+  }).join('');
+  return '<div class="dualrow"><span class="lb2">계획</span><div class="dual">'+stack(ap)+'</div><b>'+fmtH(tp)+'</b></div>'+
+         '<div class="dualrow"><span class="lb2">실적</span><div class="dual">'+stack(aa)+'</div><b>'+fmtH(ta)+'</b></div>';
+}
+/** 그 슬롯이 속한 블록의 글자 — 블록 첫 칸에만 label 이 있을 수 있어 위로 거슬러 찾는다 */
+function slotText(day, m, i){
+  const arr = day && day[m]; if(!arr || !arr[i]) return '';
+  const cat = arr[i].catId || NONE;
+  for(let k=i; k>=0; k--){
+    const b = arr[k]; if(!b || (b.catId||NONE)!==cat) break;
+    const t = cellText(b); if(t) return t;
+  }
+  return '';
+}
+function catStreakHTML(days){
+  const today = todayStr();
+  const dates = Array.from({length:days}, (_,k)=>addDays(today, -(days-1-k)));
+  const rows = M.categories.map(c=>{
+    const on = dates.map(d=>{ const a = (M.days[d]||{}).actual||[]; return a.some(b=>b && b.catId===c.id); });
+    let st = 0, k = on.length-1;
+    if(!on[k]) k--;                                  // 오늘 아직이면 어제부터
+    while(k>=0 && on[k]){ st++; k--; }
+    const total = on.filter(Boolean).length;
+    return {c, on, st, total};
+  }).filter(r=>r.total>0).sort((a,b)=>b.st-a.st || b.total-a.total);
+  if(!rows.length) return '<span class="tiny muted">실적에 분류가 붙으면 분류별로 며칠 연속인지 여기 쌓입니다</span>';
+  return rows.map(r=>'<div class="strk"><span class="n"><i style="background:'+r.c.color+'"></i>'+esc(r.c.name)+'</span>'
+    + '<span class="dots">'+r.on.map((o,k)=>'<i title="'+dates[k]+'" style="'+(o?'background:'+r.c.color:'')+'"></i>').join('')+'</span>'
+    + '<b>'+(r.st? r.st+'일 연속' : r.total+'/'+days+'일')+'</b></div>').join('');
+}
+function grassHTML(weeks){
+  const today = todayStr();
+  const start = weekStart(addDays(today, -7*(weeks-1)));
+  let h = '', maxH = 0, cells = [];
+  for(let k=0; k<weeks*7; k++){
+    const d = addDays(start, k);
+    const a = (M.days[d]||{}).actual||[];
+    let n = 0; for(const b of a) if(b) n++;
+    const hrs = n*0.5; if(hrs>maxH) maxH = hrs;
+    cells.push({d, hrs});
+  }
+  for(const c of cells){
+    const lv = c.hrs<=0 ? 0 : c.hrs < 3 ? 1 : c.hrs < 8 ? 2 : 3;
+    h += '<i class="'+(lv?'l'+lv:'')+(c.d===today?' td':'')+'" title="'+c.d+' ('+DOW[dowOf(c.d)]+') '+fmtH(c.hrs)+'"'+(c.d>today?' style="opacity:.35"':'')+'></i>';
+  }
+  return '<div class="grass">'+h+'</div>'
+    + '<div class="grass-lg"><span><i></i>0</span><span><i class="l1"></i>~3h</span><span><i class="l2"></i>~8h</span><span><i class="l3"></i>8h+</span><span style="margin-left:auto">세로 = 월~일 · 오른쪽이 이번 주</span></div>';
+}
+function renderSummary(){
+  const today = todayStr(), ym = today.slice(0,7);
+  $('#sumDate').textContent = today.replace(/-/g,'.') + ' (' + DOW[dowOf(today)] + ')';
+
+  // ① 오늘
+  const day = M.days[today] || null;
+  const ns  = nowSlot();
+  $('#sumNow').textContent = '지금 ' + slotLabel(ns);
+  const ap = aggByCategory([today],'plan'), aa = aggByCategory([today],'actual');
+  const one = day && day.oneThing ? day.oneThing.trim() : '';
+  const planNow = slotText(day, 'plan', ns), actNow = slotText(day, 'actual', ns);
+  let left = 0; if(day && day.plan) for(let k=ns+1; k<SLOTS; k++) if(day.plan[k]) left += 0.5;
+  const tp = Object.values(ap).reduce((a,b)=>a+b,0);
+  $('#sumToday').innerHTML =
+    (one ? '<p class="sum-one">🔥 '+esc(one)+'</p>' : '<p class="sum-one empty">🔥 오늘 One-Thing 이 비어 있습니다 — Weekly 맨 윗줄에 적어 주세요</p>')
+    + dualBarsHTML(ap, aa)
+    + '<div class="sum-line"><span>지금 계획</span><b>'+(planNow ? esc(planNow) : '<span class="muted">없음</span>')+'</b></div>'
+    + '<div class="sum-line"><span>지금 실적</span><b>'+(actNow ? esc(actNow) : '<span class="muted">아직 안 적음</span>')+'</b></div>'
+    + '<div class="sum-line"><span>남은 계획</span><b>'+fmtH(left)+(tp ? ' <span class="muted">/ 오늘 '+fmtH(tp)+'</span>' : '')+'</b></div>';
+
+  // ② 이번 주
+  const wd = weekDates(today);
+  $('#sumWkLb').textContent = wd[0].slice(5).replace('-','/') + ' ~ ' + wd[6].slice(5).replace('-','/');
+  $('#sumWeek').innerHTML = catBarsHTML(wd) || '<span class="tiny muted">이번 주 실적이 아직 없습니다</span>';
+
+  // ③ 이 달 — 21일 게이지 + 도넛 + One-Thing + 복기 상태
+  const st = streakDays();
+  const md = monthDates(ym);
+  const ma = aggByCategory(md, 'actual');
+  const parts = catsWithNone().map(c=>({name:c.name, color:c.color, v:ma[c.id]||0})).filter(p=>p.v>0).sort((a,b)=>b.v-a.v);
+  const mtot = parts.reduce((s,p)=>s+p.v,0);
+  const mo = M.months[ym] || {};
+  const [yy, mm] = ym.split('-').map(Number);
+  $('#sumMoLb').textContent = yy + '년 ' + mm + '월';
+  $('#sumMonth').innerHTML =
+    (mo.oneThing ? '<p class="sum-one">🔥 '+esc(mo.oneThing)+'</p>' : '<p class="sum-one empty">🔥 이 달 One-Thing 이 비어 있습니다 — Calendar 상단에서 정해 주세요</p>')
+    + '<div class="bar"><i class="'+(st>=21?'ok':st>=10?'':'warn')+'" style="width:'+clamp(st/21*100,0,100)+'%"></i></div>'
+    + '<div class="sum-line"><span>연속 기록 <b>'+st+'일</b></span><span>'+(st>=21?'<b style="color:var(--good)">21일 관문 통과 ✓</b>':'21일까지 <b>'+(21-st)+'일</b>')+'</span></div>'
+    + '<div class="sum-mo">'+donutSVG(parts, mtot)+'<div class="dlist">'
+    + (parts.length ? parts.slice(0,5).map(p=>'<div class="row"><i style="background:'+p.color+'"></i><span class="n">'+esc(p.name)+'</span><span class="v">'+fmtH(p.v)+'</span><span class="muted tiny">'+Math.round(p.v/mtot*100)+'%</span></div>').join('')
+                    : '<span class="tiny muted">이 달 실적이 아직 없습니다</span>')
+    + '</div></div>'
+    + '<div class="sum-line"><span>월간 복기</span><b>'+(mo.summary||mo.good||mo.bad ? '작성됨 ✓' : '<span class="muted">아직 안 씀</span>')+'</b></div>';
+
+  // ④ 일정
+  $('#sumUp').innerHTML = upcomingHTML(5);
+
+  // ⑤ 분류별 연속 기록
+  $('#sumStreak').innerHTML = catStreakHTML(14);
+
+  // ⑥ 기타 할 일 — 이번 주 미완료
+  const todos = ((M.weeks[weekKey(today)]||{}).todos||[]);
+  const open = todos.filter(t=>t && t.grade!=='O');
+  $('#sumTodo').innerHTML = todos.length
+    ? (open.length
+        ? open.map(t=>'<div class="sum-todo"><span class="g">'+esc(t.grade||'·')+'</span><span>'+esc(t.text)+'</span>'+(catById(t.catId)?'<span class="c">'+esc(catById(t.catId).name)+'</span>':'')+'</div>').join('')
+          + '<div class="tiny muted" style="margin-top:6px">'+(todos.length-open.length)+'/'+todos.length+' 완료</div>'
+        : '<span class="tiny muted">이번 주 기타 할 일 '+todos.length+'개 전부 완료 ✓</span>')
+    : '<span class="tiny muted">이번 주 기타 할 일이 없습니다</span>';
+
+  // ⑦ 메모 — 핀 먼저, 최근 순
+  const notes = M.notes.slice().sort((a,b)=> (b.pinned?1:0)-(a.pinned?1:0) || (b.createdAt||0)-(a.createdAt||0)).slice(0,5);
+  $('#sumMemoCnt').textContent = M.notes.length ? M.notes.length+'개' : '';
+  $('#sumMemo').innerHTML = notes.length
+    ? notes.map(n=>'<div class="sum-memo">'+(n.pinned?'<span>📌</span>':'')+'<span class="tx">'+esc(n.text)+'</span><span class="dt">'+(n.createdAt? ymd(new Date(n.createdAt)).slice(5).replace('-','/') : '')+'</span></div>').join('')
+    : '<span class="tiny muted">Memo 탭에 적은 것이 여기 뜹니다</span>';
+
+  // ⑧ 감사일기 — 최근 3일
+  const gdays = Object.keys(M.days).filter(d=>(M.days[d].gratitude||[]).some(x=>x&&x.trim())).sort().reverse().slice(0,3);
+  $('#sumGrat').innerHTML = gdays.length
+    ? gdays.map(d=>'<div class="sum-grat"><div class="dt">'+d.slice(5).replace('-','/')+' ('+DOW[dowOf(d)]+')</div><ul>'+M.days[d].gratitude.filter(x=>x&&x.trim()).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>').join('')
+    : '<span class="tiny muted">Weekly 감사일기 줄에 적으면 여기 뜹니다</span>';
+
+  // ⑨ 내 페이지 — 이 달 집계 한 줄씩
+  $('#sumPages').innerHTML = M.pages.length
+    ? M.pages.map(pg=>{
+        const t = tplOf(pg); let v = '';
+        if(pg.frame==='ledger'){
+          let spent = 0; Object.keys(pg.data.daily||{}).forEach(d=>{ if(d.startsWith(ym)) spent += lgTotal(pg, d); });
+          const bud = pg.cfg.monthlyBudget||0;
+          v = wonF(spent) + (bud ? ' <span class="tiny muted">/ '+wonF(bud)+'</span>' : '');
+        } else {
+          const ents = Array.isArray(pg.data.entries)? pg.data.entries : [];
+          v = ents.filter(e=>(e.date||'').startsWith(ym)).length + '건';
+        }
+        return '<button class="sum-pg" data-gopage="'+pg.id+'"><span>'+(t.icon||'📄')+' '+esc(pg.name||'페이지')+'</span><span class="v">'+v+'</span></button>';
+      }).join('')
+    : '<span class="tiny muted">＋ 로 가계부·투자일지 같은 페이지를 추가하면 이 달 집계가 여기 한 줄씩 뜹니다</span>';
+
+  // ⑩ 기록 잔디
+  $('#sumHeat').innerHTML = grassHTML(12);
 }
 
 function renderWeekSummary(){
@@ -2348,6 +2562,7 @@ function renderReview(){
    렌더 전체
    ========================================================== */
 function renderAll(){
+  if(curTab==='sum')    renderSummary();
   if(curTab==='today')  renderToday();
   if(curTab==='cal')    renderCalendar();
   if(curTab==='memo')   renderNotes();
@@ -2982,6 +3197,15 @@ function bindAll(){
     calMonth = b.dataset.upgo.slice(0,7);
     switchTab('cal');
   };
+  // F-33 Summary — 카드 링크·일정·페이지 클릭은 전부 위임
+  $('#p-sum').onclick = e=>{
+    const up = e.target.closest('[data-upgo]');
+    if(up){ calMonth = up.dataset.upgo.slice(0,7); switchTab('cal'); return; }
+    const pg = e.target.closest('[data-gopage]');
+    if(pg){ switchTab('page:'+pg.dataset.gopage); return; }
+    const go = e.target.closest('[data-go]');
+    if(go){ if(go.dataset.go==='today') curDate = todayStr(); switchTab(go.dataset.go); }
+  };
   $('#calOne').addEventListener('change', ()=>{
     Object.assign(ensureMonth(calMonth), { oneThing: $('#calOne').value.trim(), ut: Date.now() });
     saveModel();
@@ -3205,6 +3429,7 @@ function bindAll(){
   document.addEventListener('visibilitychange', ()=>{ if(!document.hidden && dirty) pushRemote(); });
   // 상단 원싱·감사일기를 쓰는 중이면 다시 그리지 않는다 (포커스·커서 유실 방지)
   setInterval(()=>{
+    if(curTab==='sum'){ renderSummary(); return; }
     if(curTab!=='today' || curDate!==todayStr() || painting || editing) return;
     if($('#wgrid input:focus, #wgrid textarea:focus')) return;
     renderWeekGrid();
