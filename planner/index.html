@@ -407,20 +407,29 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
 @media (max-width:1100px){
   .cols{grid-template-columns:1fr}
 }
-/* F-13.6 폰 — Weekly 는 선택한 하루(시간|띠|계획|실적)만 + 요일 칩. 같은 링크·같은 데이터 */
-.wg-chips{display:none}
+/* F-13.6 v2 폰 — Weekly 는 선택한 하루 · 실적 1열(계획은 토글) + 요일 칩. 같은 링크·같은 데이터 */
+.wg-chips,.wg-cols{display:none}
 @media (max-width:900px){
-  .wg{grid-template-columns:44px 6px minmax(0,1fr) minmax(0,1fr);min-width:0}
-  .wg-chips{grid-column:1/-1;display:flex;gap:4px;padding:6px 4px;background:var(--card2);
+  .wg{grid-template-columns:48px 6px minmax(0,1fr);min-width:0}
+  .wg .cell{height:36px;font-size:15px;padding:0 10px}
+  .wg .wg-tm{font-size:12px}
+  .wg .wg-in{grid-column:2/-1}
+  .wg .wg-in textarea,.wg .wg-in input{font-size:14px}
+  .wg-chips{grid-column:1/-1;display:flex;gap:4px;padding:6px 2px;background:var(--card2);
     border-bottom:1px solid var(--line);overflow-x:auto}
-  .wg-chip{flex:1;min-width:42px;text-align:center;padding:5px 2px;border-radius:8px;font-size:11px;font-weight:700;
+  .wg-chip{flex:1;min-width:42px;text-align:center;padding:6px 2px;border-radius:8px;font-size:11px;font-weight:700;
     color:var(--sub);background:var(--card);border:1px solid var(--line);cursor:pointer}
-  .wg-chip b{display:block;font-size:13px;color:var(--ink)}
+  .wg-chip b{display:block;font-size:14px;color:var(--ink)}
   .wg-chip.sun,.wg-chip.sun b{color:#e11d48}
   .wg-chip.sat,.wg-chip.sat b{color:#2563eb}
   .wg-chip.t{background:var(--key-soft)}
   .wg-chip.sel{border-color:var(--key);box-shadow:inset 0 -2px 0 var(--key)}
-  .wg .wg-h2{top:0}
+  .wg-cols{grid-column:1/-1;display:flex;gap:6px;padding:8px 2px 6px;background:var(--card)}
+  .wg-colbtn{flex:1;padding:9px 0;border-radius:10px;font-size:14px;font-weight:700;color:var(--sub);
+    background:var(--card2);border:1px solid var(--line);cursor:pointer}
+  .wg-colbtn.on{color:#fff;background:var(--key);border-color:var(--key)}
+  /* PC 전용 요소 숨김 — 그리드가 첫 화면에 오게 */
+  .pal,.legend,#btnApplyHabits,#btnCopyPlan,#btnCats,#btnExport,#btnImport,#dateIn{display:none}
 }
 @media (max-width:640px){
   .wrap{padding:0 10px 56px}
@@ -1283,6 +1292,7 @@ let curTab  = 'today';
 // F-13.6 폰 감지 — 900px 이하면 Weekly 는 선택한 하루만 그린다 (링크·데이터는 동일)
 const mobQ  = window.matchMedia ? window.matchMedia('(max-width:900px)') : null;
 const isMob = () => !!(mobQ && mobQ.matches);
+let mobCol = 'actual';                        // 폰 열 토글 — 실적이 기본
 if(mobQ && mobQ.addEventListener) mobQ.addEventListener('change', ()=>renderToday());
 let calMonth = todayStr().slice(0,7);
 let calShow  = { personal:true, work:true, done:true };   // 화면 상태 — 저장하지 않는다. done=완료 표시 여부
@@ -1484,6 +1494,9 @@ function renderWeekGrid(){
          + DOW[w] + '<b>' + (+d.slice(8)) + '</b></div>';
     }
     h += '</div>';
+    h += '<div class="wg-cols">'
+       + '<button class="wg-colbtn'+(mobCol==='actual'?' on':'')+'" data-mcol="actual">실적</button>'
+       + '<button class="wg-colbtn'+(mobCol==='plan'?' on':'')+'" data-mcol="plan">계획</button></div>';
   }else{
     h += '<div class="wg-h wg-corner">시간</div>';
     for(const d of dates){
@@ -1507,8 +1520,10 @@ function renderWeekGrid(){
   }
 
   // 헤더 2 — 계획 / 실적 (여기서부터 시간 기록)
-  h += '<div class="wg-h2"></div>';
-  for(let k=0;k<dates.length;k++) h += '<div class="wg-h2 ds"></div><div class="wg-h2">계획</div><div class="wg-h2">실적</div>';
+  if(!mob){
+    h += '<div class="wg-h2"></div>';
+    for(let k=0;k<dates.length;k++) h += '<div class="wg-h2 ds"></div><div class="wg-h2">계획</div><div class="wg-h2">실적</div>';
+  }
 
   // 본문
   const s0 = firstSlot();
@@ -1522,10 +1537,16 @@ function renderWeekGrid(){
       const now = (d===today && i===ns) ? ' now' : '';
       const ec = (et && evc[d]) ? evc[d][i] : null;
       h += '<div class="wg-ev'+(et?' has':'')+'"'+(ec?' style="background:'+ec+'"':'')+' title="'+esc(et||'')+'"></div>';
-      h += '<div class="cell'+(hh?' hh':'')+(p?' filled':'')+now+'" data-m="plan" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(p, 'plan')+'">'
-         + esc(cellText(p)) + '</div>';
-      h += '<div class="cell'+(hh?' hh':'')+(a?' filled':'')+now+'" data-m="actual" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(a, 'actual')+'">'
-         + esc(cellText(a)) + '</div>';
+      if(mob){
+        const v = mobCol==='plan' ? p : a;
+        h += '<div class="cell'+(hh?' hh':'')+(v?' filled':'')+now+'" data-m="'+mobCol+'" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(v, mobCol)+'">'
+           + esc(cellText(v)) + '</div>';
+      }else{
+        h += '<div class="cell'+(hh?' hh':'')+(p?' filled':'')+now+'" data-m="plan" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(p, 'plan')+'">'
+           + esc(cellText(p)) + '</div>';
+        h += '<div class="cell'+(hh?' hh':'')+(a?' filled':'')+now+'" data-m="actual" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(a, 'actual')+'">'
+           + esc(cellText(a)) + '</div>';
+      }
     }
   }
   $('#wgrid').innerHTML = h;
@@ -1711,6 +1732,8 @@ function bindGrid(){
 
   // 요일 머리 클릭 = 그 날 선택
   grid.addEventListener('click', e=>{
+    const c = e.target.closest('[data-mcol]');
+    if(c){ mobCol = c.dataset.mcol; renderWeekGrid(); return; }   // 폰 열 토글
     const b = e.target.closest('[data-pick]'); if(!b) return;
     curDate = b.dataset.pick; renderToday();
   });
