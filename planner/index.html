@@ -436,7 +436,56 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
   .todo select{display:none}
   .todo .xbtn{font-size:18px;padding:0 8px}
   .addrow input{font-size:15px}
+  /* UI 전환기 */
+  .mob-sw{grid-column:1/-1;display:flex;gap:6px;padding:6px 2px}
+  .msw{flex:1;padding:8px 0;border-radius:9px;font-size:13px;font-weight:700;color:var(--sub);background:var(--card2);border:1px solid var(--line);cursor:pointer}
+  .msw.on{color:#fff;background:var(--key);border-color:var(--key)}
+  /* 타임라인·리스트 공용 상단 (원싱·감사) */
+  .mob-one{grid-column:1/-1;display:flex;align-items:center;gap:6px;padding:7px 4px;border-bottom:1px solid var(--line);background:#fffbeb}
+  .mob-one input{flex:1;border:0;outline:0;font-size:14px;font-weight:600;background:transparent;color:var(--ink)}
+  .mob-grat{grid-column:1/-1;border-bottom:1px solid var(--line)}
+  .mob-grat textarea{width:100%;border:0;outline:0;font-size:13px;min-height:42px;background:transparent;color:var(--ink);padding:5px 4px;box-sizing:border-box;resize:none}
+  /* 타임라인 (Structured 식 병합 블록) */
+  .tlhead{grid-column:1/-1;display:flex;font-size:12px;font-weight:700;color:var(--mute);padding:8px 0 4px}
+  .tlhead span:first-child{flex:none;width:40px}
+  .tlhead span{flex:1;text-align:center}
+  .tlwrap{grid-column:1/-1;display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+  .tlruler{flex:none;width:40px;position:relative;background:var(--card2)}
+  .tlh{position:absolute;left:0;right:5px;font-size:10px;color:var(--mute);text-align:right;transform:translateY(-1px)}
+  .tltrack{flex:1;position:relative;border-left:1px solid var(--line);
+    background:repeating-linear-gradient(to bottom, transparent 0, transparent 27px, #f1f3f6 27px, #f1f3f6 28px)}
+  .tlblk{position:absolute;left:3px;right:3px;border-radius:7px;border-left:3px solid #94a3b8;background:#f1f5f9;
+    padding:2px 6px;overflow:hidden;font-size:12px;line-height:1.18;cursor:pointer;box-sizing:border-box}
+  .tlblk b{display:block;font-size:12.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tlblk span{font-size:10.5px;color:var(--sub)}
+  .tlnow{position:absolute;left:0;right:0;height:2px;background:#ef4444;z-index:2;pointer-events:none}
+  /* 리스트 (기록 블록 리스트) */
+  .lshead{grid-column:1/-1;font-size:13px;font-weight:800;color:var(--sub);padding:12px 2px 4px}
+  .lsrow{grid-column:1/-1;display:flex;align-items:center;gap:9px;padding:12px 8px;border-bottom:1px solid var(--line);background:var(--card);font-size:14px;cursor:pointer}
+  .lsrow .dot{width:10px;height:10px;border-radius:5px;flex:none}
+  .lsrow .t{color:var(--sub);font-size:12.5px;flex:none;width:96px}
+  .lsrow .l{flex:1;font-weight:600;color:var(--ink);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .lsrow .h{color:var(--sub);font-size:12.5px;flex:none}
+  .lsempty{grid-column:1/-1;font-size:12.5px;color:var(--mute);padding:6px 8px;margin:0}
+  .lsadd{grid-column:1/-1;margin:8px 0 2px;padding:11px;border:1px dashed var(--line-strong);border-radius:9px;color:var(--sub);font-size:13px;background:transparent;cursor:pointer}
 }
+/* 모바일 바텀시트 편집기 (타임라인·리스트 공용) */
+#mobsheetbg{position:fixed;inset:0;background:rgba(15,23,42,.35);z-index:69;display:none}
+#mobsheetbg.on{display:block}
+#mobsheet{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--card);border-radius:16px 16px 0 0;
+  box-shadow:0 -10px 34px rgba(0,0,0,.25);padding:14px 16px 20px;display:none}
+#mobsheet.on{display:block}
+#mobsheet .sh-t{font-size:13px;font-weight:800;color:var(--sub);margin-bottom:8px}
+#mobsheet .sh-time{display:flex;gap:8px;align-items:center;margin-bottom:8px;font-size:14px;color:var(--sub)}
+#mobsheet select{flex:1;padding:9px;border:1px solid var(--line);border-radius:9px;font-size:15px;background:var(--card);color:var(--ink)}
+#mobsheet input{width:100%;box-sizing:border-box;padding:11px;border:1px solid var(--line);border-radius:9px;font-size:15px;margin-bottom:8px;background:var(--card);color:var(--ink)}
+#mobsheet .sh-cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+#mobsheet .shc{padding:7px 12px;border-radius:16px;border:1px solid var(--line);font-size:13px;background:var(--card2);color:var(--sub);cursor:pointer}
+#mobsheet .shc.on{color:var(--ink);background:transparent;box-shadow:inset 0 0 0 2px var(--c)}
+#mobsheet .sh-btns{display:flex;gap:8px}
+#mobsheet .sh-btns button{flex:1;padding:12px;border-radius:10px;font-size:15px;font-weight:700;border:1px solid var(--line);background:var(--card2);color:var(--ink);cursor:pointer}
+#mobsheet #shSave{background:var(--key);border-color:var(--key);color:#fff}
+#mobsheet #shDel{color:#dc2626}
 @media (max-width:640px){
   .wrap{padding:0 10px 56px}
   .top-in{padding:8px 10px 0}
@@ -1463,10 +1512,175 @@ function cellText(b){
 }
 
 /** 주간 그리드 — 시간 | (일정띠, 계획, 실적) × 7일 */
+/* --- F-13.6 v4: 모바일 UI 3버전 (타임라인 / 그리드 / 리스트) --- */
+const MOB_PXS = 14;                                   // 타임라인 30분당 px (1시간 = 28px)
+function mobUI(){ try{ return localStorage.getItem('planner-mob-ui') || 'grid'; }catch(_){ return 'grid'; } }
+function setMobUI(v){ try{ localStorage.setItem('planner-mob-ui', v); }catch(_){ } }
+
+/** 연속된 같은 (분류+라벨) 슬롯을 블록으로 병합 */
+function dayBlocks(d, m){
+  const day = M.days[d]; if(!day) return [];
+  const arr = day[m], out = [];
+  let cur = null;
+  for(let i=0;i<SLOTS;i++){
+    const c = arr[i];
+    if(c){
+      const key = (c.catId||'') + '|' + (c.label||'');
+      if(cur && cur.key===key && cur.e===i) cur.e = i+1;
+      else { cur = {key, s:i, e:i+1, catId:c.catId||null, label:c.label||null}; out.push(cur); }
+    } else cur = null;
+  }
+  return out;
+}
+const slotEndLabel = i => i>=SLOTS ? '24:00' : slotLabel(i);
+
+function mobChipsHTML(week, today){
+  let h = '<div class="wg-chips">';
+  for(const d of week){
+    const w = dowOf(d);
+    h += '<div class="wg-chip'+(d===today?' t':'')+(d===curDate?' sel':'')
+       + (w===0?' sun':w===6?' sat':'')+'" data-pick="'+d+'">'
+       + DOW[w] + '<b>' + (+d.slice(8)) + '</b></div>';
+  }
+  return h + '</div>';
+}
+
+function tlHTML(d, today){
+  let ruler = '';
+  for(let i=0;i<24;i++) ruler += '<div class="tlh" style="top:'+(i*2*MOB_PXS)+'px">'+String(i).padStart(2,'0')+'</div>';
+  const track = m => {
+    let t = '';
+    for(const b of dayBlocks(d, m)){
+      const c = catById(b.catId);
+      const col = c ? c.color : '#94a3b8';
+      const name = b.label || (c ? c.name : '기록');
+      t += '<div class="tlblk" data-blk="'+m+'|'+b.s+'|'+b.e+'"'
+         + (m==='actual' && c ? ' style="top:'+(b.s*MOB_PXS)+'px;height:'+((b.e-b.s)*MOB_PXS-2)+'px;border-left-color:'+col+';background:'+col+'1c"'
+                              : ' style="top:'+(b.s*MOB_PXS)+'px;height:'+((b.e-b.s)*MOB_PXS-2)+'px"')
+         + '><b>'+esc(name)+'</b><span>'+slotLabel(b.s)+'–'+slotEndLabel(b.e)+' · '+fmtH(hoursOf(b.e-b.s))+'</span></div>';
+    }
+    if(d===today && m==='actual') t += '<div class="tlnow" style="top:'+(nowSlot()*MOB_PXS)+'px"></div>';
+    return '<div class="tltrack" data-track="'+m+'" style="height:'+(SLOTS*MOB_PXS)+'px">'+t+'</div>';
+  };
+  return '<div class="tlhead"><span></span><span>계획</span><span>실적</span></div>'
+       + '<div class="tlwrap"><div class="tlruler" style="height:'+(SLOTS*MOB_PXS)+'px">'+ruler+'</div>'
+       + track('plan') + track('actual') + '</div>';
+}
+
+function listHTML(d){
+  const sec = (m, title) => {
+    const bl = dayBlocks(d, m);
+    let r = '<div class="lshead">'+title+'</div>';
+    r += bl.length
+      ? bl.map(b=>{
+          const c = catById(b.catId);
+          return '<div class="lsrow" data-blk="'+m+'|'+b.s+'|'+b.e+'">'
+            + '<span class="dot" style="background:'+(m==='actual' && c ? c.color : '#94a3b8')+'"></span>'
+            + '<span class="t">'+slotLabel(b.s)+'–'+slotEndLabel(b.e)+'</span>'
+            + '<span class="l">'+esc(b.label || (c ? c.name : '기록'))+'</span>'
+            + '<span class="h">'+fmtH(hoursOf(b.e-b.s))+'</span></div>';
+        }).join('')
+      : '<p class="lsempty">기록이 없습니다 — 아래 ＋로 추가</p>';
+    return r + '<button class="lsadd" data-addrec="'+m+'">＋ '+title+' 추가</button>';
+  };
+  return sec('actual','실적') + sec('plan','계획');
+}
+
+const MOB_UIS = [['tl','타임라인'],['grid','그리드'],['list','리스트']];
+function mobSwitcherHTML(ui){
+  return '<div class="mob-sw">' + MOB_UIS.map(([k,n]) =>
+    '<button class="msw'+(ui===k?' on':'')+'" data-mui="'+k+'">'+n+'</button>').join('') + '</div>';
+}
+
+/** 폰 타임라인/리스트 화면 (그리드가 아닐 때 renderWeekGrid 가 위임) */
+function renderMobAlt(week){
+  const d = curDate, today = todayStr(), ui = mobUI();
+  let h = mobChipsHTML(week, today) + mobSwitcherHTML(ui);
+  h += '<div class="mob-one"><span>🔥</span><input data-one="'+d+'" placeholder="'+(d===today?'이것 하나만 끝내면 성공':'원싱')+'" value="'+esc((M.days[d]&&M.days[d].oneThing)||'')+'"></div>';
+  h += '<div class="mob-grat"><textarea data-grat="'+d+'" placeholder="감사일기 1. 2. 3.">'+esc(gratText(d))+'</textarea></div>';
+  h += ui==='tl' ? tlHTML(d, today) : listHTML(d);
+  $('#wgrid').innerHTML = h;
+
+  $('#wkRange').textContent = week[0].slice(5).replace('-','/') + ' ~ ' + week[6].slice(5).replace('-','/');
+  let pc=0, ac=0;
+  for(const dd of week){
+    const day = M.days[dd]; if(!day) continue;
+    pc += day.plan.filter(Boolean).length; ac += day.actual.filter(Boolean).length;
+  }
+  const cd = M.days[curDate];
+  $('#gridInfo').textContent = '주간 계획 '+fmtH(hoursOf(pc))+' · 실적 '+fmtH(hoursOf(ac))
+    + '  |  선택 '+curDate.slice(5).replace('-','/')+' 실적 '+fmtH(hoursOf(cd ? cd.actual.filter(Boolean).length : 0));
+}
+
+/* --- 바텀시트 편집기 (타임라인·리스트 공용) --- */
+let sheetCtx = null;
+function ensureSheet(){
+  if($('#mobsheet')) return;
+  const bg = document.createElement('div'); bg.id = 'mobsheetbg';
+  bg.addEventListener('click', closeSheet);
+  document.body.appendChild(bg);
+  const sh = document.createElement('div'); sh.id = 'mobsheet';
+  document.body.appendChild(sh);
+}
+function closeSheet(){
+  sheetCtx = null;
+  const sh = $('#mobsheet'), bg = $('#mobsheetbg');
+  if(sh) sh.classList.remove('on');
+  if(bg) bg.classList.remove('on');
+}
+function sheetOpen(m, s0, e0){
+  ensureSheet();
+  const d = curDate, day = M.days[d];
+  const cur = day ? day[m][s0] : null;
+  sheetCtx = {d, m, os:s0, oe:e0, catId: cur ? (cur.catId||null) : null};
+  let oS = '', oE = '';
+  for(let i=0;i<SLOTS;i++)  oS += '<option value="'+i+'"'+(i===s0?' selected':'')+'>'+slotLabel(i)+'</option>';
+  for(let i=1;i<=SLOTS;i++) oE += '<option value="'+i+'"'+(i===e0?' selected':'')+'>'+slotEndLabel(i)+'</option>';
+  $('#mobsheet').innerHTML =
+    '<div class="sh-t">'+(m==='plan'?'계획':'실적')+' · '+d.slice(5).replace('-','/')+'</div>'
+    + '<div class="sh-time"><select id="shS">'+oS+'</select> ~ <select id="shE">'+oE+'</select></div>'
+    + '<input id="shL" placeholder="내용 (예: 업무, 수면, 원고 작성)" value="'+esc(cur ? (cur.label||'') : '')+'">'
+    + '<div class="sh-cats">' + M.categories.map(c =>
+        '<button class="shc'+(sheetCtx.catId===c.id?' on':'')+'" data-shc="'+c.id+'" style="--c:'+c.color+'">'+esc(c.name)+'</button>').join('') + '</div>'
+    + '<div class="sh-btns">'+(cur?'<button id="shDel">삭제</button>':'')+'<button id="shSave">저장</button></div>';
+  $$('#mobsheet .shc').forEach(b => b.addEventListener('click', ()=>{
+    sheetCtx.catId = sheetCtx.catId === b.dataset.shc ? null : b.dataset.shc;
+    $$('#mobsheet .shc').forEach(x => x.classList.toggle('on', x.dataset.shc === sheetCtx.catId));
+  }));
+  $('#shSave').addEventListener('click', sheetSave);
+  if($('#shDel')) $('#shDel').addEventListener('click', sheetDel);
+  $('#mobsheet').classList.add('on'); $('#mobsheetbg').classList.add('on');
+  $('#shL').focus();
+}
+function sheetSave(){
+  if(!sheetCtx) return;
+  const {d, m, os, oe} = sheetCtx;
+  const day = ensureDay(d);
+  let s0 = +$('#shS').value, e0 = +$('#shE').value;
+  if(e0 <= s0) e0 = s0 + 1;
+  for(let i=os;i<oe;i++) day[m][i] = null;          // 원래 범위 비우고
+  const label = $('#shL').value.trim() || null;
+  let catId = sheetCtx.catId;
+  if(label || catId){
+    if(!catId){ const c0 = autoCat(d, m, s0, label); catId = c0.catId; }
+    for(let i=s0;i<e0;i++) day[m][i] = {catId, goalId:null, label};
+    learnLabel(label, catId);
+  }
+  saveModel(); closeSheet(); renderToday();
+}
+function sheetDel(){
+  if(!sheetCtx) return;
+  const {d, m, os, oe} = sheetCtx;
+  const day = ensureDay(d);
+  for(let i=os;i<oe;i++) day[m][i] = null;
+  saveModel(); closeSheet(); renderToday();
+}
+
 function renderWeekGrid(){
   const week  = weekDates(curDate);
   const mob   = isMob();
   const dates = mob ? [curDate] : week;      // F-13.6 폰 = 선택한 하루만
+  if(mob && mobUI() !== 'grid'){ renderMobAlt(week); return; }   // 타임라인/리스트는 별도 렌더
   const today = todayStr(), ns = nowSlot();
 
   // 일정 맵 (날짜 → 슬롯 → 제목)
@@ -1491,14 +1705,7 @@ function renderWeekGrid(){
   // 헤더 1 — 요일. 폰은 요일 칩 (data-pick 은 기존 클릭 핸들러를 그대로 탄다)
   let h = '';
   if(mob){
-    h += '<div class="wg-chips">';
-    for(const d of week){
-      const w = dowOf(d);
-      h += '<div class="wg-chip'+(d===today?' t':'')+(d===curDate?' sel':'')
-         + (w===0?' sun':w===6?' sat':'')+'" data-pick="'+d+'">'
-         + DOW[w] + '<b>' + (+d.slice(8)) + '</b></div>';
-    }
-    h += '</div>';
+    h += mobChipsHTML(week, today) + mobSwitcherHTML('grid');
   }else{
     h += '<div class="wg-h wg-corner">시간</div>';
     for(const d of dates){
@@ -1726,6 +1933,18 @@ function bindGrid(){
 
   // 요일 머리 클릭 = 그 날 선택
   grid.addEventListener('click', e=>{
+    const sw = e.target.closest('[data-mui]');
+    if(sw){ setMobUI(sw.dataset.mui); renderWeekGrid(); return; }
+    const bk = e.target.closest('[data-blk]');
+    if(bk){ const [m, s0, e0] = bk.dataset.blk.split('|'); sheetOpen(m, +s0, +e0); return; }
+    const ad = e.target.closest('[data-addrec]');
+    if(ad){ const s0 = Math.min(SLOTS-2, Math.max(0, nowSlot() - nowSlot()%2)); sheetOpen(ad.dataset.addrec, s0, s0+2); return; }
+    const tr = e.target.closest('[data-track]');
+    if(tr){
+      const r = tr.getBoundingClientRect();
+      let s0 = Math.floor((e.clientY - r.top) / MOB_PXS); s0 = Math.max(0, Math.min(SLOTS-2, s0 - s0%2));
+      sheetOpen(tr.dataset.track, s0, s0+2); return;
+    }
     const b = e.target.closest('[data-pick]'); if(!b) return;
     curDate = b.dataset.pick; renderToday();
   });
