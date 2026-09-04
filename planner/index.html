@@ -164,6 +164,29 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .sum-grat{font-size:12.5px;padding:4px 0}
 .sum-grat .dt{font-size:11px;color:var(--mute);font-weight:700}
 .sum-grat ul{margin:2px 0 0;padding-left:16px}
+/* F-42 — 오늘 할 것 우선 */
+.sum-top{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;align-items:start}
+.sum-side{display:flex;flex-direction:column;gap:16px}
+@media (max-width:900px){ .sum-top{grid-template-columns:1fr} }
+.sum-sec{margin-top:14px}
+.sum-sec:first-child{margin-top:0}
+.sum-sec h4{font-size:11px;color:var(--mute);letter-spacing:.05em;margin-bottom:4px;display:flex;gap:6px;align-items:baseline}
+.sum-sec h4 .muted{font-weight:500;letter-spacing:0}
+.sum-ck{display:flex;align-items:center;gap:9px;padding:5px 2px;border-bottom:1px solid #f1f3f6;font-size:13px}
+.sum-ck:last-child{border-bottom:none}
+.sum-ck input[type=checkbox]{width:17px;height:17px;accent-color:var(--good);flex:none;cursor:pointer}
+.sum-ck .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sum-ck.done .t{color:var(--mute);text-decoration:line-through}
+.sum-ck .c{font-size:10.5px;color:var(--mute);flex:none}
+.sum-ck .over{font-size:10.5px;font-weight:700;color:var(--bad);flex:none}
+.sum-ck .go{font-size:11px;color:var(--mute);flex:none;padding:1px 6px;border-radius:5px;border:1px solid var(--line)}
+.sum-ck .go:hover{color:var(--key);border-color:var(--key)}
+.sum-ev{display:flex;gap:8px;align-items:center;font-size:12.5px;padding:3px 2px}
+.sum-ev .tm{color:var(--mute);font-weight:600;min-width:40px;font-variant-numeric:tabular-nums}
+.sum-ev.done{opacity:.55;text-decoration:line-through}
+.sum-more{display:block;width:100%;text-align:left;margin-top:16px;padding:10px 14px;border:1px dashed var(--line-strong);border-radius:10px;font-size:13px;font-weight:700;color:var(--sub);background:var(--card2)}
+.sum-more:hover{color:var(--ink);border-color:var(--ink)}
+#sumMore{margin-top:16px}
 .snav-btn.add:hover{color:var(--key)}
 .tplcard{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line);border-radius:10px;
   padding:12px 14px;margin-bottom:8px;background:var(--card)}
@@ -223,6 +246,101 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .jn-row .xbtn2{border:none;background:none;color:var(--mute);font-size:14px;padding:4px}
 .jn-row .xbtn2:hover{color:var(--bad)}
 
+/* ---------- DB 페이지 (F-41) — 노션식 데이터베이스 ---------- */
+.db-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.db-bar .spacer{flex:1}
+.db-fil{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.db-f{font-size:11.5px;font-weight:700;color:var(--mute);padding:5px 9px;border-right:1px solid var(--line)}
+.db-f:last-child{border-right:none}
+.db-f.on{background:var(--ink);color:#fff}
+.db-tbl{overflow-x:auto}
+.db-h{display:grid;gap:4px;font-size:11px;font-weight:800;color:var(--mute);padding:0 4px 4px;min-width:600px}
+.db-hc{text-align:left;padding:4px 6px;border-radius:6px;color:var(--mute)}
+.db-hc:hover{background:var(--card2);color:var(--ink)}
+.db-hc.add{text-align:center}
+.db-r{display:grid;gap:4px;align-items:center;margin-bottom:4px;min-width:600px}
+.db-r.done .tt input{color:var(--mute);text-decoration:line-through}
+.db-c input,.db-c select{width:100%;border:1px solid transparent;border-radius:7px;padding:6px 8px;font-size:12.5px;min-width:0;background:transparent}
+.db-c input:hover,.db-c select:hover{border-color:var(--line)}
+.db-c input:focus,.db-c select:focus{border-color:var(--key);outline:none;background:var(--card);box-shadow:0 0 0 2px var(--key-soft)}
+.db-c input[type=checkbox]{width:17px;height:17px;accent-color:var(--good)}
+.db-c.tt{display:flex;align-items:center;gap:4px}
+.db-c.tt input{font-weight:600}
+.db-open{flex:none;font-size:12px;color:var(--mute);border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+.db-open:hover{color:var(--key);border-color:var(--key)}
+.db-par{color:var(--mute);font-size:12px;flex:none}
+.db-pr{flex:none;font-size:10.5px;font-weight:700;color:var(--sub);background:var(--card2);border-radius:999px;padding:1px 7px}
+.db-sel{border-left:3px solid var(--c,var(--mute)) !important;font-weight:600}
+.db-dt{display:flex;gap:4px;align-items:center}
+.db-r .xbtn2,.db-tplrow .xbtn2{border:none;background:none;color:var(--mute);font-size:14px;padding:4px}
+.db-r .xbtn2:hover,.db-tplrow .xbtn2:hover{color:var(--bad)}
+.db-board{display:flex;gap:10px;overflow-x:auto;align-items:flex-start;padding-bottom:6px}
+.db-col{flex:0 0 230px;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:6px}
+.db-colh{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--sub);padding:2px 4px 4px}
+.db-colh i{width:9px;height:9px;border-radius:3px}
+.db-card{display:flex;flex-direction:column;gap:4px;text-align:left;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--mute);border-radius:8px;padding:8px 10px;font-size:12.5px}
+.db-card:hover{border-color:var(--key)}
+.db-card .t{font-weight:600}
+.db-card.done .t{color:var(--mute);text-decoration:line-through}
+.db-tags{display:flex;gap:4px;flex-wrap:wrap}
+.db-tags i{font-style:normal;font-size:10.5px;background:var(--key-soft);color:var(--key);border-radius:999px;padding:1px 7px}
+.db-prbar{display:block;height:4px;border-radius:99px;background:#eef1f5;overflow:hidden}
+.db-prbar i{display:block;height:100%;background:var(--good)}
+.db-coladd{color:var(--mute);font-weight:800;padding:4px;border-radius:6px;text-align:left}
+.db-coladd:hover{background:var(--card)}
+.db-sec{margin-bottom:14px}
+.db-sec h4{font-size:11.5px;color:var(--mute);letter-spacing:.04em;margin-bottom:4px}
+.db-li{display:flex;align-items:center;gap:9px;padding:6px 4px;border-bottom:1px solid #f1f3f6;font-size:13px}
+.db-li input[type=checkbox]{width:17px;height:17px;accent-color:var(--good);flex:none}
+.db-li .t{flex:1;min-width:0;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.db-li .t:hover{color:var(--key)}
+.db-li.done .t{color:var(--mute);text-decoration:line-through;font-weight:500}
+.db-st{font-size:11px;font-weight:700;flex:none}
+.db-page{max-width:820px;margin:0 auto}
+.db-crumb{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--mute);margin-bottom:10px}
+.db-crumb button{color:var(--sub);padding:2px 6px;border-radius:6px}
+.db-crumb button:hover{background:var(--card2);color:var(--ink)}
+.db-crumb .sep{color:var(--line-strong)}
+.db-ptitle{width:100%;font-size:22px;font-weight:800;border:none;background:transparent;padding:4px 0;margin-bottom:8px;outline:none}
+.db-ptitle::placeholder{color:var(--line-strong)}
+.db-props{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px 14px;margin-bottom:12px}
+.db-pf{display:flex;align-items:center;gap:8px;font-size:12px}
+.db-pf>span{flex:0 0 64px;color:var(--mute);font-weight:700;font-size:11.5px}
+.db-pf input,.db-pf select{flex:1;min-width:0;border:1px solid transparent;border-radius:7px;padding:5px 8px;font-size:12.5px;background:transparent}
+.db-pf input:hover,.db-pf select:hover{border-color:var(--line)}
+.db-pf input:focus,.db-pf select:focus{border-color:var(--key);outline:none;background:var(--card)}
+.db-pf input[type=checkbox]{flex:none;width:17px;height:17px}
+.db-pf.wide{grid-column:1/-1}
+.db-pf .db-dt{flex:1;flex-wrap:wrap}
+.db-pf .db-dt input{flex:0 1 150px;min-width:130px}
+.db-prog{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.db-prog .bar{flex:1}
+.db-blocks{border-top:1px solid var(--line);padding-top:8px;min-height:40px}
+.blk{display:flex;align-items:center;gap:8px;padding:2px 0}
+.blk.l1{padding-left:26px}.blk.l2{padding-left:52px}.blk.l3{padding-left:78px}
+.blk input[type=checkbox]{width:16px;height:16px;accent-color:var(--good);flex:none}
+.blk .dot{width:5px;height:5px;border-radius:50%;background:var(--line-strong);flex:none;margin:0 6px 0 5px}
+.blk.h .dot{display:none}
+.blk .btx{flex:1;min-width:0;border:none;background:transparent;font-size:13.5px;padding:4px 6px;border-radius:6px;outline:none}
+.blk .btx:focus{background:var(--card2)}
+.blk.h .btx{font-size:17px;font-weight:800;padding-top:10px}
+.blk.done .btx{color:var(--mute);text-decoration:line-through}
+.blk.hr{gap:4px}.blk.hr hr{flex:1;border:none;border-top:1px solid var(--line)}
+.blk .xbtn2{border:none;background:none;color:var(--mute);font-size:13px;padding:2px 6px}
+.db-blkadd{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 16px}
+.db-kids{border-top:1px solid var(--line);padding-top:10px}
+.db-kids h4{font-size:11.5px;color:var(--mute);letter-spacing:.04em;margin-bottom:6px}
+.db-kid{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:6px 4px;border-bottom:1px solid #f1f3f6;font-size:13px}
+.db-kid i{width:9px;height:9px;border-radius:3px;flex:none}
+.db-kid .t{flex:1;min-width:0;font-weight:600}
+.db-kid:hover .t{color:var(--key)}
+.db-kid.done .t{color:var(--mute);text-decoration:line-through;font-weight:500}
+.db-pfoot{display:flex;gap:8px;align-items:center;margin-top:18px;padding-top:10px;border-top:1px solid var(--line)}
+.db-pfoot .spacer{flex:1}
+.db-hidegrid{display:flex;gap:10px;flex-wrap:wrap;font-size:12px}
+.db-tplrow{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.db-tplrow .tplcard{flex:1}
+.db-empty{margin:6px 0}
 /* ---------- Memo (F-16) ---------- */
 .note{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:var(--card)}
 .note.pin{border-color:#f7d774;background:#fffdf3}
@@ -573,19 +691,25 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
 
   <!-- ============ SUMMARY (F-33) ============ -->
   <section class="panel" id="p-sum">
-    <div class="sum-head"><h2 id="sumDate"></h2><span class="tiny muted">모든 현황을 한 화면에 · 카드 우측 링크로 그 탭에 갑니다</span></div>
-    <div class="sum-grid">
-      <div class="card"><div class="hd"><h3>오늘</h3><span class="spacer"></span><span class="tiny muted" id="sumNow"></span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumToday"></div></div>
-      <div class="card"><div class="hd"><h3>이번 주 · 분류 달성</h3><span class="spacer"></span><span class="tiny muted" id="sumWkLb"></span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumWeek"></div></div>
-      <div class="card"><div class="hd"><h3>이 달</h3><span class="spacer"></span><span class="tiny muted" id="sumMoLb"></span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumMonth"></div></div>
-      <div class="card"><div class="hd"><h3>다가오는 일정</h3><span class="spacer"></span><span class="tiny muted">D-day</span><button class="golink" data-go="cal">Calendar →</button></div><div class="bd" id="sumUp"></div></div>
-      <div class="card"><div class="hd"><h3>분류별 연속 기록</h3><span class="spacer"></span><span class="tiny muted">최근 14일 · 실적 기준</span></div><div class="bd" id="sumStreak"></div></div>
-      <div class="card"><div class="hd"><h3>기타 할 일</h3><span class="spacer"></span><span class="tiny muted">이번 주 · 미완료</span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumTodo"></div></div>
-      <div class="card"><div class="hd"><h3>메모</h3><span class="spacer"></span><span class="tiny muted" id="sumMemoCnt"></span><button class="golink" data-go="memo">Memo →</button></div><div class="bd" id="sumMemo"></div></div>
-      <div class="card"><div class="hd"><h3>감사일기</h3><span class="spacer"></span><span class="tiny muted">최근 3일</span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumGrat"></div></div>
-      <div class="card"><div class="hd"><h3>내 페이지</h3><span class="spacer"></span><span class="tiny muted">이 달 집계</span></div><div class="bd" id="sumPages"></div></div>
+    <div class="sum-head"><h2 id="sumDate"></h2><span class="tiny muted">오늘 할 것부터 · 체크는 여기서 바로 · 시간은 자동 집계</span></div>
+    <div class="sum-top">
+      <div class="card sum-act"><div class="hd"><h3>오늘</h3><span class="spacer"></span><span class="tiny muted" id="sumNow"></span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumToday"></div></div>
+      <div class="sum-side">
+        <div class="card"><div class="hd"><h3>이번 주 시간</h3><span class="spacer"></span><span class="tiny muted" id="sumWkLb"></span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumWeek"></div></div>
+        <div class="card"><div class="hd"><h3>이 달 시간</h3><span class="spacer"></span><span class="tiny muted" id="sumMoLb"></span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumMonth"></div></div>
+      </div>
     </div>
-    <div class="card" style="margin-top:16px"><div class="hd"><h3>기록 잔디</h3><span class="spacer"></span><span class="tiny muted">최근 12주 · 하루 실적량</span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumHeat"></div></div>
+    <button class="sum-more" id="sumMoreTg">▸ 더 보기 <span class="tiny muted">다가오는 일정 · 분류별 연속 기록 · 메모 · 감사일기 · 내 페이지 · 기록 잔디</span></button>
+    <div id="sumMore" hidden>
+      <div class="sum-grid">
+        <div class="card"><div class="hd"><h3>다가오는 일정</h3><span class="spacer"></span><span class="tiny muted">D-day</span><button class="golink" data-go="cal">Calendar →</button></div><div class="bd" id="sumUp"></div></div>
+        <div class="card"><div class="hd"><h3>분류별 연속 기록</h3><span class="spacer"></span><span class="tiny muted">최근 14일 · 실적 기준</span></div><div class="bd" id="sumStreak"></div></div>
+        <div class="card"><div class="hd"><h3>메모</h3><span class="spacer"></span><span class="tiny muted" id="sumMemoCnt"></span><button class="golink" data-go="memo">Memo →</button></div><div class="bd" id="sumMemo"></div></div>
+        <div class="card"><div class="hd"><h3>감사일기</h3><span class="spacer"></span><span class="tiny muted">최근 3일</span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumGrat"></div></div>
+        <div class="card"><div class="hd"><h3>내 페이지</h3><span class="spacer"></span><span class="tiny muted">이 달 집계</span></div><div class="bd" id="sumPages"></div></div>
+      </div>
+      <div class="card" style="margin-top:16px"><div class="hd"><h3>기록 잔디</h3><span class="spacer"></span><span class="tiny muted">최근 12주 · 하루 실적량</span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumHeat"></div></div>
+    </div>
   </section>
 
   <!-- ============ TODAY ============ -->
@@ -989,6 +1113,11 @@ function stampChanges(){
       if(snap[key+':'+k] !== s){ v.ut = now; snap[key+':'+k] = s; }
     }
   }
+  // F-41 DB 행도 행 단위로 스탬프
+  for(const pg of dbPages()) for(const r of dbRows(pg)){
+    const k = 'row:'+pg.id+':'+r.id, s = JSON.stringify(Object.assign({}, r, {ut:0}));
+    if(snap[k] !== s){ r.ut = now; snap[k] = s; }
+  }
   M.updatedAt = now;
 }
 function primeSnap(){
@@ -1000,6 +1129,8 @@ function primeSnap(){
       snap[key+':'+k] = JSON.stringify(Object.assign({}, v, {ut:0}));
     }
   }
+  for(const pg of dbPages()) for(const r of dbRows(pg))
+    snap['row:'+pg.id+':'+r.id] = JSON.stringify(Object.assign({}, r, {ut:0}));
 }
 function mergeModels(a, b){
   // 목표/습관/카테고리 등 전역 항목은 통째로 최신본을 쓴다
@@ -1014,6 +1145,22 @@ function mergeModels(a, b){
       o[k] = (y.ut||0) > (x.ut||0) ? y : x;     // 같은 날이면 나중 수정본
     }
     out[key] = o;
+  }
+  // F-41 DB 행은 행 단위 병합 — 두 기기가 다른 행을 고치면 둘 다 살아남는다
+  const older = (newer===b) ? a : b;
+  for(const pg of (out.pages||[])){
+    if(!pg || pg.frame!=='db') continue;
+    const op = (older.pages||[]).find(p=>p && p.id===pg.id);
+    if(!op || !op.data || !Array.isArray(op.data.rows)) continue;
+    if(!pg.data) pg.data = {};
+    if(!Array.isArray(pg.data.rows)) pg.data.rows = [];
+    const mine = new Map(pg.data.rows.map(r=>[r.id, r]));
+    for(const r of op.data.rows){
+      if(!r || !r.id) continue;
+      const x = mine.get(r.id);
+      if(!x) pg.data.rows.push(JSON.parse(JSON.stringify(r)));
+      else if((r.ut||0) > (x.ut||0)) Object.assign(x, JSON.parse(JSON.stringify(r)));
+    }
   }
   out.updatedAt = Math.max(a.updatedAt||0, b.updatedAt||0);
   return out;
@@ -1075,6 +1222,7 @@ function fillMissing(){                     // 스키마가 바뀌어도 기존 
     if(!p.id) p.id = 'pg'+uid();
     if(!p.data || typeof p.data!=='object') p.data = {};
     if(!p.cfg  || typeof p.cfg!=='object')  p.cfg  = {};
+    if(p.frame==='db') dbInit(p);                             // F-41 속성·뷰·행 방어
   }
   if(!M.days  || typeof M.days!=='object')  M.days  = {};
   if(!M.weeks || typeof M.weeks!=='object') M.weeks = {};
@@ -2392,7 +2540,11 @@ function renderSummary(){
   const today = todayStr(), ym = today.slice(0,7);
   $('#sumDate').textContent = today.replace(/-/g,'.') + ' (' + DOW[dowOf(today)] + ')';
 
-  // ① 오늘
+  // 더 보기 접힘 상태 (개인 데이터 아님 → localStorage)
+  const moreBox = $('#sumMore'), moreTg = $('#sumMoreTg');
+  if(moreBox && moreTg){ let m='0'; try{ m = localStorage.getItem('planner-sum-more') || '0'; }catch(_){} moreBox.hidden = (m!=='1'); moreTg.firstChild.textContent = (moreBox.hidden ? '▸' : '▾') + ' 더 보기 '; }
+
+  // ① 오늘 — 행동 카드 (F-42): 할 일 · 습관 · 일정 · 지금. 체크 토글만 허용, 그 외 입력은 각 탭에서
   const day = M.days[today] || null;
   const ns  = nowSlot();
   $('#sumNow').textContent = '지금 ' + slotLabel(ns);
@@ -2401,12 +2553,36 @@ function renderSummary(){
   const planNow = slotText(day, 'plan', ns), actNow = slotText(day, 'actual', ns);
   let left = 0; if(day && day.plan) for(let k=ns+1; k<SLOTS; k++) if(day.plan[k]) left += 0.5;
   const tp = Object.values(ap).reduce((a,b)=>a+b,0);
+  // 할 일 = 이번 주 기타 할 일 + 업무 DB 오늘 마감·지난 미완료
+  const wtodos = ((M.weeks[weekKey(today)]||{}).todos||[]);
+  const due = dbDueRows(today);
+  let todoH = '';
+  wtodos.forEach((t,i)=>{ if(!t) return; const d = t.grade==='O';
+    todoH += '<div class="sum-ck'+(d?' done':'')+'"><input type="checkbox" data-sumtodo="'+i+'"'+(d?' checked':'')+' title="완료(O) 체크"><span class="t">'+esc(t.text)+'</span>'
+      + (t.grade && !d ? '<span class="c">'+esc(t.grade)+'</span>' : '') + (catById(t.catId) ? '<span class="c">'+esc(catById(t.catId).name)+'</span>' : '') + '</div>'; });
+  due.forEach(x=>{ todoH += '<div class="sum-ck"><input type="checkbox" data-sumdb="'+x.pg.id+':'+x.row.id+'" title="완료로 바꾸기"><span class="t">'+(esc(dbTitle(x.pg,x.row))||'(제목 없음)')+'</span>'
+      + (x.over ? '<span class="over">D+'+x.over+'</span>' : '') + '<span class="c">'+esc(x.pg.name||'')+'</span><button class="go" data-dbgo="'+x.pg.id+':'+x.row.id+'">열기</button></div>'; });
+  const doneCnt = wtodos.filter(t=>t && t.grade==='O').length;
+  // 습관 = 오늘 요일에 걸린 램프 단계
+  const dw = dowOf(today);
+  const habs = M.habits.filter(h=>{ const ph = phaseFor(h, today); return ph && ph.days && ph.days.includes(dw); });
+  const hlog = (day && day.habitLog) || {};
+  const habH = habs.map(h=>{ const d = !!hlog[h.id], g = goalById(h.goalId);
+    return '<div class="sum-ck'+(d?' done':'')+'"><input type="checkbox" data-sumhab="'+h.id+'"'+(d?' checked':'')+'><span class="t">'+esc(h.title)+'</span><span class="c">'+slotLabel(h.startSlot|0)+(g?' · '+esc(g.title):'')+'</span></div>'; }).join('');
+  // 오늘 일정
+  const evs = eventsOn(today).sort((a,b)=>(a.allDay?-1:0)-(b.allDay?-1:0) || (a.startSlot|0)-(b.startSlot|0));
+  const evH = evs.map(e=>'<div class="sum-ev'+(e.done?' done':'')+'"><span class="tm">'+((e.allDay || e.startSlot==null) ? '종일' : slotLabel(e.startSlot))+'</span><span>'+esc(e.title||'')+'</span>'+(e.kind==='work'?'<span class="tiny muted">회사</span>':'')+'</div>').join('');
   $('#sumToday').innerHTML =
     (one ? '<p class="sum-one">🔥 '+esc(one)+'</p>' : '<p class="sum-one empty">🔥 오늘 One-Thing 이 비어 있습니다 — Weekly 맨 윗줄에 적어 주세요</p>')
-    + dualBarsHTML(ap, aa)
+    + '<div class="sum-sec"><h4>할 일 <span class="muted">'+(wtodos.length ? doneCnt+'/'+wtodos.length+' 완료' : '')+(due.length ? ' · 업무 '+due.length+'건' : '')+'</span></h4>'
+    + (todoH || '<p class="tiny muted" style="margin:0">할 일이 없습니다 — Weekly 기타 할 일이나 업무 DB(＋ 탭)에 적으면 여기 뜹니다</p>') + '</div>'
+    + '<div class="sum-sec"><h4>습관 <span class="muted">'+(habs.length ? habs.filter(h=>hlog[h.id]).length+'/'+habs.length : '')+'</span></h4>'
+    + (habH || '<p class="tiny muted" style="margin:0">오늘 걸린 습관이 없습니다 — Target 탭에서 목표를 쪼개면 요일별로 뜹니다</p>') + '</div>'
+    + '<div class="sum-sec"><h4>오늘 일정 <span class="muted">'+(evs.length||'')+'</span></h4>' + (evH || '<p class="tiny muted" style="margin:0">오늘 일정 없음</p>') + '</div>'
+    + '<div class="sum-sec"><h4>지금 · 시간</h4>' + dualBarsHTML(ap, aa)
     + '<div class="sum-line"><span>지금 계획</span><b>'+(planNow ? esc(planNow) : '<span class="muted">없음</span>')+'</b></div>'
     + '<div class="sum-line"><span>지금 실적</span><b>'+(actNow ? esc(actNow) : '<span class="muted">아직 안 적음</span>')+'</b></div>'
-    + '<div class="sum-line"><span>남은 계획</span><b>'+fmtH(left)+(tp ? ' <span class="muted">/ 오늘 '+fmtH(tp)+'</span>' : '')+'</b></div>';
+    + '<div class="sum-line"><span>남은 계획</span><b>'+fmtH(left)+(tp ? ' <span class="muted">/ 오늘 '+fmtH(tp)+'</span>' : '')+'</b></div></div>';
 
   // ② 이번 주
   const wd = weekDates(today);
@@ -2438,15 +2614,6 @@ function renderSummary(){
   // ⑤ 분류별 연속 기록
   $('#sumStreak').innerHTML = catStreakHTML(14);
 
-  // ⑥ 기타 할 일 — 이번 주 미완료
-  const todos = ((M.weeks[weekKey(today)]||{}).todos||[]);
-  const open = todos.filter(t=>t && t.grade!=='O');
-  $('#sumTodo').innerHTML = todos.length
-    ? (open.length
-        ? open.map(t=>'<div class="sum-todo"><span class="g">'+esc(t.grade||'·')+'</span><span>'+esc(t.text)+'</span>'+(catById(t.catId)?'<span class="c">'+esc(catById(t.catId).name)+'</span>':'')+'</div>').join('')
-          + '<div class="tiny muted" style="margin-top:6px">'+(todos.length-open.length)+'/'+todos.length+' 완료</div>'
-        : '<span class="tiny muted">이번 주 기타 할 일 '+todos.length+'개 전부 완료 ✓</span>')
-    : '<span class="tiny muted">이번 주 기타 할 일이 없습니다</span>';
 
   // ⑦ 메모 — 핀 먼저, 최근 순
   const notes = M.notes.slice().sort((a,b)=> (b.pinned?1:0)-(a.pinned?1:0) || (b.createdAt||0)-(a.createdAt||0)).slice(0,5);
@@ -2469,6 +2636,9 @@ function renderSummary(){
           let spent = 0; Object.keys(pg.data.daily||{}).forEach(d=>{ if(d.startsWith(ym)) spent += lgTotal(pg, d); });
           const bud = pg.cfg.monthlyBudget||0;
           v = wonF(spent) + (bud ? ' <span class="tiny muted">/ '+wonF(bud)+'</span>' : '');
+        } else if(pg.frame==='db'){
+          const rs = dbRows(pg), open = rs.filter(r=>!dbIsDone(pg,r)).length;
+          v = open + '건 미완료 <span class="tiny muted">/ ' + rs.length + '</span>';
         } else {
           const ents = Array.isArray(pg.data.entries)? pg.data.entries : [];
           v = ents.filter(e=>(e.date||'').startsWith(ym)).length + '건';
@@ -2575,7 +2745,7 @@ function renderAll(){
 function switchTab(t){
   curTab = t;
   const isPage = t.startsWith('page:');
-  if(isPage) curPageId = t.slice(5);
+  if(isPage){ if(curPageId !== t.slice(5)) dbUI.rowId = null; curPageId = t.slice(5); }
   const pid = isPage ? 'p-page' : 'p-'+t;
   $$('.snav-btn').forEach(b=>b.classList.toggle('on', b.dataset.tab===t));
   $$('.panel').forEach(p=>p.classList.toggle('on', p.id===pid));
@@ -2604,7 +2774,20 @@ const PAGE_TPLS = [
     desc:'책 · 페이지 · 한 줄 평 — 이번 달 읽은 페이지 합계가 자동으로 나옵니다' },
   { tpl:'side',   frame:'journal', icon:'🚀', name:'사이드 프로젝트',
     f:[['한 일','text'],['투입 시간(h)','number'],['다음 액션','text']],
-    desc:'오늘 한 일 · 투입 시간 · 다음 액션 — 프로젝트 로그가 쌓입니다' }
+    desc:'오늘 한 일 · 투입 시간 · 다음 액션 — 프로젝트 로그가 쌓입니다' },
+  // F-41 노션식 DB 프레임 — 속성·뷰·행 페이지(체크리스트·하위 페이지)
+  { tpl:'work',  frame:'db', icon:'🗂️', name:'업무 DB',
+    props:[['title','이름','title'],['date','날짜','date'],['status','상태','status'],['tags','태그','multi'],['note','메모','text']],
+    views:[['list','이번 주'],['table','표'],['board','보드'],['calendar','캘린더']],
+    desc:'노션식 업무 관리 — 이름·날짜·상태·태그. 표/보드/캘린더/주간 리스트로 바꿔 보고, 행마다 페이지를 열어 체크리스트·하위 페이지를 씁니다' },
+  { tpl:'meet',  frame:'db', icon:'📝', name:'회의록',
+    props:[['title','내용','title'],['date','날짜','date'],['summary','요약','text']],
+    views:[['table','표'],['calendar','캘린더']],
+    desc:'내용 · 날짜 · 요약 — 행을 열면 회의 메모를 길게 적을 수 있습니다' },
+  { tpl:'blank', frame:'db', icon:'▦', name:'빈 DB',
+    props:[['title','이름','title']],
+    views:[['table','표']],
+    desc:'속성을 직접 추가해 원하는 표를 만듭니다 (날짜·상태·선택·숫자·체크)' }
 ];
 const tplOf = p => PAGE_TPLS.find(t=>t.tpl===p.tpl) || PAGE_TPLS[0];
 
@@ -2626,6 +2809,7 @@ function dlgPageGallery(){
     const t = PAGE_TPLS.find(x=>x.tpl===b.dataset.tpl); if(!t) return;
     const dup = M.pages.filter(p=>p.tpl===t.tpl).length;
     const pg = { id:'pg'+uid(), name: t.name + (dup?' '+(dup+1):''), tpl:t.tpl, frame:t.frame, cfg:{}, data:{}, ut:Date.now() };
+    if(t.frame==='db') dbInit(pg, t);
     M.pages.push(pg);
     closeModal(); saveModel();
     switchTab('page:'+pg.id);
@@ -2639,6 +2823,7 @@ function renderPage(){
   const t = tplOf(pg);
   $('#pgTitle').textContent = t.icon + ' ' + (pg.name||'페이지');
   if(pg.frame==='ledger') renderLedger(pg);
+  else if(pg.frame==='db') renderDb(pg);
   else renderJournal(pg);
 }
 
@@ -2852,6 +3037,474 @@ function renderJournal(pg){
 }
 
 /* ==========================================================
+   DB 페이지 프레임 (F-41) — 노션식 데이터베이스
+   속성(props) · 뷰(table/board/calendar/list) · 행 = 페이지(본문 블록 + 하위 페이지)
+   🔴 입력 중 리렌더 금지 · 속성 삭제 시 값은 남긴다(규칙 6) · 행 단위 ut 병합(mergeModels)
+   ========================================================== */
+const DB_STATUS = [
+  {name:'미진행', group:'todo',  color:'#ec4899'},
+  {name:'시작 전', group:'todo', color:'#94a3b8'},
+  {name:'진행 중', group:'doing',color:'#2563eb'},
+  {name:'완료',   group:'done',  color:'#059669'}
+];
+const DB_TYPES = {title:'제목', text:'텍스트', date:'날짜', status:'상태', select:'선택', multi:'다중 선택', check:'체크', number:'숫자'};
+const DB_VIEWS = {table:'표', board:'보드', calendar:'캘린더', list:'주간 리스트'};
+let dbUI = { rowId:null, group:null, q:'', month: todayStr().slice(0,7) };   // 화면 상태 — M 에 저장하지 않는다
+
+function dbProp(key, name, type){ return {key, name, type, options: type==='status' ? JSON.parse(JSON.stringify(DB_STATUS)) : []}; }
+function dbView(type, name, pg){
+  const v = {id:'v'+uid(), name: name||DB_VIEWS[type]||type, type, hide:[], sort:{key:'date', dir:'desc'}};
+  if(type==='board'){ const sp = dbPropOf(pg,'status')||dbPropOf(pg,'select'); v.groupBy = sp ? sp.key : null; }
+  if(type==='calendar'||type==='list'){ const dp = dbPropOf(pg,'date'); v.dateKey = dp ? dp.key : null; }
+  return v;
+}
+function blk(t, text, lvl){ return {id:'b'+uid(), t:t||'p', text:text||'', done:false, lvl:lvl||0}; }
+/** 스키마 방어 — 없는 것만 채운다. fillMissing 과 갤러리 생성 둘 다 이걸 부른다 */
+function dbInit(pg, t){
+  t = t || tplOf(pg);
+  if(!pg.cfg || typeof pg.cfg!=='object') pg.cfg = {};
+  if(!pg.data || typeof pg.data!=='object') pg.data = {};
+  if(!Array.isArray(pg.data.rows)) pg.data.rows = [];
+  if(!Array.isArray(pg.cfg.props) || !pg.cfg.props.length)
+    pg.cfg.props = (t.props||[['title','이름','title']]).map(([key,name,type]) => dbProp(key,name,type));
+  if(!pg.cfg.props.some(p=>p.type==='title')) pg.cfg.props.unshift(dbProp('title','이름','title'));
+  for(const p of pg.cfg.props) if(!Array.isArray(p.options)) p.options = (p.type==='status') ? JSON.parse(JSON.stringify(DB_STATUS)) : [];
+  if(!Array.isArray(pg.cfg.views) || !pg.cfg.views.length)
+    pg.cfg.views = (t.views||[['table','표']]).map(([type,name]) => dbView(type,name,pg));
+  for(const v of pg.cfg.views){ if(!v.id) v.id='v'+uid(); if(!Array.isArray(v.hide)) v.hide=[]; }
+  if(!pg.cfg.views.some(v=>v.id===pg.cfg.curView)) pg.cfg.curView = pg.cfg.views[0].id;
+  if(!Array.isArray(pg.cfg.templates)) pg.cfg.templates = [];
+  if(t.tpl==='work' && !pg.cfg.tplSeeded){
+    pg.cfg.templates.push({id:'t'+uid(), name:'주간 to-do', body:[
+      blk('todo','이번 주 핵심 업무',0), blk('todo','기획',1), blk('todo','제작',1), blk('todo','데이터 정합성 체크',1), blk('todo','공유',1), blk('todo','피드백 반영',1)]});
+    pg.cfg.tplSeeded = true;
+  }
+  for(const r of pg.data.rows){
+    if(!r || typeof r!=='object') continue;
+    if(!r.id) r.id = 'r'+uid();
+    if(!r.p || typeof r.p!=='object') r.p = {};
+    if(!Array.isArray(r.body)) r.body = [];
+    if(r.parentId===undefined) r.parentId = null;
+  }
+  return pg;
+}
+const dbPages   = () => (M && Array.isArray(M.pages) ? M.pages : []).filter(p=>p && p.frame==='db');
+const dbRows    = pg => { if(!pg.data || typeof pg.data!=='object') pg.data = {}; if(!Array.isArray(pg.data.rows)) pg.data.rows = []; return pg.data.rows; };
+const dbRowById = (pg, id) => dbRows(pg).find(r=>r.id===id) || null;
+const dbProps   = pg => (pg.cfg && Array.isArray(pg.cfg.props)) ? pg.cfg.props : [];
+function dbPropOf(pg, type){ return dbProps(pg).find(p=>p.type===type) || null; }
+function dbStatusProp(pg){ return dbPropOf(pg,'status'); }
+function dbGroupOf(pg, row){ const sp=dbStatusProp(pg); if(!sp) return null; const o=sp.options.find(o=>o.name===row.p[sp.key]); return o ? o.group : 'todo'; }
+function dbIsDone(pg, row){ const sp=dbStatusProp(pg); if(sp) return dbGroupOf(pg,row)==='done'; const cp=dbPropOf(pg,'check'); return cp ? !!row.p[cp.key] : false; }
+function dbSetDone(pg, row, done){
+  const sp=dbStatusProp(pg);
+  if(sp){ const o = sp.options.find(o=> done ? o.group==='done' : o.group!=='done'); if(o) row.p[sp.key]=o.name; }
+  else { const cp=dbPropOf(pg,'check'); if(cp) row.p[cp.key]=!!done; }
+  row.ut=Date.now(); pg.ut=Date.now();
+}
+function dbDate(pg, row, key){
+  const dp = key ? dbProps(pg).find(p=>p.key===key) : dbPropOf(pg,'date'); if(!dp) return null;
+  const v=row.p[dp.key]; if(!v) return null;
+  return typeof v==='string' ? {start:v, end:''} : v;
+}
+function dbTitle(pg, row){ const tp=dbPropOf(pg,'title'); return (tp && row.p[tp.key]) ? String(row.p[tp.key]) : ''; }
+function dbProgress(row){ const t=(row.body||[]).filter(b=>b.t==='todo'); return {done:t.filter(b=>b.done).length, total:t.length}; }
+function dbStatusColor(pg, row){ const sp=dbStatusProp(pg); if(!sp) return 'var(--mute)'; const o=sp.options.find(o=>o.name===row.p[sp.key]); return (o&&o.color) ? o.color : 'var(--mute)'; }
+function dbNewRow(pg, parentId, seedP){
+  const r = {id:'r'+uid(), parentId:parentId||null, p:{}, body:[], ut:Date.now()};
+  const sp=dbStatusProp(pg); if(sp){ const o=sp.options.find(o=>o.group==='todo')||sp.options[0]; if(o) r.p[sp.key]=o.name; }
+  const dp=dbPropOf(pg,'date'); if(dp && !(seedP && seedP[dp.key])) r.p[dp.key]={start:todayStr(), end:''};
+  Object.assign(r.p, seedP||{});
+  dbRows(pg).push(r); pg.ut=Date.now();
+  return r;
+}
+/** 날짜 범위에 걸린 행 (캘린더 뷰 · Calendar 탭 · Summary 공용) */
+function dbRowsOn(date, pg){
+  const out=[];
+  for(const g of (pg ? [pg] : dbPages())){
+    const dp=dbPropOf(g,'date'); if(!dp) continue;
+    for(const r of dbRows(g)){ const d=dbDate(g,r,dp.key); if(!d||!d.start) continue; if(date>=d.start && date<=(d.end||d.start)) out.push({pg:g, row:r}); }
+  }
+  return out;
+}
+/** 오늘까지 마감인데 안 끝난 행 (Summary) — 많이 지난 것부터 */
+function dbDueRows(today){
+  const out=[];
+  for(const g of dbPages()){
+    const dp=dbPropOf(g,'date'); if(!dp) continue;
+    for(const r of dbRows(g)){
+      if(dbIsDone(g,r)) continue;
+      const d=dbDate(g,r,dp.key); if(!d||!d.start) continue;
+      const end=d.end||d.start;
+      if(d.start<=today) out.push({pg:g, row:r, over: end<today ? Math.round((parseYmd(today)-parseYmd(end))/86400000) : 0});
+    }
+  }
+  return out.sort((a,b)=>b.over-a.over);
+}
+function dbGo(ref){ const [pid, rid] = String(ref).split(':'); const pg=pageById(pid); if(!pg) return; curPageId = pid; dbUI.rowId = rid||null; switchTab('page:'+pid); }
+function dbWeekLabel(d){ const s=weekStart(d); const [y,m]=s.split('-').map(Number); const first=weekStart(y+'-'+pad2(m)+'-01'); const n=Math.floor((parseYmd(s)-parseYmd(first))/604800000)+1; return m+'월 '+n+'주차'; }
+function dbTouch(pg, row){ row.ut=Date.now(); pg.ut=Date.now(); saveModel(); }
+function dbView0(pg){ return pg.cfg.views.find(v=>v.id===pg.cfg.curView) || pg.cfg.views[0]; }
+function dbSumLabel(pg){ const rows=dbRows(pg); $('#pgSum').textContent = rows.length + '건 · 미완료 ' + rows.filter(r=>!dbIsDone(pg,r)).length; }
+
+/* 값 쓰기 — 셀·폼 공용. 리렌더 없음 */
+function dbSetVal(pg, row, key, el){
+  const p=dbProps(pg).find(x=>x.key===key); if(!p) return;
+  if(p.type==='date'){ const cur=dbDate(pg,row,key)||{start:'',end:''}; cur[el.dataset.sub||'start']=el.value; if(cur.end && cur.start && cur.end<cur.start) cur.end=''; row.p[key]=cur; }
+  else if(p.type==='check') row.p[key]=!!el.checked;
+  else if(p.type==='number') row.p[key]= el.value==='' ? '' : Number(el.value);
+  else if(p.type==='multi'){ row.p[key]=el.value.split(',').map(s=>s.trim()).filter(Boolean); for(const t of row.p[key]) if(!p.options.some(o=>o.name===t)) p.options.push({name:t, color:''}); }
+  else row.p[key]=el.value;
+  row.ut=Date.now(); pg.ut=Date.now(); saveModel();
+}
+function dbEditor(pg, row, p, where){
+  const v=row.p[p.key], a='data-dbr="'+row.id+'" data-k="'+p.key+'"';
+  if(p.type==='date'){ const d=dbDate(pg,row,p.key)||{start:'',end:''};
+    return '<span class="db-dt"><input type="date" '+a+' data-sub="start" value="'+esc(d.start||'')+'">'
+      + (where==='form' ? '<span class="tiny muted">~</span><input type="date" '+a+' data-sub="end" value="'+esc(d.end||'')+'">' : '')+'</span>'; }
+  if(p.type==='status'||p.type==='select')
+    return '<select '+a+' class="db-sel" style="--c:'+(p.type==='status'?dbStatusColor(pg,row):'var(--mute)')+'">'+(p.type==='select'?'<option value=""></option>':'')
+      + p.options.map(o=>'<option'+(o.name===v?' selected':'')+'>'+esc(o.name)+'</option>').join('')+'</select>';
+  if(p.type==='check')  return '<input type="checkbox" '+a+(v?' checked':'')+'>';
+  if(p.type==='number') return '<input type="number" class="num" '+a+' value="'+esc(v==null?'':v)+'">';
+  if(p.type==='multi')  return '<input '+a+' value="'+esc(Array.isArray(v)?v.join(', '):(v||''))+'" placeholder="쉼표로 구분">';
+  return '<input '+a+' value="'+esc(v==null?'':v)+'" placeholder="'+esc(p.name)+'">';
+}
+function dbFiltered(pg, view){
+  let rows = dbRows(pg).slice();
+  const sp=dbStatusProp(pg);
+  if(dbUI.group && sp) rows = rows.filter(r=>dbGroupOf(pg,r)===dbUI.group);
+  const q=(dbUI.q||'').trim().toLowerCase(); if(q) rows = rows.filter(r=>dbTitle(pg,r).toLowerCase().includes(q));
+  const sk=(view.sort||{}).key, sd=(view.sort||{}).dir==='asc' ? 1 : -1;
+  const p = dbProps(pg).find(x=>x.key===sk);
+  if(p) rows.sort((a,b)=>{ let x=a.p[sk], y=b.p[sk]; if(p.type==='date'){ x=(x&&x.start)||''; y=(y&&y.start)||''; } x = x==null?'':x; y = y==null?'':y; if(x===y) return (b.ut||0)-(a.ut||0); return (x>y?1:-1)*sd; });
+  else rows.sort((a,b)=>(b.ut||0)-(a.ut||0));
+  return rows;
+}
+function dbBodyHTML(pg, view, list){
+  if(view.type==='table')    return dbTableHTML(pg,view,list);
+  if(view.type==='board')    return dbBoardHTML(pg,view,list);
+  if(view.type==='calendar') return dbCalHTML(pg,view,list);
+  return dbListHTML(pg,view,list);
+}
+function renderDb(pg){
+  dbInit(pg);
+  dbSumLabel(pg);
+  const box=$('#pgBody');
+  const open = dbUI.rowId ? dbRowById(pg, dbUI.rowId) : null;
+  if(open){ renderDbPage(pg, open); return; }
+  dbUI.rowId = null;
+  const view=dbView0(pg), sp=dbStatusProp(pg);
+  let h='<div class="db-bar">'
+    + pg.cfg.views.map(v=>'<button class="chip'+(v.id===view.id?' on':'')+'" data-dbview="'+v.id+'">'+esc(v.name)+'</button>').join('')
+    + '<button class="chip era" data-dbviewcfg title="이 뷰 설정 (정렬·숨김·이름·삭제)">⚙</button>'
+    + '<button class="chip era" data-dbviewadd title="뷰 추가">＋ 뷰</button>'
+    + '<span class="spacer"></span>'
+    + (sp ? '<span class="db-fil">'+[['','전체'],['todo','할 일'],['doing','진행 중'],['done','완료']].map(([g,nm])=>'<button class="db-f'+((dbUI.group||'')===g?' on':'')+'" data-dbf="'+g+'">'+nm+'</button>').join('')+'</span>' : '')
+    + '<input class="lblin" id="dbQ" placeholder="🔍 제목 검색" value="'+esc(dbUI.q||'')+'">'
+    + '<button class="btn ghost sm" data-dbtpl>템플릿 ▾</button>'
+    + '<button class="btn sm" data-dbadd>＋ 새 행</button>'
+    + '</div><div id="dbBody">' + dbBodyHTML(pg, view, dbFiltered(pg, view)) + '</div>';
+  box.innerHTML=h;
+  dbBind(pg, box);
+}
+function dbTableHTML(pg, view, list){
+  const props=dbProps(pg).filter(p=>!(view.hide||[]).includes(p.key));
+  const w = p => p.type==='title'?'minmax(220px,2fr)':p.type==='date'?'150px':(p.type==='status'||p.type==='select')?'120px':p.type==='check'?'56px':p.type==='number'?'100px':p.type==='multi'?'160px':'minmax(140px,1fr)';
+  const cols = props.map(w).join(' ')+' 32px';
+  let h='<div class="db-tbl"><div class="db-h" style="grid-template-columns:'+cols+'">'
+    + props.map(p=>'<button class="db-hc" data-dbprop="'+p.key+'" title="열 설정">'+esc(p.name)+(view.sort&&view.sort.key===p.key?(view.sort.dir==='asc'?' ↑':' ↓'):'')+'</button>').join('')
+    + '<button class="db-hc add" data-dbpropadd title="열 추가">＋</button></div>';
+  if(!list.length) h+='<p class="tiny muted" style="margin:10px 4px">행이 없습니다. <b>＋ 새 행</b> 또는 <b>템플릿 ▾</b> 로 시작하세요.</p>';
+  for(const r of list){
+    const par = r.parentId ? dbRowById(pg,r.parentId) : null, pr=dbProgress(r);
+    h+='<div class="db-r'+(dbIsDone(pg,r)?' done':'')+'" style="grid-template-columns:'+cols+'" data-dbrow="'+r.id+'">';
+    for(const p of props){
+      if(p.type==='title') h+='<div class="db-c tt"><button class="db-open" data-dbopen="'+r.id+'" title="페이지 열기">↗</button>'+(par?'<span class="db-par" title="상위: '+esc(dbTitle(pg,par))+'">↳</span>':'')+dbEditor(pg,r,p,'cell')+(pr.total?'<span class="db-pr">'+pr.done+'/'+pr.total+'</span>':'')+'</div>';
+      else h+='<div class="db-c">'+dbEditor(pg,r,p,'cell')+'</div>';
+    }
+    h+='<button class="xbtn2" data-dbdel="'+r.id+'" title="행 삭제">✕</button></div>';
+  }
+  return h+'</div>';
+}
+function dbCardHTML(pg, r){
+  const d=dbDate(pg,r), pr=dbProgress(r), mp=dbPropOf(pg,'multi'), tags=(mp&&Array.isArray(r.p[mp.key]))?r.p[mp.key]:[];
+  return '<button class="db-card'+(dbIsDone(pg,r)?' done':'')+'" data-dbopen="'+r.id+'" style="border-left-color:'+dbStatusColor(pg,r)+'">'
+    + '<span class="t">'+(esc(dbTitle(pg,r))||'<span class="muted">(제목 없음)</span>')+'</span>'
+    + ((d&&d.start)?'<span class="tiny muted">'+d.start.slice(5).replace('-','/')+((d.end&&d.end!==d.start)?' ~ '+d.end.slice(5).replace('-','/'):'')+'</span>':'')
+    + (tags.length?'<span class="db-tags">'+tags.map(t=>'<i>'+esc(t)+'</i>').join('')+'</span>':'')
+    + (pr.total?'<span class="db-prbar"><i style="width:'+Math.round(pr.done/pr.total*100)+'%"></i></span>':'')
+    + '</button>';
+}
+function dbBoardHTML(pg, view, list){
+  const gp=dbProps(pg).find(p=>p.key===view.groupBy) || dbStatusProp(pg) || dbPropOf(pg,'select');
+  if(!gp) return '<p class="tiny muted">보드는 상태·선택 속성이 있어야 합니다. 표 머리의 ＋ 로 속성을 추가하세요.</p>';
+  const cols=gp.options.map(o=>o.name).concat(['']);
+  return '<div class="db-board">'+cols.map(name=>{
+    const rs=list.filter(r=>(r.p[gp.key]||'')===name), o=gp.options.find(x=>x.name===name);
+    if(!name && !rs.length) return '';
+    return '<div class="db-col"><div class="db-colh"><i style="background:'+((o&&o.color)?o.color:'var(--mute)')+'"></i>'+esc(name||'없음')+'<span class="muted tiny" style="margin-left:auto">'+rs.length+'</span></div>'
+      + rs.map(r=>dbCardHTML(pg,r)).join('')
+      + '<button class="db-coladd" data-dbadd data-seedk="'+gp.key+'" data-seed="'+esc(name)+'">＋ 추가</button></div>';
+  }).join('')+'</div>';
+}
+function dbCalHTML(pg, view, list){
+  const dp = dbProps(pg).find(p=>p.key===view.dateKey) || dbPropOf(pg,'date');
+  if(!dp) return '<p class="tiny muted">캘린더는 날짜 속성이 있어야 합니다. 표 머리의 ＋ 로 날짜 열을 추가하세요.</p>';
+  const [y,m]=dbUI.month.split('-').map(Number), today=todayStr();
+  let h='<div class="calbar"><button class="dnav" data-dbm="-1">‹</button><span class="mtitle">'+y+'년 '+m+'월</span><button class="dnav" data-dbm="1">›</button><button class="tbtn" data-dbm="0">이번 달</button><span class="tiny muted" style="margin-left:8px">빈 칸 클릭 = 그 날짜로 새 행</span></div><div class="calgrid">';
+  for(let i=0;i<7;i++){ const dw=(i+1)%7; h+='<div class="ch'+(dw===0?' sun':dw===6?' sat':'')+'">'+DOW[dw]+'</div>'; }
+  const start=weekStart(dbUI.month+'-01');
+  const need6 = parseYmd(addDays(start,35)).getMonth()===(m-1);
+  const ids=new Set(list.map(r=>r.id));
+  for(let i=0;i<(need6?42:35);i++){
+    const d=addDays(start,i), dt=parseYmd(d), inM=dt.getMonth()===(m-1), dw=dt.getDay();
+    const rs=dbRowsOn(d,pg).map(x=>x.row).filter(r=>ids.has(r.id));
+    h+='<div class="cday'+(inM?'':' out')+'" data-dbcell="'+d+'"><span class="dn'+(dw===0?' sun':dw===6?' sat':'')+(d===today?' t':'')+'">'+dt.getDate()+'</span>';
+    for(const r of rs) h+='<button class="evc'+(dbIsDone(pg,r)?' done':'')+'" data-dbopen="'+r.id+'" style="border-left-color:'+dbStatusColor(pg,r)+';background:var(--card2)"><span class="tx">'+(esc(dbTitle(pg,r))||'(제목 없음)')+'</span></button>';
+    h+='</div>';
+  }
+  return h+'</div>';
+}
+function dbListHTML(pg, view, list){
+  const today=todayStr(), ws=weekStart(today), we=addDays(ws,6), ns=addDays(ws,7), ne=addDays(ws,13);
+  const dp=dbProps(pg).find(p=>p.key===view.dateKey)||dbPropOf(pg,'date'), sp=dbStatusProp(pg);
+  const secs=[['지난 미완료',[]],['이번 주',[]],['다음 주',[]],['날짜 없음',[]]];
+  for(const r of list){
+    const d=dp?dbDate(pg,r,dp.key):null, s=(d&&d.start)?d.start:'', e=(d&&d.end)?d.end:s, done=dbIsDone(pg,r);
+    if(!s){ if(!done) secs[3][1].push(r); continue; }
+    if(e<ws){ if(!done) secs[0][1].push(r); continue; }
+    if(s<=we && e>=ws){ secs[1][1].push(r); continue; }
+    if(s<=ne && e>=ns) secs[2][1].push(r);
+  }
+  return secs.filter((x,i)=>x[1].length || i===1).map(([name, rs])=>'<div class="db-sec"><h4>'+name+' <span class="muted">'+rs.length+'</span></h4>'
+    + (rs.length ? rs.map(r=>{ const d=dbDate(pg,r), pr=dbProgress(r), done=dbIsDone(pg,r);
+        return '<div class="db-li'+(done?' done':'')+'"><input type="checkbox" data-dbdone="'+r.id+'"'+(done?' checked':'')+' title="완료 체크">'
+          + '<button class="t" data-dbopen="'+r.id+'">'+(esc(dbTitle(pg,r))||'<span class="muted">(제목 없음)</span>')+'</button>'
+          + (pr.total?'<span class="db-pr">'+pr.done+'/'+pr.total+'</span>':'')
+          + (sp?'<span class="db-st" style="color:'+dbStatusColor(pg,r)+'">'+esc(r.p[sp.key]||'')+'</span>':'')
+          + '<span class="tiny muted">'+((d&&d.start)?d.start.slice(5).replace('-','/')+' '+DOW[dowOf(d.start)]:'')+'</span></div>'; }).join('')
+      : '<p class="tiny muted" style="margin:4px 0 0">이번 주 업무가 없습니다 — ＋ 새 행 또는 템플릿 ▾</p>')
+    + '</div>').join('');
+}
+/* ---- 행 페이지 (본문 블록 + 하위 페이지) ---- */
+function dbProgHTML(pr){
+  return pr.total
+    ? '<div class="bar"><i class="'+(pr.done===pr.total?'ok':'')+'" style="width:'+Math.round(pr.done/pr.total*100)+'%"></i></div><span class="tiny muted">'+pr.done+' / '+pr.total+' 완료 · '+Math.round(pr.done/pr.total*100)+'%</span>'
+    : '<span class="tiny muted">체크 항목을 넣으면 완료율이 여기 뜹니다</span>';
+}
+function dbBlocksHTML(row){
+  if(!row.body.length) return '<p class="tiny muted db-empty">아래 <b>＋ 체크</b> 로 체크리스트를 시작하세요. Enter = 다음 줄 · Tab = 들여쓰기 · 빈 줄 Backspace = 삭제</p>';
+  return row.body.map(b=>{
+    if(b.t==='hr') return '<div class="blk hr" data-blk="'+b.id+'"><hr><button class="xbtn2" data-blkdel="'+b.id+'" title="삭제">✕</button></div>';
+    return '<div class="blk '+b.t+' l'+(b.lvl||0)+(b.done?' done':'')+'" data-blk="'+b.id+'">'
+      + (b.t==='todo' ? '<input type="checkbox" data-blkck="'+b.id+'"'+(b.done?' checked':'')+'>' : '<span class="dot"></span>')
+      + '<input class="btx" data-btx="'+b.id+'" value="'+esc(b.text)+'" placeholder="'+(b.t==='h'?'제목':b.t==='todo'?'할 일':'내용')+'"></div>';
+  }).join('');
+}
+function renderDbPage(pg, row){
+  const chain=[]; let c=row; while(c && chain.length<20){ chain.unshift(c); c = c.parentId ? dbRowById(pg,c.parentId) : null; }
+  const props=dbProps(pg), tp=dbPropOf(pg,'title'), pr=dbProgress(row);
+  const kids=dbRows(pg).filter(r=>r.parentId===row.id);
+  const h='<div class="db-page">'
+    + '<div class="db-crumb"><button data-dbback>← '+esc(dbView0(pg).name)+'</button>'
+    + chain.map((r,i)=>'<span class="sep">›</span>'+(i<chain.length-1 ? '<button data-dbopen="'+r.id+'">'+(esc(dbTitle(pg,r))||'(제목 없음)')+'</button>' : '<b>'+(esc(dbTitle(pg,r))||'(제목 없음)')+'</b>')).join('')+'</div>'
+    + (tp ? '<input class="db-ptitle" data-dbr="'+row.id+'" data-k="'+tp.key+'" value="'+esc(row.p[tp.key]||'')+'" placeholder="제목">' : '')
+    + '<div class="db-props">'+props.filter(p=>p.type!=='title').map(p=>'<label class="db-pf'+(p.type==='date'?' wide':'')+'"><span>'+esc(p.name)+'</span>'+dbEditor(pg,row,p,'form')+'</label>').join('')+'</div>'
+    + '<div class="db-prog" id="dbProg">'+dbProgHTML(pr)+'</div>'
+    + '<div class="db-blocks" id="dbBlocks">'+dbBlocksHTML(row)+'</div>'
+    + '<div class="db-blkadd"><button class="btn ghost sm" data-dbblk="todo">＋ 체크</button><button class="btn ghost sm" data-dbblk="p">＋ 글</button><button class="btn ghost sm" data-dbblk="h">＋ 제목</button><button class="btn ghost sm" data-dbblk="hr">＋ 구분선</button></div>'
+    + '<div class="db-kids"><h4>하위 페이지 <span class="muted">'+kids.length+'</span></h4>'
+    + kids.map(k=>{ const kp=dbProgress(k); return '<button class="db-kid'+(dbIsDone(pg,k)?' done':'')+'" data-dbopen="'+k.id+'"><i style="background:'+dbStatusColor(pg,k)+'"></i><span class="t">'+(esc(dbTitle(pg,k))||'(제목 없음)')+'</span>'+(kp.total?'<span class="db-pr">'+kp.done+'/'+kp.total+'</span>':'')+'</button>'; }).join('')
+    + '<button class="btn ghost sm" data-dbkidadd style="margin-top:6px">＋ 하위 페이지</button></div>'
+    + '<div class="db-pfoot"><button class="btn ghost sm" data-dbsavetpl>템플릿으로 저장</button><span class="spacer"></span><button class="btn ghost sm" data-dbdel="'+row.id+'" style="color:var(--bad)">이 페이지 삭제</button></div>'
+    + '</div>';
+  const box=$('#pgBody'); box.innerHTML=h;
+  dbBind(pg, box);
+}
+function dbRedrawBlocks(pg, row, focusId){
+  const bx=$('#dbBlocks'); if(!bx) return;
+  bx.innerHTML=dbBlocksHTML(row);
+  const pr=$('#dbProg'); if(pr) pr.innerHTML=dbProgHTML(dbProgress(row));
+  dbBindBlocks(pg, bx);
+  if(focusId){ const f=bx.querySelector('[data-btx="'+focusId+'"]'); if(f){ f.focus(); f.selectionStart=f.selectionEnd=f.value.length; } }
+}
+/* ---- 바인딩 ---- */
+function dbBindInputs(pg, box){
+  box.querySelectorAll('[data-dbr]').forEach(el=>{
+    const evn = (el.tagName==='SELECT' || el.type==='date' || el.type==='checkbox') ? 'change' : 'input';
+    el.addEventListener(evn, ()=>{
+      const row=dbRowById(pg, el.dataset.dbr); if(!row) return;
+      dbSetVal(pg, row, el.dataset.k, el);
+      const p=dbProps(pg).find(x=>x.key===el.dataset.k);
+      if(p && p.type==='status'){ el.style.setProperty('--c', dbStatusColor(pg,row)); const tr=el.closest('.db-r'); if(tr) tr.classList.toggle('done', dbIsDone(pg,row)); }
+      dbSumLabel(pg);
+    });
+  });
+}
+function dbBindBlocks(pg, box){
+  box.querySelectorAll('[data-btx]').forEach(el=>{
+    el.addEventListener('input', ()=>{ const row=dbRowById(pg,dbUI.rowId); const b=row && row.body.find(x=>x.id===el.dataset.btx); if(!b) return; b.text=el.value; dbTouch(pg,row); });
+    el.addEventListener('keydown', e=>{
+      if(e.isComposing || e.key==='Process') return;                       // 한글 IME 조합 중엔 건드리지 않는다
+      const row=dbRowById(pg,dbUI.rowId); if(!row) return;
+      const i=row.body.findIndex(x=>x.id===el.dataset.btx); if(i<0) return; const b=row.body[i];
+      if(e.key==='Enter'){ e.preventDefault(); const nb=blk(b.t==='h'?'p':b.t,'',b.lvl); row.body.splice(i+1,0,nb); dbTouch(pg,row); dbRedrawBlocks(pg,row,nb.id); }
+      else if(e.key==='Tab'){ e.preventDefault(); b.lvl=clamp((b.lvl||0)+(e.shiftKey?-1:1),0,3); dbTouch(pg,row); dbRedrawBlocks(pg,row,b.id); }
+      else if(e.key==='Backspace' && el.value===''){ e.preventDefault(); row.body.splice(i,1); dbTouch(pg,row); dbRedrawBlocks(pg,row, i>0 ? row.body[i-1].id : null); }
+      else if(e.key==='ArrowUp' && i>0){ e.preventDefault(); const f=box.querySelector('[data-btx="'+row.body[i-1].id+'"]'); if(f) f.focus(); }
+      else if(e.key==='ArrowDown' && i<row.body.length-1){ e.preventDefault(); const f=box.querySelector('[data-btx="'+row.body[i+1].id+'"]'); if(f) f.focus(); }
+    });
+  });
+  box.querySelectorAll('[data-blkck]').forEach(el=> el.addEventListener('change', ()=>{
+    const row=dbRowById(pg,dbUI.rowId); const b=row && row.body.find(x=>x.id===el.dataset.blkck); if(!b) return;
+    b.done=el.checked; el.closest('.blk').classList.toggle('done', b.done); dbTouch(pg,row);
+    const pr=$('#dbProg'); if(pr) pr.innerHTML=dbProgHTML(dbProgress(row));
+  }));
+}
+function dbBind(pg, box){
+  dbBindInputs(pg, box);
+  dbBindBlocks(pg, box);
+  const q=$('#dbQ');
+  if(q && box.contains(q)) q.addEventListener('input', ()=>{
+    dbUI.q=q.value; const body=$('#dbBody'); if(!body) return;
+    const v=dbView0(pg); body.innerHTML=dbBodyHTML(pg, v, dbFiltered(pg,v)); dbBindInputs(pg, body);
+  });
+  box.onclick = e=>{
+    const t=e.target;
+    const g = a => { const el=t.closest('['+a+']'); return el ? el.getAttribute(a) : null; };
+    let v;
+    if((v=g('data-dbview'))!==null){ pg.cfg.curView=v; pg.ut=Date.now(); saveModel(); renderDb(pg); return; }
+    if(t.closest('[data-dbviewadd]')){ dlgDbView(pg, null); return; }
+    if(t.closest('[data-dbviewcfg]')){ dlgDbView(pg, dbView0(pg)); return; }
+    if((v=g('data-dbf'))!==null){ dbUI.group = v||null; renderDb(pg); return; }
+    if((v=g('data-dbm'))!==null){
+      if(v==='0') dbUI.month=todayStr().slice(0,7);
+      else { const [y,m]=dbUI.month.split('-').map(Number); const d=new Date(y, m-1+Number(v), 1); dbUI.month=d.getFullYear()+'-'+pad2(d.getMonth()+1); }
+      renderDb(pg); return;
+    }
+    if(t.closest('[data-dbtpl]')){ dlgDbTemplates(pg); return; }
+    if((v=g('data-dbprop'))!==null){ dlgDbProp(pg, v); return; }
+    if(t.closest('[data-dbpropadd]')){ dlgDbProp(pg, null); return; }
+    if(t.closest('[data-dbback]')){ dbUI.rowId=null; renderDb(pg); return; }
+    if((v=g('data-dbopen'))!==null){ dbUI.rowId=v; renderDb(pg); return; }
+    if((v=g('data-dbdone'))!==null){ const r=dbRowById(pg,v); if(r){ dbSetDone(pg,r,t.checked); saveModel(); renderDb(pg); } return; }
+    if((v=g('data-dbdel'))!==null){ dlgDbDel(pg, v); return; }
+    if(t.closest('[data-dbkidadd]')){ const r=dbNewRow(pg, dbUI.rowId); saveModel(); dbUI.rowId=r.id; renderDb(pg); const f=$('#pgBody .db-ptitle'); if(f) f.focus(); return; }
+    if((v=g('data-dbblk'))!==null){ const row=dbRowById(pg,dbUI.rowId); if(!row) return; const nb=blk(v,'',0); row.body.push(nb); dbTouch(pg,row); dbRedrawBlocks(pg,row, v==='hr'?null:nb.id); return; }
+    if((v=g('data-blkdel'))!==null){ const row=dbRowById(pg,dbUI.rowId); if(!row) return; row.body=row.body.filter(b=>b.id!==v); dbTouch(pg,row); dbRedrawBlocks(pg,row,null); return; }
+    if(t.closest('[data-dbsavetpl]')){ dlgDbSaveTpl(pg, dbRowById(pg,dbUI.rowId)); return; }
+    const add=t.closest('[data-dbadd]');
+    const cell=t.closest('[data-dbcell]');
+    if(add || (cell && t===cell)){
+      const seed={};
+      if(add && add.dataset.seedk) seed[add.dataset.seedk]=add.dataset.seed||'';
+      if(cell){ const dp=dbPropOf(pg,'date'); if(dp) seed[dp.key]={start:cell.dataset.dbcell, end:''}; }
+      const r=dbNewRow(pg, null, seed); saveModel();
+      if(dbView0(pg).type==='table' && !cell){ renderDb(pg); const f=$('#pgBody [data-dbrow="'+r.id+'"] input'); if(f) f.focus(); }
+      else { dbUI.rowId=r.id; renderDb(pg); const f=$('#pgBody .db-ptitle'); if(f) f.focus(); }
+      return;
+    }
+  };
+}
+/* ---- 다이얼로그 ---- */
+function dlgDbView(pg, view){
+  const isNew=!view;
+  const v = view || {name:'', type:'table', groupBy:null, dateKey:null, sort:{key:'date',dir:'desc'}, hide:[]};
+  const ps=dbProps(pg);
+  openModal(isNew?'뷰 추가':'뷰 설정',
+    '<div class="fld"><label>이름</label><input id="dvName" value="'+esc(v.name)+'" placeholder="예: 이번 주"></div>'
+    + '<div class="fld"><label>형태</label><select id="dvType">'+Object.keys(DB_VIEWS).map(k=>'<option value="'+k+'"'+(v.type===k?' selected':'')+'>'+DB_VIEWS[k]+'</option>').join('')+'</select></div>'
+    + '<div class="fld"><label>보드 묶는 기준 (상태·선택 속성)</label><select id="dvGroup"><option value="">자동</option>'+ps.filter(p=>p.type==='status'||p.type==='select').map(p=>'<option value="'+p.key+'"'+(v.groupBy===p.key?' selected':'')+'>'+esc(p.name)+'</option>').join('')+'</select></div>'
+    + '<div class="fld"><label>정렬</label><div style="display:flex;gap:6px"><select id="dvSort"><option value="">최근 수정순</option>'+ps.map(p=>'<option value="'+p.key+'"'+((v.sort||{}).key===p.key?' selected':'')+'>'+esc(p.name)+'</option>').join('')+'</select>'
+    + '<select id="dvDir"><option value="desc"'+((v.sort||{}).dir!=='asc'?' selected':'')+'>내림차순</option><option value="asc"'+((v.sort||{}).dir==='asc'?' selected':'')+'>오름차순</option></select></div></div>'
+    + '<div class="fld"><label>표에서 숨길 열</label><div class="db-hidegrid">'+ps.filter(p=>p.type!=='title').map(p=>'<label><input type="checkbox" data-dvhide="'+p.key+'"'+((v.hide||[]).includes(p.key)?' checked':'')+'> '+esc(p.name)+'</label>').join('')+'</div></div>'
+    + ((!isNew && pg.cfg.views.length>1) ? '<button class="btn ghost sm" id="dvDel" style="color:var(--bad)">이 뷰 삭제</button>' : ''),
+    ()=>{
+      const name=$('#dvName').value.trim(); if(!name){ toast('이름을 입력해 주세요'); return false; }
+      const nv = isNew ? dbView($('#dvType').value, name, pg) : v;
+      nv.name=name; nv.type=$('#dvType').value; nv.groupBy=$('#dvGroup').value || nv.groupBy || null;
+      nv.sort={key:$('#dvSort').value, dir:$('#dvDir').value};
+      nv.hide=$$('#modal [data-dvhide]').filter(c=>c.checked).map(c=>c.dataset.dvhide);
+      if(isNew){ pg.cfg.views.push(nv); pg.cfg.curView=nv.id; }
+      pg.ut=Date.now(); saveModel(); renderDb(pg);
+    }, isNew?'추가':'저장');
+  const del=$('#dvDel');
+  if(del) del.onclick=()=>{ pg.cfg.views=pg.cfg.views.filter(x=>x.id!==v.id); pg.cfg.curView=pg.cfg.views[0].id; pg.ut=Date.now(); saveModel(); closeModal(); renderDb(pg); toast('뷰 삭제됨'); };
+}
+function dlgDbProp(pg, key){
+  const p = key ? dbProps(pg).find(x=>x.key===key) : null, isNew=!p;
+  const v = p || {name:'', type:'text', options:[]};
+  const optTypes=['status','select','multi'];
+  openModal(isNew?'열 추가':'열 설정',
+    '<div class="fld"><label>이름</label><input id="dpName" value="'+esc(v.name)+'"></div>'
+    + '<div class="fld"><label>형태</label><select id="dpType"'+(v.type==='title'?' disabled':'')+'>'+Object.keys(DB_TYPES).filter(k=>k!=='title'||v.type==='title').map(k=>'<option value="'+k+'"'+(v.type===k?' selected':'')+'>'+DB_TYPES[k]+'</option>').join('')+'</select></div>'
+    + '<div class="fld" id="dpOptF"'+(optTypes.includes(v.type)?'':' style="display:none"')+'><label>선택지 (한 줄에 하나)</label><textarea id="dpOpt" rows="4">'+esc((v.options||[]).map(o=>o.name).join('\n'))+'</textarea>'
+    + '<p class="tiny muted" style="margin:4px 0 0">상태 형태는 그룹이 붙습니다 — 마지막 줄 = 완료, 그 앞 줄 = 진행 중, 나머지 = 할 일</p></div>'
+    + (!isNew ? '<div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn ghost sm" id="dpSortA">↑ 오름차순 정렬</button><button class="btn ghost sm" id="dpSortD">↓ 내림차순 정렬</button><button class="btn ghost sm" id="dpHide">이 뷰에서 숨기기</button>'+(v.type!=='title'?'<button class="btn ghost sm" id="dpDel" style="color:var(--bad)">열 삭제</button>':'')+'</div>' : ''),
+    ()=>{
+      const name=$('#dpName').value.trim(); if(!name){ toast('이름을 입력해 주세요'); return false; }
+      const type=$('#dpType').value;
+      const np = isNew ? dbProp('c'+uid(), name, type) : v;
+      np.name=name; if(!isNew && v.type!=='title') np.type=type;
+      if(optTypes.includes(np.type)){
+        const names=$('#dpOpt').value.split('\n').map(x=>x.trim()).filter(Boolean), old=np.options||[];
+        np.options=names.map((nm,i)=>{ const o=old.find(x=>x.name===nm)||{name:nm, color:''};
+          if(np.type==='status'){ o.group = (i===names.length-1) ? 'done' : (i===names.length-2 && names.length>2) ? 'doing' : 'todo'; if(!o.color) o.color = o.group==='done'?'#059669':o.group==='doing'?'#2563eb':'#94a3b8'; }
+          return o; });
+        if(np.type==='status' && !np.options.length) np.options=JSON.parse(JSON.stringify(DB_STATUS));
+      }
+      if(isNew) pg.cfg.props.push(np);
+      pg.ut=Date.now(); saveModel(); renderDb(pg);
+    }, isNew?'추가':'저장');
+  $('#dpType').onchange=()=>{ $('#dpOptF').style.display = optTypes.includes($('#dpType').value) ? '' : 'none'; };
+  const view=dbView0(pg);
+  const b=(id, fn)=>{ const el=$(id); if(el) el.onclick=()=>{ fn(); pg.ut=Date.now(); saveModel(); closeModal(); renderDb(pg); }; };
+  b('#dpSortA', ()=>{ view.sort={key:v.key, dir:'asc'}; });
+  b('#dpSortD', ()=>{ view.sort={key:v.key, dir:'desc'}; });
+  b('#dpHide',  ()=>{ if(!(view.hide||[]).includes(v.key)) view.hide=(view.hide||[]).concat([v.key]); });
+  b('#dpDel',   ()=>{ pg.cfg.props=pg.cfg.props.filter(x=>x.key!==v.key); toast('열을 지웠습니다 — 적힌 값은 데이터에 남습니다'); });
+}
+function dlgDbTemplates(pg){
+  const ts=pg.cfg.templates||[];
+  openModal('템플릿에서 새 행',
+    (ts.length ? ts.map(t=>'<div class="db-tplrow"><button class="tplcard" data-dbtplu="'+t.id+'"><span class="ic">📋</span><span><b>'+esc(t.name)+'</b><span class="ds">체크 '+t.body.filter(b=>b.t==='todo').length+'개 · 블록 '+t.body.length+'개 — 지금 주차 이름으로 새 행을 만듭니다</span></span></button><button class="xbtn2" data-dbtpld="'+t.id+'" title="템플릿 삭제">✕</button></div>').join('')
+      : '<p class="tiny muted" style="margin:0">아직 템플릿이 없습니다. 행 페이지 맨 아래 <b>템플릿으로 저장</b> 을 누르면 여기 쌓입니다.</p>'),
+    ()=>false, '닫기');
+  $('#modal').onclick = e=>{
+    const a=e.target.dataset.mact; if(a==='cancel'||a==='ok'){ closeModal(); return; }
+    const u=e.target.closest('[data-dbtplu]');
+    if(u){ const t=ts.find(x=>x.id===u.dataset.dbtplu); if(!t) return;
+      const tp=dbPropOf(pg,'title'), seed={}; if(tp) seed[tp.key]=t.name+' · '+dbWeekLabel(todayStr());
+      const r=dbNewRow(pg, null, seed); r.body=t.body.map(b=>Object.assign({}, b, {id:'b'+uid(), done:false}));
+      saveModel(); closeModal(); dbUI.rowId=r.id; renderDb(pg); toast('템플릿으로 만들었습니다 ✓'); return; }
+    const d=e.target.closest('[data-dbtpld]');
+    if(d){ pg.cfg.templates=ts.filter(x=>x.id!==d.dataset.dbtpld); pg.ut=Date.now(); saveModel(); closeModal(); dlgDbTemplates(pg); }
+  };
+}
+function dlgDbSaveTpl(pg, row){
+  if(!row) return;
+  openModal('템플릿으로 저장',
+    '<div class="fld"><label>템플릿 이름</label><input id="dtName" value="'+esc(dbTitle(pg,row))+'"></div><p class="tiny muted" style="margin:0">본문 블록(체크 '+dbProgress(row).total+'개)이 복사됩니다. 완료 표시는 초기화됩니다.</p>',
+    ()=>{ const nm=$('#dtName').value.trim(); if(!nm){ toast('이름을 입력해 주세요'); return false; }
+      pg.cfg.templates.push({id:'t'+uid(), name:nm, body:row.body.map(b=>Object.assign({}, b, {id:'b'+uid(), done:false}))});
+      pg.ut=Date.now(); saveModel(); toast('템플릿 저장 ✓ — 템플릿 ▾ 에서 꺼내 씁니다'); }, '저장');
+}
+function dlgDbDel(pg, id){
+  const r=dbRowById(pg,id); if(!r) return;
+  const kids=dbRows(pg).filter(x=>x.parentId===id).length;
+  openModal('행 삭제',
+    '<p style="margin:0;font-size:13px">「'+(esc(dbTitle(pg,r))||'(제목 없음)')+'」 을 삭제합니다.'+(kids?'<br><b style="color:var(--bad)">하위 페이지 '+kids+'개도 함께 지워집니다.</b>':'')+'</p>',
+    ()=>{
+      const del=new Set([id]); let grew=true;
+      while(grew){ grew=false; for(const x of dbRows(pg)) if(x.parentId && del.has(x.parentId) && !del.has(x.id)){ del.add(x.id); grew=true; } }
+      pg.data.rows=dbRows(pg).filter(x=>!del.has(x.id)); pg.ut=Date.now(); saveModel();
+      if(del.has(dbUI.rowId)) dbUI.rowId = r.parentId||null;
+      renderDb(pg); toast('삭제됨');
+    }, '삭제');
+}
+
+/* ==========================================================
    Memo (F-16) — 빠른 캡처 + 승격. 캡처와 정리 사이 단계가 노션에는 없었다
    ========================================================== */
 let noteQ = '';                 // 검색어 — 화면 상태
@@ -2961,6 +3614,10 @@ function renderCalendar(){
       h += '<button class="evc'+(e.kind==='work'?' work':'')+(e.holi?' holi':'')+(e.done?' done':'')+'" data-evid="'+e.id+'"'+st+' title="'+esc(e.title||'')+'">'
          + '<span class="ck" data-evck="'+e.id+'" title="완료 체크">✓</span>'
          + (tm?'<span class="tm">'+tm+'</span>':'') + '<span class="tx">'+esc(e.title||'(제목 없음)')+'</span></button>';
+    }
+    if(calShow.work) for(const x of dbRowsOn(d)){                       // F-41.7 업무 DB 행
+      h += '<button class="evc work'+(dbIsDone(x.pg,x.row)?' done':'')+'" data-dbgo="'+x.pg.id+':'+x.row.id+'" style="border-left-color:'+dbStatusColor(x.pg,x.row)+'" title="'+esc(x.pg.name||'')+'">'
+         + '<span class="tx">'+(esc(dbTitle(x.pg,x.row))||'(제목 없음)')+'</span></button>';
     }
     if(list.length>cap) h += '<button class="more" data-calmore="'+d+'">+'+(list.length-cap)+'개 더</button>';
     else if(calOpen===d && list.length>3) h += '<button class="more" data-calmore="">접기</button>';
@@ -3199,6 +3856,16 @@ function bindAll(){
   };
   // F-33 Summary — 카드 링크·일정·페이지 클릭은 전부 위임
   $('#p-sum').onclick = e=>{
+    // F-42 체크 토글 — 기존 저장 함수만 쓴다 (ensureWeek / ensureDay / dbSetDone)
+    const st = e.target.closest('[data-sumtodo]');
+    if(st){ const ts = ensureWeek(todayStr()).todos, t = ts[+st.dataset.sumtodo]; if(t){ t.grade = st.checked ? 'O' : ''; saveModel(); renderSummary(); } return; }
+    const sh = e.target.closest('[data-sumhab]');
+    if(sh){ const d = ensureDay(todayStr()); d.habitLog[sh.dataset.sumhab] = !!sh.checked; saveModel(); renderSummary(); return; }
+    const sd = e.target.closest('[data-sumdb]');
+    if(sd){ const [pid, rid] = sd.dataset.sumdb.split(':'); const pg = pageById(pid), r = pg && dbRowById(pg, rid); if(r){ dbSetDone(pg, r, true); saveModel(); renderSummary(); } return; }
+    const dg = e.target.closest('[data-dbgo]');
+    if(dg){ dbGo(dg.dataset.dbgo); return; }
+    if(e.target.closest('#sumMoreTg')){ const m = $('#sumMore'); m.hidden = !m.hidden; try{ localStorage.setItem('planner-sum-more', m.hidden ? '0' : '1'); }catch(_){} $('#sumMoreTg').firstChild.textContent = (m.hidden ? '▸' : '▾') + ' 더 보기 '; return; }
     const up = e.target.closest('[data-upgo]');
     if(up){ calMonth = up.dataset.upgo.slice(0,7); switchTab('cal'); return; }
     const pg = e.target.closest('[data-gopage]');
@@ -3218,6 +3885,8 @@ function bindAll(){
     if(ck){ const ev = evById(ck.dataset.evck); if(ev){ ev.done = !ev.done; ev.ut = Date.now(); saveModel(); renderCalendar(); } return; }
     const pick = e.target.closest('[data-calpick]');
     if(pick){ curDate = pick.dataset.calpick; $('#dateIn').value = curDate; switchTab('today'); return; }
+    const dg = e.target.closest('[data-dbgo]');
+    if(dg){ dbGo(dg.dataset.dbgo); return; }
     const chip = e.target.closest('[data-evid]');
     if(chip){ const ev = evById(chip.dataset.evid); if(ev) dlgEvent(ev); return; }
     const cell = e.target.closest('[data-cday]');
