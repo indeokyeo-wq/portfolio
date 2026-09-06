@@ -517,18 +517,31 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
 .vis-card .vt b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vis-card .va{font-size:13px;font-weight:700;color:var(--key)}
 .vis-card .vn{font-size:11.5px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mandal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;max-width:660px}
-.mandal .mc{position:relative;aspect-ratio:1.45;border:1px solid var(--line);border-top:4px solid var(--cc,var(--line));border-radius:10px;background:var(--card);padding:10px;text-align:left;display:flex;flex-direction:column;justify-content:flex-start;gap:4px;cursor:pointer;min-width:0}
-.mandal .mc:hover{border-color:var(--key);background:var(--key-soft)}
-.mandal .mc.empty{border-style:dashed;border-top-width:1px;color:var(--sub);justify-content:center;align-items:center;font-size:13px}
-.mandal .mc .mn{position:absolute;top:6px;right:8px;font-size:10px;color:var(--mute);font-weight:700}
-.mandal .mc b{font-size:14px;line-height:1.3;word-break:keep-all;margin-top:8px}
-.mandal .mc .mp{font-size:11.5px;color:var(--sub)}
-.mandal .mc .mo{font-size:10px;font-weight:700;color:var(--key);background:var(--key-soft);border-radius:999px;padding:1px 6px;align-self:flex-start}
-.mandal .mc.center{background:var(--ink);border-color:var(--ink);border-top-width:1px;cursor:default;padding:8px}
-.mandal .mc.center:hover{background:var(--ink)}
-.mandal .mc.center textarea{width:100%;height:100%;background:transparent;color:#fff;border:0;resize:none;font-size:13.5px;font-weight:700;line-height:1.45;text-align:center;outline:none}
-.mandal .mc.center textarea::placeholder{color:rgba(255,255,255,.55);font-weight:500}
+.tg-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:22px}
+.tgs{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:10px 12px;min-width:0}
+.tgs .n{width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;background:var(--card2);color:var(--sub);border:1px solid var(--line)}
+.tgs .t{min-width:0}
+.tgs.done .n{background:var(--good);color:#fff;border-color:var(--good)}
+.tgs b{display:block;font-size:13px}
+.tgs .s{display:block;font-size:11px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tgs.run .n{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tgs.run.ready{background:var(--key);border-color:var(--key);color:#fff} .tgs.run.ready .s{color:rgba(255,255,255,.78)} .tgs.run.ready .n{background:#fff;color:var(--key)}
+.m9-chips{display:none}
+.m9{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.m3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;padding:4px;border-radius:12px;background:color-mix(in srgb,var(--bc,#94a3b8) 9%,#fff);border:1px solid color-mix(in srgb,var(--bc,#94a3b8) 28%,#fff)}
+.m3.core-b{background:var(--card2);border-color:var(--line)}
+.mx{min-height:60px;border-radius:7px;padding:6px 7px;font-size:12px;line-height:1.35;text-align:center;display:flex;align-items:center;justify-content:center;word-break:keep-all;overflow:hidden;background:var(--card);border:1px solid transparent;color:var(--ink);min-width:0}
+.mx.empty{color:var(--mute)} .mx .ph{font-size:11px;color:var(--mute)}
+button.mx:hover{box-shadow:inset 0 0 0 2px var(--bc,var(--key))}
+.mx.sub{background:var(--bc);color:#fff;font-weight:700;font-size:12.5px}
+.mx.sub.empty{background:color-mix(in srgb,var(--bc) 16%,#fff)} .mx.sub.empty .ph{color:var(--bc);font-weight:700}
+.mx.core{background:var(--ink);color:#fff;font-weight:800;font-size:12.5px}
+.mx.core.empty .ph{color:rgba(255,255,255,.72)}
+.mx.ed{padding:4px;flex-direction:column;gap:4px;border-color:var(--key);box-shadow:0 0 0 2px var(--key-soft);background:var(--card);color:var(--ink)}
+.mx.ed textarea{width:100%;flex:1;min-height:46px;border:0;outline:none;resize:none;font-size:12px;line-height:1.35;text-align:center;background:transparent;color:var(--ink)}
+.mx.ed select{width:100%;font-size:11px;border:1px solid var(--line);border-radius:6px;padding:2px 4px;background:var(--card)}
+.okr-badge[style*="--bc"]{color:#fff;background:var(--bc)}
+.kr .unit{width:44px;border:1px solid var(--line);border-radius:6px;padding:3px 5px;font-size:12px;background:var(--card)}
 .okr-hd{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--card2);margin-bottom:12px}
 .okr-hd .ol{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;font-size:14px}
 .okr-hd .or{display:flex;align-items:center;gap:8px}
@@ -537,7 +550,14 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
 .ma{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--line);font-size:13px}
 .ma span{flex:1;min-width:0} .ma .dn{text-decoration:line-through;color:var(--mute)}
 .fld .ma input[type=checkbox]{width:auto;flex:none;margin:0}
-@media (max-width:700px){ .mandal{gap:4px} .mandal .mc{padding:6px;border-radius:8px;aspect-ratio:1} .mandal .mc b{font-size:11.5px;margin-top:6px} .mandal .mc .mp{font-size:10px} .mandal .mc.center textarea{font-size:11px} .vis-grid{grid-template-columns:1fr 1fr} }
+@media (max-width:700px){
+  .tg-steps{grid-template-columns:1fr 1fr}
+  .m9-chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px}
+  .m9-chip{flex:none;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid var(--line);color:var(--sub);background:var(--card)}
+  .m9-chip.on{background:var(--bc);color:#fff;border-color:var(--bc)}
+  .m9{grid-template-columns:1fr} .m3{display:none} .m3.act{display:grid;gap:5px} .mx{min-height:74px;font-size:13px}
+  .vis-grid{grid-template-columns:1fr 1fr}
+}
 .goal{border:1px solid var(--line);border-radius:var(--r);background:var(--card);margin-bottom:12px;overflow:hidden}
 .goal .gh2{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
 .goal .gh2 .cat{width:4px;align-self:stretch;border-radius:3px;flex:none}
@@ -820,6 +840,7 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
   <!-- ============ GOALS ============ -->
   <section class="panel" id="p-goals">
     <!-- F-43 Target 3층: 비전 → 만다라트 → OKR (노션 [4] Vision-Board · [0] OKR 구조 이식) -->
+    <div class="tg-steps" id="tgSteps"></div>
     <div class="tg-sec" id="tgVision">
       <div class="tg-hd"><h2>비전</h2><span class="tiny muted" id="visSum"></span><span style="flex:1"></span>
         <button class="btn ghost sm" data-visbg>배경 이미지</button><button class="btn ghost sm" data-visfold id="visFold">▾ 접기</button></div>
@@ -827,9 +848,9 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
     </div>
     <div class="tg-sec" id="tgMandal">
       <div class="tg-hd"><h2>만다라트</h2><select id="perSel"></select><span class="tiny muted" id="perMeta"></span><span style="flex:1"></span>
-        <button class="btn ghost sm" data-periodedit>기간 편집</button><button class="btn ghost sm" data-periodadd>+ 기간</button></div>
-      <p class="tiny muted" style="margin:0 0 8px">가운데 = 이 기간의 <b>[One-Thing]</b> 한 문장 · 8칸 = 영역과 행동. 칸을 누르면 행동 체크리스트와 <b>→ OKR 보내기</b>가 있습니다.</p>
-      <div class="mandal" id="mandal"></div>
+        <button class="btn ghost sm" data-example>예시 불러오기</button><button class="btn ghost sm" data-periodedit>기간 편집</button><button class="btn ghost sm" data-periodadd>+ 기간</button></div>
+      <p class="tiny muted" style="margin:0 0 10px">가운데 블록 = <b>핵심 목표 1</b> + <b>영역 8</b>. 바깥 8블록 = 각 영역의 <b>행동 8</b>. 칸을 누르면 바로 타이핑 (Enter 저장 · Tab 다음 칸 · Esc 취소). 영역은 OKR 목표로, 행동은 KR 로 <b>자동</b> 연결됩니다.</p>
+      <div id="mandal"></div>
     </div>
     <div class="tg-sec" id="tgOkr">
       <div class="tg-hd"><h2>OKR</h2><span style="flex:1"></span><button class="btn" id="btnAddGoal">+ 목표 추가</button></div>
@@ -1282,6 +1303,7 @@ function fillMissing(){                     // 스키마가 바뀌어도 기존 
   if(typeof M.vision.imgUrl!=='string') M.vision.imgUrl = '';
   ensurePeriod();
   for(const g of M.goals){ if(!g || typeof g!=='object') continue; if(g.periodId===undefined) g.periodId = null; if(g.cellIdx===undefined) g.cellIdx = null; }
+  for(const p of M.periods) syncOkr(p);                       // 만다라트 영역·행동 ↔ 목표·KR 정합
   // 기타 할 일이 '그 날'에서 '그 주'로 옮겨졌다 (F-20.7). 기존 입력을 잃지 않게 한 번만 이관한다
   if(!M.todosMovedToWeek){
     for(const d of Object.keys(M.days)){
@@ -2421,8 +2443,12 @@ function renderTodoList(){
    이미지는 URL 문자열만 (data URI 금지 — 동기화 JSON 비대화). 중심 문장·행동 입력 중 리렌더 금지.
    ========================================================== */
 const MANDAL_POS = [0,1,2,5,8,7,6,3];     // 칸 0~7 → 3×3 그리드 위치 (시계 방향), 4 = 중심
+const MANDAL_COLORS = ['#2563eb','#059669','#d97706','#db2777','#7c3aed','#0891b2','#dc2626','#475569'];  // 영역 8 블록 색
 let okrFold = true;                        // '기간 미지정·다른 기간' 그룹 접힘 (M 밖 — 화면 상태)
-function emptyCells(){ return Array.from({length:8}, ()=>({title:'', catId:null, actions:[]})); }
+let mandalBlock = 4;                       // 폰: 보고 있는 블록 (그리드 위치 0~8, 4 = 중심)
+let mandalEdit = null, mandalCancel = false, mandalNext = 0;   // 인라인 편집 중인 칸 키 · Esc 취소 · Tab 이동 방향
+function emptyActions(){ return Array.from({length:8}, ()=>({id:'a'+uid(), text:'', done:false})); }
+function emptyCells(){ return Array.from({length:8}, ()=>({title:'', catId:null, actions:emptyActions()})); }
 function defaultPeriod(){
   const d = new Date(), y = d.getFullYear(), m = d.getMonth()+1;
   return { id:'pr'+uid(), label: y+'년 '+(m===12?'12월':m+'~12월'), from: y+'-'+pad2(m)+'-01', to: y+'-12-31',
@@ -2437,7 +2463,12 @@ function ensurePeriod(){
     if(typeof p.center!=='string') p.center = '';
     if(!Array.isArray(p.cells)) p.cells = [];
     while(p.cells.length<8) p.cells.push({title:'', catId:null, actions:[]});
-    for(const c of p.cells){ if(typeof c.title!=='string') c.title=''; if(c.catId===undefined) c.catId=null; if(!Array.isArray(c.actions)) c.actions=[]; }
+    for(const c of p.cells){
+      if(typeof c.title!=='string') c.title=''; if(c.catId===undefined) c.catId=null; if(!Array.isArray(c.actions)) c.actions=[];
+      c.actions = c.actions.filter(a=>a && typeof a==='object');
+      for(const a of c.actions){ if(!a.id) a.id='a'+uid(); if(typeof a.text!=='string') a.text=''; }
+      while(c.actions.length<8) c.actions.push({id:'a'+uid(), text:'', done:false});   // 9×9: 영역당 행동 8칸 고정
+    }
   }
   if(!M.periods.length) M.periods.push(defaultPeriod());
   if(!M.periods.find(p=>p.id===M.curPeriod)) M.curPeriod = M.periods[0].id;
@@ -2453,9 +2484,48 @@ function periodDday(p){
 }
 function fmtEok(n){ n = +n||0; return n ? (Math.round(n*10)/10)+'억' : ''; }
 function visionTotal(){ return M.vision.items.reduce((s,i)=>s+(+i.amount||0), 0); }
-function cellProgress(c){ const n = c.actions.length, d = c.actions.filter(a=>a.done).length; return {n, d}; }
-function cellGoal(p, idx){ return M.goals.find(g=>g.periodId===p.id && g.cellIdx===idx) || null; }
-function renderTarget(){ renderVision(); renderMandal(); renderGoals(); }
+function cellGoalId(p, idx){ return 'g:'+p.id+':'+idx; }
+function isSyncedGoal(g){ return typeof g.id==='string' && g.id.startsWith('g:'); }
+/** 🔴 만다라트 → OKR 자동 연동. 영역 = 목표(id 'g:<기간>:<i>'), 행동 = KR(id 'kr:<행동id>').
+ *  제목만 동기화한다 — KR 의 현재/목표/단위 숫자는 KR 쪽에 남는다. 영역을 비우면 자동 생성분(목표·KR·습관)도 지운다 */
+function syncOkr(p){
+  p.cells.forEach((c,i)=>{
+    const gid = cellGoalId(p, i);
+    let g = M.goals.find(x=>x.id===gid);
+    if(c.title.trim()){
+      if(!g){ g = {id:gid, title:c.title, catId:c.catId||null, deadline:p.to, weeklyTargetH:0, archived:false, _open:false, periodId:p.id, cellIdx:i}; M.goals.push(g); }
+      g.title = c.title; g.periodId = p.id; g.cellIdx = i; g.catId = c.catId||g.catId||null; if(!g.deadline) g.deadline = p.to;
+      for(const a of c.actions){
+        const kid = 'kr:'+a.id; let k = M.krs.find(x=>x.id===kid);
+        if(a.text.trim()){
+          if(!k){ k = {id:kid, goalId:gid, title:a.text, current:0, target:(+a.tgt||1), unit:(a.unit||'')}; M.krs.push(k); }
+          k.title = a.text; k.goalId = gid;
+        } else if(k) M.krs = M.krs.filter(x=>x.id!==kid);
+      }
+    } else if(g){
+      M.goals = M.goals.filter(x=>x.id!==gid); M.krs = M.krs.filter(x=>x.goalId!==gid); M.habits = M.habits.filter(x=>x.goalId!==gid);
+    }
+  });
+}
+function renderTarget(){ renderVision(); renderMandal(); renderGoals(); renderSteps(); }
+/* ---- ⓪ 온보딩 스텝 — 비전 → 만다라트 → OKR → 달리기(Weekly) ---- */
+function targetProgress(){
+  const p = curPeriod();
+  const subs = p.cells.filter(c=>c.title.trim()).length;
+  const acts = p.cells.reduce((s,c)=>s+c.actions.filter(a=>a.text.trim()).length, 0);
+  const goals = M.goals.filter(g=>g.periodId===p.id).length;
+  const krs = M.krs.filter(k=>M.goals.some(g=>g.id===k.goalId && g.periodId===p.id)).length;
+  return { s1: M.vision.items.length>0, s2: !!p.center.trim() && subs>0, s3: goals>0 && krs>0, subs, acts, goals, krs };
+}
+function renderSteps(){
+  const t = targetProgress();
+  const step = (n, done, title, sub, go) => '<button class="tgs'+(done?' done':'')+'" data-tgo="'+go+'"><span class="n">'+(done?'✓':n)+'</span><span class="t"><b>'+title+'</b><span class="s">'+sub+'</span></span></button>';
+  $('#tgSteps').innerHTML =
+    step(1, t.s1, '비전', t.s1 ? '카드 '+M.vision.items.length+'개' : '이루고 싶은 것을 카드로', 'tgVision') +
+    step(2, t.s2, '만다라트', t.s2 ? '영역 '+t.subs+'/8 · 행동 '+t.acts+'/64' : '핵심 1 → 영역 8 → 행동 64', 'tgMandal') +
+    step(3, t.s3, 'OKR', t.s3 ? '목표 '+t.goals+' · KR '+t.krs : '영역이 목표, 행동이 KR로 자동 연결', 'tgOkr') +
+    '<button class="tgs run'+(t.s3?' ready':'')+'" data-tgrun><span class="n">▶</span><span class="t"><b>달리기</b><span class="s">이번 주 계획 세우러 Weekly 로</span></span></button>';
+}
 
 /* ---- ① 비전 ---- */
 function renderVision(){
@@ -2502,71 +2572,50 @@ function dlgVisionBg(){
     ()=>{ M.vision.imgUrl = $('#vBg').value.trim(); saveModel(); renderVision(); }, '저장');
 }
 
-/* ---- ② 만다라트 ---- */
+/* ---- ② 만다라트 9×9 — 인라인 편집. 칸 키: 'x' = 핵심(One-Thing) · 'c:<i>' = 영역 i · 'a:<i>:<k>' = 영역 i 의 행동 k ---- */
+function mandalCellHTML(key, text, cls, style, ph){
+  if(mandalEdit===key){
+    const catSel = key.startsWith('c:') ? '<select data-mcat><option value="">분류 없음</option>'+catOptions(curPeriod().cells[+key.slice(2)].catId)+'</select>' : '';
+    return '<div class="mx ed '+cls+'" style="'+style+'"><textarea data-mx="'+key+'" placeholder="'+esc(ph||'')+'">'+esc(text)+'</textarea>'+catSel+'</div>';
+  }
+  return '<button class="mx '+cls+(text?'':' empty')+'" data-mx="'+key+'" style="'+style+'">'+(text ? esc(text) : '<span class="ph">'+esc(ph||'')+'</span>')+'</button>';
+}
 function renderMandal(){
   const p = curPeriod();
   $('#perSel').innerHTML = M.periods.map(x=>'<option value="'+x.id+'"'+(x.id===p.id?' selected':'')+'>'+esc(x.label)+'</option>').join('');
   $('#perMeta').textContent = p.from.slice(5).replace('-','/')+' ~ '+p.to.slice(5).replace('-','/')+' · '+periodDday(p);
-  const grid = new Array(9).fill('');
+  const blocks = new Array(9);
+  const cen = new Array(9);
+  p.cells.forEach((c,i)=>{ cen[MANDAL_POS[i]] = mandalCellHTML('c:'+i, c.title, 'sub', '--bc:'+MANDAL_COLORS[i], '영역 '+(i+1)); });
+  cen[4] = mandalCellHTML('x', p.center, 'core', '', '[One-Thing] 핵심 목표 한 문장');
+  blocks[4] = '<div class="m3 core-b'+(mandalBlock===4?' act':'')+'" data-mb="4">'+cen.join('')+'</div>';
   p.cells.forEach((c,i)=>{
-    const cat = catById(c.catId), pr = cellProgress(c), linked = cellGoal(p, i);
-    grid[MANDAL_POS[i]] = c.title
-      ? '<button class="mc" data-cell="'+i+'" style="--cc:'+(cat?cat.color:'var(--line)')+'"><span class="mn">'+(i+1)+'</span><b>'+esc(c.title)+'</b>'+
-        (pr.n ? '<span class="mp">행동 '+pr.d+'/'+pr.n+'</span>' : '')+(linked ? '<span class="mo">OKR</span>' : '')+'</button>'
-      : '<button class="mc empty" data-cell="'+i+'"><span class="mn">'+(i+1)+'</span>＋ 영역</button>';
+    const arr = new Array(9), col = MANDAL_COLORS[i], pos = MANDAL_POS[i];
+    c.actions.forEach((a,k)=>{ arr[MANDAL_POS[k]] = mandalCellHTML('a:'+i+':'+k, a.text, 'act', '--bc:'+col, c.title ? '행동 '+(k+1) : ''); });
+    arr[4] = mandalCellHTML('c:'+i, c.title, 'sub', '--bc:'+col, '영역 '+(i+1));
+    blocks[pos] = '<div class="m3'+(mandalBlock===pos?' act':'')+'" data-mb="'+pos+'" style="--bc:'+col+'">'+arr.join('')+'</div>';
   });
-  grid[4] = '<div class="mc center"><textarea data-center rows="4" placeholder="[One-Thing] ○○하는 '+esc(p.label)+'&#10;예: 회사 안정적으로 적응하고, 사업 기반 다지는 25년 4분기">'+esc(p.center)+'</textarea></div>';
-  $('#mandal').innerHTML = grid.join('');
+  const chips = '<div class="m9-chips">'+[4].concat(MANDAL_POS).map(b=>{
+    const i = MANDAL_POS.indexOf(b), t = b===4 ? '핵심' : (p.cells[i].title || '영역 '+(i+1));
+    return '<button class="m9-chip'+(mandalBlock===b?' on':'')+'" data-mbgo="'+b+'" style="--bc:'+(b===4?'var(--ink)':MANDAL_COLORS[i])+'">'+esc(t)+'</button>';
+  }).join('')+'</div>';
+  $('#mandal').innerHTML = chips + '<div class="m9">'+blocks.join('')+'</div>';
+  const ta = $('#mandal textarea[data-mx]');
+  if(ta){ ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); }
 }
-function dlgCell(idx){
-  const p = curPeriod(), c = p.cells[idx];
-  const draft = JSON.parse(JSON.stringify(c));            // 편집 사본 — 저장 눌러야 반영
-  const linked = cellGoal(p, idx);
-  const listHTML = ()=> draft.actions.length
-    ? draft.actions.map((a,i)=>'<div class="ma"><input type="checkbox" data-mck="'+i+'"'+(a.done?' checked':'')+'><span'+(a.done?' class="dn"':'')+'>'+esc(a.text)+'</span><button class="xbtn" data-mdel="'+i+'">×</button></div>').join('')
-    : '<p class="tiny muted" style="margin:0">이 영역에서 '+esc(p.label)+'에 할 행동을 적으세요.</p>';
-  openModal('영역 '+(idx+1)+' — '+p.label,
-    '<div class="fld"><label>영역 이름</label><input id="cTitle" value="'+esc(draft.title)+'" placeholder="예: 부동산 임장 · 회사 · 건강 · 가족 · 독서 · 재무점검"></div>'+
-    '<div class="fld"><label>분류 (색)</label><select id="cCat"><option value="">없음</option>'+catOptions(draft.catId)+'</select></div>'+
-    '<div class="fld"><label>행동 체크리스트</label><div id="cList">'+listHTML()+'</div>'+
-      '<input id="cNew" placeholder="행동 입력 후 Enter" style="margin-top:6px"></div>'+
-    '<div style="display:flex;gap:8px;flex-wrap:wrap">'+
-      '<button class="btn ghost sm" id="cOkr">'+(linked ? 'OKR 연결됨 · 열기' : '→ OKR 목표로 보내기')+'</button>'+
-      (c.title ? '<button class="btn ghost sm" id="cClear" style="color:var(--bad)">비우기</button>' : '')+
-    '</div>',
-    ()=>{
-      draft.title = $('#cTitle').value.trim(); draft.catId = $('#cCat').value||null;
-      Object.assign(c, draft); p.ut = Date.now(); saveModel(); renderMandal(); renderGoals();
-    }, '저장');
-  const redraw = ()=>{ $('#cList').innerHTML = listHTML(); };
-  $('#cList').onclick = e=>{
-    const ck = e.target.closest('[data-mck]'); if(ck){ draft.actions[+ck.dataset.mck].done = ck.checked; redraw(); return; }
-    const d = e.target.closest('[data-mdel]'); if(d){ draft.actions.splice(+d.dataset.mdel, 1); redraw(); }
-  };
-  $('#cNew').addEventListener('keydown', e=>{
-    if(e.isComposing || e.key==='Process') return;                  // 한글 IME 조합 중
-    if(e.key!=='Enter') return;
-    e.preventDefault();
-    const t = e.target.value.trim(); if(!t) return;
-    draft.actions.push({id:'a'+uid(), text:t, done:false}); e.target.value=''; redraw();
-  });
-  $('#cOkr').onclick = ()=>{
-    draft.title = $('#cTitle').value.trim(); draft.catId = $('#cCat').value||null;
-    if(!draft.title){ $('#cTitle').focus(); return; }
-    Object.assign(c, draft); p.ut = Date.now();
-    let g = linked;
-    if(!g){
-      g = {id:uid(), title:c.title, catId:c.catId||(M.categories[0]||{}).id, deadline:p.to, weeklyTargetH:0, archived:false, _open:true, periodId:p.id, cellIdx:idx};
-      M.goals.push(g); toast('OKR 목표로 보냈습니다 — KR 을 정하세요');
-    } else g._open = true;
-    saveModel(); closeModal(); renderMandal(); renderGoals();
-    const el = $('[data-goal="'+g.id+'"]'); if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
-  };
-  if(c.title) $('#cClear').onclick = ()=>{
-    if(!confirm('영역 '+(idx+1)+' 을 비울까요? (연결된 OKR 목표는 남습니다)')) return;
-    Object.assign(c, {title:'', catId:null, actions:[]}); p.ut = Date.now();
-    saveModel(); closeModal(); renderMandal(); renderGoals();
-  };
+/** 편집 확정 — 저장 + OKR 동기화. 리렌더는 호출부(focusout)에서 한 번만 */
+function mandalCommit(key, val, catId){
+  const p = curPeriod(); val = (val||'').trim();
+  if(key==='x') p.center = val;
+  else if(key.startsWith('c:')){ const c = p.cells[+key.slice(2)]; c.title = val; if(catId!==undefined) c.catId = catId||null; }
+  else { const [, i, k] = key.split(':'); p.cells[+i].actions[+k].text = val; }
+  p.ut = Date.now(); syncOkr(p); saveModel();
+}
+/** Tab 이동 — 같은 블록 안에서 다음/이전 칸 */
+function mandalNeighbor(key, dir){
+  if(key==='x') return null;
+  if(key.startsWith('c:')){ const i = +key.slice(2)+dir; return (i>=0 && i<8) ? 'c:'+i : null; }
+  const [, i, k] = key.split(':'); const nk = +k+dir; return (nk>=0 && nk<8) ? 'a:'+i+':'+nk : null;
 }
 function dlgPeriod(pid){
   const p = pid ? M.periods.find(x=>x.id===pid) : null;
@@ -2590,15 +2639,44 @@ function dlgPeriod(pid){
       if(!l || !f || !t || f > t){ toast('이름·시작·끝을 확인하세요'); return false; }
       if(p) Object.assign(p, {label:l, from:f, to:t, ut:Date.now()});
       else { const n = Object.assign(defaultPeriod(), {label:l, from:f, to:t}); M.periods.push(n); M.curPeriod = n.id; }
-      saveModel(); renderTarget();
+      mandalBlock = 4; saveModel(); renderTarget();
     }, p ? '저장' : '추가');
   $$('#modal [data-pre]').forEach(b=> b.onclick = ()=>{ const x = presets[+b.dataset.pre]; $('#pLabel').value = x[1]; $('#pFrom').value = x[2]; $('#pTo').value = x[3]; });
   if(p && M.periods.length>1) $('#pDel').onclick = ()=>{
-    if(!confirm('"'+p.label+'" 기간을 삭제할까요? (OKR 목표는 "기간 미지정"으로 남습니다)')) return;
-    M.periods = M.periods.filter(x=>x.id!==p.id);
-    for(const g of M.goals) if(g.periodId===p.id){ g.periodId = null; g.cellIdx = null; }
-    M.curPeriod = M.periods[0].id; saveModel(); closeModal(); renderTarget();
+    if(!confirm('"'+p.label+'" 기간을 삭제할까요?\n만다라트에서 자동 생성된 목표·KR·습관은 같이 지워지고, 직접 추가한 목표는 "기간 미지정"으로 남습니다.')) return;
+    deletePeriod(p.id); closeModal();
   };
+}
+function deletePeriod(pid){
+  const gids = new Set(M.goals.filter(g=>isSyncedGoal(g) && g.periodId===pid).map(g=>g.id));
+  M.goals = M.goals.filter(g=>!gids.has(g.id)); M.krs = M.krs.filter(k=>!gids.has(k.goalId)); M.habits = M.habits.filter(h=>!gids.has(h.goalId));
+  for(const g of M.goals) if(g.periodId===pid){ g.periodId = null; g.cellIdx = null; }
+  M.periods = M.periods.filter(x=>x.id!==pid); M.curPeriod = M.periods.length ? M.periods[0].id : null;
+  mandalBlock = 4; saveModel(); renderTarget();
+}
+/* ---- 예시 — 직장인 9~12월 (구조를 보여주기 위한 샘플 기간. "기간 편집 → 이 기간 삭제" 로 제거) ---- */
+const MANDAL_EXAMPLE = {
+  label:'예시 · 직장인 9~12월',
+  center:'[One-Thing] 퇴근 후 2시간을 되찾아 부동산 1호기 준비를 끝내는 9~12월',
+  cells:[
+    ['부동산 임장','biz',   ['후보 5개 지역 선정|5|곳','토요일 분위기 임장|8|회','단지 임장 엑셀 정리|6|회','시세 트래킹 매주 화|16|회','임장 보고서 작성|4|편','자금 계획 점검|1|회','매물 3곳 비교|3|곳','12월 지역·방식 확정|1|건']],
+    ['회사 성과','work',    ['본부 사업전략 초안|1|건','위클리 이슈 보드 운영|16|주','대시보드 마무리|1|건','야근 주 2일 이하|16|주','1:1 피드백 월 1회|4|회','업무 DB 매주 정리|16|주','보고서 템플릿화|1|건','연말 평가 준비|1|건']],
+    ['건강','health',       ['점심 걷기 20분 주3|48|회','아침 근력 10분 주2|32|회','수면 6시간|100|일','체중 -3kg|3|kg','주말 등산 월 1|4|회','물 1.5L|100|일','야식 끊기|100|일','건강검진|1|회']],
+    ['가족','family',       ['토요일 함께 시간 고정|16|회','부모님 월 1 방문|4|회','밤 대화 1시간|100|일','연말 여행|1|회','집안일 분담표|1|건','가계부 같이 보기 월 1|4|회','기념일 챙기기|3|회','비전 카드 같이 쓰기|1|회']],
+    ['독서','study',        ['10월 오디오북 시작|1|권','출근길 30분 듣기|60|회','월 2권|8|권','독서 후기 1줄|8|편','사업 책 다시 읽기|2|권','부동산 책|1|권','고전|1|권','책 리스트 정리|1|건']],
+    ['재무','etc',          ['월 1회 현금 점검|4|회','순수현금 1억 달성|1|건','불필요 구독 정리|1|건','비상금 통장 분리|1|건','투자금 기준 재확인|1|건','보험 점검|1|건','연말정산 준비|1|건','재무 대시보드 갱신|4|회']],
+    ['사이드·AI','biz',     ['플래너 21일 연속 사용|21|일','주말 1일만 개발|16|주','유튜브 원고|1|편','노션 → 플래너 이관|1|건','AI 툴 1개 익히기|1|개','포트폴리오 갱신|1|건','앱 사용 후기 정리|1|건','12월 회고|1|건']],
+    ['휴식·마음','etc',     ['퇴근길 손대지 않기|60|일','일요일 늦잠|16|회','감사일기 매일|100|일','폰 없는 밤 30분|60|일','산책 명상 주 1|16|회','친구 월 1|4|회','취미 1개|1|개','한 해 정리|1|건']]
+  ]
+};
+function loadMandalExample(){
+  const ex = MANDAL_EXAMPLE, y = new Date().getFullYear();
+  const p = Object.assign(defaultPeriod(), {label:ex.label, center:ex.center, from:y+'-09-01', to:y+'-12-31'});
+  p.cells = ex.cells.map(([t, cat, acts])=>({ title:t, catId:catById(cat)?cat:null,
+    actions: acts.map(str=>{ const [text, tgt, unit] = str.split('|'); return {id:'a'+uid(), text, done:false, tgt:tgt?+tgt:undefined, unit:unit||''}; }) }));
+  M.periods.push(p); M.curPeriod = p.id; mandalBlock = 4; syncOkr(p);
+  for(const k of M.krs) if(k.goalId.startsWith('g:'+p.id+':') && +k.target>1) k.current = Math.round(+k.target*0.3);   // 예시답게 진행값
+  saveModel(); renderTarget(); toast('예시 기간을 불러왔습니다 — 필요 없으면 기간 편집 → 이 기간 삭제');
 }
 
 /* ---- ③ OKR — 기존 목표 카드 엔진, 기간 필터 + 만다라트 배지 ---- */
@@ -2619,7 +2697,7 @@ function renderGoals(){
     '<div class="or"><span class="tiny muted">목표 '+mine.length+' · KR 달성 '+(pct==null?'—':pct+'%')+'</span>'+
       '<div class="bar" style="width:110px"><i class="'+(pct>=100?'ok':'')+'" style="width:'+(pct||0)+'%"></i></div></div></div>';
   h += mine.length ? mine.map(g=>goalCardHTML(g, totAgg, wkAgg, p)).join('')
-    : '<div class="card"><div class="bd"><p class="muted" style="margin:0">이 기간의 OKR 목표가 아직 없습니다. 만다라트 칸에서 <b>→ OKR 목표로 보내기</b> 하거나 <b>+ 목표 추가</b>로 시작하세요.<br>'+
+    : '<div class="card"><div class="bd"><p class="muted" style="margin:0">이 기간의 OKR 목표가 아직 없습니다. 만다라트 <b>영역</b>을 쓰면 목표가, <b>행동</b>을 쓰면 KR 이 여기 자동으로 생깁니다. 만다라트 밖 목표는 <b>+ 목표 추가</b>.<br>'+
       '<span class="tiny">목표 → KR(현재/목표/단위) → 습관으로 쪼개면 시간 슬롯에 배치되고 목표별 투입시간이 집계됩니다.</span></p></div></div>';
   if(other.length){
     h += '<button class="okr-fold" data-okrfold>'+(okrFold?'▸':'▾')+' 기간 미지정·다른 기간 목표 '+other.length+'개</button>'+
@@ -2635,7 +2713,8 @@ function goalCardHTML(g, totAgg, wkAgg, p){
     const act  = wkAgg[g.id]||0, tgt = +g.weeklyTargetH||0;
     const wpct = tgt>0 ? Math.round(act/tgt*100) : 0;
     const cell = (p && g.cellIdx!=null && p.cells[g.cellIdx] && p.cells[g.cellIdx].title) ? p.cells[g.cellIdx] : null;
-    const badge = cell ? '<span class="okr-badge">만다라트 '+(g.cellIdx+1)+' · '+esc(cell.title)+'</span>'
+    const synced = isSyncedGoal(g);
+    const badge = cell ? '<span class="okr-badge" style="--bc:'+MANDAL_COLORS[g.cellIdx]+'">만다라트 '+(g.cellIdx+1)+'</span>'
                 : (p && p.id!==M.curPeriod ? '<span class="okr-badge">'+esc(p.label)+'</span>' : (!g.periodId ? '<span class="okr-badge" style="color:var(--sub);background:var(--card2)">기간 미지정</span>' : ''));
     return '<div class="goal'+(g._open?' open':'')+'" data-goal="'+g.id+'">'+
       '<div class="gh2" data-act="toggle">'+
@@ -2644,7 +2723,7 @@ function goalCardHTML(g, totAgg, wkAgg, p){
           '<span class="sb">'+(c?esc(c.name):'')+(g.deadline?' · ~'+esc(g.deadline):'')+
           ' · 누적 '+fmtH(totAgg[g.id]||0)+(tgt?' · 이번 주 '+fmtH(act)+'/'+fmtH(tgt):'')+'</span></span>'+
         '<span class="pill">KR '+done+'/'+krs.length+'</span>'+
-        '<button class="xbtn" data-act="delGoal">×</button>'+
+        (synced ? '' : '<button class="xbtn" data-act="delGoal">×</button>')+
       '</div>'+
       '<div class="gb">'+
         '<div class="sec"><h4>진척</h4>'+
@@ -2655,9 +2734,10 @@ function goalCardHTML(g, totAgg, wkAgg, p){
           (krs.length ? krs.map(k=>
             '<div class="kr" data-kr="'+k.id+'"><span class="n">'+esc(k.title)+'</span>'+
             '<input class="num" data-act="cur" type="number" value="'+esc(k.current||0)+'">'+
-            '<span class="tiny muted">/ '+esc(k.target||0)+' '+esc(k.unit||'')+'</span>'+
-            '<button class="xbtn" data-act="delKr">×</button></div>').join('')
-            : '<p class="tiny muted" style="margin:0 0 4px">측정 지표를 1~3개 정하세요.</p>')+
+            '<input class="num" data-act="tgt" type="number" value="'+esc(k.target||0)+'" title="목표">'+
+            '<input class="unit" data-act="unit" value="'+esc(k.unit||'')+'" placeholder="단위">'+
+            (String(k.id).startsWith('kr:') ? '' : '<button class="xbtn" data-act="delKr">×</button>')+'</div>').join('')
+            : '<p class="tiny muted" style="margin:0 0 4px">'+(synced ? '만다라트의 이 영역에 행동을 쓰면 KR 로 들어옵니다.' : '측정 지표를 1~3개 정하세요.')+'</p>')+
           '<button class="btn ghost sm" data-act="addKr" style="margin-top:6px">+ KR</button>'+
         '</div>'+
         '<div class="sec"><h4>습관 (최소단위 행동)</h4>'+
@@ -3997,15 +4077,13 @@ function dlgAddGoal(){
     '<div class="f2">'+
       '<div class="fld"><label>기간 (OKR)</label><select id="mPer"><option value="">기간 미지정</option>'+
         M.periods.map(p=>'<option value="'+p.id+'"'+(p.id===M.curPeriod?' selected':'')+'>'+esc(p.label)+'</option>').join('')+'</select></div>'+
-      '<div class="fld"><label>만다라트 영역 (현재 기간)</label><select id="mCell"><option value="">없음</option>'+
-        curPeriod().cells.map((c,i)=>c.title?'<option value="'+i+'">'+(i+1)+' · '+esc(c.title)+'</option>':'').join('')+'</select></div>'+
+      '<p class="tiny muted" style="margin:18px 0 0">만다라트 영역은 자동으로 목표가 됩니다. 여기는 만다라트 밖 목표용.</p>'+
     '</div>',
     ()=>{
       const t = $('#mTitle').value.trim(); if(!t){ $('#mTitle').focus(); return false; }
-      const periodId = $('#mPer').value||null, cv = $('#mCell').value;
+      const periodId = $('#mPer').value||null;
       M.goals.push({id:uid(), title:t, catId:$('#mCat').value, deadline:$('#mDl').value||'',
-                    weeklyTargetH:+$('#mWk').value||0, archived:false, _open:true,
-                    periodId, cellIdx:(periodId===M.curPeriod && cv!=='') ? +cv : null});
+                    weeklyTargetH:+$('#mWk').value||0, archived:false, _open:true, periodId, cellIdx:null});
       saveModel(); renderGoals(); toast('목표 추가됨');
     }, '추가');
 }
@@ -4252,14 +4330,35 @@ function bindAll(){
     if(g('data-visadd')!=null){ dlgVision(null); return; }
     if(g('data-visbg')!=null){ dlgVisionBg(); return; }
     if((v = g('data-vis'))){ dlgVision(v); return; }
-    if((v = g('data-cell'))!=null){ dlgCell(+v); return; }
+    if(g('data-example')!=null){ loadMandalExample(); return; }
+    if((v = g('data-tgo'))){ const el = $('#'+v); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); return; }
+    if(g('data-tgrun')!=null){ switchTab('today'); return; }
+    if((v = g('data-mbgo'))!=null){ mandalBlock = +v; renderMandal(); return; }
+    if(e.target.closest('button[data-mx]')){ mandalEdit = e.target.closest('button[data-mx]').dataset.mx; renderMandal(); return; }
     if(g('data-periodadd')!=null){ dlgPeriod(null); return; }
     if(g('data-periodedit')!=null){ dlgPeriod(M.curPeriod); return; }
     if(g('data-okrfold')!=null){ okrFold = !okrFold; renderGoals(); return; }
   });
   $('#perSel').addEventListener('change', e=>{ M.curPeriod = e.target.value; saveModel(); renderMandal(); renderGoals(); });
-  $('#p-goals').addEventListener('input', e=>{                 // 중심 문장: 저장만, 리렌더 없음 (커서 유지)
-    if(e.target.matches('[data-center]')){ const p = curPeriod(); p.center = e.target.value; p.ut = Date.now(); saveModel(); }
+  // 만다라트 인라인 편집 — Enter 저장 · Shift+Enter 줄바꿈 · Tab 다음 칸 · Esc 취소. 저장·리렌더는 focusout 한 곳에서만
+  $('#mandal').addEventListener('keydown', e=>{
+    const ta = e.target.closest('textarea[data-mx]'); if(!ta) return;
+    if(e.isComposing || e.key==='Process') return;
+    if(e.key==='Escape'){ mandalCancel = true; ta.blur(); }
+    else if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); ta.blur(); }
+    else if(e.key==='Tab'){ e.preventDefault(); mandalNext = e.shiftKey ? -1 : 1; ta.blur(); }
+  });
+  $('#mandal').addEventListener('focusout', e=>{
+    const ed = e.target.closest('.mx.ed'); if(!ed) return;
+    setTimeout(()=>{
+      if(document.body.contains(ed) && ed.contains(document.activeElement)) return;   // textarea ↔ 분류 select 이동
+      if(!document.body.contains(ed)) return;
+      const ta = ed.querySelector('textarea'), sel = ed.querySelector('select');
+      const key = ta.dataset.mx, nextKey = mandalNext ? mandalNeighbor(key, mandalNext) : null;
+      if(!mandalCancel) mandalCommit(key, ta.value, sel ? sel.value : undefined);
+      mandalCancel = false; mandalNext = 0; mandalEdit = nextKey;
+      renderMandal(); renderGoals(); renderSteps();
+    }, 0);
   });
   // 목표 탭
   $('#btnAddGoal').onclick = dlgAddGoal;
@@ -4289,6 +4388,8 @@ function bindAll(){
     }
   });
   $('#goalList').addEventListener('input', e=>{
+    const t = e.target.closest('[data-act="tgt"],[data-act="unit"]');
+    if(t){ const k = M.krs.find(x=>x.id===t.closest('[data-kr]').dataset.kr); if(k){ if(t.dataset.act==='tgt') k.target = +t.value||0; else k.unit = t.value.trim(); saveModel(); } return; }
     const b = e.target.closest('[data-act="cur"]'); if(!b) return;
     const kid = b.closest('[data-kr]').dataset.kr, k = M.krs.find(x=>x.id===kid);
     if(k){ k.current = +b.value||0; saveModel(); }
