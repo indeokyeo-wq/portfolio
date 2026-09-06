@@ -501,6 +501,43 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
 
 /* ---------- goals ---------- */
+/* ---------- Target 3층 (F-43) — 비전 / 만다라트 / OKR ---------- */
+.tg-sec{margin-bottom:24px}
+.tg-hd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.tg-hd h2{font-size:17px}
+#perSel{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:5px 8px;font-size:13px;font-weight:700}
+.vis-hero{height:150px;border-radius:var(--r);background-size:cover;background-position:center;margin-bottom:10px;border:1px solid var(--line)}
+.vis-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.vis-card{display:flex;gap:10px;align-items:center;text-align:left;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px;cursor:pointer;min-width:0}
+.vis-card:hover{border-color:var(--key);background:var(--key-soft)}
+.vis-card.add{border-style:dashed;color:var(--sub)}
+.vis-card .vi{width:52px;height:52px;border-radius:9px;flex:none;background-size:cover;background-position:center;background-color:var(--card2)}
+.vis-card .vi.ph{display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--sub)}
+.vis-card .vt{min-width:0;display:flex;flex-direction:column;gap:2px}
+.vis-card .vt b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vis-card .va{font-size:13px;font-weight:700;color:var(--key)}
+.vis-card .vn{font-size:11.5px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mandal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;max-width:660px}
+.mandal .mc{position:relative;aspect-ratio:1.45;border:1px solid var(--line);border-top:4px solid var(--cc,var(--line));border-radius:10px;background:var(--card);padding:10px;text-align:left;display:flex;flex-direction:column;justify-content:flex-start;gap:4px;cursor:pointer;min-width:0}
+.mandal .mc:hover{border-color:var(--key);background:var(--key-soft)}
+.mandal .mc.empty{border-style:dashed;border-top-width:1px;color:var(--sub);justify-content:center;align-items:center;font-size:13px}
+.mandal .mc .mn{position:absolute;top:6px;right:8px;font-size:10px;color:var(--mute);font-weight:700}
+.mandal .mc b{font-size:14px;line-height:1.3;word-break:keep-all;margin-top:8px}
+.mandal .mc .mp{font-size:11.5px;color:var(--sub)}
+.mandal .mc .mo{font-size:10px;font-weight:700;color:var(--key);background:var(--key-soft);border-radius:999px;padding:1px 6px;align-self:flex-start}
+.mandal .mc.center{background:var(--ink);border-color:var(--ink);border-top-width:1px;cursor:default;padding:8px}
+.mandal .mc.center:hover{background:var(--ink)}
+.mandal .mc.center textarea{width:100%;height:100%;background:transparent;color:#fff;border:0;resize:none;font-size:13.5px;font-weight:700;line-height:1.45;text-align:center;outline:none}
+.mandal .mc.center textarea::placeholder{color:rgba(255,255,255,.55);font-weight:500}
+.okr-hd{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--card2);margin-bottom:12px}
+.okr-hd .ol{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;font-size:14px}
+.okr-hd .or{display:flex;align-items:center;gap:8px}
+.okr-badge{font-size:10.5px;font-weight:700;color:var(--key);background:var(--key-soft);border-radius:999px;padding:1px 7px;margin-left:6px;white-space:nowrap}
+.okr-fold{display:block;width:100%;text-align:left;padding:8px 4px;color:var(--sub);font-size:12.5px;font-weight:700}
+.ma{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--line);font-size:13px}
+.ma span{flex:1;min-width:0} .ma .dn{text-decoration:line-through;color:var(--mute)}
+.fld .ma input[type=checkbox]{width:auto;flex:none;margin:0}
+@media (max-width:700px){ .mandal{gap:4px} .mandal .mc{padding:6px;border-radius:8px;aspect-ratio:1} .mandal .mc b{font-size:11.5px;margin-top:6px} .mandal .mc .mp{font-size:10px} .mandal .mc.center textarea{font-size:11px} .vis-grid{grid-template-columns:1fr 1fr} }
 .goal{border:1px solid var(--line);border-radius:var(--r);background:var(--card);margin-bottom:12px;overflow:hidden}
 .goal .gh2{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
 .goal .gh2 .cat{width:4px;align-self:stretch;border-radius:3px;flex:none}
@@ -782,13 +819,23 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
 
   <!-- ============ GOALS ============ -->
   <section class="panel" id="p-goals">
-    <div class="datebar">
-      <h2 style="font-size:17px">목표</h2>
-      <span style="flex:1"></span>
-      <button class="btn" id="btnAddGoal">+ 목표 추가</button>
+    <!-- F-43 Target 3층: 비전 → 만다라트 → OKR (노션 [4] Vision-Board · [0] OKR 구조 이식) -->
+    <div class="tg-sec" id="tgVision">
+      <div class="tg-hd"><h2>비전</h2><span class="tiny muted" id="visSum"></span><span style="flex:1"></span>
+        <button class="btn ghost sm" data-visbg>배경 이미지</button><button class="btn ghost sm" data-visfold id="visFold">▾ 접기</button></div>
+      <div id="visBody"></div>
     </div>
-    <div id="goalList"></div>
-    <p class="tiny muted" style="margin-top:14px">목표를 습관으로 쪼개면 해당 요일의 계획 슬롯에 자동으로 배치됩니다. TODAY 탭의 <b>습관 배치</b> 버튼으로 반영하세요.</p>
+    <div class="tg-sec" id="tgMandal">
+      <div class="tg-hd"><h2>만다라트</h2><select id="perSel"></select><span class="tiny muted" id="perMeta"></span><span style="flex:1"></span>
+        <button class="btn ghost sm" data-periodedit>기간 편집</button><button class="btn ghost sm" data-periodadd>+ 기간</button></div>
+      <p class="tiny muted" style="margin:0 0 8px">가운데 = 이 기간의 <b>[One-Thing]</b> 한 문장 · 8칸 = 영역과 행동. 칸을 누르면 행동 체크리스트와 <b>→ OKR 보내기</b>가 있습니다.</p>
+      <div class="mandal" id="mandal"></div>
+    </div>
+    <div class="tg-sec" id="tgOkr">
+      <div class="tg-hd"><h2>OKR</h2><span style="flex:1"></span><button class="btn" id="btnAddGoal">+ 목표 추가</button></div>
+      <div id="goalList"></div>
+      <p class="tiny muted" style="margin-top:14px">목표를 습관으로 쪼개면 해당 요일의 계획 슬롯에 자동으로 배치됩니다. Weekly 탭의 <b>습관 배치</b> 버튼으로 반영하세요.</p>
+    </div>
   </section>
 
   <!-- ============ WEEK ============ -->
@@ -928,7 +975,8 @@ const SEED = {
     {id:'health', name:'건강', color:'#059669'},
     {id:'etc',    name:'기타', color:'#d97706'}
   ],
-  goals: [], krs: [], habits: [], days: {}, events: [], weeks: {}, labelCats: {}, months: {}, notes: [], pages: []
+  goals: [], krs: [], habits: [], days: {}, events: [], weeks: {}, labelCats: {}, months: {}, notes: [], pages: [],
+  vision: {imgUrl:'', items:[]}, periods: [], curPeriod: null      // F-43 Target 3층
 };
 
 /* ==========================================================
@@ -1228,6 +1276,12 @@ function fillMissing(){                     // 스키마가 바뀌어도 기존 
   if(!M.weeks || typeof M.weeks!=='object') M.weeks = {};
   if(!M.labelCats || typeof M.labelCats!=='object') M.labelCats = {};
   if(!M.months || typeof M.months!=='object') M.months = {};
+  // F-43 비전·기간(만다라트)·목표의 기간 링크 방어 — 기존 목표는 periodId 없음 = '기간 미지정'
+  if(!M.vision || typeof M.vision!=='object') M.vision = {imgUrl:'', items:[]};
+  if(!Array.isArray(M.vision.items)) M.vision.items = [];
+  if(typeof M.vision.imgUrl!=='string') M.vision.imgUrl = '';
+  ensurePeriod();
+  for(const g of M.goals){ if(!g || typeof g!=='object') continue; if(g.periodId===undefined) g.periodId = null; if(g.cellIdx===undefined) g.cellIdx = null; }
   // 기타 할 일이 '그 날'에서 '그 주'로 옮겨졌다 (F-20.7). 기존 입력을 잃지 않게 한 번만 이관한다
   if(!M.todosMovedToWeek){
     for(const d of Object.keys(M.days)){
@@ -2360,27 +2414,233 @@ function renderTodoList(){
 /* ==========================================================
    렌더 — 목표
    ========================================================== */
-function renderGoals(){
-  const el = $('#goalList');
-  if(!M.goals.length){
-    el.innerHTML = '<div class="card"><div class="bd"><p class="muted" style="margin:0">아직 목표가 없습니다. <b>+ 목표 추가</b>로 시작하세요.<br>' +
-      '<span class="tiny">목표를 만들면 → 습관으로 쪼개고 → 시간 슬롯에 자동 배치되고 → 목표별 투입시간이 집계됩니다.</span></p></div></div>';
-    return;
+/* ==========================================================
+   Target 3층 (F-43) — 비전보드 → 만다라트(3×3) → OKR
+   노션 [4] Vision-Board(콜라주+금액 메모) · [0] OKR([One-Thing] 문장 + 영역별 목표 + 목표별 현황 DB) 구조 이식.
+   OKR = 기존 목표→KR→습관 카드 그대로. 목표에 periodId(기간)·cellIdx(만다라트 칸) 링크만 추가.
+   이미지는 URL 문자열만 (data URI 금지 — 동기화 JSON 비대화). 중심 문장·행동 입력 중 리렌더 금지.
+   ========================================================== */
+const MANDAL_POS = [0,1,2,5,8,7,6,3];     // 칸 0~7 → 3×3 그리드 위치 (시계 방향), 4 = 중심
+let okrFold = true;                        // '기간 미지정·다른 기간' 그룹 접힘 (M 밖 — 화면 상태)
+function emptyCells(){ return Array.from({length:8}, ()=>({title:'', catId:null, actions:[]})); }
+function defaultPeriod(){
+  const d = new Date(), y = d.getFullYear(), m = d.getMonth()+1;
+  return { id:'pr'+uid(), label: y+'년 '+(m===12?'12월':m+'~12월'), from: y+'-'+pad2(m)+'-01', to: y+'-12-31',
+           center:'', cells: emptyCells(), ut: Date.now() };
+}
+/** 기간 배열 방어 + 없으면 '올해 이번 달~12월' 1개 생성. 현재 기간 객체를 돌려준다 */
+function ensurePeriod(){
+  if(!Array.isArray(M.periods)) M.periods = [];
+  M.periods = M.periods.filter(p=>p && typeof p==='object');
+  for(const p of M.periods){
+    if(!p.id) p.id = 'pr'+uid();
+    if(typeof p.center!=='string') p.center = '';
+    if(!Array.isArray(p.cells)) p.cells = [];
+    while(p.cells.length<8) p.cells.push({title:'', catId:null, actions:[]});
+    for(const c of p.cells){ if(typeof c.title!=='string') c.title=''; if(c.catId===undefined) c.catId=null; if(!Array.isArray(c.actions)) c.actions=[]; }
   }
+  if(!M.periods.length) M.periods.push(defaultPeriod());
+  if(!M.periods.find(p=>p.id===M.curPeriod)) M.curPeriod = M.periods[0].id;
+  return M.periods.find(p=>p.id===M.curPeriod);
+}
+const curPeriod = () => ensurePeriod();
+function daysBetween(a, b){ return Math.round((parseYmd(b) - parseYmd(a)) / 86400000); }
+function periodDday(p){
+  const t = todayStr();
+  if(t < p.from) return 'D-'+daysBetween(t, p.from)+' 시작';
+  if(t > p.to)   return '종료';
+  return '남은 '+daysBetween(t, p.to)+'일';
+}
+function fmtEok(n){ n = +n||0; return n ? (Math.round(n*10)/10)+'억' : ''; }
+function visionTotal(){ return M.vision.items.reduce((s,i)=>s+(+i.amount||0), 0); }
+function cellProgress(c){ const n = c.actions.length, d = c.actions.filter(a=>a.done).length; return {n, d}; }
+function cellGoal(p, idx){ return M.goals.find(g=>g.periodId===p.id && g.cellIdx===idx) || null; }
+function renderTarget(){ renderVision(); renderMandal(); renderGoals(); }
+
+/* ---- ① 비전 ---- */
+function renderVision(){
+  const fold = localStorage.getItem('planner-vision-fold')==='1';
+  const it = M.vision.items, tot = visionTotal();
+  $('#visFold').textContent = fold ? '▸ 펼치기' : '▾ 접기';
+  $('#visBody').hidden = fold;
+  $('#visSum').innerHTML = it.length ? '카드 '+it.length+'개'+(tot ? ' · 합계 <b>'+fmtEok(tot)+'</b>' : '') : '';
+  const hero = M.vision.imgUrl ? '<div class="vis-hero" style="background-image:url(&quot;'+esc(M.vision.imgUrl)+'&quot;)"></div>' : '';
+  $('#visBody').innerHTML = hero + '<div class="vis-grid">' +
+    it.map(i=>'<button class="vis-card" data-vis="'+i.id+'">'+
+      (i.imgUrl ? '<span class="vi" style="background-image:url(&quot;'+esc(i.imgUrl)+'&quot;)"></span>' : '<span class="vi ph">'+esc((i.title||'?').slice(0,1))+'</span>')+
+      '<span class="vt"><b>'+esc(i.title)+'</b>'+(i.amount ? '<span class="va">'+fmtEok(i.amount)+'</span>' : '')+(i.note ? '<span class="vn">'+esc(i.note)+'</span>' : '')+'</span></button>').join('') +
+    '<button class="vis-card add" data-visadd><span class="vi ph">＋</span><span class="vt"><b>카드 추가</b>'+
+      (it.length ? '' : '<span class="vn">예: 도곡렉슬 25평 30억 · BMW X7 2억 · 월 1,000만 현금흐름</span>')+'</span></button>'+
+    '</div>';
+}
+function dlgVision(id){
+  const v = id ? M.vision.items.find(x=>x.id===id) : null;
+  openModal(v ? '비전 카드' : '비전 카드 추가',
+    '<div class="fld"><label>이루고 싶은 것</label><input id="vTitle" value="'+esc(v?v.title:'')+'" placeholder="예: 도곡렉슬 25평"></div>'+
+    '<div class="f2">'+
+      '<div class="fld"><label>금액 (억 · 없으면 비움)</label><input id="vAmt" type="number" step="0.1" value="'+esc(v&&v.amount?v.amount:'')+'" placeholder="30"></div>'+
+      '<div class="fld"><label>이미지 URL (선택)</label><input id="vImg" value="'+esc(v?v.imgUrl:'')+'" placeholder="https://…"></div>'+
+    '</div>'+
+    '<div class="fld"><label>메모</label><input id="vNote" value="'+esc(v?v.note:'')+'" placeholder="예: 월 1,000만 현금흐름 = 자산소득 + 사업소득"></div>'+
+    (v ? '<button class="btn ghost sm" id="vDel" style="color:var(--bad)">삭제</button>' : ''),
+    ()=>{
+      const t = $('#vTitle').value.trim(); if(!t){ $('#vTitle').focus(); return false; }
+      const o = v || {id:'v'+uid()};
+      Object.assign(o, {title:t, amount:+$('#vAmt').value||0, imgUrl:$('#vImg').value.trim(), note:$('#vNote').value.trim(), ut:Date.now()});
+      if(!v) M.vision.items.push(o);
+      saveModel(); renderVision();
+    }, v ? '저장' : '추가');
+  if(v) $('#vDel').onclick = ()=>{
+    if(!confirm('"'+v.title+'" 카드를 삭제할까요?')) return;
+    M.vision.items = M.vision.items.filter(x=>x.id!==id); saveModel(); closeModal(); renderVision();
+  };
+}
+function dlgVisionBg(){
+  openModal('비전보드 배경 이미지',
+    '<p class="tiny muted" style="margin:0 0 10px">콜라주 이미지의 <b>URL</b>만 저장합니다 (파일 업로드는 동기화 데이터를 키우므로 지원하지 않습니다). 비우면 배경 없음.</p>'+
+    '<div class="fld"><label>이미지 URL</label><input id="vBg" value="'+esc(M.vision.imgUrl)+'" placeholder="https://…/vision.png"></div>',
+    ()=>{ M.vision.imgUrl = $('#vBg').value.trim(); saveModel(); renderVision(); }, '저장');
+}
+
+/* ---- ② 만다라트 ---- */
+function renderMandal(){
+  const p = curPeriod();
+  $('#perSel').innerHTML = M.periods.map(x=>'<option value="'+x.id+'"'+(x.id===p.id?' selected':'')+'>'+esc(x.label)+'</option>').join('');
+  $('#perMeta').textContent = p.from.slice(5).replace('-','/')+' ~ '+p.to.slice(5).replace('-','/')+' · '+periodDday(p);
+  const grid = new Array(9).fill('');
+  p.cells.forEach((c,i)=>{
+    const cat = catById(c.catId), pr = cellProgress(c), linked = cellGoal(p, i);
+    grid[MANDAL_POS[i]] = c.title
+      ? '<button class="mc" data-cell="'+i+'" style="--cc:'+(cat?cat.color:'var(--line)')+'"><span class="mn">'+(i+1)+'</span><b>'+esc(c.title)+'</b>'+
+        (pr.n ? '<span class="mp">행동 '+pr.d+'/'+pr.n+'</span>' : '')+(linked ? '<span class="mo">OKR</span>' : '')+'</button>'
+      : '<button class="mc empty" data-cell="'+i+'"><span class="mn">'+(i+1)+'</span>＋ 영역</button>';
+  });
+  grid[4] = '<div class="mc center"><textarea data-center rows="4" placeholder="[One-Thing] ○○하는 '+esc(p.label)+'&#10;예: 회사 안정적으로 적응하고, 사업 기반 다지는 25년 4분기">'+esc(p.center)+'</textarea></div>';
+  $('#mandal').innerHTML = grid.join('');
+}
+function dlgCell(idx){
+  const p = curPeriod(), c = p.cells[idx];
+  const draft = JSON.parse(JSON.stringify(c));            // 편집 사본 — 저장 눌러야 반영
+  const linked = cellGoal(p, idx);
+  const listHTML = ()=> draft.actions.length
+    ? draft.actions.map((a,i)=>'<div class="ma"><input type="checkbox" data-mck="'+i+'"'+(a.done?' checked':'')+'><span'+(a.done?' class="dn"':'')+'>'+esc(a.text)+'</span><button class="xbtn" data-mdel="'+i+'">×</button></div>').join('')
+    : '<p class="tiny muted" style="margin:0">이 영역에서 '+esc(p.label)+'에 할 행동을 적으세요.</p>';
+  openModal('영역 '+(idx+1)+' — '+p.label,
+    '<div class="fld"><label>영역 이름</label><input id="cTitle" value="'+esc(draft.title)+'" placeholder="예: 부동산 임장 · 회사 · 건강 · 가족 · 독서 · 재무점검"></div>'+
+    '<div class="fld"><label>분류 (색)</label><select id="cCat"><option value="">없음</option>'+catOptions(draft.catId)+'</select></div>'+
+    '<div class="fld"><label>행동 체크리스트</label><div id="cList">'+listHTML()+'</div>'+
+      '<input id="cNew" placeholder="행동 입력 후 Enter" style="margin-top:6px"></div>'+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap">'+
+      '<button class="btn ghost sm" id="cOkr">'+(linked ? 'OKR 연결됨 · 열기' : '→ OKR 목표로 보내기')+'</button>'+
+      (c.title ? '<button class="btn ghost sm" id="cClear" style="color:var(--bad)">비우기</button>' : '')+
+    '</div>',
+    ()=>{
+      draft.title = $('#cTitle').value.trim(); draft.catId = $('#cCat').value||null;
+      Object.assign(c, draft); p.ut = Date.now(); saveModel(); renderMandal(); renderGoals();
+    }, '저장');
+  const redraw = ()=>{ $('#cList').innerHTML = listHTML(); };
+  $('#cList').onclick = e=>{
+    const ck = e.target.closest('[data-mck]'); if(ck){ draft.actions[+ck.dataset.mck].done = ck.checked; redraw(); return; }
+    const d = e.target.closest('[data-mdel]'); if(d){ draft.actions.splice(+d.dataset.mdel, 1); redraw(); }
+  };
+  $('#cNew').addEventListener('keydown', e=>{
+    if(e.isComposing || e.key==='Process') return;                  // 한글 IME 조합 중
+    if(e.key!=='Enter') return;
+    e.preventDefault();
+    const t = e.target.value.trim(); if(!t) return;
+    draft.actions.push({id:'a'+uid(), text:t, done:false}); e.target.value=''; redraw();
+  });
+  $('#cOkr').onclick = ()=>{
+    draft.title = $('#cTitle').value.trim(); draft.catId = $('#cCat').value||null;
+    if(!draft.title){ $('#cTitle').focus(); return; }
+    Object.assign(c, draft); p.ut = Date.now();
+    let g = linked;
+    if(!g){
+      g = {id:uid(), title:c.title, catId:c.catId||(M.categories[0]||{}).id, deadline:p.to, weeklyTargetH:0, archived:false, _open:true, periodId:p.id, cellIdx:idx};
+      M.goals.push(g); toast('OKR 목표로 보냈습니다 — KR 을 정하세요');
+    } else g._open = true;
+    saveModel(); closeModal(); renderMandal(); renderGoals();
+    const el = $('[data-goal="'+g.id+'"]'); if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+  };
+  if(c.title) $('#cClear').onclick = ()=>{
+    if(!confirm('영역 '+(idx+1)+' 을 비울까요? (연결된 OKR 목표는 남습니다)')) return;
+    Object.assign(c, {title:'', catId:null, actions:[]}); p.ut = Date.now();
+    saveModel(); closeModal(); renderMandal(); renderGoals();
+  };
+}
+function dlgPeriod(pid){
+  const p = pid ? M.periods.find(x=>x.id===pid) : null;
+  const y = new Date().getFullYear(), m = new Date().getMonth()+1;
+  const presets = [
+    ['이번 달~12월', y+'년 '+(m===12?'12월':m+'~12월'), y+'-'+pad2(m)+'-01', y+'-12-31'],
+    ['1년', y+'년', y+'-01-01', y+'-12-31'],
+    ['상반기', y+'년 상반기', y+'-01-01', y+'-06-30'], ['하반기', y+'년 하반기', y+'-07-01', y+'-12-31'],
+    ['1분기', y+'년 1분기', y+'-01-01', y+'-03-31'], ['2분기', y+'년 2분기', y+'-04-01', y+'-06-30'],
+    ['3분기', y+'년 3분기', y+'-07-01', y+'-09-30'], ['4분기', y+'년 4분기', y+'-10-01', y+'-12-31'],
+    ['내년', (y+1)+'년', (y+1)+'-01-01', (y+1)+'-12-31']
+  ];
+  openModal(p ? '기간 편집' : '기간 추가',
+    '<div class="fld"><label>프리셋</label><div style="display:flex;gap:6px;flex-wrap:wrap">'+presets.map((x,i)=>'<button class="btn ghost sm" data-pre="'+i+'">'+x[0]+'</button>').join('')+'</div></div>'+
+    '<div class="fld"><label>이름</label><input id="pLabel" value="'+esc(p?p.label:'')+'" placeholder="예: 2026년 9~12월"></div>'+
+    '<div class="f2"><div class="fld"><label>시작</label><input id="pFrom" type="date" value="'+esc(p?p.from:'')+'"></div>'+
+    '<div class="fld"><label>끝</label><input id="pTo" type="date" value="'+esc(p?p.to:'')+'"></div></div>'+
+    (p && M.periods.length>1 ? '<button class="btn ghost sm" id="pDel" style="color:var(--bad)">이 기간 삭제</button>' : ''),
+    ()=>{
+      const l = $('#pLabel').value.trim(), f = $('#pFrom').value, t = $('#pTo').value;
+      if(!l || !f || !t || f > t){ toast('이름·시작·끝을 확인하세요'); return false; }
+      if(p) Object.assign(p, {label:l, from:f, to:t, ut:Date.now()});
+      else { const n = Object.assign(defaultPeriod(), {label:l, from:f, to:t}); M.periods.push(n); M.curPeriod = n.id; }
+      saveModel(); renderTarget();
+    }, p ? '저장' : '추가');
+  $$('#modal [data-pre]').forEach(b=> b.onclick = ()=>{ const x = presets[+b.dataset.pre]; $('#pLabel').value = x[1]; $('#pFrom').value = x[2]; $('#pTo').value = x[3]; });
+  if(p && M.periods.length>1) $('#pDel').onclick = ()=>{
+    if(!confirm('"'+p.label+'" 기간을 삭제할까요? (OKR 목표는 "기간 미지정"으로 남습니다)')) return;
+    M.periods = M.periods.filter(x=>x.id!==p.id);
+    for(const g of M.goals) if(g.periodId===p.id){ g.periodId = null; g.cellIdx = null; }
+    M.curPeriod = M.periods[0].id; saveModel(); closeModal(); renderTarget();
+  };
+}
+
+/* ---- ③ OKR — 기존 목표 카드 엔진, 기간 필터 + 만다라트 배지 ---- */
+function krPct(goals){
+  const ks = M.krs.filter(k=> +k.target>0 && goals.some(g=>g.id===k.goalId));
+  if(!ks.length) return null;
+  return Math.round(ks.reduce((s,k)=>s+Math.min(1, (+k.current||0)/+k.target), 0)/ks.length*100);
+}
+function renderGoals(){
+  const el = $('#goalList'), p = curPeriod();
   const allDates = Object.keys(M.days);
   const totAgg = aggByGoal(allDates, 'actual');
   const wkAgg  = aggByGoal(weekDates(todayStr()), 'actual');
-
-  el.innerHTML = M.goals.map(g=>{
+  const mine = M.goals.filter(g=>g.periodId===p.id), other = M.goals.filter(g=>g.periodId!==p.id);
+  const pct = krPct(mine);
+  let h = '<div class="okr-hd"><div class="ol"><span class="pill">'+esc(p.label)+'</span><b>'+
+      (p.center ? esc(p.center) : '<span class="muted" style="font-weight:500">만다라트 가운데에 [One-Thing] 문장을 쓰면 여기 보입니다</span>')+'</b></div>'+
+    '<div class="or"><span class="tiny muted">목표 '+mine.length+' · KR 달성 '+(pct==null?'—':pct+'%')+'</span>'+
+      '<div class="bar" style="width:110px"><i class="'+(pct>=100?'ok':'')+'" style="width:'+(pct||0)+'%"></i></div></div></div>';
+  h += mine.length ? mine.map(g=>goalCardHTML(g, totAgg, wkAgg, p)).join('')
+    : '<div class="card"><div class="bd"><p class="muted" style="margin:0">이 기간의 OKR 목표가 아직 없습니다. 만다라트 칸에서 <b>→ OKR 목표로 보내기</b> 하거나 <b>+ 목표 추가</b>로 시작하세요.<br>'+
+      '<span class="tiny">목표 → KR(현재/목표/단위) → 습관으로 쪼개면 시간 슬롯에 배치되고 목표별 투입시간이 집계됩니다.</span></p></div></div>';
+  if(other.length){
+    h += '<button class="okr-fold" data-okrfold>'+(okrFold?'▸':'▾')+' 기간 미지정·다른 기간 목표 '+other.length+'개</button>'+
+      (okrFold ? '' : other.map(g=>goalCardHTML(g, totAgg, wkAgg, M.periods.find(x=>x.id===g.periodId)||null)).join(''));
+  }
+  el.innerHTML = h;
+}
+/** 목표 카드 1장 — 기존 F-4 카드. p = 이 목표가 속한 기간(없으면 null) */
+function goalCardHTML(g, totAgg, wkAgg, p){
     const c = catById(g.catId), krs = M.krs.filter(k=>k.goalId===g.id), habs = M.habits.filter(h=>h.goalId===g.id);
     const done = krs.filter(k=> +k.target>0 && +k.current >= +k.target).length;
     const pct  = krs.length ? Math.round(done/krs.length*100) : 0;
     const act  = wkAgg[g.id]||0, tgt = +g.weeklyTargetH||0;
     const wpct = tgt>0 ? Math.round(act/tgt*100) : 0;
+    const cell = (p && g.cellIdx!=null && p.cells[g.cellIdx] && p.cells[g.cellIdx].title) ? p.cells[g.cellIdx] : null;
+    const badge = cell ? '<span class="okr-badge">만다라트 '+(g.cellIdx+1)+' · '+esc(cell.title)+'</span>'
+                : (p && p.id!==M.curPeriod ? '<span class="okr-badge">'+esc(p.label)+'</span>' : (!g.periodId ? '<span class="okr-badge" style="color:var(--sub);background:var(--card2)">기간 미지정</span>' : ''));
     return '<div class="goal'+(g._open?' open':'')+'" data-goal="'+g.id+'">'+
       '<div class="gh2" data-act="toggle">'+
         '<span class="cat" style="background:'+(c?c.color:'#94a3b8')+'"></span>'+
-        '<span class="ti"><span class="nm">'+esc(g.title)+'</span>'+
+        '<span class="ti"><span class="nm">'+esc(g.title)+badge+'</span>'+
           '<span class="sb">'+(c?esc(c.name):'')+(g.deadline?' · ~'+esc(g.deadline):'')+
           ' · 누적 '+fmtH(totAgg[g.id]||0)+(tgt?' · 이번 주 '+fmtH(act)+'/'+fmtH(tgt):'')+'</span></span>'+
         '<span class="pill">KR '+done+'/'+krs.length+'</span>'+
@@ -2406,7 +2666,6 @@ function renderGoals(){
           '<button class="btn sm" data-act="split" style="margin-top:6px">+ 목표 쪼개기</button>'+
         '</div>'+
       '</div></div>';
-  }).join('');
 }
 function renderHabitBlock(h){
   const cur = phaseFor(h, todayStr());
@@ -2738,7 +2997,7 @@ function renderAll(){
   if(curTab==='memo')   renderNotes();
   if(curTab.startsWith('page:')) renderPage();
   renderTabs();
-  if(curTab==='goals')  renderGoals();
+  if(curTab==='goals')  renderTarget();
   if(curTab==='review') renderReview();
   renderSync();
 }
@@ -3734,11 +3993,19 @@ function dlgAddGoal(){
       '<div class="fld"><label>분류</label><select id="mCat">'+catOptions('health')+'</select></div>'+
       '<div class="fld"><label>기한</label><input id="mDl" type="date"></div>'+
     '</div>'+
-    '<div class="fld"><label>주간 시간 배정 (h) — 이 목표에 매주 쓸 시간</label><input id="mWk" type="number" step="0.5" placeholder="예: 3"></div>',
+    '<div class="fld"><label>주간 시간 배정 (h) — 이 목표에 매주 쓸 시간</label><input id="mWk" type="number" step="0.5" placeholder="예: 3"></div>'+
+    '<div class="f2">'+
+      '<div class="fld"><label>기간 (OKR)</label><select id="mPer"><option value="">기간 미지정</option>'+
+        M.periods.map(p=>'<option value="'+p.id+'"'+(p.id===M.curPeriod?' selected':'')+'>'+esc(p.label)+'</option>').join('')+'</select></div>'+
+      '<div class="fld"><label>만다라트 영역 (현재 기간)</label><select id="mCell"><option value="">없음</option>'+
+        curPeriod().cells.map((c,i)=>c.title?'<option value="'+i+'">'+(i+1)+' · '+esc(c.title)+'</option>':'').join('')+'</select></div>'+
+    '</div>',
     ()=>{
       const t = $('#mTitle').value.trim(); if(!t){ $('#mTitle').focus(); return false; }
+      const periodId = $('#mPer').value||null, cv = $('#mCell').value;
       M.goals.push({id:uid(), title:t, catId:$('#mCat').value, deadline:$('#mDl').value||'',
-                    weeklyTargetH:+$('#mWk').value||0, archived:false, _open:true});
+                    weeklyTargetH:+$('#mWk').value||0, archived:false, _open:true,
+                    periodId, cellIdx:(periodId===M.curPeriod && cv!=='') ? +cv : null});
       saveModel(); renderGoals(); toast('목표 추가됨');
     }, '추가');
 }
@@ -3977,6 +4244,23 @@ function bindAll(){
     ensureWeek(curDate).todos[+b.closest('.todo').dataset.i].catId = b.value; saveModel();
   });
 
+  // Target 3층 (F-43) — 비전·만다라트·기간·OKR 접힘 위임. #goalList 카드 조작은 아래 기존 리스너
+  $('#p-goals').addEventListener('click', e=>{
+    const g = a => { const el = e.target.closest('['+a+']'); return el ? el.getAttribute(a) : null; };
+    let v;
+    if(g('data-visfold')!=null){ const f = localStorage.getItem('planner-vision-fold')==='1'; localStorage.setItem('planner-vision-fold', f?'0':'1'); renderVision(); return; }
+    if(g('data-visadd')!=null){ dlgVision(null); return; }
+    if(g('data-visbg')!=null){ dlgVisionBg(); return; }
+    if((v = g('data-vis'))){ dlgVision(v); return; }
+    if((v = g('data-cell'))!=null){ dlgCell(+v); return; }
+    if(g('data-periodadd')!=null){ dlgPeriod(null); return; }
+    if(g('data-periodedit')!=null){ dlgPeriod(M.curPeriod); return; }
+    if(g('data-okrfold')!=null){ okrFold = !okrFold; renderGoals(); return; }
+  });
+  $('#perSel').addEventListener('change', e=>{ M.curPeriod = e.target.value; saveModel(); renderMandal(); renderGoals(); });
+  $('#p-goals').addEventListener('input', e=>{                 // 중심 문장: 저장만, 리렌더 없음 (커서 유지)
+    if(e.target.matches('[data-center]')){ const p = curPeriod(); p.center = e.target.value; p.ut = Date.now(); saveModel(); }
+  });
   // 목표 탭
   $('#btnAddGoal').onclick = dlgAddGoal;
   $('#goalList').addEventListener('click', e=>{
