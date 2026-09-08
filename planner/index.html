@@ -547,7 +547,7 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
 .vis-card .vt b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vis-card .va{font-size:13px;font-weight:700;color:var(--key)}
 .vis-card .vn{font-size:11.5px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tg-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:22px}
+.tg-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:22px}
 .tgs{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:10px 12px;min-width:0}
 .tgs .n{width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;background:var(--card2);color:var(--sub);border:1px solid var(--line)}
 .tgs .t{min-width:0}
@@ -556,6 +556,43 @@ textarea.gt{min-height:78px;resize:vertical;line-height:1.6}
 .tgs .s{display:block;font-size:11px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tgs.run .n{background:var(--ink);color:#fff;border-color:var(--ink)}
 .tgs.run.ready{background:var(--key);border-color:var(--key);color:#fff} .tgs.run.ready .s{color:rgba(255,255,255,.78)} .tgs.run.ready .n{background:#fff;color:var(--key)}
+/* F-44 온보딩 게이트 · 안내 오버레이 · 분류 스텝 · Summary OKR */
+.snav-btn.lock{opacity:.4} .snav-btn.lock::before{content:'🔒';font-size:10px;margin-right:4px}
+.tg-gate{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid #fcd34d;background:#fffbeb;color:#92400e;border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:13px;line-height:1.5}
+.tg-gate b{color:#78350f} .tg-gate .btn{margin-left:auto}
+.tg-intro{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.onb{position:fixed;inset:0;z-index:70;background:rgba(246,247,249,.97);overflow:auto;display:none;padding:32px 16px}
+.onb.on{display:block}
+.onb-in{max-width:780px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:30px 32px}
+.onb .kicker{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--key);margin-bottom:6px}
+.onb h2{font-size:22px;margin:0 0 6px;line-height:1.3}
+.onb .lead{color:var(--sub);font-size:14px;margin:0 0 20px;line-height:1.65}
+.onb h5{font-size:11px;color:var(--mute);letter-spacing:.06em;margin:18px 0 8px}
+.onb-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:0}
+.onb-st{border:1px solid var(--line);border-radius:12px;padding:12px 10px;background:var(--card2);position:relative;min-width:0}
+.onb-st .n{display:inline-flex;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;font-weight:800;align-items:center;justify-content:center;margin-bottom:8px}
+.onb-st b{display:block;font-size:13px;margin-bottom:3px}
+.onb-st .s{font-size:11.5px;color:var(--sub);line-height:1.45}
+.onb-st.now{border-color:var(--key);background:var(--key-soft)} .onb-st.now .n{background:var(--key)}
+.onb-st.done .n{background:var(--good)}
+.onb-st:not(:last-child)::after{content:'›';position:absolute;right:-9px;top:12px;color:var(--mute);font-size:18px;font-weight:800}
+.onb-daily{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.onb-daily .d{border-left:3px solid var(--key);padding:8px 12px;background:var(--card2);border-radius:0 10px 10px 0;font-size:13px;line-height:1.5}
+.onb-daily .d b{display:block} .onb-daily .d span{font-size:12px;color:var(--sub)}
+.onb-cats{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.onb-cats .chip{cursor:default} .onb-cats .chip.goal{border-style:dashed;color:var(--sub)}
+.onb-act{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:24px}
+.onb-act .btn.big{padding:10px 18px;font-size:14px}
+.onb-act .skip{margin-left:auto;font-size:12px;color:var(--mute);text-decoration:underline}
+.cats-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.cat-li{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #f1f3f6;font-size:13px}
+.cat-li i{width:12px;height:12px;border-radius:4px;flex:none} .cat-li .sb{font-size:11px;color:var(--sub);margin-left:auto;text-align:right}
+.cat-li.miss{color:var(--bad)} .cat-li.miss i{background:#fee2e2;border:1px dashed var(--bad)}
+.sum-okr .g{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:7px} .sum-okr .g i{width:9px;height:9px;border-radius:50%;flex:none}
+.sum-okr .g .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600} .sum-okr .g .p{font-size:12px;color:var(--sub);width:36px;text-align:right}
+.sum-okr .g .mb{width:54px;height:5px;border-radius:999px;background:#eef1f5;overflow:hidden;flex:none} .sum-okr .g .mb i{display:block;height:100%;border-radius:0;width:0}
+.sum-okr .krl{font-size:12px;display:flex;gap:6px;padding:4px 0;border-bottom:1px solid #f1f3f6} .sum-okr .krl .n{flex:1;min-width:0} .sum-okr .krl .v{color:var(--sub);white-space:nowrap}
+.sum-okr .krl.done .n{text-decoration:line-through;color:var(--mute)}
 .m9-chips{display:none}
 .m9{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .m3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;padding:4px;border-radius:12px;background:color-mix(in srgb,var(--bc,#94a3b8) 9%,#fff);border:1px solid color-mix(in srgb,var(--bc,#94a3b8) 28%,#fff)}
@@ -588,6 +625,7 @@ button.mx:hover{box-shadow:inset 0 0 0 2px var(--bc,var(--key))}
 .fld .ma input[type=checkbox]{width:auto;flex:none;margin:0}
 @media (max-width:700px){
   .tg-steps{grid-template-columns:1fr 1fr}
+  .onb-flow{grid-template-columns:1fr 1fr} .onb-st:not(:last-child)::after{display:none} .onb-in{padding:20px 16px} .onb-daily{grid-template-columns:1fr} .cats-wrap{grid-template-columns:1fr}
   .okr-grid{grid-template-columns:1fr}
   .okr-kr{grid-template-columns:minmax(0,1fr) 42px 8px 42px 36px}
   .m9-chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px}
@@ -753,6 +791,7 @@ button.mx:hover{box-shadow:inset 0 0 0 2px var(--bc,var(--key))}
 </head>
 <body>
 <div id="nbar"></div>
+<div class="onb" id="onb"></div>
 
 <div class="top">
   <div class="top-in">
@@ -790,6 +829,7 @@ button.mx:hover{box-shadow:inset 0 0 0 2px var(--bc,var(--key))}
     <div class="sum-top">
       <div class="card sum-act"><div class="hd"><h3>오늘</h3><span class="spacer"></span><span class="tiny muted" id="sumNow"></span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumToday"></div></div>
       <div class="sum-side">
+        <div class="card sum-okr"><div class="hd"><h3>OKR</h3><span class="spacer"></span><span class="tiny muted" id="sumOkrLb"></span><button class="golink" data-go="goals">Target →</button></div><div class="bd" id="sumOkr"></div></div>
         <div class="card"><div class="hd"><h3>이번 주 시간</h3><span class="spacer"></span><span class="tiny muted" id="sumWkLb"></span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumWeek"></div></div>
         <div class="card"><div class="hd"><h3>이 달 시간</h3><span class="spacer"></span><span class="tiny muted" id="sumMoLb"></span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumMonth"></div></div>
       </div>
@@ -879,9 +919,15 @@ button.mx:hover{box-shadow:inset 0 0 0 2px var(--bc,var(--key))}
   <section class="panel" id="p-goals">
     <!-- F-43 Target 3층: 비전 → 만다라트 → OKR (노션 [4] Vision-Board · [0] OKR 구조 이식) -->
     <div class="tg-wrap">
+    <div class="tg-intro"><span class="tiny muted">목표 → OKR → 분류 → Weekly 순서로 잡습니다. 매일은 <b>Summary · Weekly</b> 두 탭만 봅니다.</span><span style="flex:1"></span><button class="btn ghost sm" data-onbshow>시작 안내 보기</button></div>
+    <div id="tgGate"></div>
     <div class="tg-steps" id="tgSteps"></div>
     <div class="tg-tabs" id="tgTabs">
-      <button data-tgv="okr">OKR</button><button data-tgv="mandal">만다라트</button><button data-tgv="vision">비전</button>
+      <button data-tgv="okr">OKR</button><button data-tgv="mandal">만다라트</button><button data-tgv="vision">비전</button><button data-tgv="cats">분류</button>
+    </div>
+    <div class="tg-sec" id="tgCats">
+      <div class="tg-hd"><span class="tiny muted">Weekly 시간가계부에서 칠하는 <b>분류</b>입니다. 루틴(해야 할 것)이 먼저 깔리고, 그 위에 만다라트 영역이 목표 분류로 올라갑니다.</span><span style="flex:1"></span><button class="btn ghost sm" data-cats>분류 관리</button></div>
+      <div id="catsBody"></div>
     </div>
     <div class="tg-sec" id="tgOkr">
       <div id="goalList"></div>
@@ -1029,17 +1075,22 @@ const SYNC  = location.protocol === 'http:' || location.protocol === 'https:';
 const SEED = {
   version: 1,
   // 실사용이 가장 많았던 시트(gid=0) 세트를 기본값으로. 설정에서 수정 가능.
+  // F-44: 기본은 '루틴(해야 할 것)'만. 사업·운동·투자 같은 목표 분류는 Target 만다라트 영역에서 만들어진다
   categories: [
-    {id:'work',   name:'업무', color:'#64748b'},
-    {id:'biz',    name:'사업', color:'#2563eb'},
-    {id:'study',  name:'독서', color:'#7c3aed'},
-    {id:'family', name:'가족', color:'#db2777'},
-    {id:'health', name:'건강', color:'#059669'},
-    {id:'etc',    name:'기타', color:'#d97706'}
+    {id:'sleep', name:'수면',      color:'#94a3b8', kind:'routine'},
+    {id:'meal',  name:'식사·준비', color:'#a8a29e', kind:'routine'},
+    {id:'move',  name:'이동',      color:'#78716c', kind:'routine'},
+    {id:'work',  name:'회사',      color:'#64748b', kind:'routine'},
+    {id:'home',  name:'집안일',    color:'#d97706', kind:'routine'},
+    {id:'rest',  name:'휴식',      color:'#0891b2', kind:'routine'},
+    {id:'etc',   name:'기타',      color:'#a3a3a3', kind:'routine'}
   ],
   goals: [], krs: [], habits: [], days: {}, events: [], weeks: {}, labelCats: {}, months: {}, notes: [], pages: [],
-  vision: {imgUrl:'', items:[]}, periods: [], curPeriod: null      // F-43 Target 3층
+  vision: {imgUrl:'', items:[]}, periods: [], curPeriod: null,     // F-43 Target 3층
+  onb: {done:false, at:0}                                            // F-44 온보딩 게이트 (done 전엔 Target 만 열린다)
 };
+const ROUTINE_IDS = ['sleep','meal','move','work','home','rest','etc'];
+const catKind = c => c.kind || (ROUTINE_IDS.includes(c.id) ? 'routine' : 'goal');
 
 /* ==========================================================
    유틸
@@ -1324,6 +1375,7 @@ async function loadModel(){
 }
 function fillMissing(){                     // 스키마가 바뀌어도 기존 데이터를 살린다
   if(!M || typeof M!=='object') M = JSON.parse(JSON.stringify(SEED));
+  const hadOnb = !!(M.onb && typeof M.onb==='object');   // F-44: SEED 채우기 전에 봐야 한다 — 기존 사용자를 게이트로 막지 않기 위해
   for(const k of Object.keys(SEED)) if(M[k]===undefined) M[k] = JSON.parse(JSON.stringify(SEED[k]));
   if(!Array.isArray(M.categories) || !M.categories.length) M.categories = JSON.parse(JSON.stringify(SEED.categories));
   for(const k of ['goals','krs','habits','events','notes','pages']) if(!Array.isArray(M[k])) M[k]=[];
@@ -1338,6 +1390,13 @@ function fillMissing(){                     // 스키마가 바뀌어도 기존 
   if(!M.weeks || typeof M.weeks!=='object') M.weeks = {};
   if(!M.labelCats || typeof M.labelCats!=='object') M.labelCats = {};
   if(!M.months || typeof M.months!=='object') M.months = {};
+  for(const c of M.categories) if(c && !c.kind) c.kind = catKind(c);     // F-44 분류 종류(루틴/목표)
+  // F-44 온보딩 — 이미 기록이 있는 사용자는 통과 처리 (기존 데이터를 게이트로 막지 않는다)
+  if(!hadOnb){
+    const has = Object.keys(M.days).length>0 || M.goals.length>0 || M.notes.length>0 || M.pages.length>0 || M.events.length>0
+             || (Array.isArray(M.periods) && M.periods.some(p=>p && ((p.center||'').trim() || (p.cells||[]).some(c=>c && (c.title||'').trim()))));
+    M.onb = {done: has, at: has ? Date.now() : 0};
+  }
   // F-43 비전·기간(만다라트)·목표의 기간 링크 방어 — 기존 목표는 periodId 없음 = '기간 미지정'
   if(!M.vision || typeof M.vision!=='object') M.vision = {imgUrl:'', items:[]};
   if(!Array.isArray(M.vision.items)) M.vision.items = [];
@@ -1741,7 +1800,8 @@ function openCatEditor(){
     for(const r of $$('#catList .catrow')){
       const name = r.querySelector('.cn').value.trim();
       if(!name) continue;
-      next.push({id:r.dataset.cid, name, color:r.querySelector('.cc').value || '#64748b'});
+      const old = catById(r.dataset.cid);
+      next.push({id:r.dataset.cid, name, color:r.querySelector('.cc').value || '#64748b', kind: old ? catKind(old) : 'goal'});
     }
     if(!next.length){ toast('분류는 최소 1개 필요합니다'); return false; }
 
@@ -2561,14 +2621,96 @@ function syncOkr(p){
 let tgView = null;                          // 'okr' | 'mandal' | 'vision' — 화면 상태 (localStorage 'planner-tg-view')
 function tgDefaultView(){
   const t = targetProgress();
-  if(!t.s1) return 'vision'; if(!t.s2) return 'mandal'; return 'okr';   // 온보딩: 첫 미완 단계, 다 되면 OKR
+  if(!t.s1) return 'vision'; if(!t.s2) return 'mandal'; if(!t.s4) return 'cats'; return 'okr';   // 온보딩: 첫 미완 단계, 다 되면 OKR
 }
 function setTgView(v){ tgView = v; try{ localStorage.setItem('planner-tg-view', v); }catch(e){} renderTarget(); }
 function renderTarget(){
   if(!tgView){ let v = null; try{ v = localStorage.getItem('planner-tg-view'); }catch(e){} tgView = v || tgDefaultView(); }
   $$('#tgTabs [data-tgv]').forEach(b=>b.classList.toggle('on', b.dataset.tgv===tgView));
-  $('#tgOkr').hidden = tgView!=='okr'; $('#tgMandal').hidden = tgView!=='mandal'; $('#tgVision').hidden = tgView!=='vision';
-  renderVision(); renderMandal(); renderGoals(); renderSteps();
+  $('#tgOkr').hidden = tgView!=='okr'; $('#tgMandal').hidden = tgView!=='mandal'; $('#tgVision').hidden = tgView!=='vision'; $('#tgCats').hidden = tgView!=='cats';
+  renderVision(); renderMandal(); renderGoals(); renderCats(); renderSteps(); renderGate();
+}
+/* ---- F-44 온보딩 게이트 — 목표를 세우기 전엔 다른 탭이 잠긴다 ---- */
+function onbLocked(){ return !(M.onb && M.onb.done); }
+function onbFinish(){ if(!M.onb) M.onb = {}; M.onb.done = true; M.onb.at = Date.now(); saveModel(); renderTabsLock(); }
+function renderTabsLock(){ const L = onbLocked(); $$('.snav-btn[data-tab]').forEach(b=> b.classList.toggle('lock', L && b.dataset.tab!=='goals')); }
+function renderGate(){
+  const el = $('#tgGate'); if(!el) return;
+  if(!onbLocked()){ el.innerHTML = ''; return; }
+  const t = targetProgress();
+  el.innerHTML = '<div class="tg-gate">🔒 <span><b>Summary · Weekly · Calendar 는 목표를 세운 뒤 열립니다.</b> '+
+    (t.s2 ? '핵심 목표와 영역이 준비됐습니다 — <b>▶ 달리기</b>를 누르면 Weekly 로 넘어갑니다.' : '만다라트 가운데에 <b>핵심 목표 1</b> + <b>영역 1개</b>만 적으면 달릴 수 있습니다. 시간가계부의 분류(색)가 이 영역에서 나오기 때문입니다.')+'</span>'+
+    (t.s2 ? '<button class="btn sm" data-tgrun>▶ 달리기</button>' : '<button class="btn sm" data-tgv="mandal">만다라트 쓰기</button>')+'</div>';
+}
+function showOnb(on){ const el = $('#onb'); if(!el) return; el.classList.toggle('on', !!on); if(on){ renderOnb(); el.scrollTop = 0; } }
+function renderOnb(){
+  const t = targetProgress(), L = onbLocked();
+  const cur = !t.s1 ? 1 : !t.s2 ? 2 : !t.s4 ? 4 : 5;
+  const st = (n, title, sub, done) => '<div class="onb-st'+(done?' done':'')+(n===cur?' now':'')+'"><span class="n">'+(done?'✓':n)+'</span><b>'+title+'</b><span class="s">'+sub+'</span></div>';
+  const routine = M.categories.filter(c=>catKind(c)==='routine'), goal = M.categories.filter(c=>catKind(c)==='goal');
+  const chip = (c, k) => '<span class="chip'+(k?' '+k:'')+'"><i style="background:'+c.color+'"></i>'+esc(c.name)+'</span>';
+  $('#onb').innerHTML = '<div class="onb-in">'+
+    '<div class="kicker">시작하기 전에</div>'+
+    '<h2>'+(L ? '목표를 먼저 세워야 다음으로 갈 수 있습니다' : '이 플래너가 돌아가는 순서')+'</h2>'+
+    '<p class="lead">이 플래너는 <b>목표 → 계획 → 실적 → 집계</b>가 한 줄로 이어집니다. 시간가계부에서 칠하는 <b>분류(색)</b>가 목표에서 나오기 때문에, 목표 없이 시작하면 기록은 쌓여도 "내 1순위 목표에 몇 시간 썼는지"가 안 나옵니다. 그래서 첫 화면이 Target 입니다.</p>'+
+    '<h5>순서 — 처음 한 번만</h5>'+
+    '<div class="onb-flow">'+
+      st(1, '비전', '이루고 싶은 것을 카드로 (금액·이미지)', t.s1)+
+      st(2, '만다라트', '핵심 목표 1 → 영역 8 → 행동 64. 영역 1개만 있어도 시작 가능', t.s2)+
+      st(3, 'OKR', '영역이 목표, 행동이 KR 로 자동 생성. 숫자만 채웁니다', t.s3)+
+      st(4, '분류', '루틴(수면·식사·회사…)은 기본 제공. 영역마다 분류색을 연결', t.s4)+
+      st(5, '달리기', 'Weekly 에 이번 주 계획을 칠하고 실적을 적습니다', !L)+
+    '</div>'+
+    '<h5>매일 — 두 탭만 봅니다</h5>'+
+    '<div class="onb-daily">'+
+      '<div class="d"><b>Summary</b><span>오늘 할 일·습관·일정 체크, OKR 진행률, 이번 주·이 달 시간이 자동 집계돼 한 화면에 뜹니다.</span></div>'+
+      '<div class="d"><b>Weekly</b><span>30분 단위 계획·실적을 적는 곳. 분류별 시간이 즉시 합산되고 OKR 투입시간으로 올라갑니다.</span></div>'+
+    '</div>'+
+    '<h5>분류 — 지금 들어 있는 것</h5>'+
+    '<div class="onb-cats"><span class="tiny muted" style="margin-right:4px">루틴 · 해야 할 것</span>'+routine.map(c=>chip(c)).join('')+'</div>'+
+    '<div class="onb-cats" style="margin-top:6px"><span class="tiny muted" style="margin-right:4px">목표 · 만다라트에서 생김</span>'+(goal.length ? goal.map(c=>chip(c,'goal')).join('') : '<span class="tiny muted">아직 없음 — 사업·운동·투자처럼 영역을 적으면 여기 생깁니다</span>')+'</div>'+
+    '<div class="onb-act">'+
+      '<button class="btn big" data-onbgo>'+(L ? '목표 세우러 가기 →' : 'Target 으로')+'</button>'+
+      '<button class="btn ghost" data-onbex>예시로 둘러보기</button>'+
+      (L ? '<button class="skip" data-onbskip>이미 써 봤어요 — 건너뛰기</button>' : '<button class="skip" data-onbclose>닫기</button>')+
+    '</div></div>';
+}
+/* ---- ④ 분류 — 루틴(기본) + 목표 영역(만다라트) ---- */
+function routineMissing(){ return SEED.categories.filter(c=>!catById(c.id)); }
+function addRoutineCats(){ const miss = routineMissing(); for(const c of miss) M.categories.push(JSON.parse(JSON.stringify(c))); return miss.length; }
+/** 제목은 있는데 분류가 없는 영역마다 분류를 만들어 연결한다 (이름 = 영역 제목, 색 = 블록 색) */
+function autoCatsFromCells(){
+  const p = curPeriod(); let n = 0;
+  p.cells.forEach((c, i)=>{
+    if(!c.title.trim() || catById(c.catId)) return;
+    const used = new Set(M.categories.map(x=>x.color));
+    const color = !used.has(MANDAL_COLORS[i]) ? MANDAL_COLORS[i] : (CATPAL.find(x=>!used.has(x)) || MANDAL_COLORS[i]);
+    const cat = {id:'c'+uid(), name:c.title.trim().slice(0,12), color, kind:'goal'}; M.categories.push(cat); c.catId = cat.id; n++;
+  });
+  if(n){ p.ut = Date.now(); syncOkr(p); saveModel(); }
+  return n;
+}
+function renderCats(){
+  const el = $('#catsBody'); if(!el) return;
+  const p = curPeriod();
+  const routine = M.categories.filter(c=>catKind(c)==='routine'), goal = M.categories.filter(c=>catKind(c)==='goal');
+  const areasOf = id => p.cells.filter(c=>c.catId===id && c.title.trim()).map(c=>esc(c.title)).join(' · ');
+  const miss = p.cells.map((c,i)=>({c,i})).filter(x=>x.c.title.trim() && !catById(x.c.catId));
+  const rmiss = routineMissing();
+  const li = (c, sb) => '<div class="cat-li"><i style="background:'+c.color+'"></i><span>'+esc(c.name)+'</span><span class="sb">'+(sb||'')+'</span></div>';
+  el.innerHTML = '<div class="cats-wrap">'+
+    '<div class="card"><div class="hd"><h3>루틴 · 해야 할 것</h3><span class="spacer"></span><span class="tiny muted">'+routine.length+'개</span></div><div class="bd">'+
+      (routine.length ? routine.map(c=>li(c)).join('') : '<p class="tiny muted" style="margin:0">루틴 분류가 없습니다</p>')+
+      (rmiss.length ? '<button class="btn ghost sm" data-routine style="margin-top:10px">기본 루틴 '+rmiss.length+'개 넣기 <span class="tiny muted">('+rmiss.map(c=>esc(c.name)).join('·')+')</span></button>' : '')+
+      '<p class="tiny muted" style="margin:10px 0 0;line-height:1.55">수면·식사·이동·회사처럼 <b>매일 반복되는 시간</b>을 칠하는 분류입니다. 이걸 먼저 깔아야 하루 24시간에서 <b>목표에 쓸 수 있는 시간</b>이 얼마인지 보입니다.</p>'+
+    '</div></div>'+
+    '<div class="card"><div class="hd"><h3>목표 · 만다라트 영역</h3><span class="spacer"></span><span class="tiny muted">'+goal.length+'개</span></div><div class="bd">'+
+      (goal.length ? goal.map(c=>li(c, areasOf(c.id) || '<span class="muted">연결된 영역 없음</span>')).join('') : '<p class="tiny muted" style="margin:0">아직 없습니다 — 만다라트 영역(사업·운동·투자…)이 여기 목표 분류로 올라옵니다</p>')+
+      (miss.length ? '<div style="margin-top:10px">'+miss.map(x=>'<div class="cat-li miss"><i></i><span>'+esc(x.c.title)+'</span><span class="sb">분류 없음</span></div>').join('')+
+        '<button class="btn sm" data-catsauto style="margin-top:10px">영역 '+miss.length+'개에 분류 자동 만들기</button> <span class="tiny muted">이름 = 영역 제목 · 색 = 블록 색</span></div>' : (p.cells.some(c=>c.title.trim()) ? '<p class="tiny muted" style="margin:10px 0 0">모든 영역에 분류가 연결돼 있습니다 ✓</p>' : ''))+
+      '<p class="tiny muted" style="margin:10px 0 0;line-height:1.55">영역을 바꾸려면 <b>만다라트</b> 탭에서 칸을 눌러 분류를 고르세요. Weekly 에서 이 색으로 칠한 시간이 OKR 투입시간으로 집계됩니다.</p>'+
+    '</div></div>'+
+  '</div>';
 }
 /* ---- ⓪ 온보딩 스텝 — 비전 → 만다라트 → OKR → 달리기(Weekly) ---- */
 function targetProgress(){
@@ -2577,7 +2719,9 @@ function targetProgress(){
   const acts = p.cells.reduce((s,c)=>s+c.actions.filter(a=>a.text.trim()).length, 0);
   const goals = M.goals.filter(g=>g.periodId===p.id).length;
   const krs = M.krs.filter(k=>M.goals.some(g=>g.id===k.goalId && g.periodId===p.id)).length;
-  return { s1: M.vision.items.length>0, s2: !!p.center.trim() && subs>0, s3: goals>0 && krs>0, subs, acts, goals, krs };
+  const titled = p.cells.filter(c=>c.title.trim()), noCat = titled.filter(c=>!catById(c.catId)).length;
+  return { s1: M.vision.items.length>0, s2: !!p.center.trim() && subs>0, s3: goals>0 && krs>0,
+           s4: titled.length>0 && noCat===0, noCat, subs, acts, goals, krs };
 }
 function renderSteps(){
   const t = targetProgress();
@@ -2586,7 +2730,8 @@ function renderSteps(){
     step(1, t.s1, '비전', t.s1 ? '카드 '+M.vision.items.length+'개' : '이루고 싶은 것을 카드로', 'vision') +
     step(2, t.s2, '만다라트', t.s2 ? '영역 '+t.subs+'/8 · 행동 '+t.acts+'/64' : '핵심 1 → 영역 8 → 행동 64', 'mandal') +
     step(3, t.s3, 'OKR', t.s3 ? '목표 '+t.goals+' · KR '+t.krs : '영역이 목표, 행동이 KR로 자동 연결', 'okr') +
-    '<button class="tgs run'+(t.s3?' ready':'')+'" data-tgrun><span class="n">▶</span><span class="t"><b>달리기</b><span class="s">이번 주 계획 세우러 Weekly 로</span></span></button>';
+    step(4, t.s4, '분류', t.s4 ? '루틴 '+M.categories.filter(c=>catKind(c)==='routine').length+' · 목표 '+M.categories.filter(c=>catKind(c)==='goal').length : (t.noCat ? '영역 '+t.noCat+'개 분류 없음' : '루틴 기본 + 영역별 분류색'), 'cats') +
+    '<button class="tgs run'+(t.s2?' ready':'')+'" data-tgrun><span class="n">▶</span><span class="t"><b>달리기</b><span class="s">'+(t.s2 ? '이번 주 계획 세우러 Weekly 로' : '핵심 1 + 영역 1개면 출발')+'</span></span></button>';
 }
 
 /* ---- ① 비전 ---- */
@@ -2685,7 +2830,7 @@ function dlgNewCat(cb){
     '<p class="tiny muted" style="margin:0">이 분류는 Weekly 시간 기록·집계에도 같이 쓰입니다. 전체 목록은 <b>분류 관리</b>에서.</p>',
     ()=>{
       const name = $('#ncName').value.trim(); if(!name){ $('#ncName').focus(); return false; }
-      const c = {id:'c'+uid(), name, color:$('#ncColor').value||pick}; M.categories.push(c); saveModel();
+      const c = {id:'c'+uid(), name, color:$('#ncColor').value||pick, kind:'goal'}; M.categories.push(c); saveModel();
       if(cb) cb(c.id);
     }, '만들기');
 }
@@ -2742,13 +2887,18 @@ const MANDAL_EXAMPLE = {
     ['건강','health',       ['점심 걷기 20분 주3|48|회','아침 근력 10분 주2|32|회','수면 6시간|100|일','체중 -3kg|3|kg','주말 등산 월 1|4|회','물 1.5L|100|일','야식 끊기|100|일','건강검진|1|회']],
     ['가족','family',       ['토요일 함께 시간 고정|16|회','부모님 월 1 방문|4|회','밤 대화 1시간|100|일','연말 여행|1|회','집안일 분담표|1|건','가계부 같이 보기 월 1|4|회','기념일 챙기기|3|회','비전 카드 같이 쓰기|1|회']],
     ['독서','study',        ['10월 오디오북 시작|1|권','출근길 30분 듣기|60|회','월 2권|8|권','독서 후기 1줄|8|편','사업 책 다시 읽기|2|권','부동산 책|1|권','고전|1|권','책 리스트 정리|1|건']],
-    ['재무','etc',          ['월 1회 현금 점검|4|회','순수현금 1억 달성|1|건','불필요 구독 정리|1|건','비상금 통장 분리|1|건','투자금 기준 재확인|1|건','보험 점검|1|건','연말정산 준비|1|건','재무 대시보드 갱신|4|회']],
+    ['재무','fin',          ['월 1회 현금 점검|4|회','순수현금 1억 달성|1|건','불필요 구독 정리|1|건','비상금 통장 분리|1|건','투자금 기준 재확인|1|건','보험 점검|1|건','연말정산 준비|1|건','재무 대시보드 갱신|4|회']],
     ['사이드·AI','biz',     ['플래너 21일 연속 사용|21|일','주말 1일만 개발|16|주','유튜브 원고|1|편','노션 → 플래너 이관|1|건','AI 툴 1개 익히기|1|개','포트폴리오 갱신|1|건','앱 사용 후기 정리|1|건','12월 회고|1|건']],
-    ['휴식·마음','etc',     ['퇴근길 손대지 않기|60|일','일요일 늦잠|16|회','감사일기 매일|100|일','폰 없는 밤 30분|60|일','산책 명상 주 1|16|회','친구 월 1|4|회','취미 1개|1|개','한 해 정리|1|건']]
+    ['휴식·마음','mind',    ['퇴근길 손대지 않기|60|일','일요일 늦잠|16|회','감사일기 매일|100|일','폰 없는 밤 30분|60|일','산책 명상 주 1|16|회','친구 월 1|4|회','취미 1개|1|개','한 해 정리|1|건']]
   ]
 };
+/** 분류가 없으면 만든다 (id 고정) — 예시·온보딩이 쓴다 */
+function ensureCat(id, name, color, kind){ if(!catById(id)) M.categories.push({id, name, color, kind: kind||'goal'}); return id; }
+const EXAMPLE_CATS = [['biz','사업','#2563eb'],['health','건강','#059669'],['family','가족','#db2777'],['study','독서','#7c3aed'],['fin','재무','#0d9488'],['mind','마음','#9333ea']];
 function loadMandalExample(){
   const ex = MANDAL_EXAMPLE, y = new Date().getFullYear();
+  for(const [id, name, color] of EXAMPLE_CATS) ensureCat(id, name, color, 'goal');   // 목표 분류는 만다라트 영역에서 생긴다 — 예시도 같은 길로
+  ensureCat('work', '회사', '#64748b', 'routine');
   const p = Object.assign(defaultPeriod(), {label:ex.label, center:ex.center, from:y+'-09-01', to:y+'-12-31'});
   p.cells = ex.cells.map(([t, cat, acts])=>({ title:t, catId:catById(cat)?cat:null,
     actions: acts.map((str,k)=>{ const [text, tgt, unit] = str.split('|'); const mons = periodMonths(p);
@@ -2937,6 +3087,24 @@ function grassHTML(weeks){
   return '<div class="grass">'+h+'</div>'
     + '<div class="grass-lg"><span><i></i>0</span><span><i class="l1"></i>~3h</span><span><i class="l2"></i>~8h</span><span><i class="l3"></i>8h+</span><span style="margin-left:auto">세로 = 월~일 · 오른쪽이 이번 주</span></div>';
 }
+/** Summary OKR 카드 — Target 을 열지 않아도 이 기간의 OKR 이 보인다 */
+function okrSummaryHTML(ym){
+  const p = curPeriod(), mine = M.goals.filter(g=>g.periodId===p.id);
+  const lb = $('#sumOkrLb'); if(lb) lb.textContent = p.label + ' · ' + periodDday(p);
+  if(!p.center.trim() && !mine.length) return '<p class="tiny muted" style="margin:0">Target 만다라트에 핵심 목표와 영역을 적으면 OKR 이 여기 뜹니다</p>';
+  const pct = krPct(mine);
+  let h = (p.center.trim() ? '<p class="sum-one">🎯 '+esc(p.center)+'</p>' : '')+
+    '<div class="bar"><i class="'+(pct>=100?'ok':'')+'" style="width:'+(pct||0)+'%"></i></div>'+
+    '<div class="sum-line"><span>KR 달성 <b>'+(pct==null?'—':pct+'%')+'</b></span><span>목표 '+mine.length+' · KR '+M.krs.filter(k=>mine.some(g=>g.id===k.goalId)).length+'</span></div>';
+  h += mine.slice(0,8).map(g=>{ const gp = krPct([g]); const col = catById(g.catId) ? catById(g.catId).color : (isSyncedGoal(g) && g.cellIdx!=null ? MANDAL_COLORS[g.cellIdx] : '#94a3b8');
+    return '<div class="g"><i style="background:'+col+'"></i><span class="t">'+esc(g.title)+'</span><span class="mb"><i style="width:'+(gp||0)+'%;background:'+col+'"></i></span><span class="p">'+(gp==null?'—':gp+'%')+'</span></div>'; }).join('');
+  const all = M.krs.filter(k=>mine.some(g=>g.id===k.goalId));
+  let ks = all.filter(k=>(k.month||'')===ym), ttl = monLabel(ym)+' KR';
+  if(!ks.length){ ks = all.filter(k=>!(+k.target>0 && +k.current>=+k.target)); ttl = '진행 중 KR'; }
+  if(ks.length) h += '<div class="sum-sec"><h4>'+ttl+' <span class="muted">'+ks.length+'</span></h4>'+ks.slice(0,6).map(k=>{ const done = +k.target>0 && +k.current>=+k.target;
+    return '<div class="krl'+(done?' done':'')+'"><span class="n">'+esc(k.title)+'</span><span class="v">'+(+k.current||0)+'/'+(+k.target||0)+' '+esc(k.unit||'')+'</span></div>'; }).join('')+(ks.length>6 ? '<p class="tiny muted" style="margin:4px 0 0">외 '+(ks.length-6)+'개 — Target 에서</p>' : '')+'</div>';
+  return h;
+}
 function renderSummary(){
   const today = todayStr(), ym = today.slice(0,7);
   $('#sumDate').textContent = today.replace(/-/g,'.') + ' (' + DOW[dowOf(today)] + ')';
@@ -2985,6 +3153,8 @@ function renderSummary(){
     + '<div class="sum-line"><span>지금 실적</span><b>'+(actNow ? esc(actNow) : '<span class="muted">아직 안 적음</span>')+'</b></div>'
     + '<div class="sum-line"><span>남은 계획</span><b>'+fmtH(left)+(tp ? ' <span class="muted">/ 오늘 '+fmtH(tp)+'</span>' : '')+'</b></div></div>';
 
+  // ①.5 OKR (F-44) — 이 기간 One-Thing · 목표별 달성 · 이 달 KR
+  $('#sumOkr').innerHTML = okrSummaryHTML(ym);
   // ② 이번 주
   const wd = weekDates(today);
   $('#sumWkLb').textContent = wd[0].slice(5).replace('-','/') + ' ~ ' + wd[6].slice(5).replace('-','/');
@@ -3144,13 +3314,17 @@ function renderAll(){
   renderSync();
 }
 function switchTab(t){
+  if(onbLocked() && t!=='goals'){                      // F-44: 목표를 세우기 전엔 Target 만 열린다
+    toast(targetProgress().s2 ? 'Target 의 ▶ 달리기를 누르면 열립니다' : '먼저 Target 에서 핵심 목표 1 + 영역 1개를 적어 주세요');
+    t = 'goals';
+  }
   curTab = t;
   const isPage = t.startsWith('page:');
   if(isPage){ if(curPageId !== t.slice(5)) dbUI.rowId = null; curPageId = t.slice(5); }
   const pid = isPage ? 'p-page' : 'p-'+t;
   $$('.snav-btn').forEach(b=>b.classList.toggle('on', b.dataset.tab===t));
   $$('.panel').forEach(p=>p.classList.toggle('on', p.id===pid));
-  renderAll();
+  renderAll(); renderTabsLock();
 }
 /* 집계 토글은 F-25 에서 제거됐다 — 계획·실적을 항상 같이 보여 준다 */
 
@@ -4396,7 +4570,13 @@ function bindAll(){
     if(g('data-cats')!=null){ dlgCats(); return; }
     if((v = g('data-okrmon'))!=null){ okrMonth = v; renderGoals(); return; }
     if((v = g('data-tgv'))){ setTgView(v); return; }
-    if(g('data-tgrun')!=null){ switchTab('today'); return; }
+    if(g('data-tgrun')!=null){
+      if(onbLocked() && !targetProgress().s2){ toast('만다라트에 핵심 목표 1 + 영역 1개를 적으면 달릴 수 있습니다'); setTgView('mandal'); return; }
+      if(onbLocked()) onbFinish();
+      switchTab('today'); return; }
+    if(g('data-onbshow')!=null){ showOnb(true); return; }
+    if(g('data-routine')!=null){ const n = addRoutineCats(); saveModel(); renderTarget(); toast('루틴 분류 '+n+'개 추가'); return; }
+    if(g('data-catsauto')!=null){ const n = autoCatsFromCells(); renderTarget(); toast(n ? '분류 '+n+'개 생성 · 영역에 연결' : '분류 없는 영역이 없습니다'); return; }
     if((v = g('data-mbgo'))!=null){ mandalBlock = +v; renderMandal(); return; }
     if(e.target.closest('button[data-mx]')){ mandalEdit = e.target.closest('button[data-mx]').dataset.mx; renderMandal(); return; }
     if(g('data-periodadd')!=null){ dlgPeriod(null); return; }
@@ -4404,6 +4584,14 @@ function bindAll(){
     if(g('data-okrfold')!=null){ okrFold = !okrFold; renderGoals(); return; }
   });
   $('#perSel').addEventListener('change', e=>{ M.curPeriod = e.target.value; saveModel(); renderMandal(); renderGoals(); });
+  // F-44 온보딩 오버레이
+  $('#onb').addEventListener('click', e=>{
+    const g = a => e.target.closest('['+a+']');
+    if(g('data-onbgo')){ showOnb(false); switchTab('goals'); tgView = null; try{ localStorage.removeItem('planner-tg-view'); }catch(_){} renderTarget(); return; }
+    if(g('data-onbex')){ showOnb(false); switchTab('goals'); loadMandalExample(); setTgView('mandal'); return; }
+    if(g('data-onbskip')){ onbFinish(); showOnb(false); switchTab('today'); toast('건너뛰었습니다 — Target 탭에서 언제든 목표를 세울 수 있습니다'); return; }
+    if(g('data-onbclose')){ showOnb(false); return; }
+  });
   // 만다라트 인라인 편집 — Enter 저장 · Shift+Enter 줄바꿈 · Tab 다음 칸 · Esc 취소. 저장·리렌더는 focusout 한 곳에서만
   $('#mandal').addEventListener('keydown', e=>{
     const ta = e.target.closest('textarea[data-mx]'); if(!ta) return;
@@ -4542,7 +4730,8 @@ function bindAll(){
 (async function init(){
   await loadModel();
   bindAll();
-  switchTab('today');
+  switchTab(onbLocked() ? 'goals' : 'today');        // F-44: 처음이면 Target + 안내 오버레이
+  if(onbLocked()) showOnb(true);
   renderSync();
   startPolling();
   window.addEventListener('beforeunload', e=>{
