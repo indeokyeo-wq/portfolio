@@ -442,7 +442,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 /* --- 주간 그리드 (7일 × 계획/실적) --- */
 .wgwrap{border:1px solid var(--line);border-radius:var(--r);background:var(--card);overflow:hidden}
 .wgscroll{overflow:auto;max-height:calc(100vh - 270px)}
-.wg{display:grid;grid-template-columns:54px repeat(7, 7px minmax(0,1fr) minmax(0,1fr) 56px);min-width:1200px;   /* F-46: 일정띠 · 계획 · 실적 · 분류 */
+.wg{display:grid;grid-template-columns:54px repeat(7, 7px minmax(0,1fr) minmax(0,1fr) 46px);min-width:1200px;   /* F-46: 일정띠 · 계획 · 실적 · 분류 */
     touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .wg.drag{touch-action:none}
 .wg .wg-h{position:sticky;top:0;z-index:3;height:30px;background:var(--card2);border-bottom:1px solid var(--line);
@@ -478,7 +478,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .wg .cell{height:22px;border-bottom:1px solid #f1f3f6;border-left:1px solid var(--line);font-size:11px;padding:0 5px;
     display:flex;align-items:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:crosshair}
 .wg .cell.hh{border-bottom-color:var(--line)}
-.wg .cell.cat{font-size:10.5px;color:var(--sub);gap:4px;padding:0 4px;cursor:pointer;background:var(--card2)} .wg .cell.cat i{width:7px;height:7px;border-radius:50%;flex:none;background:var(--bc)}
+.wg .cell.cat{font-size:10.5px;color:var(--sub);gap:3px;padding:0 3px;cursor:pointer;background:var(--card2);letter-spacing:-.2px} .wg .cell.cat i{width:6px;height:6px;border-radius:50%;flex:none;background:var(--bc)}
 .wg .cell.cat.dim{opacity:.45} .wg .cell.cat.filled{color:var(--ink);font-weight:600} .wg .cell.cat:hover{background:var(--key-soft)}
 .wg .cell.now{box-shadow:inset 0 0 0 2px rgba(37,99,235,.5)}
 .wg .cell.filled{font-weight:600}
@@ -749,7 +749,7 @@ button.mx:hover{box-shadow:inset 0 0 0 2px var(--bc,var(--key))}
 /* F-13.6 v3 폰 — 계획|실적 2열 크게 + 요일 칩 + 할 일 우선. 같은 링크·같은 데이터 */
 .wg-chips{display:none}
 @media (max-width:900px){
-  .wg{grid-template-columns:40px 4px minmax(0,1fr) minmax(0,1fr) 58px;min-width:0}
+  .wg{grid-template-columns:40px 4px minmax(0,1fr) minmax(0,1fr) 50px;min-width:0}
   .wg .cell.cat{font-size:11px}
   .wg .cell{height:36px;font-size:14px;padding:0 6px}
   .wg .wg-tm{font-size:11px}
@@ -1957,9 +1957,10 @@ function cellStyle(b, m){
   const col = c ? c.color : '#94a3b8';
   return 'background:'+col+'1f;border-left:3px solid '+col+';color:'+col+';';
 }
-function cellText(b){
+function cellText(b, m){
   if(!b) return '';
   if(b.label) return b.label;
+  if(m === 'actual'){ const g0 = b.goalId && goalById(b.goalId); return g0 ? g0.title : ''; }   // F-46b 실적 칸엔 분류 이름을 안 쓴다 — 분류 열이 보여 준다
   const g = b.goalId && goalById(b.goalId);
   if(g) return g.title;
   const c = catById(b.catId);
@@ -2196,7 +2197,7 @@ function renderWeekGrid(){
       h += '<div class="cell'+(hh?' hh':'')+(p?' filled':'')+now+'" data-m="plan" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(p, 'plan')+'">'
          + esc(cellText(p)) + '</div>';
       h += '<div class="cell'+(hh?' hh':'')+(a?' filled':'')+now+'" data-m="actual" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(a, 'actual')+'">'
-         + esc(cellText(a)) + '</div>';
+         + esc(cellText(a, 'actual')) + '</div>';
       h += catCellHTML(d, i, p, a, (hh?' hh':'')+now);
     }
   }
@@ -2555,7 +2556,7 @@ function refreshGridCells(){
     const b = day ? day[el.dataset.m][+el.dataset.s] : null;
     el.setAttribute('style', cellStyle(b, el.dataset.m));
     el.classList.toggle('filled', !!b);
-    el.textContent = cellText(b);
+    el.textContent = cellText(b, el.dataset.m);
   });
 }
 
