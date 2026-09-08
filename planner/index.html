@@ -166,6 +166,11 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .sum-grat ul{margin:2px 0 0;padding-left:16px}
 /* F-45 아침 화면 — 분기 목표 → 확언 → 감사 → 오늘 */
 .sum-main{display:flex;flex-direction:column;gap:16px;min-width:0}
+.sum-daynav{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 8px;box-shadow:var(--shadow)}
+.sum-daynav b{font-size:13px;min-width:120px;text-align:center} .sum-daynav b.past{color:var(--key)}
+.sum-daynav input[type=date]{margin-left:auto;border:1px solid var(--line);border-radius:8px;padding:4px 6px;font:inherit;font-size:12px;background:var(--card);max-width:140px}
+.sum-okr .krh{font-size:11px;color:var(--mute);letter-spacing:.05em;margin:12px 0 4px;display:flex;gap:6px;align-items:baseline} .sum-okr .krh b{color:var(--ink);font-size:12px;letter-spacing:0}
+.sum-okr .krh .muted{font-weight:500;letter-spacing:0}
 .sum-okr .one-big{font-size:16px;font-weight:800;line-height:1.35;margin:0 0 10px}
 .sum-focus{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0 6px;font-size:12.5px}
 .sum-focus .fb{display:inline-flex;align-items:center;gap:6px;font-weight:700} .sum-focus .fb i{width:10px;height:10px;border-radius:3px}
@@ -866,30 +871,25 @@ button.mx:hover{box-shadow:inset 0 0 0 2px var(--bc,var(--key))}
 
   <!-- ============ SUMMARY (F-33) ============ -->
   <section class="panel" id="p-sum">
-    <div class="sum-head"><h2 id="sumDate"></h2><span class="tiny muted">아침 루틴 — 목표 확인 → 확언 → 감사 → 오늘 계획. 시간 기록은 Weekly 에서, 해석은 여기서.</span></div>
+    <div class="sum-head"><h2 id="sumDate"></h2><span class="tiny muted">아침 루틴 — 왼쪽에서 분기 목표·오늘·시간을 확인하고, 오른쪽에서 확언·감사를 씁니다. 시간 기록은 Weekly 에서.</span></div>
     <div class="sum-top">
       <div class="sum-main">
         <!-- F-45 아침 화면: 분기 목표 → 확언 100번쓰기 → 감사일기 → 오늘. 확언·감사·메모는 여기서 직접 입력한다 (입력 중 리렌더 금지) -->
         <div class="card sum-okr"><div class="hd"><h3>이번 분기 목표</h3><span class="spacer"></span><span class="tiny muted" id="sumOkrLb"></span><button class="golink" data-go="goals">Target →</button></div><div class="bd" id="sumOkr"></div></div>
-        <div class="card sum-affirm"><div class="hd"><h3>확언 · 100번쓰기</h3><span class="spacer"></span><span class="tiny muted" id="sumAffLb"></span></div><div class="bd" id="sumAffirm"></div></div>
-        <div class="card sum-gratc"><div class="hd"><h3>감사일기</h3><span class="spacer"></span><span class="tiny muted">오늘 3가지</span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumGratBox"></div></div>
         <div class="card sum-act"><div class="hd"><h3>오늘</h3><span class="spacer"></span><span class="tiny muted" id="sumNow"></span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumToday"></div></div>
-      </div>
-      <div class="sum-side">
         <div class="card"><div class="hd"><h3>이번 주 시간</h3><span class="spacer"></span><span class="tiny muted" id="sumWkLb"></span><button class="golink" data-go="today">Weekly →</button></div><div class="bd" id="sumWeek"></div></div>
         <div class="card"><div class="hd"><h3>이 달 시간</h3><span class="spacer"></span><span class="tiny muted" id="sumMoLb"></span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumMonth"></div></div>
+      </div>
+      <div class="sum-side">
+        <!-- F-45b 우측 = 매일 쓰는 것. 날짜 내비(sumDay)로 지난 날 확언·감사도 보고 고친다 -->
+        <div class="sum-daynav"><button class="dnav" data-sumdayd="-1">‹</button><b id="sumDayLb"></b><button class="dnav" data-sumdayd="1">›</button><button class="tbtn" data-sumdayto>오늘</button><input type="date" id="sumDayIn" title="날짜 선택"></div>
+        <div class="card sum-affirm"><div class="hd"><h3>확언 · 100번쓰기</h3><span class="spacer"></span><span class="tiny muted" id="sumAffLb"></span></div><div class="bd" id="sumAffirm"></div></div>
+        <div class="card sum-gratc"><div class="hd"><h3>감사일기</h3><span class="spacer"></span><span class="tiny muted" id="sumGratLb">3가지</span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumGratBox"></div></div>
         <div class="card"><div class="hd"><h3>메모</h3><span class="spacer"></span><span class="tiny muted" id="sumMemoCnt"></span><button class="golink" data-go="memo">Memo →</button></div><div class="bd"><div class="sum-memoin"><input id="sumMemoIn" placeholder="떠오른 것 한 줄 — Enter 로 저장" autocomplete="off"></div><div id="sumMemo"></div></div></div>
         <div class="card"><div class="hd"><h3>다가오는 일정</h3><span class="spacer"></span><span class="tiny muted">D-day</span><button class="golink" data-go="cal">Calendar →</button></div><div class="bd" id="sumUp"></div></div>
       </div>
     </div>
-    <button class="sum-more" id="sumMoreTg">▸ 더 보기 <span class="tiny muted">분류별 연속 기록 · 내 페이지 · 기록 잔디</span></button>
-    <div id="sumMore" hidden>
-      <div class="sum-grid">
-        <div class="card"><div class="hd"><h3>분류별 연속 기록</h3><span class="spacer"></span><span class="tiny muted">최근 14일 · 실적 기준</span></div><div class="bd" id="sumStreak"></div></div>
-        <div class="card"><div class="hd"><h3>내 페이지</h3><span class="spacer"></span><span class="tiny muted">이 달 집계</span></div><div class="bd" id="sumPages"></div></div>
-      </div>
-      <div class="card" style="margin-top:16px"><div class="hd"><h3>기록 잔디</h3><span class="spacer"></span><span class="tiny muted">최근 12주 · 하루 실적량</span><button class="golink" data-go="review">Monthly →</button></div><div class="bd" id="sumHeat"></div></div>
-    </div>
+    <!-- 더 보기(분류별 연속 기록 · 내 페이지 · 기록 잔디)는 F-45b 에서 제거 — "안 보게 될 듯". Monthly 가 담당 -->
   </section>
 
   <!-- ============ TODAY ============ -->
@@ -3194,6 +3194,9 @@ function grassHTML(weeks){
     + '<div class="grass-lg"><span><i></i>0</span><span><i class="l1"></i>~3h</span><span><i class="l2"></i>~8h</span><span><i class="l3"></i>8h+</span><span style="margin-left:auto">세로 = 월~일 · 오른쪽이 이번 주</span></div>';
 }
 /* ---- F-45 아침 루틴: 확언 100번쓰기 · 감사일기 · 분기 루틴 상태 ---- */
+let sumDay = null;                            // Summary 우측(확언·감사)이 보고 있는 날 — 화면 상태, M 밖. null = 오늘
+const sumDayStr = () => sumDay || todayStr();
+function setSumDay(d){ sumDay = (d && d!==todayStr()) ? d : null; renderSummary(); }
 /** 그날 확언 줄 수 (빈 줄 제외). 카운트는 저장하지 않고 본문에서 센다 */
 function affirmCount(d){ const day = typeof d==='string' ? M.days[d] : d; if(!day || !day.affirm) return 0; return day.affirm.split('\n').filter(l=>l.trim()).length; }
 /** 목표 횟수를 채운 연속일 (오늘 미달이면 어제부터) */
@@ -3210,22 +3213,24 @@ function dlgAffirm(){
     '<p class="tiny muted" style="margin:0;line-height:1.55">이번 분기 루틴 목표를 <b>이미 이룬 사람</b>의 문장으로, 현재형·1인칭으로 씁니다. 분기가 바뀌면 문장도 바꿉니다.</p>',
     ()=>{ M.affirm.text = $('#afText').value.trim(); M.affirm.target = Math.max(1, +$('#afTgt').value||100); saveModel(); renderSummary(); }, '저장');
 }
-function affirmHTML(today){
-  const day = M.days[today], n = affirmCount(day), tgt = +M.affirm.target||100, done = n>=tgt, st = affirmStreak();
-  const lb = $('#sumAffLb'); if(lb) lb.textContent = st ? '연속 '+st+'일' : '';
+function affirmHTML(d){
+  const day = M.days[d], n = affirmCount(day), tgt = +M.affirm.target||100, done = n>=tgt, st = affirmStreak();
+  const lb = $('#sumAffLb'); if(lb) lb.textContent = (d!==todayStr() ? d.slice(5).replace('-','/')+' · ' : '') + (st ? '연속 '+st+'일' : '');
   return (M.affirm.text
       ? '<p class="affirm-q">'+esc(M.affirm.text)+'<button class="ed" data-affedit>✏️ 문장</button></p>'
       : '<p class="affirm-q empty">확언 문장이 아직 없습니다 — 이번 분기 목표를 이룬 나를 한 문장으로 <button class="ed" data-affedit>문장 정하기</button></p>')+
     '<textarea id="affirmIn" placeholder="'+(M.affirm.text ? '문장을 한 줄에 하나씩 반복해서 씁니다 — 줄 수가 자동으로 세어집니다' : '먼저 문장을 정해 주세요')+'">'+esc((day && day.affirm) || '')+'</textarea>'+
     '<div class="affirm-ft'+(done?' done':'')+'" id="affirmFt"><span class="cnt"><span id="affirmN">'+n+'</span><small> / '+tgt+'</small></span>'+
       '<div class="bar"><i id="affirmBar" style="width:'+Math.min(100, Math.round(n/tgt*100))+'%"></i></div>'+
-      (done ? '<span style="color:var(--good);font-weight:700;white-space:nowrap">오늘 완료 ✓</span>' : '')+
+      (done ? '<span style="color:var(--good);font-weight:700;white-space:nowrap">완료 ✓</span>' : '')+
       (M.affirm.text ? '<button class="btn ghost sm" data-affpaste title="커서 자리에 문장 한 줄 추가">+ 문장 1줄</button>' : '')+'</div>';
 }
-function gratHTML(today){
-  const gdays = Object.keys(M.days).filter(d=>d!==today && (M.days[d].gratitude||[]).some(x=>x&&x.trim())).sort().reverse().slice(0,3);
-  return '<textarea id="sumGratIn" placeholder="1. \n2. \n3. ">'+esc(gratText(today))+'</textarea>'+
-    (gdays.length ? '<details class="grat-hist"><summary>최근 3일</summary>'+gdays.map(d=>'<div class="sum-grat"><div class="dt">'+d.slice(5).replace('-','/')+' ('+DOW[dowOf(d)]+')</div><ul>'+M.days[d].gratitude.filter(x=>x&&x.trim()).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>').join('')+'</details>' : '');
+function gratHTML(d){
+  const lb = $('#sumGratLb'); if(lb) lb.textContent = (d===todayStr() ? '오늘' : d.slice(5).replace('-','/')+' ('+DOW[dowOf(d)]+')') + ' 3가지';
+  // 최근 기록 5일 — 날짜를 누르면 그 날로 이동해 보고 고친다 (그냥 쌓이는 게 아니라 날짜별로 열린다)
+  const gdays = Object.keys(M.days).filter(x=>x!==d && (M.days[x].gratitude||[]).some(x=>x&&x.trim())).sort().reverse().slice(0,5);
+  return '<textarea id="sumGratIn" placeholder="1. \n2. \n3. ">'+esc(gratText(d))+'</textarea>'+
+    (gdays.length ? '<details class="grat-hist"'+(d!==todayStr() ? ' open' : '')+'><summary>지난 감사일기 '+gdays.length+'일 — 날짜를 누르면 그 날로</summary>'+gdays.map(x=>'<div class="sum-grat"><button class="dt" data-sumday="'+x+'" style="color:var(--key);cursor:pointer">'+x.slice(5).replace('-','/')+' ('+DOW[dowOf(x)]+') →</button><ul>'+M.days[x].gratitude.filter(y=>y&&y.trim()).map(y=>'<li>'+esc(y)+'</li>').join('')+'</ul></div>').join('')+'</details>' : '');
 }
 /** 이번 분기 집중 영역에 걸린 습관(=루틴). 새 필드 없이 goalId 로 연결 */
 function routineHabits(p){ if(p.focusCell==null) return []; const gid = cellGoalId(p, p.focusCell); return M.habits.filter(h=>h.goalId===gid); }
@@ -3258,20 +3263,25 @@ function okrSummaryHTML(ym){
     '<div class="sum-line"><span>KR 달성 <b>'+(pct==null?'—':pct+'%')+'</b></span><span>목표 '+mine.length+' · KR '+M.krs.filter(k=>mine.some(g=>g.id===k.goalId)).length+'</span></div>';
   h += mine.slice(0,8).map(g=>{ const gp = krPct([g]); const col = catById(g.catId) ? catById(g.catId).color : (isSyncedGoal(g) && g.cellIdx!=null ? MANDAL_COLORS[g.cellIdx] : '#94a3b8');
     return '<div class="g"><i style="background:'+col+'"></i><span class="t">'+esc(g.title)+'</span><span class="mb"><i style="width:'+(gp||0)+'%;background:'+col+'"></i></span><span class="p">'+(gp==null?'—':gp+'%')+'</span></div>'; }).join('');
-  const all = M.krs.filter(k=>mine.some(g=>g.id===k.goalId));
-  let ks = all.filter(k=>(k.month||'')===ym), ttl = monLabel(ym)+' KR';
-  if(!ks.length){ ks = all.filter(k=>!(+k.target>0 && +k.current>=+k.target)); ttl = '진행 중 KR'; }
-  if(ks.length) h += '<div class="sum-sec"><h4>'+ttl+' <span class="muted">'+ks.length+'</span></h4>'+ks.slice(0,6).map(k=>{ const done = +k.target>0 && +k.current>=+k.target;
-    return '<div class="krl'+(done?' done':'')+'"><span class="n">'+esc(k.title)+'</span><span class="v">'+(+k.current||0)+'/'+(+k.target||0)+' '+esc(k.unit||'')+'</span></div>'; }).join('')+(ks.length>6 ? '<p class="tiny muted" style="margin:4px 0 0">외 '+(ks.length-6)+'개 — Target 에서</p>' : '')+'</div>';
+  // F-45b 당월 KR / 분기 KR 을 나눠 보여 준다 — "그래야 내가 뭘 해야 하는지 집중해서 본다"
+  const all = M.krs.filter(k=>mine.some(g=>g.id===k.goalId)), isDone = k => +k.target>0 && +k.current>=+k.target;
+  const monthKs = all.filter(k=>(k.month||'')===ym);
+  const qKs = all.filter(k=>(k.month||'')!==ym).sort((a,b)=>(isDone(a)?1:0)-(isDone(b)?1:0));
+  const krRows = (ks, max) => ks.slice(0,max).map(k=>'<div class="krl'+(isDone(k)?' done':'')+'"><span class="n">'+esc(k.title)+(k.month && k.month!==ym ? ' <span class="muted">'+monLabel(k.month)+'</span>' : '')+'</span><span class="v">'+(+k.current||0)+'/'+(+k.target||0)+' '+esc(k.unit||'')+'</span></div>').join('')
+    + (ks.length>max ? '<p class="tiny muted" style="margin:4px 0 0">외 '+(ks.length-max)+'개 — Target 에서</p>' : '');
+  h += '<div class="krh"><b>'+monLabel(ym)+' KR</b> 이번 달 할 것 <span class="muted">'+monthKs.length+' · 완료 '+monthKs.filter(isDone).length+'</span></div>'
+     + (monthKs.length ? krRows(monthKs, 8) : '<p class="tiny muted" style="margin:0">이 달에 붙은 KR 이 없습니다 — 만다라트 행동 칸에서 달을 고르면 여기 뜹니다</p>');
+  if(qKs.length) h += '<div class="krh"><b>분기 KR</b> 나머지 <span class="muted">'+qKs.length+' · 완료 '+qKs.filter(isDone).length+'</span></div>' + krRows(qKs, 5);
   return h;
 }
 function renderSummary(){
   const today = todayStr(), ym = today.slice(0,7);
   $('#sumDate').textContent = today.replace(/-/g,'.') + ' (' + DOW[dowOf(today)] + ')';
 
-  // 더 보기 접힘 상태 (개인 데이터 아님 → localStorage)
-  const moreBox = $('#sumMore'), moreTg = $('#sumMoreTg');
-  if(moreBox && moreTg){ let m='0'; try{ m = localStorage.getItem('planner-sum-more') || '0'; }catch(_){} moreBox.hidden = (m!=='1'); moreTg.firstChild.textContent = (moreBox.hidden ? '▸' : '▾') + ' 더 보기 '; }
+  // F-45b 우측 날짜 내비 — 확언·감사가 보는 날
+  const sd = sumDayStr(), dl = $('#sumDayLb'), di = $('#sumDayIn');
+  if(dl){ dl.textContent = sd.replace(/-/g,'.') + ' (' + DOW[dowOf(sd)] + ')' + (sd===today ? ' 오늘' : ''); dl.classList.toggle('past', sd!==today); }
+  if(di) di.value = sd;
 
   // ① 오늘 — 행동 카드 (F-42): 할 일 · 습관 · 일정 · 지금. 체크 토글만 허용, 그 외 입력은 각 탭에서
   const day = M.days[today] || null;
@@ -3316,8 +3326,8 @@ function renderSummary(){
   // ①.5 OKR (F-44) — 이 기간 One-Thing · 목표별 달성 · 이 달 KR
   $('#sumOkr').innerHTML = okrSummaryHTML(ym);
   // F-45 아침 루틴 — 확언 100번쓰기 · 감사일기 (입력은 #p-sum input 위임, 여기서는 그리기만)
-  $('#sumAffirm').innerHTML = affirmHTML(today);
-  $('#sumGratBox').innerHTML = gratHTML(today);
+  $('#sumAffirm').innerHTML = affirmHTML(sd);
+  $('#sumGratBox').innerHTML = gratHTML(sd);
   // ② 이번 주
   const wd = weekDates(today);
   $('#sumWkLb').textContent = wd[0].slice(5).replace('-','/') + ' ~ ' + wd[6].slice(5).replace('-','/');
@@ -3345,9 +3355,6 @@ function renderSummary(){
   // ④ 일정
   $('#sumUp').innerHTML = upcomingHTML(5);
 
-  // ⑤ 분류별 연속 기록
-  $('#sumStreak').innerHTML = catStreakHTML(14);
-
 
   // ⑦ 메모 — 핀 먼저, 최근 순
   const notes = M.notes.slice().sort((a,b)=> (b.pinned?1:0)-(a.pinned?1:0) || (b.createdAt||0)-(a.createdAt||0)).slice(0,5);
@@ -3356,27 +3363,7 @@ function renderSummary(){
     ? notes.map(n=>'<div class="sum-memo">'+(n.pinned?'<span>📌</span>':'')+'<span class="tx">'+esc(n.text)+'</span><span class="dt">'+(n.createdAt? ymd(new Date(n.createdAt)).slice(5).replace('-','/') : '')+'</span></div>').join('')
     : '<span class="tiny muted">위 칸에 한 줄 적으면 여기 쌓입니다 · 정리는 Memo 탭에서</span>';
 
-  // ⑨ 내 페이지 — 이 달 집계 한 줄씩
-  $('#sumPages').innerHTML = M.pages.length
-    ? M.pages.map(pg=>{
-        const t = tplOf(pg); let v = '';
-        if(pg.frame==='ledger'){
-          let spent = 0; Object.keys(pg.data.daily||{}).forEach(d=>{ if(d.startsWith(ym)) spent += lgTotal(pg, d); });
-          const bud = pg.cfg.monthlyBudget||0;
-          v = wonF(spent) + (bud ? ' <span class="tiny muted">/ '+wonF(bud)+'</span>' : '');
-        } else if(pg.frame==='db'){
-          const rs = dbRows(pg), open = rs.filter(r=>!dbIsDone(pg,r)).length;
-          v = open + '건 미완료 <span class="tiny muted">/ ' + rs.length + '</span>';
-        } else {
-          const ents = Array.isArray(pg.data.entries)? pg.data.entries : [];
-          v = ents.filter(e=>(e.date||'').startsWith(ym)).length + '건';
-        }
-        return '<button class="sum-pg" data-gopage="'+pg.id+'"><span>'+(t.icon||'📄')+' '+esc(pg.name||'페이지')+'</span><span class="v">'+v+'</span></button>';
-      }).join('')
-    : '<span class="tiny muted">＋ 로 가계부·투자일지 같은 페이지를 추가하면 이 달 집계가 여기 한 줄씩 뜹니다</span>';
-
-  // ⑩ 기록 잔디
-  $('#sumHeat').innerHTML = grassHTML(12);
+  // 분류별 연속 기록 · 내 페이지 · 기록 잔디는 F-45b 에서 Summary 에서 뺐다 (catStreakHTML/grassHTML 은 남아 있음)
 }
 
 function renderWeekSummary(){
@@ -4603,7 +4590,10 @@ function bindAll(){
     if(sd){ const [pid, rid] = sd.dataset.sumdb.split(':'); const pg = pageById(pid), r = pg && dbRowById(pg, rid); if(r){ dbSetDone(pg, r, true); saveModel(); renderSummary(); } return; }
     const dg = e.target.closest('[data-dbgo]');
     if(dg){ dbGo(dg.dataset.dbgo); return; }
-    if(e.target.closest('#sumMoreTg')){ const m = $('#sumMore'); m.hidden = !m.hidden; try{ localStorage.setItem('planner-sum-more', m.hidden ? '0' : '1'); }catch(_){} $('#sumMoreTg').firstChild.textContent = (m.hidden ? '▸' : '▾') + ' 더 보기 '; return; }
+    // F-45b 날짜 내비 (확언·감사)
+    const dd = e.target.closest('[data-sumdayd]'); if(dd){ setSumDay(addDays(sumDayStr(), +dd.dataset.sumdayd)); return; }
+    if(e.target.closest('[data-sumdayto]')){ setSumDay(null); return; }
+    const sdg = e.target.closest('[data-sumday]'); if(sdg){ setSumDay(sdg.dataset.sumday); return; }
     const up = e.target.closest('[data-upgo]');
     if(up){ calMonth = up.dataset.upgo.slice(0,7); switchTab('cal'); return; }
     const pg = e.target.closest('[data-gopage]');
@@ -4622,13 +4612,14 @@ function bindAll(){
   $('#p-sum').addEventListener('input', e=>{
     const t = e.target;
     if(t.id==='affirmIn'){
-      const d = ensureDay(todayStr()); d.affirm = t.value; saveModel();
+      const d = ensureDay(sumDayStr()); d.affirm = t.value; saveModel();
       const n = affirmCount(d), tgt = +M.affirm.target||100;
       const en = $('#affirmN'), eb = $('#affirmBar'), ef = $('#affirmFt');
       if(en) en.textContent = n; if(eb) eb.style.width = Math.min(100, Math.round(n/tgt*100))+'%'; if(ef) ef.classList.toggle('done', n>=tgt);
       return;
     }
-    if(t.id==='sumGratIn'){ setGratText(todayStr(), t.value); saveModel(); return; }
+    if(t.id==='sumGratIn'){ setGratText(sumDayStr(), t.value); saveModel(); return; }
+    if(t.id==='sumDayIn'){ if(t.value) setSumDay(t.value); return; }
   });
   $('#p-sum').addEventListener('keydown', e=>{
     if(e.target.id!=='sumMemoIn' || e.key!=='Enter' || e.isComposing) return;
