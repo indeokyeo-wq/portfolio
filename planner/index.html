@@ -478,8 +478,8 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .wg .cell{height:22px;border-bottom:1px solid #f1f3f6;border-left:1px solid var(--line);font-size:11px;padding:0 5px;
     display:flex;align-items:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:crosshair}
 .wg .cell.hh{border-bottom-color:var(--line)}
-.wg .cell.cat{font-size:10.5px;color:var(--sub);gap:3px;padding:0 3px;cursor:pointer;background:var(--card2);letter-spacing:-.2px} .wg .cell.cat i{width:6px;height:6px;border-radius:50%;flex:none;background:var(--bc)}
-.wg .cell.cat.dim{opacity:.45} .wg .cell.cat.filled{color:var(--ink);font-weight:600} .wg .cell.cat:hover{background:var(--key-soft)}
+.wg .cell.cat{font-size:10.5px;padding:0 4px;cursor:pointer;background:var(--card2);letter-spacing:-.2px;font-weight:600}
+.wg .cell.cat.dim{opacity:.4} .wg .cell.cat:hover{filter:brightness(.95)}
 .wg .cell.now{box-shadow:inset 0 0 0 2px rgba(37,99,235,.5)}
 .wg .cell.filled{font-weight:600}
 .wg .cell{cursor:text}
@@ -1930,12 +1930,12 @@ function showTagPop(x, y){
 }
 function hideTagPop(){ const p = $('#tagpop'); if(p) p.classList.remove('on'); }
 
-/* F-46 분류 열 — 시트의 '계획 | 실적 | 분류' 그대로. 분류 = 실적의 분류(실적이 비면 계획 분류를 흐리게).
+/* F-46 분류 열 — 시트의 '계획 | 실적 | 분류' 그대로. 분류 = 실적의 분류 (실적이 없으면 빈 칸).
    분류만 적어도 실적 칸이 생겨 시간이 집계된다 — "분류를 적고 그걸 토대로 시간을 트래킹" */
-function catSrc(p, a){ return (a && a.catId) ? {b:a, dim:false} : ((p && p.catId) ? {b:p, dim:true} : null); }
+function catSrc(p, a){ return (a && a.catId) ? {b:a, dim:false} : null; }   // F-46d 분류는 실적과 함께 적는 칸 — 계획 분류를 미리 보여 주지 않는다
 function catCellHTML(d, i, p, a, extra){
   const s = catSrc(p, a), c = s ? catById(s.b.catId) : null;
-  return '<div class="cell cat'+(extra||'')+(c?' filled':'')+(c && s.dim?' dim':'')+'" data-m="cat" data-d="'+d+'" data-s="'+i+'" style="--bc:'+(c?c.color:'transparent')+'">'+(c ? '<i></i>'+esc(c.name) : '')+'</div>';
+  return '<div class="cell cat'+(extra||'')+(c?' filled':'')+(c && s.dim?' dim':'')+'" data-m="cat" data-d="'+d+'" data-s="'+i+'" style="'+(c ? cellStyle(s.b, 'cat') : '')+'">'+(c ? esc(c.name) : '')+'</div>';
 }
 /** 분류 열에 분류를 적는다. 실적이 있으면 실적의 분류를, 없으면 실적 칸을 만든다(글자 없음 → 분류 이름으로 보임). 계획에 분류가 없으면 같이 붙인다 */
 function setCatAt(d, i, catId){
@@ -1953,6 +1953,7 @@ function setCatAt(d, i, catId){
 function cellStyle(b, m){
   if(!b) return '';
   if(m === 'plan') return 'color:var(--sub);';
+  if(m === 'actual') return '';                    // F-46c 실적 열도 색 없음 — 색은 분류 열이 맡는다
   const c = catById(b.catId);
   const col = c ? c.color : '#94a3b8';
   return 'background:'+col+'1f;border-left:3px solid '+col+';color:'+col+';';
@@ -2550,7 +2551,7 @@ function refreshGridCells(){
     const day = M.days[el.dataset.d];
     if(el.dataset.m==='cat'){                        // F-46 분류 열
       const i = +el.dataset.s, s = catSrc(day?day.plan[i]:null, day?day.actual[i]:null), c = s ? catById(s.b.catId) : null;
-      el.classList.toggle('filled', !!c); el.classList.toggle('dim', !!c && s.dim); el.style.setProperty('--bc', c?c.color:'transparent'); el.innerHTML = c ? '<i></i>'+esc(c.name) : '';
+      el.classList.toggle('filled', !!c); el.classList.toggle('dim', !!c && s.dim); el.setAttribute('style', c ? cellStyle(s.b, 'cat') : ''); el.textContent = c ? c.name : '';
       return;
     }
     const b = day ? day[el.dataset.m][+el.dataset.s] : null;
