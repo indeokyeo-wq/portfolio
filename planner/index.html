@@ -442,13 +442,13 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 /* --- 주간 그리드 (7일 × 계획/실적) --- */
 .wgwrap{border:1px solid var(--line);border-radius:var(--r);background:var(--card);overflow:hidden}
 .wgscroll{overflow:auto;max-height:calc(100vh - 270px)}
-.wg{display:grid;grid-template-columns:54px repeat(7, 7px minmax(0,1fr) minmax(0,1fr));min-width:960px;
+.wg{display:grid;grid-template-columns:54px repeat(7, 7px minmax(0,1fr) minmax(0,1fr) 56px);min-width:1200px;   /* F-46: 일정띠 · 계획 · 실적 · 분류 */
     touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .wg.drag{touch-action:none}
 .wg .wg-h{position:sticky;top:0;z-index:3;height:30px;background:var(--card2);border-bottom:1px solid var(--line);
     font-size:12px;font-weight:700;color:var(--sub);display:flex;align-items:center;justify-content:center;gap:4px}
 .wg .wg-corner{border-right:1px solid var(--line);font-size:11px;color:var(--mute)}
-.wg .wg-day{grid-column:span 3;border-left:2px solid var(--line-strong);cursor:pointer}
+.wg .wg-day{grid-column:span 4;border-left:2px solid var(--line-strong);cursor:pointer}
 .wg .wg-day b{font-size:13px;color:var(--ink)}
 .wg .wg-day.sun{color:#e11d48} .wg .wg-day.sun b{color:#e11d48}
 .wg .wg-day.sat{color:#2563eb} .wg .wg-day.sat b{color:#2563eb}
@@ -459,7 +459,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .wg .wg-h2.ds{border-left:2px solid var(--line-strong)}
 .wg .wg-lb{font-size:9.5px;font-weight:700;color:var(--sub);padding:0 6px;display:flex;align-items:center;justify-content:flex-end;
     text-align:right;line-height:1.25;background:var(--card2);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.wg .wg-in{grid-column:span 3;border-left:2px solid var(--line-strong);border-bottom:1px solid var(--line);background:var(--card)}
+.wg .wg-in{grid-column:span 4;border-left:2px solid var(--line-strong);border-bottom:1px solid var(--line);background:var(--card)}
 .wg .wg-in textarea,.wg .wg-in input{width:100%;display:block;border:0;outline:0;background:transparent;
     font-family:inherit;color:var(--ink);padding:4px 6px;resize:none;box-sizing:border-box}
 .wg .wg-in input{height:26px;font-size:11.5px;font-weight:600}
@@ -478,6 +478,8 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .wg .cell{height:22px;border-bottom:1px solid #f1f3f6;border-left:1px solid var(--line);font-size:11px;padding:0 5px;
     display:flex;align-items:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:crosshair}
 .wg .cell.hh{border-bottom-color:var(--line)}
+.wg .cell.cat{font-size:10.5px;color:var(--sub);gap:4px;padding:0 4px;cursor:pointer;background:var(--card2)} .wg .cell.cat i{width:7px;height:7px;border-radius:50%;flex:none;background:var(--bc)}
+.wg .cell.cat.dim{opacity:.45} .wg .cell.cat.filled{color:var(--ink);font-weight:600} .wg .cell.cat:hover{background:var(--key-soft)}
 .wg .cell.now{box-shadow:inset 0 0 0 2px rgba(37,99,235,.5)}
 .wg .cell.filled{font-weight:600}
 .wg .cell{cursor:text}
@@ -747,7 +749,8 @@ button.mx:hover{box-shadow:inset 0 0 0 2px var(--bc,var(--key))}
 /* F-13.6 v3 폰 — 계획|실적 2열 크게 + 요일 칩 + 할 일 우선. 같은 링크·같은 데이터 */
 .wg-chips{display:none}
 @media (max-width:900px){
-  .wg{grid-template-columns:40px 4px minmax(0,1fr) minmax(0,1fr);min-width:0}
+  .wg{grid-template-columns:40px 4px minmax(0,1fr) minmax(0,1fr) 58px;min-width:0}
+  .wg .cell.cat{font-size:11px}
   .wg .cell{height:36px;font-size:14px;padding:0 6px}
   .wg .wg-tm{font-size:11px}
   .wg .wg-h2{top:0;height:24px;font-size:12px}
@@ -1908,7 +1911,7 @@ function renderTagPop(){
   const pop = $('#tagpop'); if(!pop) return;
   const n = selRange().length;
   pop.innerHTML =
-      '<div class="tp-h"><b>' + (sel && sel.m === 'plan' ? '계획' : '실적') + ' ' + n + '칸</b> · '
+      '<div class="tp-h"><b>' + (sel && sel.m === 'plan' ? '계획' : sel && sel.m === 'cat' ? '분류' : '실적') + ' ' + n + '칸</b> · '
     + fmtH(hoursOf(n)) + ' — 분류를 고르세요</div>'
     + '<div class="tp-b">'
     + M.categories.map(c => '<button class="chip" data-tp="'+c.id+'"><i style="background:'+c.color+'"></i>'+esc(c.name)+'</button>').join('')
@@ -1927,6 +1930,24 @@ function showTagPop(x, y){
 }
 function hideTagPop(){ const p = $('#tagpop'); if(p) p.classList.remove('on'); }
 
+/* F-46 분류 열 — 시트의 '계획 | 실적 | 분류' 그대로. 분류 = 실적의 분류(실적이 비면 계획 분류를 흐리게).
+   분류만 적어도 실적 칸이 생겨 시간이 집계된다 — "분류를 적고 그걸 토대로 시간을 트래킹" */
+function catSrc(p, a){ return (a && a.catId) ? {b:a, dim:false} : ((p && p.catId) ? {b:p, dim:true} : null); }
+function catCellHTML(d, i, p, a, extra){
+  const s = catSrc(p, a), c = s ? catById(s.b.catId) : null;
+  return '<div class="cell cat'+(extra||'')+(c?' filled':'')+(c && s.dim?' dim':'')+'" data-m="cat" data-d="'+d+'" data-s="'+i+'" style="--bc:'+(c?c.color:'transparent')+'">'+(c ? '<i></i>'+esc(c.name) : '')+'</div>';
+}
+/** 분류 열에 분류를 적는다. 실적이 있으면 실적의 분류를, 없으면 실적 칸을 만든다(글자 없음 → 분류 이름으로 보임). 계획에 분류가 없으면 같이 붙인다 */
+function setCatAt(d, i, catId){
+  const day = ensureDay(d);
+  if(!catId){
+    if(day.actual[i]){ if(day.actual[i].label) day.actual[i].catId = null; else day.actual[i] = null; }
+    return;
+  }
+  if(day.actual[i]){ day.actual[i].catId = catId; if(day.actual[i].label) learnLabel(day.actual[i].label, catId); }
+  else day.actual[i] = {catId, goalId:null, label:null};
+  if(day.plan[i] && !day.plan[i].catId) day.plan[i].catId = catId;
+}
 /** 칸 색. 🔴 계획 열은 색을 쓰지 않는다 — 실적과 헷갈린다는 사용자 판단(F-21).
  *  색은 '실제로 쓴 시간'을 나타내는 신호로만 남긴다. */
 function cellStyle(b, m){
@@ -2158,7 +2179,7 @@ function renderWeekGrid(){
   // 감사일기 행은 F-45 에서 Summary 아침 화면으로 옮겼다 — Weekly 는 시간 기록만
   // 헤더 2 — 계획 / 실적 (여기서부터 시간 기록)
   h += '<div class="wg-h2"></div>';
-  for(let k=0;k<dates.length;k++) h += '<div class="wg-h2 ds"></div><div class="wg-h2">계획</div><div class="wg-h2">실적</div>';
+  for(let k=0;k<dates.length;k++) h += '<div class="wg-h2 ds"></div><div class="wg-h2">계획</div><div class="wg-h2">실적</div><div class="wg-h2">분류</div>';
 
   // 본문
   const s0 = firstSlot();
@@ -2176,6 +2197,7 @@ function renderWeekGrid(){
          + esc(cellText(p)) + '</div>';
       h += '<div class="cell'+(hh?' hh':'')+(a?' filled':'')+now+'" data-m="actual" data-d="'+d+'" data-s="'+i+'" style="'+cellStyle(a, 'actual')+'">'
          + esc(cellText(a)) + '</div>';
+      h += catCellHTML(d, i, p, a, (hh?' hh':'')+now);
     }
   }
   $('#wgrid').innerHTML = h;
@@ -2236,10 +2258,11 @@ function learnLabel(label, catId){
 function paintCell(el){
   if(!el || !el.classList.contains('cell')) return;
   const m = el.dataset.m;
-  if(m !== 'plan' && m !== 'actual') return;
+  if(m !== 'plan' && m !== 'actual' && m !== 'cat') return;
   if(paintMode && m !== paintMode) return;        // 드래그는 시작한 열 안에서만
   const i = +el.dataset.s, d = el.dataset.d || curDate;
   if(paintDate && d !== paintDate) return;        // 드래그는 시작한 날짜 안에서만
+  if(m === 'cat'){ const g0 = (!paintErase && brush.goalId) ? goalById(brush.goalId) : null; setCatAt(d, i, paintErase ? null : (g0 ? g0.catId : brush.catId)); return; }   // F-46
   const day = ensureDay(d);
   if(paintErase){ day[m][i] = null; return; }
   const g = brush.goalId ? goalById(brush.goalId) : null;
@@ -2280,6 +2303,7 @@ function applyCatToSelection(catId, goalId){
   if(!sel) return false;
   const day = ensureDay(sel.d);
   const r = selRange();
+  if(sel.m === 'cat'){ for(const i of r) setCatAt(sel.d, i, catId); saveModel(); renderWeekGrid(); renderWeekSummary(); updateAgg(); return true; }   // F-46 분류 열
   // 범위 안의 글자가 한 종류뿐이면 그 글자를 범위 전체에 채운다.
   // (00:00 에 '수면' 하나 쓰고 00:00~06:00 을 잡아 태그하면 여섯 시간이 전부 '수면')
   // 서로 다른 글자가 섞여 있으면 각자의 글자를 그대로 둔다.
@@ -2434,7 +2458,8 @@ function bindGrid(){
     if(selecting){
       const tap = !moved, el = downEl, px = lastX, py = lastY;
       finish(false);
-      if(tap && el) editCell(el.dataset.d, el.dataset.m, +el.dataset.s);   // 탭 = 그 자리에서 바로 입력
+      if(tap && el && el.dataset.m === 'cat'){ select(el.dataset.d, 'cat', +el.dataset.s, false); showTagPop(px, py); }   // F-46 분류 칸 탭 = 분류 고르기
+      else if(tap && el) editCell(el.dataset.d, el.dataset.m, +el.dataset.s);   // 탭 = 그 자리에서 바로 입력
       else if(sel && selRange().length > 1) showTagPop(px, py);            // 끌었으면 그 자리에서 태그 선택
       return;
     }
@@ -2455,6 +2480,11 @@ function bindGrid(){
       saveModel(); renderWeekGrid(); renderWeekSummary(); updateAgg();
     };
     if(k === 'Escape'){ hideTagPop(); return; }
+    if(sel.m === 'cat'){                                            // F-46 분류 열: 이동·Enter(고르기)·Delete(지우기)만
+      if(k === 'Enter' || k === 'F2'){ e.preventDefault(); const el = cellEl(sel.d, 'cat', sel.s), r = el ? el.getBoundingClientRect() : {left:200, top:200}; showTagPop(r.left, r.top); return; }
+      if(k === 'Delete' || k === 'Backspace'){ e.preventDefault(); bulk(()=>{ for(const i of selRange()) setCatAt(sel.d, i, null); }); return; }
+      if(!k.startsWith('Arrow')) return;
+    }
     if(k === 'ArrowDown'){ e.preventDefault(); moveSel(1, 0); }
     else if(k === 'ArrowUp'){ e.preventDefault(); moveSel(-1, 0); }
     else if(k === 'ArrowRight'){ e.preventDefault(); moveSel(0, 1); }
@@ -2517,6 +2547,11 @@ function refreshGridCells(){
   $$('#wgrid .cell').forEach(el=>{
     if(el.classList.contains('editing')) return;   // 편집 중인 칸은 건드리지 않는다
     const day = M.days[el.dataset.d];
+    if(el.dataset.m==='cat'){                        // F-46 분류 열
+      const i = +el.dataset.s, s = catSrc(day?day.plan[i]:null, day?day.actual[i]:null), c = s ? catById(s.b.catId) : null;
+      el.classList.toggle('filled', !!c); el.classList.toggle('dim', !!c && s.dim); el.style.setProperty('--bc', c?c.color:'transparent'); el.innerHTML = c ? '<i></i>'+esc(c.name) : '';
+      return;
+    }
     const b = day ? day[el.dataset.m][+el.dataset.s] : null;
     el.setAttribute('style', cellStyle(b, el.dataset.m));
     el.classList.toggle('filled', !!b);
@@ -4668,7 +4703,7 @@ function bindAll(){
     if(v === '__close'){ hideTagPop(); return; }
     if(v === '__erase'){
       const day = ensureDay(sel.d);
-      for(const i of selRange()) day[sel.m][i] = null;
+      for(const i of selRange()){ if(sel.m==='cat') setCatAt(sel.d, i, null); else day[sel.m][i] = null; }
       saveModel(); renderWeekGrid(); updateAgg();
     }else{
       brush = {catId:v, goalId:null};
