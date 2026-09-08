@@ -169,6 +169,13 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .sum-daynav{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 8px;box-shadow:var(--shadow)}
 .sum-daynav b{font-size:13px;min-width:120px;text-align:center} .sum-daynav b.past{color:var(--key)}
 .sum-daynav input[type=date]{margin-left:auto;border:1px solid var(--line);border-radius:8px;padding:4px 6px;font:inherit;font-size:12px;background:var(--card);max-width:140px}
+.okr-objs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.okr-obj{border:1px solid var(--line);border-left:3px solid var(--bc);border-radius:10px;padding:8px 10px 9px;background:var(--card);min-width:0}
+.okr-obj.focus{background:var(--key-soft)}
+.okr-obj .oh{display:flex;gap:6px;align-items:center;font-size:13px} .okr-obj .oh b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} .okr-obj .oh .p{font-size:11.5px;color:var(--sub);white-space:nowrap}
+.okr-obj .kh{font-size:10px;font-weight:800;color:var(--key);letter-spacing:.05em;margin:7px 0 1px} .okr-obj .kh.q{color:var(--mute)}
+.okr-obj .krl{font-size:12px;padding:3px 0}
+@media (max-width:700px){ .okr-objs{grid-template-columns:1fr} }
 .sum-okr .krh{font-size:11px;color:var(--mute);letter-spacing:.05em;margin:12px 0 4px;display:flex;gap:6px;align-items:baseline} .sum-okr .krh b{color:var(--ink);font-size:12px;letter-spacing:0}
 .sum-okr .krh .muted{font-weight:500;letter-spacing:0}
 .sum-okr .one-big{font-size:16px;font-weight:800;line-height:1.35;margin:0 0 10px}
@@ -480,6 +487,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .wg .cell.hh{border-bottom-color:var(--line)}
 .wg .cell.cat{font-size:10.5px;padding:0 4px;cursor:pointer;background:var(--card2);letter-spacing:-.2px;font-weight:600}
 .wg .cell.cat.dim{opacity:.4} .wg .cell.cat:hover{filter:brightness(.95)}
+.wg .cell.cat.miss{color:var(--line-strong);font-weight:500;border-left:3px dashed var(--line-strong)}
 .wg .cell.now{box-shadow:inset 0 0 0 2px rgba(37,99,235,.5)}
 .wg .cell.filled{font-weight:600}
 .wg .cell{cursor:text}
@@ -1934,8 +1942,8 @@ function hideTagPop(){ const p = $('#tagpop'); if(p) p.classList.remove('on'); }
    분류만 적어도 실적 칸이 생겨 시간이 집계된다 — "분류를 적고 그걸 토대로 시간을 트래킹" */
 function catSrc(p, a){ return (a && a.catId) ? {b:a, dim:false} : null; }   // F-46d 분류는 실적과 함께 적는 칸 — 계획 분류를 미리 보여 주지 않는다
 function catCellHTML(d, i, p, a, extra){
-  const s = catSrc(p, a), c = s ? catById(s.b.catId) : null;
-  return '<div class="cell cat'+(extra||'')+(c?' filled':'')+(c && s.dim?' dim':'')+'" data-m="cat" data-d="'+d+'" data-s="'+i+'" style="'+(c ? cellStyle(s.b, 'cat') : '')+'">'+(c ? esc(c.name) : '')+'</div>';
+  const s = catSrc(p, a), c = s ? catById(s.b.catId) : null, miss = !!a && !c;   // 실적은 있는데 분류가 없다 → 여기서 고르라는 표시
+  return '<div class="cell cat'+(extra||'')+(c?' filled':'')+(miss?' miss':'')+'" data-m="cat" data-d="'+d+'" data-s="'+i+'" style="'+(c ? cellStyle(s.b, 'cat') : '')+'">'+(c ? esc(c.name) : (miss ? '미지정' : ''))+'</div>';
 }
 /** 분류 열에 분류를 적는다. 실적이 있으면 실적의 분류를, 없으면 실적 칸을 만든다(글자 없음 → 분류 이름으로 보임). 계획에 분류가 없으면 같이 붙인다 */
 function setCatAt(d, i, catId){
@@ -2240,12 +2248,14 @@ const cellEl = (d,m,i) => $('#wgrid .cell[data-m="'+m+'"][data-d="'+d+'"][data-s
  *  ③ 그것도 없으면 미지정(회색) — 나중에 범위로 입히면 된다
  *  이 연결이 끊기면 시트에서처럼 '입력은 했는데 합계가 0'이 된다 */
 function autoCat(d, m, i, label){
+  // F-46e: 계획 분류를 무조건 따라오게 하면 "실적에 뭘 쓰면 분류가 갑자기 따라온다"(사용자). 순서를 바꿨다.
+  //   ① 전에 같은 글자에 분류를 붙인 적이 있으면 그것  ② 반대편 칸의 글자가 똑같으면 그 분류  ③ 미지정 — 분류 열에서 고른다
+  const k = (label||'').trim();
+  if(k && M.labelCats && M.labelCats[k]) return {catId:M.labelCats[k], goalId:null};
   const day = M.days[d];
   const other = (m === 'actual') ? 'plan' : 'actual';
   const p = day && day[other] && day[other][i];
-  if(p) return {catId:p.catId, goalId:p.goalId||null};
-  const k = (label||'').trim();
-  if(k && M.labelCats && M.labelCats[k]) return {catId:M.labelCats[k], goalId:null};
+  if(p && p.catId && k && (p.label||'').trim() === k) return {catId:p.catId, goalId:p.goalId||null};
   return {catId:null, goalId:null};
 }
 /** 라벨↔분류를 기억해 둔다 (다음 자동 지정의 재료) */
@@ -2485,6 +2495,22 @@ function bindGrid(){
     if(sel.m === 'cat'){                                            // F-46 분류 열: 이동·Enter(고르기)·Delete(지우기)만
       if(k === 'Enter' || k === 'F2'){ e.preventDefault(); const el = cellEl(sel.d, 'cat', sel.s), r = el ? el.getBoundingClientRect() : {left:200, top:200}; showTagPop(r.left, r.top); return; }
       if(k === 'Delete' || k === 'Backspace'){ e.preventDefault(); bulk(()=>{ for(const i of selRange()) setCatAt(sel.d, i, null); }); return; }
+      const ctrl = e.ctrlKey || e.metaKey, kl = k.toLowerCase();
+      if(ctrl && (kl === 'c' || kl === 'x')){                       // 분류만 복사·잘라내기
+        e.preventDefault(); const day = M.days[sel.d];
+        clipCells = selRange().map(i => { const b = day && day.actual[i]; return (b && b.catId) ? {__cat:b.catId} : null; });
+        if(kl === 'x') bulk(()=>{ for(const i of selRange()) setCatAt(sel.d, i, null); });
+        toast(clipCells.length + '칸 분류 ' + (kl === 'x' ? '잘라냄' : '복사됨') + ' — Ctrl+V 로 붙여넣기'); return;
+      }
+      if(ctrl && kl === 'v'){
+        e.preventDefault(); if(!clipCells || !clipCells.length){ toast('복사한 칸이 없습니다'); return; }
+        const r = selRange(), start = r[0], n = Math.min(r.length > 1 ? r.length : clipCells.length, SLOTS - start);
+        bulk(()=>{ for(let j=0; j<n; j++){ const b = clipCells[j % clipCells.length]; setCatAt(sel.d, start + j, b ? (b.__cat || b.catId || null) : null); } });
+        select(sel.d, 'cat', start, false); selEnd = start + n - 1; paintSelection(); toast(n + '칸 분류 붙여넣음'); return;
+      }
+      if(ctrl && kl === 'd'){                                        // 위 칸의 분류를 아래로
+        e.preventDefault(); bulk(()=>{ const r = selRange(), day = M.days[sel.d], src = day && day.actual[Math.max(0, r[0]-1)]; for(const i of r) setCatAt(sel.d, i, src ? src.catId : null); }); return;
+      }
       if(!k.startsWith('Arrow')) return;
     }
     if(k === 'ArrowDown'){ e.preventDefault(); moveSel(1, 0); }
@@ -2527,7 +2553,7 @@ function bindGrid(){
       const n = Math.min(r.length > 1 ? r.length : clipCells.length, SLOTS - start);
       bulk(day => {
         for(let j=0; j<n; j++){
-          const b = clipCells[j % clipCells.length];
+          const b0 = clipCells[j % clipCells.length], b = (b0 && b0.__cat) ? {catId:b0.__cat, goalId:null, label:null} : b0;   // 분류 열에서 복사한 것도 붙는다
           day[sel.m][start + j] = b ? JSON.parse(JSON.stringify(b)) : null;
         }
       });
@@ -2551,7 +2577,8 @@ function refreshGridCells(){
     const day = M.days[el.dataset.d];
     if(el.dataset.m==='cat'){                        // F-46 분류 열
       const i = +el.dataset.s, s = catSrc(day?day.plan[i]:null, day?day.actual[i]:null), c = s ? catById(s.b.catId) : null;
-      el.classList.toggle('filled', !!c); el.classList.toggle('dim', !!c && s.dim); el.setAttribute('style', c ? cellStyle(s.b, 'cat') : ''); el.textContent = c ? c.name : '';
+      const a0 = day ? day.actual[i] : null, miss = !!a0 && !c;
+      el.classList.toggle('filled', !!c); el.classList.toggle('miss', miss); el.setAttribute('style', c ? cellStyle(s.b, 'cat') : ''); el.textContent = c ? c.name : (miss ? '미지정' : '');
       return;
     }
     const b = day ? day[el.dataset.m][+el.dataset.s] : null;
@@ -3298,17 +3325,19 @@ function okrSummaryHTML(ym){
   let h = (p.center.trim() ? '<p class="one-big">🎯 '+esc(p.center)+'</p>' : '') + focusH +
     '<div class="bar"><i class="'+(pct>=100?'ok':'')+'" style="width:'+(pct||0)+'%"></i></div>'+
     '<div class="sum-line"><span>KR 달성 <b>'+(pct==null?'—':pct+'%')+'</b></span><span>목표 '+mine.length+' · KR '+M.krs.filter(k=>mine.some(g=>g.id===k.goalId)).length+'</span></div>';
-  h += mine.slice(0,8).map(g=>{ const gp = krPct([g]); const col = catById(g.catId) ? catById(g.catId).color : (isSyncedGoal(g) && g.cellIdx!=null ? MANDAL_COLORS[g.cellIdx] : '#94a3b8');
-    return '<div class="g"><i style="background:'+col+'"></i><span class="t">'+esc(g.title)+'</span><span class="mb"><i style="width:'+(gp||0)+'%;background:'+col+'"></i></span><span class="p">'+(gp==null?'—':gp+'%')+'</span></div>'; }).join('');
-  // F-45b 당월 KR / 분기 KR 을 나눠 보여 준다 — "그래야 내가 뭘 해야 하는지 집중해서 본다"
+  // F-45c 목표(만다라트 영역)별 카드 — "꼭지별로 어떻게 갈지 기준으로 묶어라". 카드 안: 당월 KR 먼저 → 분기 KR
   const all = M.krs.filter(k=>mine.some(g=>g.id===k.goalId)), isDone = k => +k.target>0 && +k.current>=+k.target;
-  const monthKs = all.filter(k=>(k.month||'')===ym);
-  const qKs = all.filter(k=>(k.month||'')!==ym).sort((a,b)=>(isDone(a)?1:0)-(isDone(b)?1:0));
-  const krRows = (ks, max) => ks.slice(0,max).map(k=>'<div class="krl'+(isDone(k)?' done':'')+'"><span class="n">'+esc(k.title)+(k.month && k.month!==ym ? ' <span class="muted">'+monLabel(k.month)+'</span>' : '')+'</span><span class="v">'+(+k.current||0)+'/'+(+k.target||0)+' '+esc(k.unit||'')+'</span></div>').join('')
-    + (ks.length>max ? '<p class="tiny muted" style="margin:4px 0 0">외 '+(ks.length-max)+'개 — Target 에서</p>' : '');
-  h += '<div class="krh"><b>'+monLabel(ym)+' KR</b> 이번 달 할 것 <span class="muted">'+monthKs.length+' · 완료 '+monthKs.filter(isDone).length+'</span></div>'
-     + (monthKs.length ? krRows(monthKs, 8) : '<p class="tiny muted" style="margin:0">이 달에 붙은 KR 이 없습니다 — 만다라트 행동 칸에서 달을 고르면 여기 뜹니다</p>');
-  if(qKs.length) h += '<div class="krh"><b>분기 KR</b> 나머지 <span class="muted">'+qKs.length+' · 완료 '+qKs.filter(isDone).length+'</span></div>' + krRows(qKs, 5);
+  const row = k => '<div class="krl'+(isDone(k)?' done':'')+'"><span class="n">'+esc(k.title)+(k.month && k.month!==ym ? ' <span class="muted">'+monLabel(k.month)+'</span>' : '')+'</span><span class="v">'+(+k.current||0)+'/'+(+k.target||0)+' '+esc(k.unit||'')+'</span></div>';
+  const ordered = mine.slice().sort((a,b)=>((b.cellIdx===fc)?1:0)-((a.cellIdx===fc)?1:0));   // 이번 분기 집중 영역 먼저
+  h += '<div class="okr-objs">'+ordered.map(g=>{
+    const gp = krPct([g]), col = catById(g.catId) ? catById(g.catId).color : (isSyncedGoal(g) && g.cellIdx!=null ? MANDAL_COLORS[g.cellIdx] : '#94a3b8');
+    const ks = all.filter(k=>k.goalId===g.id), mk = ks.filter(k=>(k.month||'')===ym), qk = ks.filter(k=>(k.month||'')!==ym).sort((a,b)=>(isDone(a)?1:0)-(isDone(b)?1:0));
+    const focus = isSyncedGoal(g) && g.cellIdx===fc;
+    return '<div class="okr-obj'+(focus?' focus':'')+'" style="--bc:'+col+'"><div class="oh"><b>'+(focus?'★ ':'')+esc(g.title)+'</b><span class="p">'+(gp==null?'—':gp+'%')+'</span></div>'+
+      (mk.length ? '<div class="kh">'+monLabel(ym)+' · 이번 달 '+mk.filter(isDone).length+'/'+mk.length+'</div>'+mk.map(row).join('') : '')+
+      (qk.length ? '<div class="kh q">분기 '+qk.filter(isDone).length+'/'+qk.length+'</div>'+qk.slice(0,4).map(row).join('')+(qk.length>4 ? '<p class="tiny muted" style="margin:3px 0 0">외 '+(qk.length-4)+'개</p>' : '') : '')+
+      (!ks.length ? '<p class="tiny muted" style="margin:6px 0 0">KR 없음 — 만다라트 행동 칸에 적으면 생깁니다</p>' : '')+
+    '</div>'; }).join('')+'</div>';
   return h;
 }
 function renderSummary(){
