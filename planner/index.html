@@ -169,7 +169,10 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .sum-daynav{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 8px;box-shadow:var(--shadow)}
 .sum-daynav b{font-size:13px;min-width:120px;text-align:center} .sum-daynav b.past{color:var(--key)}
 .sum-daynav input[type=date]{margin-left:auto;border:1px solid var(--line);border-radius:8px;padding:4px 6px;font:inherit;font-size:12px;background:var(--card);max-width:140px}
-.okr-objs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.okr-grp{margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:10px 12px 12px;background:var(--key-soft)}
+.okr-grp.q{background:var(--card)}
+.okr-grp .gh{display:flex;align-items:center;gap:8px;font-size:13px} .okr-grp .gh b{color:var(--key)} .okr-grp.q .gh b{color:var(--mute)} .okr-grp .gh span{font-size:12px;color:var(--sub);margin-left:auto}
+.okr-objs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
 .okr-obj{border:1px solid var(--line);border-left:3px solid var(--bc);border-radius:10px;padding:8px 10px 9px;background:var(--card);min-width:0}
 .okr-obj.focus{background:var(--key-soft)}
 .okr-obj .oh{display:flex;gap:6px;align-items:center;font-size:13px} .okr-obj .oh b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} .okr-obj .oh .p{font-size:11.5px;color:var(--sub);white-space:nowrap}
@@ -3334,15 +3337,21 @@ function okrSummaryHTML(ym){
   const all = M.krs.filter(k=>mine.some(g=>g.id===k.goalId)), isDone = k => +k.target>0 && +k.current>=+k.target;
   const row = k => '<div class="krl'+(isDone(k)?' done':'')+'"><span class="n">'+esc(k.title)+(k.month && k.month!==ym ? ' <span class="muted">'+monLabel(k.month)+'</span>' : '')+'</span><span class="v">'+(+k.current||0)+'/'+(+k.target||0)+' '+esc(k.unit||'')+'</span></div>';
   const ordered = mine.slice().sort((a,b)=>((b.cellIdx===fc)?1:0)-((a.cellIdx===fc)?1:0));   // 이번 분기 집중 영역 먼저
-  h += '<div class="okr-objs">'+ordered.map(g=>{
-    const gp = krPct([g]), col = catById(g.catId) ? catById(g.catId).color : (isSyncedGoal(g) && g.cellIdx!=null ? MANDAL_COLORS[g.cellIdx] : '#94a3b8');
-    const ks = all.filter(k=>k.goalId===g.id), mk = ks.filter(k=>(k.month||'')===ym), qk = ks.filter(k=>(k.month||'')!==ym).sort((a,b)=>(isDone(a)?1:0)-(isDone(b)?1:0));
-    const focus = isSyncedGoal(g) && g.cellIdx===fc;
-    return '<div class="okr-obj'+(focus?' focus':'')+'" style="--bc:'+col+'"><div class="oh"><b>'+(focus?'★ ':'')+esc(g.title)+'</b><span class="p">'+(gp==null?'—':gp+'%')+'</span></div>'+
-      (mk.length ? '<div class="kh">'+monLabel(ym)+' · 이번 달 '+mk.filter(isDone).length+'/'+mk.length+'</div>'+mk.map(row).join('') : '')+
-      (qk.length ? '<div class="kh q">분기 '+qk.filter(isDone).length+'/'+qk.length+'</div>'+qk.slice(0,4).map(row).join('')+(qk.length>4 ? '<p class="tiny muted" style="margin:3px 0 0">외 '+(qk.length-4)+'개</p>' : '') : '')+
-      (!ks.length ? '<p class="tiny muted" style="margin:6px 0 0">KR 없음 — 만다라트 행동 칸에 적으면 생깁니다</p>' : '')+
-    '</div>'; }).join('')+'</div>';
+  // F-45d 큰 카드 2개 = 당월 | 분기 (사용자: "분기를 카드 밑에 두지 말고 따로 분리 — 큰 카드 안에 만다라트 기준 카드, 당월 것엔 당월 내용만")
+  const objCard = (g, ks) => {
+    const col = catById(g.catId) ? catById(g.catId).color : (isSyncedGoal(g) && g.cellIdx!=null ? MANDAL_COLORS[g.cellIdx] : '#94a3b8');
+    const focus = isSyncedGoal(g) && g.cellIdx===fc, dn = ks.filter(isDone).length;
+    return '<div class="okr-obj'+(focus?' focus':'')+'" data-gid="'+esc(g.id)+'" style="--bc:'+col+'"><div class="oh"><b>'+(focus?'★ ':'')+esc(g.title)+'</b><span class="p">'+dn+'/'+ks.length+'</span></div>'+(ks.length ? ks.map(row).join('') : '<p class="tiny muted" style="margin:4px 0 0">KR 없음 — 만다라트 행동 칸에 적으면 생깁니다</p>')+'</div>';
+  };
+  const group = (cls, label, pick, keepEmpty) => {
+    const items = ordered.map(g=>[g, pick(all.filter(k=>k.goalId===g.id))]).filter(x=>x[1].length || (keepEmpty && !all.some(k=>k.goalId===x[0].id)));   // KR 이 아예 없는 목표는 분기 카드에 'KR 없음'으로
+    const ks = items.flatMap(x=>x[1]);
+    return '<div class="okr-grp'+cls+'"><div class="gh"><b>'+label+'</b><span>'+ks.filter(isDone).length+'/'+ks.length+'</span></div>'+
+      (items.length ? '<div class="okr-objs">'+items.map(x=>objCard(x[0], x[1])).join('')+'</div>'
+                    : '<p class="tiny muted" style="margin:4px 0 0">이 달로 잡힌 KR 이 없습니다 — 만다라트 행동 칸에서 달을 고르면 여기 뜹니다</p>')+'</div>';
+  };
+  h += group('', monLabel(ym)+' · 당월 KR', ks=>ks.filter(k=>(k.month||'')===ym)) +
+       group(' q', '분기 KR', ks=>ks.filter(k=>(k.month||'')!==ym).sort((a,b)=>(isDone(a)?1:0)-(isDone(b)?1:0)), true);
   return h;
 }
 function renderSummary(){
