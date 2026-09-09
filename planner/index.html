@@ -170,7 +170,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
 .sum-daynav b{font-size:13px;min-width:120px;text-align:center} .sum-daynav b.past{color:var(--key)}
 .sum-daynav input[type=date]{margin-left:auto;border:1px solid var(--line);border-radius:8px;padding:4px 6px;font:inherit;font-size:12px;background:var(--card);max-width:140px}
 .okr-grp{margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:10px 12px 12px;background:var(--key-soft)}
-.okr-grp.q{background:var(--card)}
+.okr-qlink{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12.5px;color:var(--sub)} .okr-qlink b{color:var(--ink)} .okr-qlink .go{margin-left:auto}
 .okr-grp .gh{display:flex;align-items:center;gap:8px;font-size:13px} .okr-grp .gh b{color:var(--key)} .okr-grp.q .gh b{color:var(--mute)} .okr-grp .gh span{font-size:12px;color:var(--sub);margin-left:auto}
 .okr-objs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
 .okr-obj{border:1px solid var(--line);border-left:3px solid var(--bc);border-radius:10px;padding:8px 10px 9px;background:var(--card);min-width:0}
@@ -3350,8 +3350,10 @@ function okrSummaryHTML(ym){
       (items.length ? '<div class="okr-objs">'+items.map(x=>objCard(x[0], x[1])).join('')+'</div>'
                     : '<p class="tiny muted" style="margin:4px 0 0">이 달로 잡힌 KR 이 없습니다 — 만다라트 행동 칸에서 달을 고르면 여기 뜹니다</p>')+'</div>';
   };
+  // F-45e 분기 KR 은 Summary 에 펼치지 않는다 ("저기까지 들어가니 지저분") — Target OKR 로 가는 줄 하나만
+  const qk = all.filter(k=>(k.month||'')!==ym);
   h += group('', monLabel(ym)+' · 당월 KR', ks=>ks.filter(k=>(k.month||'')===ym)) +
-       group(' q', '분기 KR', ks=>ks.filter(k=>(k.month||'')!==ym).sort((a,b)=>(isDone(a)?1:0)-(isDone(b)?1:0)), true);
+       '<div class="okr-qlink"><span>분기 KR <b>'+qk.filter(isDone).length+'/'+qk.length+'</b></span><button class="go" data-go="goals" data-tgv2="okr">Target 에서 보기 →</button></div>';
   return h;
 }
 function renderSummary(){
